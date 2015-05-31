@@ -4,16 +4,26 @@ import Welcome from "./components/welcome";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
+import SideBar from "./components/side_bar.jsx";
 
 var { DefaultRoute, Link, Route, RouteHandler } = Router;
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.onOpenSideBar = this.onOpenSideBar.bind(this);
+  }
 
   render() {
     return(
       <div>
+        <SideBar ref="sidebar" />
       </div>
     );
+  }
+
+  onOpenSideBar() {
+    this.refs.sidebar.toggle();
   }
 };
 
