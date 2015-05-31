@@ -1,26 +1,13 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
-var webpack = require("webpack");
-
 module.exports = {
+  context: __dirname + "/src/scripts",
 
-  context: __dirname,
-
-  entry: {
-    app: [
-      "webpack/hot/dev-server",
-      "./src/scripts/test-app.jsx"
-    ]
-  },
+  entry: "./app.jsx",
 
   output: {
-    path: "./dist",
-    filename: "test-app.bundle.js"
+    path: __dirname + "/dist",
+    filename: "app.bundle.js"
   },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
 
   externals: {
     jquery: "var jQuery"
@@ -40,12 +27,5 @@ module.exports = {
     extensions: ["", ".js", ".jsx"]
   },
 
-  devtool: "#eval-source-map",
-
-  devServer: {
-        contentBase: "./build",
-        noInfo: true,
-        hot: true,
-        inline: true
-    }
+  devtool: "#eval-source-map"
 };

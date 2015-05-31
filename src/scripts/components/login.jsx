@@ -36,8 +36,8 @@ class Login extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="Email" defaultValue="joe@example.com"/></label>
-        <label><input ref="password" placeholder="Password"/></label><br/>
+        <label><input ref="email" placeholder="Email" defaultValue="agent.smith@matrix.com"/></label>
+        <label><input ref="password" placeholder="Password" defaultValue="dammit"/></label><br/>
         <button type="submit">login</button>
         {this.state.error}
       </form>
@@ -86,7 +86,7 @@ var auth = {
 
 function pretendRequest(email, password, cb) {
   setTimeout(() => {
-    if (email === "joe@example.com" && password === "password1") {
+    if (email === "agent.smith@matrix.com" && password === "dammit") {
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7)
