@@ -20,8 +20,8 @@ class App extends React.Component {
 var routes = (
   <Route handler={App}>
     <DefaultRoute handler={Welcome}/>
-    <Route name="login" path="/login" handler={Login}/>
-    <Route name="signup" path="/signup" handler={Signup}/>
+    <Route name="log-in" path="/login" handler={Login}/>
+    <Route name="sign-up" path="/signup" handler={Signup}/>
     <Route name="dashboard" path="/dashboard" handler={Dashboard}/>
   </Route>
 );
