@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Link to="app">Home</Link>
+        <Link to="welcome">Welcome</Link>
         <Link to="login">Log In</Link>
         <Link to="signup">Sign Up</Link>
 
