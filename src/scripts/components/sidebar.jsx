@@ -96,7 +96,7 @@ class Sidebar extends React.Component {
     }
 };
 
-SideBar.contextTypes = {
+Sidebar.contextTypes = {
   router: React.PropTypes.func
 };
 
