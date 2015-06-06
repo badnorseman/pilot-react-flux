@@ -1,11 +1,11 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
 module.exports = {
+  context: __dirname + "/src/scripts",
 
-  context: __dirname,
-  entry: "./src/scripts/app.jsx",
+  entry: "./app.jsx",
 
   output: {
-    path: "./dist",
+    path: __dirname + "/dist",
     filename: "app.bundle.js"
   },
 
@@ -24,7 +24,7 @@ module.exports = {
 
   resolve: {
     root: __dirname + "./src/scripts",
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx"]
   },
 
   devtool: "#eval-source-map"

@@ -1,41 +1,52 @@
 import React from "react";
 import Router from "react-router";
-import Welcome from "./components/welcome";
-import Login from "./components/login";
-import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
-import SideBar from "./components/side_bar.jsx";
+import Login from "./components/login";
+import Sidebar from "./components/sidebar.jsx";
+import Signup from "./components/signup";
+import Welcome from "./components/welcome";
 
-var { DefaultRoute, Link, Route, RouteHandler } = Router;
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+
+window.React = React;
 
 class App extends React.Component {
   constructor() {
     super();
-    this.onOpenSideBar = this.onOpenSideBar.bind(this);
+    this.onOpenSidebar = this.onOpenSidebar.bind(this);
   }
 
   render() {
-    return(
+    return (
       <div>
         <SideBar ref="sidebar" />
+        <Link to="welcome">Welcome</Link>
+        <Link to="login">Log In</Link>
+        <Link to="signup">Sign Up</Link>
+
+        <RouteHandler/>
       </div>
     );
   }
 
-  onOpenSideBar() {
+  onOpenSidebar() {
     this.refs.sidebar.toggle();
   }
 };
 
 var routes = (
-  <Route handler={App}>
+  <Route path="/" handler={App}>
     <DefaultRoute handler={Welcome}/>
-    <Route name="log-in" path="/login" handler={Login}/>
-    <Route name="sign-up" path="/signup" handler={Signup}/>
     <Route name="dashboard" path="/dashboard" handler={Dashboard}/>
+    <Route name="login" path="/login" handler={Login}/>
+    <Route name="signup" path="/signup" handler={Signup}/>
+    <Route name="welcome" path="/welcome" handler={Welcome}/>
   </Route>
 );
 
-Router.run(routes, function(Handler) {
+Router.run(routes, function (Handler) {
   React.render(<Handler/>, document.getElementById("app"));
 });
