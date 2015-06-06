@@ -2,6 +2,7 @@ import React from "react";
 import Router from "react-router";
 import Dashboard from "./components/dashboard";
 import Login from "./components/login";
+import Sidebar from "./components/sidebar.jsx";
 import Signup from "./components/signup";
 import Welcome from "./components/welcome";
 
@@ -13,9 +14,15 @@ var RouteHandler = Router.RouteHandler;
 window.React = React;
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.onOpenSidebar = this.onOpenSidebar.bind(this);
+  }
+
   render() {
     return (
       <div>
+        <SideBar ref="sidebar" />
         <Link to="welcome">Welcome</Link>
         <Link to="login">Log In</Link>
         <Link to="signup">Sign Up</Link>
@@ -23,6 +30,10 @@ class App extends React.Component {
         <RouteHandler/>
       </div>
     );
+  }
+
+  onOpenSidebar() {
+    this.refs.sidebar.toggle();
   }
 };
 
