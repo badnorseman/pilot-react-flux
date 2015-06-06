@@ -22,7 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SideBar ref="sidebar" />
+        <sidebar ref="sidebar" />
         <Link to="welcome">Welcome</Link>
         <Link to="login">Log In</Link>
         <Link to="signup">Sign Up</Link>
