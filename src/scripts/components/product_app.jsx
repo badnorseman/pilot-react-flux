@@ -1,17 +1,15 @@
 var React = require("react");
 var ProductStore = require("../stores/product_store");
+var ProductActions = require("../actions/product_actions");
 var Sidebar = require("./sidebar");
-
-function getStateFromStores() {
-  return {
-    products: ProductStore.getProducts()
-  };
-}
 
 module.exports = React.createClass({
 
   getInitialState: function() {
-    return getStateFromStores();
+    return {
+      products: ProductStore.getProducts(),
+      errors: []
+    };
   },
 
   componentDidMount: function() {
@@ -23,15 +21,24 @@ module.exports = React.createClass({
   },
 
   onChange: function() {
-    this.setState(getStateFromStores());
+    this.setState({
+      products: ProductStore.getProducts(),
+      errors: ProductStore.getErrors()
+    });
   },
 
   render: function() {
     return (
       <div>
         <Sidebar />
+        <p>{this.state.errors}</p>
         <p>{this.state.products}</p>
+        <button onClick={this.OnListClick} />
       </div>
     );
+  },
+
+  OnListClick: function() {
+    ProductActions.list();
   }
 });

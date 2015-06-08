@@ -1,12 +1,13 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
-module.exports = {
-  context: __dirname + "/src/scripts",
+var webpack = require("webpack");
 
-  entry: "./app.jsx",
+module.exports = {
+  entry: "./src/scripts/app.jsx",
 
   output: {
     path: __dirname + "/dist",
-    filename: "app.bundle.js"
+    filename: "app.bundle.js",
+    publicPath: ""
   },
 
   module: {

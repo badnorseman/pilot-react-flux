@@ -14,6 +14,12 @@ var ProductActions = {
       product: product
     });
   },
+  list: function(json) {
+    AppDispatcher.handleServerAction({
+      actionType: ProductConstants.LIST,
+      json: json
+    });
+  },
   remove: function(id) {
     AppDispatcher.handleViewAction({
       actionType: ProductConstants.REMOVE,

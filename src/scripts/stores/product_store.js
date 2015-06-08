@@ -1,18 +1,11 @@
 var AppDispatcher = require("../dispatchers/app_dispatcher");
 var EventEmitter = require("events").EventEmitter;
 var ProductConstants = require("../constants/product_constants");
+var AppUtils = require("../utils/app_utils");
 var assign = require("object-assign");
 
-var _products = [
-  {
-    name: "Name1",
-    description: "Description1"
-  },
-  {
-    name: "Name2",
-    description: "Description2"
-  }
-];
+var products = [];
+var errors = [];
 
 function add(product) {
 };
@@ -26,7 +19,18 @@ function remove(id) {
 var ProductStore = assign({}, EventEmitter.prototype, {
 
   getProducts: function() {
-    return _products;
+    products = [
+      {
+        id: 99,
+        name: "name1",
+        description: "description1"
+      }
+    ];
+    return products;
+  },
+
+  getErrors: function() {
+    return errors;
   },
 
   emitChange: function() {
@@ -45,6 +49,12 @@ var ProductStore = assign({}, EventEmitter.prototype, {
     var action = payload.action;
 
     switch(action.actionType) {
+      case ProductConstants.LIST:
+        console.log("LIST");
+        console.log(action);
+        products = action.json.products;
+        break;
+
       case ProductConstants.ADD:
         add(action.product);
         break;

@@ -11,6 +11,7 @@
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "react-tap-event-plugin": "^0.1.7",
+    "superagent": "^1.2.0",
     "webpack": "^1.9.10"
   },
   "engines": {
