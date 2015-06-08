@@ -1,24 +1,24 @@
-var Dispatcher = require("../dispatchers/app_dispatcher");
+var AppDispatcher = require("../dispatchers/app_dispatcher");
 var ProductConstants = require("../constants/product_constants");
 
 var ProductActions = {
-  add: function(product){
+  add: function(product) {
     AppDispatcher.handleViewAction({
-      actionType:ProductConstants.ADD,
+      actionType: ProductConstants.ADD,
       product: product
-    })
+    });
   },
-  edit: function(product){
+  edit: function(product) {
     AppDispatcher.handleViewAction({
-      actionType:ProductConstants.EDIT,
+      actionType: ProductConstants.EDIT,
       product: product
-    })
+    });
   },
-  remove: function(id){
+  remove: function(id) {
     AppDispatcher.handleViewAction({
-      actionType:ProductConstants.REMOVE,
+      actionType: ProductConstants.REMOVE,
       id: id
-    })
+    });
   }
 };
 

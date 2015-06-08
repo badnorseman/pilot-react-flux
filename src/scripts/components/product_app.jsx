@@ -1,44 +1,37 @@
-import React from "react";
-import ProductStore from "../stores/product_store";
-import Sidebar from "./sidebar";
-
-export default class ProductApp extends React.Component {
-
-  constructor() {
-    super();
-    this.onOpenSidebar = this.onOpenSidebar.bind(this);
-  }
-
-  getInitialState() {
-  }
-
-  componentDidMount() {
-    ProductStore.addChangeListener(this.onChange);
-  }
-
-  componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange);
-  }
-
-  onChange() {
-    this.setState(getStateFromStores());
-  }
-
-  onOpenSidebar() {
-    this.refs.sidebar.toggle();
-  }
-
-  render() {
-    return (
-      <div>
-        <sidebar ref="sidebar" />
-      </div>
-    );
-  }
-};
+var React = require("react");
+var ProductStore = require("../stores/product_store");
+var Sidebar = require("./sidebar");
 
 function getStateFromStores() {
   return {
-    products: ProductStore.get()
+    products: ProductStore.getProducts()
   };
-};
+}
+
+module.exports = React.createClass({
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    ProductStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount: function() {
+    ProductStore.removeChangeListener(this.onChange);
+  },
+
+  onChange: function() {
+    this.setState(getStateFromStores());
+  },
+
+  render: function() {
+    return (
+      <div>
+        <Sidebar />
+        <p>{this.state.products}</p>
+      </div>
+    );
+  }
+});

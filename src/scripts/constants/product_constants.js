@@ -1,6 +1,6 @@
-import { keyMirror } from "react";
+var keyMirror = require("react/lib/keyMirror");
 
-export default keyMirror({
+module.exports = keyMirror({
   ADD: null,
   EDIT: null,
   REMOVE: null

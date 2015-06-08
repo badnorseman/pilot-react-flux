@@ -1,9 +1,18 @@
 var AppDispatcher = require("../dispatchers/app_dispatcher");
 var EventEmitter = require("events").EventEmitter;
-var assign = require("object-assign");
 var ProductConstants = require("../constants/product_constants");
+var assign = require("object-assign");
 
-var _products = {};
+var _products = [
+  {
+    name: "Name1",
+    description: "Description1"
+  },
+  {
+    name: "Name2",
+    description: "Description2"
+  }
+];
 
 function add(product) {
 };
@@ -16,7 +25,7 @@ function remove(id) {
 
 var ProductStore = assign({}, EventEmitter.prototype, {
 
-  get: function() {
+  getProducts: function() {
     return _products;
   },
 
@@ -32,25 +41,24 @@ var ProductStore = assign({}, EventEmitter.prototype, {
     this.removeListener("change", callback);
   },
 
-  dispatchToken: AppDispatcher.register(function(payload) {
+  dispatcherIndex: AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
       case ProductConstants.ADD:
-        add(action.data);
-        ProductStore.emitChange();
+        add(action.product);
         break;
 
       case ProductConstants.EDIT:
-        edit(action.data);
-        ProductStore.emitChange();
+        edit(action.product);
         break;
 
       case ProductConstants.REMOVE:
-        remove(action.data);
-        ProductStore.emitChange();
+        remove(action.id);
         break;
     }
+
+    ProductStore.emitChange();
 
     return true;
   })

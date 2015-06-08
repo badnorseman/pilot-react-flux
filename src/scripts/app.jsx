@@ -1,9 +1,9 @@
-import React from "react";
-import ProductApp from "./components/product_app";
+var React = require("react");
+var ProductApp = require("./components/product_app");
 
 window.React = React;
 
 React.render(
-  <ProductApp/>,
+  <ProductApp />,
   document.getElementById("app")
 );
