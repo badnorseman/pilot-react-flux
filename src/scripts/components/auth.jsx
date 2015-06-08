@@ -1,6 +1,6 @@
 import React from "react";
 
-class Auth extends React.Component {
+export default class Auth extends React.Component {
   login (email, password, callback) {
     callback = arguments[arguments.length - 1];
     if (localStorage.token) {
@@ -49,6 +49,4 @@ function pretendRequest(email, password, callback) {
       callback({authenticated: false});
     }
   }, 0);
-}
-
-export default Auth;
+};

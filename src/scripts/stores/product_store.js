@@ -1,8 +1,7 @@
-import React from "react";
-import AppDispatcher from "../dispatchers/app_dispatcher";
-import ProductConstants from "../constants/product_constants";
-import EventEmitter from "EventEmitter";
-import { assign } from "object-assign";
+var AppDispatcher = require("../dispatchers/app_dispatcher");
+var EventEmitter = require("events").EventEmitter;
+var assign = require("object-assign");
+var ProductConstants = require("../constants/product_constants");
 
 var _products = {};
 
@@ -15,50 +14,46 @@ function edit(product) {
 function remove(id) {
 };
 
-// class ProductStore extends React.Component
 var ProductStore = assign({}, EventEmitter.prototype, {
 
-  get() {
+  get: function() {
     return _products;
   },
 
-  emitChange() {
+  emitChange: function() {
     this.emit("change");
   },
 
-  addChangeListener(callback) {
+  addChangeListener: function(callback) {
     this.on("change", callback);
   },
 
-  removeChangeListener(callback) {
+  removeChangeListener: function(callback) {
     this.removeListener("change", callback);
   },
 
-  AppDispatcher.register(function(payload) {
+  dispatchToken: AppDispatcher.register(function(payload) {
     var action = payload.action;
-    var text;
 
     switch(action.actionType) {
       case ProductConstants.ADD:
         add(action.data);
+        ProductStore.emitChange();
         break;
 
       case ProductConstants.EDIT:
         edit(action.data);
+        ProductStore.emitChange();
         break;
 
       case ProductConstants.REMOVE:
         remove(action.data);
+        ProductStore.emitChange();
         break;
-
-      default:
-        return true;
     }
-
-    ProductStore.emitChange();
 
     return true;
   })
 });
 
-export default ProductStore;
+module.exports = ProductStore;

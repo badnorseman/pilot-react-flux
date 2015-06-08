@@ -2,7 +2,7 @@ import React from "react";
 import ProductStore from "../stores/product_store";
 import Sidebar from "./sidebar";
 
-class ProductApp extends React.Component {
+export default class ProductApp extends React.Component {
 
   constructor() {
     super();
@@ -41,6 +41,4 @@ function getStateFromStores() {
   return {
     products: ProductStore.get()
   };
-}
-
-export default ProductApp;
+};

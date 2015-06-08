@@ -1,29 +1,27 @@
-// ES5
-import { Promise } from "es6-promise";
-import { assign } from "object-assign";
+var Promise = require("es6-promise").Promise;
+var assign = require("object-assign");
 
 var _callbacks = [];
 var _promises = [];
 
-// class Dispatcher extends React.Component
 var Dispatcher = function() {};
 Dispatcher.prototype = assign({}, Dispatcher.prototype, {
 
   /**
-   * Register a Store's callback so that it may be invoked by an action.
+   * Register a Store callback so that it may be invoked by an action.
    * @param {function} callback The callback to be registered.
    * @return {number} The index of the callback within the _callbacks array.
    */
-  register(callback) {
+  register: function(callback) {
     _callbacks.push(callback);
     return _callbacks.length - 1; // index
-  }
+  },
 
   /**
    * dispatch
    * @param  {object} payload The data from the action.
    */
-  dispatch(payload) {
+  dispatch: function(payload) {
     // First create array of promises for callbacks to reference.
     var resolves = [];
     var rejects = [];
@@ -40,11 +38,11 @@ Dispatcher.prototype = assign({}, Dispatcher.prototype, {
       Promise.resolve(callback(payload)).then(function() {
         resolves[i](payload);
       }, function() {
-        rejects[i](new Error('Dispatcher callback unsuccessful'));
+        rejects[i](new Error("Dispatcher callback unsuccessful"));
       });
     });
     _promises = [];
   }
 });
 
-export default Dispatcher;
+module.exports = Dispatcher;

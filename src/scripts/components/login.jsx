@@ -1,7 +1,7 @@
 import React from "react";
 import Auth from "./auth";
 
-class Login extends React.Component {
+export default class Login extends React.Component {
 
   contextTypes: {
     router: React.PropTypes.func
@@ -43,6 +43,4 @@ class Login extends React.Component {
       </form>
     );
   }
-}
-
-export default Login;
+};

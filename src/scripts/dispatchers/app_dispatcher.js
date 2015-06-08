@@ -1,6 +1,5 @@
-// ES5
-import Dispatcher from "./Dispatcher";
-import { assign } from "object-assign";
+var Dispatcher = require("./Dispatcher");
+var assign = require("object-assign");
 
 var AppDispatcher = assign({}, Dispatcher.prototype, {
 
@@ -15,7 +14,6 @@ var AppDispatcher = assign({}, Dispatcher.prototype, {
       action: action
     });
   }
-
 });
 
 module.exports = AppDispatcher;

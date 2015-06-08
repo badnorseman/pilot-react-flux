@@ -9,16 +9,9 @@ module.exports = {
     filename: "app.bundle.js"
   },
 
-  externals: {
-    jquery: "var jQuery"
-  },
-
   module: {
     loaders: [
-      { test: /\.js$/, exclude: __dirname + /node_modules/, loader: "babel-loader" },
-      { test: /\.jsx$/, exclude: __dirname + /node_modules/, loader: "babel-loader" },
-      { test: require.resolve("jquery"), loader: "expose?jQuery" },
-      { test: require.resolve("jquery"), loader: "expose?$" }
+      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" }
     ]
   },
 
