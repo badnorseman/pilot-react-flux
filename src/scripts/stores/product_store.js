@@ -1,3 +1,4 @@
+import React from "react";
 import AppDispatcher from "../dispatchers/app_dispatcher";
 import ProductConstants from "../constants/product_constants";
 import EventEmitter from "EventEmitter";
@@ -14,6 +15,7 @@ function edit(product) {
 function remove(id) {
 };
 
+// class ProductStore extends React.Component
 var ProductStore = assign({}, EventEmitter.prototype, {
 
   get() {
@@ -59,4 +61,4 @@ var ProductStore = assign({}, EventEmitter.prototype, {
   })
 });
 
-module.exports = ProductStore;
+export default ProductStore;
