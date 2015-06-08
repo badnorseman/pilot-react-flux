@@ -2,7 +2,7 @@ var keyMirror = require("react/lib/keyMirror");
 
 module.exports = {
 
-  Urls : {
+  API : {
     PRODUCTS: "http://localhost:3000/api/products"
   },
 

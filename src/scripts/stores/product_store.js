@@ -1,7 +1,6 @@
 var AppDispatcher = require("../dispatchers/app_dispatcher");
 var EventEmitter = require("events").EventEmitter;
 var ProductConstants = require("../constants/product_constants");
-var AppUtils = require("../utils/app_utils");
 var assign = require("object-assign");
 
 var products = [];
@@ -50,9 +49,8 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 
     switch(action.actionType) {
       case ProductConstants.LIST:
-        console.log("LIST");
-        console.log(action);
-        products = action.json.products;
+        console.log("dispatcherIndex LIST");
+        products = action.json;
         break;
 
       case ProductConstants.ADD:
