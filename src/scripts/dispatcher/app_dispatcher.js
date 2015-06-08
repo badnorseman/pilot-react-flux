@@ -1,3 +1,4 @@
+// ES5
 import Dispatcher from "./Dispatcher";
 import { assign } from "object-assign";
 

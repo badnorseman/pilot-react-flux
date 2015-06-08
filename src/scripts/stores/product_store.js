@@ -6,29 +6,29 @@ import { assign } from "object-assign";
 var _products = {};
 
 function add(product) {
-}
+};
 
 function edit(product) {
-}
+};
 
 function remove(id) {
-}
+};
 
 var ProductStore = assign({}, EventEmitter.prototype, {
 
-  get: function() {
+  get() {
     return _products;
   },
 
-  emitChange: function() {
+  emitChange() {
     this.emit("change");
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on("change", callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener("change", callback);
   },
 
@@ -54,6 +54,7 @@ var ProductStore = assign({}, EventEmitter.prototype, {
     }
 
     ProductStore.emitChange();
+
     return true;
   })
 });

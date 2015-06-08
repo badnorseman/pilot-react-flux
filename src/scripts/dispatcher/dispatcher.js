@@ -1,3 +1,4 @@
+// ES5
 var Promise = require('es6-promise').Promise;
 var assign = require('object-assign');
 

@@ -1,12 +1,6 @@
 import React from "react";
-import ProductStore from "./stores/product_store";
+import ProductStore from "../stores/product_store";
 import Sidebar from "./sidebar";
-
-function getStateFromStores() {
-  return {
-    products: ProductStore.get()
-  };
-}
 
 class ProductApp extends React.Component {
 
@@ -15,18 +9,18 @@ class ProductApp extends React.Component {
     this.onOpenSidebar = this.onOpenSidebar.bind(this);
   }
 
-  getInitialState: function() {
+  getInitialState() {
   }
 
-  componentDidMount: function() {
+  componentDidMount() {
     ProductStore.addChangeListener(this.onChange);
   }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     ProductStore.removeChangeListener(this.onChange);
   }
 
-  onChange: function() {
+  onChange() {
     this.setState(getStateFromStores());
   }
 
@@ -42,5 +36,11 @@ class ProductApp extends React.Component {
     );
   }
 };
+
+function getStateFromStores() {
+  return {
+    products: ProductStore.get()
+  };
+}
 
 export default ProductApp;
