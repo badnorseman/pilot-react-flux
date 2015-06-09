@@ -12,11 +12,11 @@ module.exports = {
         console.log("Response: ", response)
 
         if (response) {
-          var json = JSON.parse(response.text);
-          ProductActions.list(json);
+          // var json = JSON.parse(response.text);
+          // ProductActions.list(json);
         }
         if (error) {
-          // json = JSON.parse(error.text);
+          // var json = JSON.parse(error.text);
         }
       });
   }
