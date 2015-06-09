@@ -1,6 +1,6 @@
 var AppDispatcher = require("../dispatchers/app_dispatcher");
 var EventEmitter = require("events").EventEmitter;
-var ProductConstants = require("../constants/product_constants");
+var ActionTypes = require("../constants/action_types");
 var assign = require("object-assign");
 
 var products = [];
@@ -44,24 +44,25 @@ var ProductStore = assign({}, EventEmitter.prototype, {
     this.removeListener("change", callback);
   },
 
-  dispatcherIndex: AppDispatcher.register(function(payload) {
+  dispatchToken: AppDispatcher.register(function(payload) {
+    console.log(payload);
     var action = payload.action;
 
     switch(action.actionType) {
-      case ProductConstants.LIST:
-        console.log("dispatcherIndex LIST");
+      case ActionTypes.LIST:
+        console.log(action);
         products = action.json;
         break;
 
-      case ProductConstants.ADD:
+      case ActionTypes.ADD:
         add(action.product);
         break;
 
-      case ProductConstants.EDIT:
+      case ActionTypes.EDIT:
         edit(action.product);
         break;
 
-      case ProductConstants.REMOVE:
+      case ActionTypes.REMOVE:
         remove(action.id);
         break;
     }

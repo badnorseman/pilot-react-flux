@@ -1,24 +1,27 @@
-var ProductActions = require("../actions/product_actions");
-var ProductConstants = require("../constants/product_constants");
-var request = require("superagent");
+import ProductActions from "../actions/product_actions";
+import API from "../constants/api_routes";
+import request from "superagent";
 
-console.log("AppUtils");
+// var ProductActions = require("../actions/product_actions");
+// var API = require("../constants/api_routes");
+// var request = require("superagent");
 
 module.exports = {
 
   list: function() {
-    console.log("AppUtils list");
-    request.get(ProductConstants.API.PRODUCTS)
+    request.get(API.Routes.PRODUCTS)
       .accept("application/json")
-      .end(function(error, response){
+      .end(function(error, response) {
+        console.log("Error: ", error)
+        console.log("Response: ", response)
+
         if (response) {
-          json = JSON.parse(response.text);
-          console.log("Response: ", json)
-          ProductActions.list();
+          return JSON.parse(response.text);
+          // json = JSON.parse(response.text);
+          // ProductActions.list();
         }
         if (error) {
-          json = JSON.parse(error.text);
-          console.log("Error: ", json)
+          // json = JSON.parse(error.text);
         }
       });
   }

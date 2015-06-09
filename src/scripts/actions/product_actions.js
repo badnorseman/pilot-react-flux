@@ -1,33 +1,31 @@
-var AppDispatcher = require("../dispatchers/app_dispatcher");
-var ProductConstants = require("../constants/product_constants");
-var AppUtils = require("../utils/app_utils");
+import AppDispatcher from "../dispatchers/app_dispatcher";
+import ActionTypes from "../constants/action_types";
+import AppUtils from "../utils/app_utils";
 
-console.log("ProductActions");
+export function add(product) {
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.ADD,
+    product: product
+  });
+}
 
-module.exports = {
-  add: function(product) {
-    AppDispatcher.handleViewAction({
-      actionType: ProductConstants.ADD,
-      product: product
-    });
-  },
-  edit: function(product) {
-    AppDispatcher.handleViewAction({
-      actionType: ProductConstants.EDIT,
-      product: product
-    });
-  },
-  list: function() {
-    console.log("ProductActions list");
-    AppDispatcher.handleViewAction({
-      actionType: ProductConstants.LIST
-    });
-    AppUtils.list();
-  },
-  remove: function(id) {
-    AppDispatcher.handleViewAction({
-      actionType: ProductConstants.REMOVE,
-      id: id
-    });
-  }
-};
+export function edit(product) {
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.EDIT,
+    product: product
+  });
+}
+
+export function list() {
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.LIST
+  });
+  AppUtils.list();
+}
+
+export function remove(id) {
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.REMOVE,
+    id: id
+  });
+}
