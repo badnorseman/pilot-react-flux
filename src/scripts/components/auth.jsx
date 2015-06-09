@@ -7,7 +7,7 @@ export default class Auth extends React.Component {
       if (callback) callback(true);
       this.onChange(true);
       return;
-    },
+    }
 
     pretendRequest(email, password, (res) => {
       if (res.authenticated) {

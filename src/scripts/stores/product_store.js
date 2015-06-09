@@ -1,30 +1,25 @@
-var AppDispatcher = require("../dispatchers/app_dispatcher");
+var AppDispatcher = require("../dispatcher/app_dispatcher");
 var EventEmitter = require("events").EventEmitter;
 var ActionTypes = require("../constants/action_types");
-var assign = require("object-assign");
+var assign = require("react/lib/Object.assign");
+import AppUtils from "../utils/app_utils";
 
-var products = [];
-var errors = [];
+var products = {};
+var errors = {};
 
-function add(product) {
+function add(text) {
 };
 
-function edit(product) {
+function list() {
+  AppUtils.get();
 };
 
 function remove(id) {
-};
+}
 
 var ProductStore = assign({}, EventEmitter.prototype, {
 
   getProducts: function() {
-    products = [
-      {
-        id: 99,
-        name: "name1",
-        description: "description1"
-      }
-    ];
     return products;
   },
 
@@ -42,35 +37,26 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener("change", callback);
-  },
+  }
+});
 
-  dispatchToken: AppDispatcher.register(function(payload) {
-    console.log(payload);
-    var action = payload.action;
+AppDispatcher.register(function(action) {
+  switch(action.actionType) {
+    case ActionTypes.ActionTypes.LIST:
+      list();
+      ProductStore.emitChange();
+      break;
 
-    switch(action.actionType) {
-      case ActionTypes.LIST:
-        console.log(action);
-        products = action.json;
-        break;
+    case ActionTypes.ActionTypes.ADD:
+      add(action.text);
+      ProductStore.emitChange();
+      break;
 
-      case ActionTypes.ADD:
-        add(action.product);
-        break;
-
-      case ActionTypes.EDIT:
-        edit(action.product);
-        break;
-
-      case ActionTypes.REMOVE:
-        remove(action.id);
-        break;
-    }
-
-    ProductStore.emitChange();
-
-    return true;
-  })
+    case ActionTypes.ActionTypes.REMOVE:
+      remove(action.id);
+      ProductStore.emitChange();
+      break;
+  }
 });
 
 module.exports = ProductStore;

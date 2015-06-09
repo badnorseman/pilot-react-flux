@@ -1,31 +1,27 @@
-import AppDispatcher from "../dispatchers/app_dispatcher";
+import AppDispatcher from "../dispatcher/app_dispatcher";
 import ActionTypes from "../constants/action_types";
-import AppUtils from "../utils/app_utils";
 
-export function add(product) {
-  AppDispatcher.handleViewAction({
-    actionType: ActionTypes.ADD,
-    product: product
-  });
-}
+var ProductActions = {
 
-export function edit(product) {
-  AppDispatcher.handleViewAction({
-    actionType: ActionTypes.EDIT,
-    product: product
-  });
-}
+  add: function(text) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.ADD,
+      text: text
+    });
+  },
 
-export function list() {
-  AppDispatcher.handleViewAction({
-    actionType: ActionTypes.LIST
-  });
-  AppUtils.list();
-}
+  list: function() {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.LIST
+    });
+  },
 
-export function remove(id) {
-  AppDispatcher.handleViewAction({
-    actionType: ActionTypes.REMOVE,
-    id: id
-  });
-}
+  remove: function(id) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.REMOVE,
+      id: id
+    });
+  }
+};
+
+module.exports = ProductActions;
