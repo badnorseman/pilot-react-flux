@@ -4,8 +4,8 @@ export default {
 
   ActionTypes: keyMirror({
     ADD: null,
-    EDIT: null,
-    LIST: null,
+    LIST1: null,
+    LIST2: null,
     REMOVE: null
   })
 }

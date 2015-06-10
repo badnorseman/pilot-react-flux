@@ -1,7 +1,7 @@
 import AppDispatcher from "../dispatcher/app_dispatcher";
 import ActionTypes from "../constants/action_types";
 
-var ProductActions = {
+module.exports = {
 
   add: function(text) {
     AppDispatcher.dispatch({
@@ -10,9 +10,17 @@ var ProductActions = {
     });
   },
 
-  list: function() {
+  list1: function() {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.LIST
+      actionType: ActionTypes.ActionTypes.LIST1
+    });
+  },
+
+  list2: function(json, errors) {
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.LIST2,
+      json: json,
+      errors: errors
     });
   },
 
@@ -23,5 +31,3 @@ var ProductActions = {
     });
   }
 };
-
-module.exports = ProductActions;

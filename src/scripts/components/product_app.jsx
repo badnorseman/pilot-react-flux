@@ -36,16 +36,22 @@ module.exports = React.createClass({
         <p>{this.state.products}</p>
         <button onClick={this.OnListClick}>List </button>
         <button onClick={this.OnAddClick}>Add </button>
+        <button onClick={this.OnRemoveClick}>Remove </button>
       </div>
     );
   },
 
   OnListClick: function() {
-    ProductActions.list();
+    ProductActions.list1();
   },
 
   OnAddClick: function() {
-    var text = "";
+    var text = "Add Record";
     ProductActions.add(text);
+  },
+
+  OnRemoveClick: function() {
+    var id = 99;
+    ProductActions.remove(id);
   }
 });

@@ -4,19 +4,16 @@ import request from "superagent";
 
 module.exports = {
 
-  get: function() {
+  list1: function() {
     request.get(API.Routes.PRODUCTS)
       .accept("application/json")
       .end(function(error, response) {
-        console.log("Error: ", error)
-        console.log("Response: ", response)
-
         if (response) {
-          // var json = JSON.parse(response.text);
-          // ProductActions.list(json);
+          var json = JSON.parse(response.text);
+          ProductActions.list2(json);
         }
         if (error) {
-          // var json = JSON.parse(error.text);
+          var json = JSON.parse(error.text);
         }
       });
   }
