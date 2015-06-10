@@ -10,23 +10,6 @@ function getProductState() {
   };
 }
 
-function listOnClick() {
-  ProductActions.list1();
-}
-
-function addOnClick() {
-  var record = {
-    name: "name",
-    description: "description"
-  };
-  ProductActions.add1(record);
-}
-
-function removeOnClick() {
-  var id = 1;
-  ProductActions.remove1(id);
-}
-
 module.exports = React.createClass({
 
   getInitialState: function() {
@@ -51,11 +34,9 @@ module.exports = React.createClass({
         <Sidebar />
         <div>
           {this.state.errors}
-          <div>
-            <List items={this.state.products} />
-          </div>
-          <button onClick={listOnClick}>List </button>
-          <button onClick={addOnClick}>Add </button>
+          <List items={this.state.products} />
+          <RefreshList />
+          <AddItem />
         </div>
       </div>
     );
@@ -78,11 +59,48 @@ var Item = React.createClass({
   render: function() {
     return (
       <li>
-        {this.props.item.id}
         {this.props.item.name}
         {this.props.item.description}
-        <button onClick={removeOnClick}>Remove </button>
+        <RemoveItem id={this.props.item.id} />
       </li>
     )
+  }
+});
+
+var AddItem = React.createClass({
+  onClick: function() {
+    var record = {
+      name: "name",
+      description: "description"
+    };
+    ProductActions.add1(record);
+  },
+  render: function() {
+    return (
+      <button onClick={this.onClick}>Add </button>
+    )
+  }
+});
+
+var RemoveItem = React.createClass({
+  onClick: function() {
+    var id = this.props.id;
+    ProductActions.remove1(id);
+  },
+  render: function() {
+    return (
+      <button onClick={this.onClick}>Remove </button>
+    )
+  }
+});
+
+var RefreshList = React.createClass({
+  onClick: function() {
+    ProductActions.list1();
+  },
+  render: function() {
+    return (
+      <button onClick={this.onClick}>List </button>
+    );
   }
 });
