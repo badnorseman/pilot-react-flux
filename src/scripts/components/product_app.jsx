@@ -10,6 +10,23 @@ function getProductState() {
   };
 }
 
+function listOnClick() {
+  ProductActions.list1();
+}
+
+function addOnClick() {
+  var record = {
+    name: "name",
+    description: "description"
+  };
+  ProductActions.add1(record);
+}
+
+function removeOnClick() {
+  var id = 1;
+  ProductActions.remove1(id);
+}
+
 module.exports = React.createClass({
 
   getInitialState: function() {
@@ -32,26 +49,40 @@ module.exports = React.createClass({
     return (
       <div>
         <Sidebar />
-        <p>{this.state.errors}</p>
-        <p>{this.state.products}</p>
-        <button onClick={this.OnListClick}>List </button>
-        <button onClick={this.OnAddClick}>Add </button>
-        <button onClick={this.OnRemoveClick}>Remove </button>
+        <div>
+          {this.state.errors}
+          <div>
+            <List items={this.state.products} />
+          </div>
+          <button onClick={listOnClick}>List </button>
+          <button onClick={addOnClick}>Add </button>
+        </div>
       </div>
     );
-  },
+  }
+});
 
-  OnListClick: function() {
-    ProductActions.list1();
-  },
+var List = React.createClass({
+  render: function() {
+    return (
+      <ul>
+        {this.props.items.map(function(item, index) {
+          return <Item item={item} key={index} />
+        })}
+      </ul>
+    );
+  }
+});
 
-  OnAddClick: function() {
-    var text = "Add Record";
-    ProductActions.add(text);
-  },
-
-  OnRemoveClick: function() {
-    var id = 99;
-    ProductActions.remove(id);
+var Item = React.createClass({
+  render: function() {
+    return (
+      <li>
+        {this.props.item.id}
+        {this.props.item.name}
+        {this.props.item.description}
+        <button onClick={removeOnClick}>Remove </button>
+      </li>
+    )
   }
 });
