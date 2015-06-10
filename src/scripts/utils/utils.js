@@ -40,10 +40,10 @@ module.exports = {
         if (res.ok) {
           ProductActions.remove_cb();
         }
-        console.log("res: ", res.body.message);
-        console.log("res: ", res.status);
-        console.log("res: ", res.type);
         if (res.error) {
+          console.log("res: ", res.body);
+          console.log("res: ", res.status);
+          console.log("res: ", res.type);
         }
       });
   }
