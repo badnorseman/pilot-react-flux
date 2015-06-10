@@ -1,9 +1,9 @@
 var React = require("react");
-var ProductApp = require("./components/product_app");
+var Products = require("./components/products");
 
 window.React = React;
 
 React.render(
-  <ProductApp />,
+  <Products />,
   document.getElementById("app")
 );
