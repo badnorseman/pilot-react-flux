@@ -6,45 +6,45 @@ module.exports = {
 
   list: function() {
     request.get(ApiRoutes.PRODUCTS)
-      .accept("application/json")
-      .end(function(error, response) {
-        if (response) {
-          var json = JSON.parse(response.text);
+      .set("Content-Type", "application/json")
+      .end(function(err, res) {
+        var json = JSON.parse(res.text);
+
+        if (res.ok) {
           ProductActions.list_cb(json);
         }
-        if (error) {
-          var json = JSON.parse(error.text);
+        if (res.error) {
         }
       });
   },
 
   add: function(record) {
     request.post(ApiRoutes.PRODUCTS)
-      .accept("application/json")
+      .set("Content-Type", "application/json")
       .send(record)
-      .end(function(error, response) {
-        if (response) {
-          var json = JSON.parse(response.text);
+      .end(function(err, res) {
+        var json = JSON.parse(res.text);
+
+        if (res.ok) {
           ProductActions.add_cb(json);
         }
-        if (error) {
-          var json = JSON.parse(error.text);
+        if (res.error) {
         }
       });
   },
 
   remove: function(id) {
     request.del(ApiRoutes.PRODUCTS + "/" + id)
-      .accept("application/json")
-      .end(function(error, response) {
-        if (response) {
-          var json = JSON.parse(response.text);
-          ProductActions.remove_cb(json);
+      .set("Content-Type", "application/json")
+      .end(function(err, res) {
+        if (res.ok) {
+          ProductActions.remove_cb();
         }
-        // console.log("error: ", error);
-        // if (error) {
-        //   var json = JSON.parse(error.text);
-        // }
+        console.log("res: ", res.body.message);
+        console.log("res: ", res.status);
+        console.log("res: ", res.type);
+        if (res.error) {
+        }
       });
   }
 };
