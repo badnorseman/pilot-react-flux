@@ -73,7 +73,7 @@ var AddItem = React.createClass({
       name: "name",
       description: "description"
     };
-    ProductActions.add1(record);
+    ProductActions.add(record);
   },
   render: function() {
     return (
@@ -85,7 +85,7 @@ var AddItem = React.createClass({
 var RemoveItem = React.createClass({
   onClick: function() {
     var id = this.props.id;
-    ProductActions.remove1(id);
+    ProductActions.remove(id);
   },
   render: function() {
     return (
@@ -96,7 +96,7 @@ var RemoveItem = React.createClass({
 
 var RefreshList = React.createClass({
   onClick: function() {
-    ProductActions.list1();
+    ProductActions.list();
   },
   render: function() {
     return (

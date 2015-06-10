@@ -1,4 +1,4 @@
-var AppDispatcher = require("../dispatcher/dispatcher");
+var Dispatcher = require("../dispatcher/dispatcher");
 var EventEmitter = require("events").EventEmitter;
 var ActionTypes = require("../constants/action_types");
 var assign = require("react/lib/Object.assign");
@@ -30,30 +30,30 @@ var ProductStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
+Dispatcher.register(function(action) {
   switch(action.actionType) {
-    case ActionTypes.ActionTypes.LIST1:
-      Api.list1();
+    case ActionTypes.ActionTypes.LIST:
+      Api.list();
       break;
 
-    case ActionTypes.ActionTypes.LIST2:
+    case ActionTypes.ActionTypes.LIST_CB:
       products = action.json;
       ProductStore.emitChange();
       break;
 
-    case ActionTypes.ActionTypes.ADD1:
-      Api.add1(action.record);
+    case ActionTypes.ActionTypes.ADD:
+      Api.add(action.record);
       break;
 
-    case ActionTypes.ActionTypes.ADD2:
+    case ActionTypes.ActionTypes.ADD_CB:
       ProductStore.emitChange();
       break;
 
-    case ActionTypes.ActionTypes.REMOVE1:
-      Api.remove1(action.id);
+    case ActionTypes.ActionTypes.REMOVE:
+      Api.remove(action.id);
       break;
 
-    case ActionTypes.ActionTypes.REMOVE2:
+    case ActionTypes.ActionTypes.REMOVE_CB:
       ProductStore.emitChange();
       break;
   }

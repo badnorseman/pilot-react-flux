@@ -1,47 +1,47 @@
-import AppDispatcher from "../dispatcher/dispatcher";
+import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
 module.exports = {
 
-  add1: function(record) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.ADD1,
+  add: function(record) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.ADD,
       record: record
     });
   },
 
-  add2: function(json, errors) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.ADD2,
+  add_cb: function(json, errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.ADD_CB,
       json: json,
       errors: errors
     });
   },
 
-  list1: function() {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.LIST1
+  list: function() {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.LIST
     });
   },
 
-  list2: function(json, errors) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.LIST2,
+  list_cb: function(json, errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.LIST_CB,
       json: json,
       errors: errors
     });
   },
 
-  remove1: function(id) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.REMOVE1,
+  remove: function(id) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.REMOVE,
       id: id
     });
   },
 
-  remove2: function(json, errors) {
-    AppDispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.REMOVE2,
+  remove_cb: function(json, errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.ActionTypes.REMOVE_CB,
       json: json,
       errors: errors
     });

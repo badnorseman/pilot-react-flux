@@ -6,7 +6,5 @@ var root = "/api";
 
 export default {
 
-  Routes : {
-    PRODUCTS: host + root + "/products"
-  }
+  PRODUCTS: host + root + "/products"
 }

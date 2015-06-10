@@ -1,16 +1,16 @@
 import ProductActions from "../actions/product_actions";
-import Api from "../constants/api_routes";
+import ApiRoutes from "../constants/api_routes";
 import request from "superagent";
 
 module.exports = {
 
-  list1: function() {
-    request.get(Api.Routes.PRODUCTS)
+  list: function() {
+    request.get(ApiRoutes.PRODUCTS)
       .accept("application/json")
       .end(function(error, response) {
         if (response) {
           var json = JSON.parse(response.text);
-          ProductActions.list2(json);
+          ProductActions.list_cb(json);
         }
         if (error) {
           var json = JSON.parse(error.text);
@@ -18,14 +18,14 @@ module.exports = {
       });
   },
 
-  add1: function(record) {
-    console.log("add1: ", record);
-    request.post(Api.Routes.PRODUCTS)
+  add: function(record) {
+    request.post(ApiRoutes.PRODUCTS)
       .accept("application/json")
+      .send(record)
       .end(function(error, response) {
         if (response) {
           var json = JSON.parse(response.text);
-          ProductActions.add2(json);
+          ProductActions.add_cb(json);
         }
         if (error) {
           var json = JSON.parse(error.text);
@@ -33,18 +33,18 @@ module.exports = {
       });
   },
 
-  remove1: function(id) {
-    console.log("remove1: ", id);
-    request.post(Api.Routes.PRODUCTS)
+  remove: function(id) {
+    request.del(ApiRoutes.PRODUCTS + "/" + id)
       .accept("application/json")
       .end(function(error, response) {
         if (response) {
           var json = JSON.parse(response.text);
-          ProductActions.remove2(json);
+          ProductActions.remove_cb(json);
         }
-        if (error) {
-          var json = JSON.parse(error.text);
-        }
+        // console.log("error: ", error);
+        // if (error) {
+        //   var json = JSON.parse(error.text);
+        // }
       });
   }
 };
