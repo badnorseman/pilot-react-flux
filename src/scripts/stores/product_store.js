@@ -32,28 +32,32 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
   switch(action.actionType) {
-    case ActionTypes.ActionTypes.LIST:
+    case ActionTypes.LIST:
       Api.list();
       break;
 
-    case ActionTypes.ActionTypes.LIST_CB:
+    case ActionTypes.LIST_CB:
       products = action.json;
+      errors = action.error;
       ProductStore.emitChange();
       break;
 
-    case ActionTypes.ActionTypes.ADD:
+    case ActionTypes.ADD:
       Api.add(action.record);
       break;
 
-    case ActionTypes.ActionTypes.ADD_CB:
+    case ActionTypes.ADD_CB:
+      products.push(action.json);
+      errors = action.error;
       ProductStore.emitChange();
       break;
 
-    case ActionTypes.ActionTypes.REMOVE:
+    case ActionTypes.REMOVE:
       Api.remove(action.id);
       break;
 
-    case ActionTypes.ActionTypes.REMOVE_CB:
+    case ActionTypes.REMOVE_CB:
+      errors = action.error;
       ProductStore.emitChange();
       break;
   }

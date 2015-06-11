@@ -5,45 +5,44 @@ module.exports = {
 
   add: function(record) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.ADD,
+      actionType: ActionTypes.ADD,
       record: record
     });
   },
 
-  add_cb: function(json, errors) {
+  add_cb: function(json, error) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.ADD_CB,
+      actionType: ActionTypes.ADD_CB,
       json: json,
-      errors: errors
+      error: error
     });
   },
 
   list: function() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.LIST
+      actionType: ActionTypes.LIST
     });
   },
 
-  list_cb: function(json, errors) {
+  list_cb: function(json, error) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.LIST_CB,
+      actionType: ActionTypes.LIST_CB,
       json: json,
-      errors: errors
+      error: error
     });
   },
 
   remove: function(id) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.REMOVE,
+      actionType: ActionTypes.REMOVE,
       id: id
     });
   },
 
-  remove_cb: function(json, errors) {
+  remove_cb: function(error) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ActionTypes.REMOVE_CB,
-      json: json,
-      errors: errors
+      actionType: ActionTypes.REMOVE_CB,
+      error: error
     });
   }
 };

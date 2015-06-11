@@ -8,12 +8,12 @@ module.exports = {
     request.get(ApiRoutes.PRODUCTS)
       .set("Content-Type", "application/json")
       .end(function(err, res) {
-        var json = JSON.parse(res.text);
-
         if (res.ok) {
-          ProductActions.list_cb(json);
+          var json = JSON.parse(res.text);
+          ProductActions.list_cb(json, null);
         }
         if (res.error) {
+          ProductActions.list_cb(null, res.error);
         }
       });
   },
@@ -23,12 +23,12 @@ module.exports = {
       .set("Content-Type", "application/json")
       .send(record)
       .end(function(err, res) {
-        var json = JSON.parse(res.text);
-
         if (res.ok) {
-          ProductActions.add_cb(json);
+          var json = JSON.parse(res.text);
+          ProductActions.add_cb(json, null);
         }
         if (res.error) {
+          ProductActions.add_cb(null, res.error);
         }
       });
   },
@@ -41,9 +41,7 @@ module.exports = {
           ProductActions.remove_cb();
         }
         if (res.error) {
-          console.log("res: ", res.body);
-          console.log("res: ", res.status);
-          console.log("res: ", res.type);
+          ProductActions.remove_cb(res.error);
         }
       });
   }

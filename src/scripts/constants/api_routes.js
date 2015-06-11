@@ -1,5 +1,3 @@
-import keyMirror from "react/lib/keyMirror";
-
 // var host = "https://matrix-api.herokuapp.com";
 var host = "http://localhost:3000";
 var root = "/api";
