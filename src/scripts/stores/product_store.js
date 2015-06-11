@@ -8,23 +8,18 @@ var products = [];
 var errors = [];
 
 var ProductStore = assign({}, EventEmitter.prototype, {
-
   getProducts: function() {
     return products;
   },
-
   getErrors: function() {
     return errors;
   },
-
   emitChange: function() {
     this.emit("change");
   },
-
   addChangeListener: function(callback) {
     this.on("change", callback);
   },
-
   removeChangeListener: function(callback) {
     this.removeListener("change", callback);
   }
@@ -38,7 +33,7 @@ Dispatcher.register(function(action) {
 
     case ActionTypes.LIST_CB:
       products = action.data;
-      errors = action.error;
+      errors = action.errors;
       ProductStore.emitChange();
       break;
 
@@ -48,7 +43,7 @@ Dispatcher.register(function(action) {
 
     case ActionTypes.ADD_CB:
       products.push(action.data);
-      errors = action.error;
+      errors = action.errors;
       ProductStore.emitChange();
       break;
 
@@ -58,7 +53,7 @@ Dispatcher.register(function(action) {
 
     case ActionTypes.REMOVE_CB:
       products = removeItem(action.id);
-      errors = action.error;
+      errors = action.errors;
       ProductStore.emitChange();
       break;
   }

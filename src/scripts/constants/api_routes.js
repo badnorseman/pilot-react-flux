@@ -3,6 +3,6 @@ var host = "https://matrix-api.herokuapp.com";
 var root = "/api";
 
 export default {
-
+  LOGIN: host + root + "/auth/identity/callback",
   PRODUCTS: host + root + "/products"
 }

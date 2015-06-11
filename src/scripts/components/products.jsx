@@ -1,7 +1,7 @@
 var React = require("react");
 var ProductStore = require("../stores/product_store");
 var ProductActions = require("../actions/product_actions");
-var Sidebar = require("./sidebar");
+var Login = require("./login");
 
 function getProductState() {
   return {
@@ -11,30 +11,27 @@ function getProductState() {
 }
 
 module.exports = React.createClass({
-
   getInitialState: function() {
     return getProductState();
   },
-
   componentDidMount: function() {
     ProductStore.addChangeListener(this.onChange);
   },
-
   componentWillUnmount: function() {
     ProductStore.removeChangeListener(this.onChange);
   },
-
   onChange: function() {
     this.setState(getProductState);
   },
-
   render: function() {
     return (
       <div>
-        <Sidebar />
+        <Login />
         <RefreshList />
         <div>
-          {this.state.errors}
+          <div>
+            {this.state.errors}
+          </div>
           <List items={this.state.products} />
           <AddItem />
         </div>
@@ -68,7 +65,7 @@ var Item = React.createClass({
 });
 
 var AddItem = React.createClass({
-  onSubmit: function(e) {
+  handleSubmit: function(e) {
     e.preventDefault();
 
     var name = React.findDOMNode(this.refs.name).value;
@@ -76,8 +73,10 @@ var AddItem = React.createClass({
 
     if (name && description) {
       var record = {
-        name: name,
-        description: description
+        product : {
+          name: name,
+          description: description
+        }
       }
       ProductActions.add(record);
       React.findDOMNode(this.refs.name).value = "";
@@ -86,34 +85,36 @@ var AddItem = React.createClass({
   },
   render: function() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" ref="name" />
-        <input type="text" ref="description" />
-        <button type="submit">Add</button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" ref="name" />
+          <input type="text" ref="description" />
+          <input type="submit" value="Add" />
+        </form>
+      </div>
     )
   }
 });
 
 var RemoveItem = React.createClass({
-  onClick: function() {
+  handleClick: function() {
     var id = this.props.id;
     ProductActions.remove(id);
   },
   render: function() {
     return (
-      <button onClick={this.onClick}>Remove </button>
+      <button onClick={this.handleClick}>Remove </button>
     )
   }
 });
 
 var RefreshList = React.createClass({
-  onClick: function() {
+  handleClick: function() {
     ProductActions.list();
   },
   render: function() {
     return (
-      <button onClick={this.onClick}>List </button>
+      <button onClick={this.handleClick}>List </button>
     );
   }
 });
