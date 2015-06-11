@@ -1,52 +1,9 @@
-import React from "react";
-import Router from "react-router";
-import Dashboard from "./components/dashboard";
-import Login from "./components/login";
-import Sidebar from "./components/sidebar.jsx";
-import Signup from "./components/signup";
-import Welcome from "./components/welcome";
-
-var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+var React = require("react");
+var Products = require("./components/products");
 
 window.React = React;
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.onOpenSidebar = this.onOpenSidebar.bind(this);
-  }
-
-  render() {
-    return (
-      <div>
-        <sidebar ref="sidebar" />
-        <Link to="welcome">Welcome</Link>
-        <Link to="login">Log In</Link>
-        <Link to="signup">Sign Up</Link>
-
-        <RouteHandler/>
-      </div>
-    );
-  }
-
-  onOpenSidebar() {
-    this.refs.sidebar.toggle();
-  }
-};
-
-var routes = (
-  <Route path="/" handler={App}>
-    <DefaultRoute handler={Welcome}/>
-    <Route name="dashboard" path="/dashboard" handler={Dashboard}/>
-    <Route name="login" path="/login" handler={Login}/>
-    <Route name="signup" path="/signup" handler={Signup}/>
-    <Route name="welcome" path="/welcome" handler={Welcome}/>
-  </Route>
+React.render(
+  <Products />,
+  document.getElementById("app")
 );
-
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById("app"));
-});

@@ -1,24 +1,18 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
-module.exports = {
-  context: __dirname + "/src/scripts",
+var webpack = require("webpack");
 
-  entry: "./app.jsx",
+module.exports = {
+  entry: "./src/scripts/app.jsx",
 
   output: {
     path: __dirname + "/dist",
-    filename: "app.bundle.js"
-  },
-
-  externals: {
-    jquery: "var jQuery"
+    filename: "app.bundle.js",
+    publicPath: ""
   },
 
   module: {
     loaders: [
-      { test: /\.js$/, exclude: __dirname + /node_modules/, loader: "babel-loader" },
-      { test: /\.jsx$/, exclude: __dirname + /node_modules/, loader: "babel-loader" },
-      { test: require.resolve("jquery"), loader: "expose?jQuery" },
-      { test: require.resolve("jquery"), loader: "expose?$" }
+      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" }
     ]
   },
 

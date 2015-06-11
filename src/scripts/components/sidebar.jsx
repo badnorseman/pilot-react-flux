@@ -3,6 +3,7 @@ import mui from "material-ui";
 import Router from "react-router";
 
 class Sidebar extends React.Component {
+
   constructor(props) {
       var menuItems;
       if (props.user) {
