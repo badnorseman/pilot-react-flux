@@ -1,46 +1,55 @@
 import React from "react";
-import Auth from "./auth";
+import AuthActions from "../actions/auth_actions";
+import AuthStore from "../stores/auth_store";
 
-export default class Login extends React.Component {
+function getAuthState() {
+  return {
+    user: AuthStore.getUser(),
+    errors: AuthStore.getErrors()
+  };
+}
 
-  contextTypes: {
-    router: React.PropTypes.func
-  }
+module.exports = React.createClass({
+  getInitialState: function() {
+    return getAuthState();
+  },
+  componentDidMount: function() {
+    AuthStore.addChangeListener(this.onChange);
+  },
+  componentWillUnmount: function() {
+    AuthStore.removeChangeListener(this.onChange);
+  },
+  onChange: function() {
+    this.setState(getAuthState);
+  },
+  onSubmit: function(e) {
+    e.preventDefault();
 
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      error: false
-    };
-  }
+    var email = React.findDOMNode(this.refs.email).value;
+    var password = React.findDOMNode(this.refs.password).value;
 
-  handleSubmit(event) {
-    event.preventDefault();
-    var { router } = this.context;
-    var nextPath = router.getCurrentQuery().nextPath;
-    var email = this.refs.email.getDOMNode().value;
-    var password = this.refs.password.getDOMNode().value;
-
-    Auth.login(email, password, (loggedIn) => {
-      if (!loggedIn)
-        return this.setState({ error: true });
-      if (nextPath) {
-        router.replaceWith(nextPath);
-      } else {
-        router.replaceWith("dashboard");
+    if (email && password) {
+      var record = {
+        auth_key: email,
+        password: password
       }
-    });
-  }
-
-  render() {
+      AuthActions.login(record);
+    }
+  },
+  render: function() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="Email" defaultValue="agent.smith@matrix.com"/></label>
-        <label><input ref="password" placeholder="Password" defaultValue="dammit"/></label><br/>
-        <button type="submit">login</button>
-        {this.state.error}
-      </form>
-    );
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <div>
+            {this.state.errors}
+          </div>
+          <div>
+            <input type="text" ref="email" placeholder="Email" />
+            <input type="text" ref="password" placeholder="Password" />
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    )
   }
-};
+});
