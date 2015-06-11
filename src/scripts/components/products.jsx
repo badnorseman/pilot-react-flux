@@ -32,10 +32,10 @@ module.exports = React.createClass({
     return (
       <div>
         <Sidebar />
+        <RefreshList />
         <div>
           {this.state.errors}
           <List items={this.state.products} />
-          <RefreshList />
           <AddItem />
         </div>
       </div>
@@ -46,11 +46,11 @@ module.exports = React.createClass({
 var List = React.createClass({
   render: function() {
     return (
-      <ul>
+      <div>
         {this.props.items.map(function(item, index) {
           return <Item item={item} key={index} />
         })}
-      </ul>
+      </div>
     );
   }
 });
@@ -58,26 +58,39 @@ var List = React.createClass({
 var Item = React.createClass({
   render: function() {
     return (
-      <li>
+      <div>
         {this.props.item.name}
         {this.props.item.description}
         <RemoveItem id={this.props.item.id} />
-      </li>
+      </div>
     )
   }
 });
 
 var AddItem = React.createClass({
-  onClick: function() {
-    var record = {
-      name: "name",
-      description: "description"
-    };
-    ProductActions.add(record);
+  onSubmit: function(e) {
+    e.preventDefault();
+
+    var name = React.findDOMNode(this.refs.name).value;
+    var description = React.findDOMNode(this.refs.description).value;
+
+    if (name && description) {
+      var record = {
+        name: name,
+        description: description
+      }
+      ProductActions.add(record);
+      React.findDOMNode(this.refs.name).value = "";
+      React.findDOMNode(this.refs.description).value = "";
+    }
   },
   render: function() {
     return (
-      <button onClick={this.onClick}>Add </button>
+      <form onSubmit={this.onSubmit}>
+        <input type="text" ref="name" />
+        <input type="text" ref="description" />
+        <button type="submit">Add</button>
+      </form>
     )
   }
 });
