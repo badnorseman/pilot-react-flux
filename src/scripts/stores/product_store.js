@@ -37,7 +37,7 @@ Dispatcher.register(function(action) {
       break;
 
     case ActionTypes.LIST_CB:
-      products = action.json;
+      products = action.data;
       errors = action.error;
       ProductStore.emitChange();
       break;
@@ -47,7 +47,7 @@ Dispatcher.register(function(action) {
       break;
 
     case ActionTypes.ADD_CB:
-      products.push(action.json);
+      products.push(action.data);
       errors = action.error;
       ProductStore.emitChange();
       break;
@@ -57,10 +57,20 @@ Dispatcher.register(function(action) {
       break;
 
     case ActionTypes.REMOVE_CB:
+      products = removeItem(action.id);
       errors = action.error;
       ProductStore.emitChange();
       break;
   }
 });
+
+function removeItem(id) {
+  for (var i = 0; i < products.length; i++) {
+    if (products[i].id === id) {
+      products.splice(i, 1);
+      return products;
+    }
+  };
+};
 
 module.exports = ProductStore;

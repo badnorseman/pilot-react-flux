@@ -10,10 +10,10 @@ module.exports = {
     });
   },
 
-  add_cb: function(json, error) {
+  add_cb: function(data, error) {
     Dispatcher.dispatch({
       actionType: ActionTypes.ADD_CB,
-      json: json,
+      data: data,
       error: error
     });
   },
@@ -24,10 +24,10 @@ module.exports = {
     });
   },
 
-  list_cb: function(json, error) {
+  list_cb: function(data, error) {
     Dispatcher.dispatch({
       actionType: ActionTypes.LIST_CB,
-      json: json,
+      data: data,
       error: error
     });
   },
@@ -39,9 +39,10 @@ module.exports = {
     });
   },
 
-  remove_cb: function(error) {
+  remove_cb: function(id, error) {
     Dispatcher.dispatch({
       actionType: ActionTypes.REMOVE_CB,
+      id: id,
       error: error
     });
   }
