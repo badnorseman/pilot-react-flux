@@ -1,5 +1,5 @@
 var React = require("react");
-var Products = require("./components/products");
+var Products = require("./components/products/products");
 
 window.React = React;
 

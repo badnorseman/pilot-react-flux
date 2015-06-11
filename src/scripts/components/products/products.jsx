@@ -1,7 +1,8 @@
 var React = require("react");
-var ProductStore = require("../stores/product_store");
-var ProductActions = require("../actions/product_actions");
-var Login = require("./login");
+var ProductStore = require("../../stores/product_store");
+var ProductActions = require("../../actions/product_actions");
+var Login = require("../login");
+var List = require("./product_list");
 
 function getProductState() {
   return {
@@ -40,30 +41,6 @@ module.exports = React.createClass({
   }
 });
 
-var List = React.createClass({
-  render: function() {
-    return (
-      <div>
-        {this.props.items.map(function(item, index) {
-          return <Item item={item} key={index} />
-        })}
-      </div>
-    );
-  }
-});
-
-var Item = React.createClass({
-  render: function() {
-    return (
-      <div>
-        {this.props.item.name}
-        {this.props.item.description}
-        <RemoveItem id={this.props.item.id} />
-      </div>
-    )
-  }
-});
-
 var AddItem = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
@@ -92,18 +69,6 @@ var AddItem = React.createClass({
           <input type="submit" value="Add" />
         </form>
       </div>
-    )
-  }
-});
-
-var RemoveItem = React.createClass({
-  handleClick: function() {
-    var id = this.props.id;
-    ProductActions.remove(id);
-  },
-  render: function() {
-    return (
-      <button onClick={this.handleClick}>Remove </button>
     )
   }
 });
