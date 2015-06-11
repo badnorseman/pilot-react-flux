@@ -3,6 +3,7 @@ var ProductStore = require("../../stores/product_store");
 var ProductActions = require("../../actions/product_actions");
 var Login = require("../login");
 var List = require("./product_list");
+// var AddItem = require("./product_add");
 
 function getProductState() {
   return {

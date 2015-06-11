@@ -1,5 +1,5 @@
 var React = require("react");
-var ProductActions = require("../../actions/product_actions");
+var RemoveItem = require("./product_remove");
 
 module.exports = React.createClass({
   render: function() {
@@ -9,18 +9,6 @@ module.exports = React.createClass({
         {this.props.item.description}
         <RemoveItem id={this.props.item.id} />
       </div>
-    )
-  }
-});
-
-var RemoveItem = React.createClass({
-  handleClick: function() {
-    var id = this.props.id;
-    ProductActions.remove(id);
-  },
-  render: function() {
-    return (
-      <button onClick={this.handleClick}>Remove </button>
     )
   }
 });
