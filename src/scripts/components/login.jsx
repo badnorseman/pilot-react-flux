@@ -22,7 +22,7 @@ module.exports = React.createClass({
   onChange: function() {
     this.setState(getAuthState);
   },
-  onSubmit: function(e) {
+  handleSubmit: function(e) {
     e.preventDefault();
 
     var email = React.findDOMNode(this.refs.email).value;
@@ -33,20 +33,22 @@ module.exports = React.createClass({
         auth_key: email,
         password: password
       }
+      React.findDOMNode(this.refs.email).value = "";
+      React.findDOMNode(this.refs.password).value = "";
       AuthActions.login(record);
     }
   },
   render: function() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <div>
             {this.state.errors}
           </div>
           <div>
             <input type="text" ref="email" placeholder="Email" />
-            <input type="text" ref="password" placeholder="Password" />
-            <button type="submit">Login</button>
+            <input type="password" ref="password" placeholder="Password" />
+            <input type="submit" value="Login" />
           </div>
         </form>
       </div>

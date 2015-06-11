@@ -65,7 +65,7 @@ var Item = React.createClass({
 });
 
 var AddItem = React.createClass({
-  onSubmit: function(e) {
+  handleSubmit: function(e) {
     e.preventDefault();
 
     var name = React.findDOMNode(this.refs.name).value;
@@ -86,10 +86,10 @@ var AddItem = React.createClass({
   render: function() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <input type="text" ref="name" />
           <input type="text" ref="description" />
-          <button type="submit">Add</button>
+          <input type="submit" value="Add" />
         </form>
       </div>
     )
@@ -97,24 +97,24 @@ var AddItem = React.createClass({
 });
 
 var RemoveItem = React.createClass({
-  onClick: function() {
+  handleClick: function() {
     var id = this.props.id;
     ProductActions.remove(id);
   },
   render: function() {
     return (
-      <button onClick={this.onClick}>Remove </button>
+      <button onClick={this.handleClick}>Remove </button>
     )
   }
 });
 
 var RefreshList = React.createClass({
-  onClick: function() {
+  handleClick: function() {
     ProductActions.list();
   },
   render: function() {
     return (
-      <button onClick={this.onClick}>List </button>
+      <button onClick={this.handleClick}>List </button>
     );
   }
 });
