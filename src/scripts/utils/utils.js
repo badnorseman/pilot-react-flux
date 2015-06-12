@@ -3,8 +3,8 @@ import AuthActions from "../actions/auth_actions";
 import ProductActions from "../actions/product_actions";
 import $ from "jquery";
 
-module.exports = {
-  add: function(record) {
+export default {
+  add(record) {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       type: "POST",
@@ -18,7 +18,7 @@ module.exports = {
       }.bind(this)
     });
   },
-  load: function() {
+  load() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       type: "GET",
@@ -31,7 +31,7 @@ module.exports = {
       }.bind(this)
     });
   },
-  login: function(record) {
+  login(record) {
     $.ajax({
       url: ApiRoutes.LOGIN,
       type: "GET",
@@ -45,7 +45,7 @@ module.exports = {
       }.bind(this)
     });
   },
-  remove: function(id) {
+  remove(id) {
     $.ajax({
       url: ApiRoutes.PRODUCTS + "/" + id,
       type: "DELETE",
