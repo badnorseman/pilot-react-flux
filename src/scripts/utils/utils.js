@@ -18,16 +18,16 @@ module.exports = {
       }.bind(this)
     });
   },
-  list: function() {
+  load: function() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       type: "GET",
       dataType: "json",
       success: function(data) {
-        ProductActions.list_cb(data, null);
+        ProductActions.load_cb(data, null);
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.list_cb(null, err);
+        ProductActions.load_cb(null, err);
       }.bind(this)
     });
   },

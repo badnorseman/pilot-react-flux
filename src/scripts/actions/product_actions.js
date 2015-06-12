@@ -15,14 +15,14 @@ module.exports = {
       errors: errors
     });
   },
-  list: function() {
+  load: function() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LIST
+      actionType: ActionTypes.LOAD
     });
   },
-  list_cb: function(data, errors) {
+  load_cb: function(data, errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LIST_CB,
+      actionType: ActionTypes.LOAD_CB,
       data: data,
       errors: errors
     });
