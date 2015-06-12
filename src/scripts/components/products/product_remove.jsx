@@ -1,5 +1,5 @@
-var React = require("react");
-var ProductActions = require("../../actions/product_actions");
+import React from "react";
+import ProductActions from "../../actions/product_actions";
 
 module.exports = React.createClass({
   handleClick: function() {

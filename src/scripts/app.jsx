@@ -6,4 +6,4 @@ window.React = React;
 React.render(
   <Products />,
   document.getElementById("app")
-);
+)
