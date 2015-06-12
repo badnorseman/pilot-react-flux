@@ -1,8 +1,8 @@
-var React = require("react");
-var RemoveItem = require("./product_remove");
+import React from "react";
+import RemoveItem from "./product_remove";
 
-module.exports = React.createClass({
-  render: function() {
+export default class extends React.Component {
+  render() {
     return (
       <div>
         {this.props.item.name}
@@ -11,4 +11,4 @@ module.exports = React.createClass({
       </div>
     )
   }
-});
+};

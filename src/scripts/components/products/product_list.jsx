@@ -1,8 +1,8 @@
-var React = require("react");
-var Item = require("./product_item");
+import React from "react";
+import Item from "./product_item";
 
-module.exports = React.createClass({
-  render: function() {
+export default class extends React.Component {
+  render() {
     return (
       <div>
         {this.props.items.map(function(item, index) {
@@ -11,4 +11,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

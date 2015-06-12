@@ -17,6 +17,7 @@ module.exports = React.createClass({
     return getProductState();
   },
   componentDidMount: function() {
+    ProductActions.load();
     ProductStore.addChangeListener(this.onChange);
   },
   componentWillUnmount: function() {
@@ -29,7 +30,6 @@ module.exports = React.createClass({
     return (
       <div>
         <Login />
-        <RefreshList />
         <div>
           <div>
             {this.state.errors}
@@ -38,17 +38,6 @@ module.exports = React.createClass({
           <AddItem />
         </div>
       </div>
-    );
-  }
-});
-
-var RefreshList = React.createClass({
-  handleClick: function() {
-    ProductActions.list();
-  },
-  render: function() {
-    return (
-      <button onClick={this.handleClick}>List </button>
     );
   }
 });

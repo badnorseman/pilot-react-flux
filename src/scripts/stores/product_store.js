@@ -27,11 +27,11 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
   switch(action.actionType) {
-    case ActionTypes.LIST:
-      Api.list();
+    case ActionTypes.LOAD:
+      Api.load();
       break;
 
-    case ActionTypes.LIST_CB:
+    case ActionTypes.LOAD_CB:
       products = action.data;
       errors = action.errors;
       ProductStore.emitChange();
