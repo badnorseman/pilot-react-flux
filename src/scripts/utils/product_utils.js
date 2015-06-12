@@ -1,5 +1,4 @@
 import ApiRoutes from "../constants/api_routes";
-import AuthActions from "../actions/auth_actions";
 import ProductActions from "../actions/product_actions";
 import $ from "jquery";
 
@@ -7,9 +6,12 @@ export default {
   add(record) {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
-      type: "POST",
-      data: record,
       dataType: "json",
+      type: "POST",
+      headers: {
+        "Authorization": "Token token=" + localStorage.token
+      },
+      data: record,
       success: function(data) {
         ProductActions.add_cb(data, null);
       }.bind(this),
@@ -21,8 +23,8 @@ export default {
   load() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
-      type: "GET",
       dataType: "json",
+      type: "GET",
       success: function(data) {
         ProductActions.load_cb(data, null);
       }.bind(this),
@@ -31,25 +33,14 @@ export default {
       }.bind(this)
     });
   },
-  login(record) {
-    $.ajax({
-      url: ApiRoutes.LOGIN,
-      type: "GET",
-      data: record,
-      dataType: "json",
-      success: function(data) {
-        AuthActions.login_cb(data, null);
-      }.bind(this),
-      error: function(xhr, status, err) {
-        AuthActions.login_cb(null, err);
-      }.bind(this)
-    });
-  },
   remove(id) {
     $.ajax({
       url: ApiRoutes.PRODUCTS + "/" + id,
-      type: "DELETE",
       dataType: "json",
+      type: "DELETE",
+      headers: {
+        "Authorization": "Token token=" + localStorage.token
+      },
       success: function(data) {
         ProductActions.remove_cb(id, null);
       }.bind(this),
