@@ -2,7 +2,7 @@ var Dispatcher = require("../dispatcher/dispatcher");
 var EventEmitter = require("events").EventEmitter;
 var ActionTypes = require("../constants/action_types");
 var assign = require("react/lib/Object.assign");
-var Api = require("../utils/utils");
+var AuthUtils = require("../utils/auth_utils");
 
 var user;
 var errors = [];
@@ -21,6 +21,10 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     this.emit("change");
   },
 
+  setToken: function(token) {
+    localStorage.token = token;
+  },
+
   addChangeListener: function(callback) {
     this.on("change", callback);
   },
@@ -33,12 +37,17 @@ var AuthStore = assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
   switch(action.actionType) {
     case ActionTypes.LOGIN:
-      Api.login(action.record);
+      AuthUtils.login(action.record);
       break;
 
     case ActionTypes.LOGIN_CB:
-      user = action.data;
-      errors = action.errors;
+      if (action.data) {
+        user = action.data;
+        AuthStore.setToken(action.data.token);
+      } else {
+        errors = action.errors;
+        AuthStore.setToken();
+      }
       AuthStore.emitChange();
       break;
   }
