@@ -1,14 +1,13 @@
 import React from "react";
 import ProductActions from "../../actions/product_actions";
 
-module.exports = React.createClass({
-  handleClick: function() {
-    var id = this.props.id;
-    ProductActions.remove(id);
-  },
-  render: function() {
+export default class extends React.Component {
+  handleClick() {
+    ProductActions.remove(this.props.id);
+  }
+  render() {
     return (
-      <button onClick={this.handleClick}>Remove</button>
+      <button onClick={this.handleClick.bind(this)}>Remove</button>
     )
   }
-});
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import ProductActions from "../../actions/product_actions";
 
-module.exports = React.createClass({
-  handleSubmit: function(e) {
+export default class extends React.Component {
+  handleSubmit(e) {
     e.preventDefault();
 
     var name = React.findDOMNode(this.refs.name).value;
@@ -19,11 +19,11 @@ module.exports = React.createClass({
       React.findDOMNode(this.refs.name).value = "";
       React.findDOMNode(this.refs.description).value = "";
     }
-  },
-  render: function() {
+  }
+  render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" ref="name" />
           <input type="text" ref="description" />
           <input type="submit" value="Add" />
@@ -31,4 +31,4 @@ module.exports = React.createClass({
       </div>
     )
   }
-});
+}
