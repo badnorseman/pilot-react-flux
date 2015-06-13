@@ -1,7 +1,8 @@
 var React = require("react");
 var ProductStore = require("../../stores/product_store");
 var ProductActions = require("../../actions/product_actions");
-var Login = require("../login");
+var Login = require("../authentication/login");
+var Logout = require("../authentication/logout");
 var List = require("./product_list");
 var AddItem = require("./product_add");
 
@@ -30,6 +31,7 @@ module.exports = React.createClass({
     return (
       <div>
         <Login />
+        <Logout />
         <div>
           <div>
             {this.state.errors}

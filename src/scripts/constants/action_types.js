@@ -7,6 +7,7 @@ export default keyMirror({
   LOAD_CB: null,
   LOGIN: null,
   LOGIN_CB: null,
+  LOGOUT: null,
   REMOVE: null,
   REMOVE_CB: null
 })

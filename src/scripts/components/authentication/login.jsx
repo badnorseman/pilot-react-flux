@@ -1,6 +1,6 @@
 import React from "react";
-import AuthActions from "../actions/auth_actions";
-import AuthStore from "../stores/auth_store";
+import AuthActions from "../../actions/auth_actions";
+import AuthStore from "../../stores/auth_store";
 
 function getAuthState() {
   return {

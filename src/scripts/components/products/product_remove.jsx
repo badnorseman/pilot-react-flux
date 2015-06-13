@@ -8,7 +8,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <button onClick={this.handleClick}>Remove </button>
+      <button onClick={this.handleClick}>Remove</button>
     )
   }
 });
