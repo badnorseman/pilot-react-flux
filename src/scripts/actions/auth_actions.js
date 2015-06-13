@@ -14,5 +14,10 @@ module.exports = {
       data: data,
       errors: errors
     });
+  },
+  logout: function() {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.LOGOUT,
+    });
   }
-};
+}

@@ -17,5 +17,16 @@ export default {
         AuthActions.login_cb(null, err);
       }.bind(this)
     });
+  },
+  logout(record) {
+    $.ajax({
+      url: ApiRoutes.LOGOUT,
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+      }.bind(this),
+      error: function(xhr, status, err) {
+      }.bind(this)
+    });
   }
-};
+}

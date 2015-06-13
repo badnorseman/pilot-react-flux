@@ -25,6 +25,10 @@ var AuthStore = assign({}, EventEmitter.prototype, {
     localStorage.token = token;
   },
 
+  deleteToken: function() {
+    localStorage.removeItem("token");
+  },
+
   addChangeListener: function(callback) {
     this.on("change", callback);
   },
@@ -46,9 +50,14 @@ Dispatcher.register(function(action) {
         AuthStore.setToken(action.data.token);
       } else {
         errors = action.errors;
-        AuthStore.setToken();
+        AuthStore.deleteToken();
       }
       AuthStore.emitChange();
+      break;
+
+    case ActionTypes.LOGOUT:
+      AuthUtils.logout();
+      AuthStore.deleteToken();
       break;
   }
 });
