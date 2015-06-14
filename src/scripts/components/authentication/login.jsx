@@ -4,6 +4,7 @@ import AuthStore from "../../stores/auth_store";
 import Mui from "material-ui";
 
 var TextField = Mui.TextField;
+var RaisedButton = Mui.RaisedButton;
 
 function getAuthState() {
   return {
@@ -15,6 +16,19 @@ function getAuthState() {
 module.exports = React.createClass({
   getInitialState: function() {
     return getAuthState();
+  },
+
+  styles: {
+    Input: {
+      cursor: 'pointer',
+      position: 'absolute',
+      top: '0',
+      bottom: '0',
+      right: '0',
+      left: '0',
+      width: '100%',
+      opacity: '0'
+    }
   },
 
   componentDidMount: function() {
@@ -53,9 +67,11 @@ module.exports = React.createClass({
           <p>
             {this.state.errors}
           </p>
-          <input type="email" ref="email" placeholder="Email" />
-          <input type="password" ref="password" placeholder="Password" />
-          <input type="submit" value="Login" />
+          <TextField floatingLabelText="Email" value={this.state.email} type="email" ref="email" placeholder="Email" />
+          <TextField floatingLabelText="Password" value={this.state.password} type="password" ref="password" placeholder="Password" />
+        <RaisedButton label="Login">
+          <input type="button" onClick={this.handleSubmit} style={this.styles.Input}/>
+        </RaisedButton>
         </form>
       </div>
     )
