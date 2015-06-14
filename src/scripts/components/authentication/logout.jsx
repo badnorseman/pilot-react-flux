@@ -5,9 +5,12 @@ export default class extends React.Component {
   handleClick() {
     AuthActions.logout();
   }
+
   render() {
     return (
-      <button onClick={this.handleClick}>Logout</button>
+      <div>
+        <button onClick={this.handleClick}>Logout</button>
+      </div>
     )
   }
 }

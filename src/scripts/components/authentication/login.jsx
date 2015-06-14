@@ -1,6 +1,9 @@
 import React from "react";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
+import Mui from "material-ui";
+
+var TextField = Mui.TextField;
 
 function getAuthState() {
   return {
@@ -13,15 +16,19 @@ module.exports = React.createClass({
   getInitialState: function() {
     return getAuthState();
   },
+
   componentDidMount: function() {
     AuthStore.addChangeListener(this.onChange);
   },
+
   componentWillUnmount: function() {
     AuthStore.removeChangeListener(this.onChange);
   },
+
   onChange: function() {
     this.setState(getAuthState);
   },
+
   handleSubmit: function(e) {
     e.preventDefault();
 
@@ -38,18 +45,17 @@ module.exports = React.createClass({
       AuthActions.login(record);
     }
   },
+
   render: function() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <p>
             {this.state.errors}
-          </div>
-          <div>
-            <input type="text" ref="email" placeholder="Email" />
-            <input type="password" ref="password" placeholder="Password" />
-            <input type="submit" value="Login" />
-          </div>
+          </p>
+          <input type="email" ref="email" placeholder="Email" />
+          <input type="password" ref="password" placeholder="Password" />
+          <input type="submit" value="Login" />
         </form>
       </div>
     )
