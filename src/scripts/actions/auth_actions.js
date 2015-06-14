@@ -8,6 +8,7 @@ module.exports = {
       record: record
     });
   },
+
   login_cb: function(data, errors) {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOGIN_CB,
@@ -15,6 +16,7 @@ module.exports = {
       errors: errors
     });
   },
+
   logout: function() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOGOUT,

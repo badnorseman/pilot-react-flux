@@ -20,6 +20,7 @@ export default class extends React.Component {
       React.findDOMNode(this.refs.description).value = "";
     }
   }
+
   render() {
     return (
       <div>

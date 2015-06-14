@@ -20,24 +20,30 @@ module.exports = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
+
   getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
+
   getInitialState: function() {
     return getProductState();
   },
+
   componentDidMount: function() {
     ProductActions.load();
     ProductStore.addChangeListener(this.onChange);
   },
+
   componentWillUnmount: function() {
     ProductStore.removeChangeListener(this.onChange);
   },
+
   onChange: function() {
     this.setState(getProductState);
   },
+
   render: function() {
     return (
       <div>
