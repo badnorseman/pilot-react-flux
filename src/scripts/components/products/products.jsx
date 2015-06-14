@@ -9,13 +9,6 @@ import Mui from "material-ui";
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
-function getProductState() {
-  return {
-    products: ProductStore.getProducts(),
-    errors: ProductStore.getErrors()
-  };
-}
-
 module.exports = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -28,11 +21,16 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    return getProductState();
+    return {
+      products: ProductStore.getProducts()
+    };
+  },
+
+  componentWillMount: function() {
+    ProductActions.load();    
   },
 
   componentDidMount: function() {
-    ProductActions.load();
     ProductStore.addChangeListener(this.onChange);
   },
 
@@ -41,18 +39,22 @@ module.exports = React.createClass({
   },
 
   onChange: function() {
-    this.setState(getProductState);
+    if (!this.isMounted())
+      return;
+
+    this.setState({
+      products: ProductStore.getProducts()
+    });
   },
 
   render: function() {
     return (
       <div>
-        <Login />
-        <Logout />
         <div>
-          <div>
-            {this.state.errors}
-          </div>
+          <Login />
+          <Logout />
+        </div>
+        <div>
           <List items={this.state.products} />
           <AddItem />
         </div>

@@ -2,6 +2,9 @@
 var webpack = require("webpack");
 
 module.exports = {
+  colors : true,
+  progress : true,
+
   entry: "./src/scripts/app.jsx",
 
   output: {
