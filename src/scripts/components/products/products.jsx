@@ -1,10 +1,13 @@
-var React = require("react");
-var ProductStore = require("../../stores/product_store");
-var ProductActions = require("../../actions/product_actions");
-var Login = require("../authentication/login");
-var Logout = require("../authentication/logout");
-var List = require("./product_list");
-var AddItem = require("./product_add");
+import React from "react";
+import ProductStore from "../../stores/product_store";
+import ProductActions from "../../actions/product_actions";
+import Login from "../authentication/login";
+import Logout from "../authentication/logout";
+import List from "./product_list";
+import AddItem from "./product_add";
+import Mui from "material-ui";
+
+let ThemeManager = new Mui.Styles.ThemeManager();
 
 function getProductState() {
   return {
@@ -14,6 +17,14 @@ function getProductState() {
 }
 
 module.exports = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
   getInitialState: function() {
     return getProductState();
   },
