@@ -1,44 +1,44 @@
 import React from "react";
-import ProductStore from "../../stores/product_store";
-import ProductActions from "../../actions/product_actions";
+import Mui from "material-ui";
+import AddItem from "./product_add";
+import List from "./product_list";
 import Login from "../authentication/login";
 import Logout from "../authentication/logout";
-import List from "./product_list";
-import AddItem from "./product_add";
-import Mui from "material-ui";
+import ProductActions from "../../actions/product_actions";
+import ProductStore from "../../stores/product_store";
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
-module.exports = React.createClass({
+var Products = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
 
-  getChildContext: function() {
+  getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       products: ProductStore.getProducts()
     };
   },
 
-  componentWillMount: function() {
-    ProductActions.load();    
+  componentWillMount() {
+    ProductActions.load();
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     ProductStore.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     ProductStore.removeChangeListener(this.onChange);
   },
 
-  onChange: function() {
+  onChange() {
     if (!this.isMounted())
       return;
 
@@ -47,8 +47,8 @@ module.exports = React.createClass({
     });
   },
 
-  render: function() {
-    return (
+  render() {
+    return(
       <div>
         <div>
           <Login />
@@ -62,3 +62,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Products;

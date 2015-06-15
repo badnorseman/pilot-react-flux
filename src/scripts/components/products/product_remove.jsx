@@ -7,7 +7,7 @@ export default class extends React.Component {
   }
 
   render() {
-    return (
+    return(
       <button onClick={this.handleClick.bind(this)}>Remove</button>
     )
   }
