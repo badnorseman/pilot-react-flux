@@ -1,6 +1,6 @@
 import React from "react";
 import Mui from "material-ui";
-import AddItem from "./product_add";
+import AddProduct from "./product_add";
 import List from "./product_list";
 import Login from "../authentication/login";
 import Logout from "../authentication/logout";
@@ -9,43 +9,36 @@ import ProductStore from "../../stores/product_store";
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
-var Products = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
+class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {products: []}
+    this.onChange = this.onChange.bind(this);
+  }
 
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  },
-
-  getInitialState() {
-    return {
-      products: ProductStore.getProducts()
-    };
-  },
+  }
 
   componentWillMount() {
-    ProductActions.load();
-  },
+    ProductActions.load()
+  }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange);
-  },
+    ProductStore.addChangeListener(this.onChange)
+  }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange);
-  },
+    ProductStore.removeChangeListener(this.onChange)
+  }
 
   onChange() {
-    if (!this.isMounted())
-      return;
-
     this.setState({
-      products: ProductStore.getProducts()
-    });
-  },
+      products: this.state.products = ProductStore.getProducts()
+    })
+  }
 
   render() {
     return(
@@ -56,11 +49,15 @@ var Products = React.createClass({
         </div>
         <div>
           <List items={this.state.products} />
-          <AddItem />
+          <AddProduct />
         </div>
       </div>
     );
   }
-});
+}
+
+Products.childContextTypes = {
+  muiTheme: React.PropTypes.object
+}
 
 module.exports = Products;

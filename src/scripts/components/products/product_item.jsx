@@ -1,5 +1,5 @@
 import React from "react";
-import RemoveItem from "./product_remove";
+import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   render() {
@@ -7,7 +7,7 @@ export default class extends React.Component {
       <div>
         {this.props.item.name}
         {this.props.item.description}
-        <RemoveItem id={this.props.item.id} />
+        <RemoveProduct id={this.props.item.id} />
       </div>
     )
   }
