@@ -9,6 +9,7 @@
     "jquery": "^2.1.4",
     "material-ui": "^0.8.0",
     "react": "^0.13.3",
+    "react-grid-layout": "^0.8.3",
     "react-hot-loader": "^1.2.7",
     "react-tap-event-plugin": "^0.1.7",
     "webpack": "^1.9.10"

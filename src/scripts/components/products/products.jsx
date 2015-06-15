@@ -1,6 +1,7 @@
 import React from "react";
 import Mui from "material-ui";
 import AddProduct from "./product_add";
+import Grid from "./product_grid";
 import List from "./product_list";
 import Login from "../authentication/login";
 import Logout from "../authentication/logout";
@@ -49,6 +50,7 @@ class Products extends React.Component {
         </div>
         <div>
           <List items={this.state.products} />
+          <Grid items={this.state.products} />
           <AddProduct />
         </div>
       </div>

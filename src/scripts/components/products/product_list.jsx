@@ -5,9 +5,7 @@ export default class extends React.Component {
   render() {
     let items = this.props.items.map(function(item, index) {
       return(
-        <div>
-          <Item item={item} key={index} />
-        </div>
+        <Item item={item} key={index} />
       )
     })
 
