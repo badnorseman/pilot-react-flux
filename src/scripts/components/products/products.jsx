@@ -49,9 +49,11 @@ class Products extends React.Component {
           <Logout />
         </div>
         <div>
+          <AddProduct />
+        </div>
+        <div>
           <List items={this.state.products} />
           <Grid items={this.state.products} />
-          <AddProduct />
         </div>
       </div>
     );
