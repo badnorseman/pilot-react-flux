@@ -3,9 +3,9 @@ import Item from "./product_list_item";
 
 export default class extends React.Component {
   render() {
-    let items = this.props.items.map(function(item, index) {
+    let items = this.props.items.map(function(item) {
       return(
-        <Item item={item} key={index} />
+        <Item item={item} key={item.id} />
       )
     })
 

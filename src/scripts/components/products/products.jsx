@@ -53,7 +53,7 @@ class Products extends React.Component {
         </div>
         <div>
           <List items={this.state.products} />
-          <Grid items={this.state.products} />
+          <Grid />
         </div>
       </div>
     );
