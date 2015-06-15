@@ -1,6 +1,6 @@
-var React = require("react/addons");
-var injectTapEventPlugin = require("react-tap-event-plugin");
-var Products = require("./components/products/products");
+import React from "react/addons";
+import injectTapEventPlugin from "react-tap-event-plugin";
+import Products from "./components/products/products";
 
 window.React = React;
 
