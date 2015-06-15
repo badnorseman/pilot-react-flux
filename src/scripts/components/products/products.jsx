@@ -1,62 +1,63 @@
 import React from "react";
-import ProductStore from "../../stores/product_store";
-import ProductActions from "../../actions/product_actions";
+import Mui from "material-ui";
+import AddProduct from "./product_add";
+import List from "./product_list";
 import Login from "../authentication/login";
 import Logout from "../authentication/logout";
-import List from "./product_list";
-import AddItem from "./product_add";
-import Mui from "material-ui";
+import ProductActions from "../../actions/product_actions";
+import ProductStore from "../../stores/product_store";
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
-function getProductState() {
-  return {
-    products: ProductStore.getProducts(),
-    errors: ProductStore.getErrors()
-  };
-}
+class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {products: []}
+    this.onChange = this.onChange.bind(this);
+  }
 
-module.exports = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
-  getChildContext: function() {
+  getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  },
+  }
 
-  getInitialState: function() {
-    return getProductState();
-  },
+  componentWillMount() {
+    ProductActions.load()
+  }
 
-  componentDidMount: function() {
-    ProductActions.load();
-    ProductStore.addChangeListener(this.onChange);
-  },
+  componentDidMount() {
+    ProductStore.addChangeListener(this.onChange)
+  }
 
-  componentWillUnmount: function() {
-    ProductStore.removeChangeListener(this.onChange);
-  },
+  componentWillUnmount() {
+    ProductStore.removeChangeListener(this.onChange)
+  }
 
-  onChange: function() {
-    this.setState(getProductState);
-  },
+  onChange() {
+    this.setState({
+      products: this.state.products = ProductStore.getProducts()
+    })
+  }
 
-  render: function() {
-    return (
+  render() {
+    return(
       <div>
-        <Login />
-        <Logout />
         <div>
-          <div>
-            {this.state.errors}
-          </div>
+          <Login />
+          <Logout />
+        </div>
+        <div>
           <List items={this.state.products} />
-          <AddItem />
+          <AddProduct />
         </div>
       </div>
     );
   }
-});
+}
+
+Products.childContextTypes = {
+  muiTheme: React.PropTypes.object
+}
+
+module.exports = Products;

@@ -1,4 +1,5 @@
 import React from "react";
+import Mui from "material-ui";
 import ProductActions from "../../actions/product_actions";
 
 export default class extends React.Component {
@@ -9,25 +10,24 @@ export default class extends React.Component {
     var description = React.findDOMNode(this.refs.description).value;
 
     if (name && description) {
-      var record = {
+      ProductActions.add({
         product : {
           name: name,
           description: description
         }
-      }
-      ProductActions.add(record);
+      });
       React.findDOMNode(this.refs.name).value = "";
       React.findDOMNode(this.refs.description).value = "";
     }
   }
 
   render() {
-    return (
+    return(
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" ref="name" />
           <input type="text" ref="description" />
-          <input type="submit" value="Add" />
+          <button type="submit">Add</button>
         </form>
       </div>
     )
