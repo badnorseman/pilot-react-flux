@@ -1,5 +1,5 @@
 import ApiRoutes from "../constants/api_routes"
-import ProductActions from "../actions/product_actions"
+import { add_cb, load_cb, remove_cb } from "../actions/product_callbacks"
 import $ from "jquery"
 
 export default {
@@ -13,10 +13,10 @@ export default {
       },
       data: record,
       success: function(data) {
-        ProductActions.add_cb(data, null)
+        add_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.add_cb(null, err)
+        add_cb(null, err)
       }.bind(this)
     })
   },
@@ -26,10 +26,10 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ProductActions.load_cb(data, null)
+        load_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.load_cb(null, err)
+        load_cb(null, err)
       }.bind(this)
     })
   },
@@ -42,10 +42,10 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        ProductActions.remove_cb(id, null)
+        remove_cb(id, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.remove_cb(null, err)
+        remove_cb(null, err)
       }.bind(this)
     });
   }

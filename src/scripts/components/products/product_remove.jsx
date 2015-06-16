@@ -1,9 +1,9 @@
 import React from "react"
-import ProductActions from "../../actions/product_actions"
+import { remove } from "../../actions/product_remove"
 
 export default class extends React.Component {
   handleClick() {
-    ProductActions.remove(this.props.id)
+    remove(this.props.id)
   }
 
   render() {
