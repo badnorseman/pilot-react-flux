@@ -2,15 +2,14 @@
 var webpack = require("webpack");
 
 module.exports = {
-  colors : true,
-  progress : true,
-
-  entry: "./src/scripts/app.jsx",
+  entry: [
+    "webpack/hot/dev-server",
+    "./src/scripts/app.jsx"
+  ],
 
   output: {
     path: __dirname + "/dist",
-    filename: "bundle.js",
-    publicPath: ""
+    filename: "bundle.js"
   },
 
   module: {
@@ -20,9 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    root: __dirname + "./src/scripts",
+    root: __dirname + "/src/scripts",
     extensions: ["", ".js", ".jsx"]
-  },
-
-  devtool: "#eval-source-map"
+  }
 };
