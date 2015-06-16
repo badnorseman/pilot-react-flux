@@ -1,25 +1,26 @@
-import React from "react";
-import Mui from "material-ui";
-import AddProduct from "./product_add";
-import List from "./product_list";
-import Login from "../authentication/login";
-import Logout from "../authentication/logout";
-import ProductActions from "../../actions/product_actions";
-import ProductStore from "../../stores/product_store";
+import React from "react"
+import Mui from "material-ui"
+import AddProduct from "./product_add"
+import Grid from "./product_grid"
+import List from "./product_list"
+import Login from "../authentication/login"
+import Logout from "../authentication/logout"
+import ProductActions from "../../actions/product_actions"
+import ProductStore from "../../stores/product_store"
 
-let ThemeManager = new Mui.Styles.ThemeManager();
+let ThemeManager = new Mui.Styles.ThemeManager()
 
 class Products extends React.Component {
   constructor() {
     super()
     this.state = {products: []}
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this)
   }
 
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
-    };
+    }
   }
 
   componentWillMount() {
@@ -48,8 +49,11 @@ class Products extends React.Component {
           <Logout />
         </div>
         <div>
-          <List items={this.state.products} />
           <AddProduct />
+        </div>
+        <div>
+          <List items={this.state.products} />
+          <Grid />
         </div>
       </div>
     );
