@@ -1,36 +1,36 @@
-var Dispatcher = require("../dispatcher/dispatcher");
-var EventEmitter = require("events").EventEmitter;
-var ActionTypes = require("../constants/action_types");
-var assign = require("react/lib/Object.assign");
-var AuthUtils = require("../utils/auth_utils");
+var Dispatcher = require("../dispatcher/dispatcher")
+var EventEmitter = require("events").EventEmitter
+var ActionTypes = require("../constants/action_types")
+var assign = require("react/lib/Object.assign")
+var AuthUtils = require("../utils/auth_utils")
 
-var user;
-var errors = [];
+var user
+var errors = []
 
 var AuthStore = assign({}, EventEmitter.prototype, {
 
   getUser: function() {
-    return user;
+    return user
   },
 
   getErrors: function() {
-    return errors;
+    return errors
   },
 
   emitChange: function() {
-    this.emit("change");
+    this.emit("change")
   },
 
   setToken: function(token) {
-    localStorage.token = token;
+    localStorage.token = token
   },
 
   deleteToken: function() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("token")
   },
 
   addChangeListener: function(callback) {
-    this.on("change", callback);
+    this.on("change", callback)
   },
 
   removeChangeListener: function(callback) {
@@ -41,25 +41,25 @@ var AuthStore = assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
   switch(action.actionType) {
     case ActionTypes.LOGIN:
-      AuthUtils.login(action.record);
-      break;
+      AuthUtils.login(action.record)
+      break
 
     case ActionTypes.LOGIN_CB:
       if (action.data) {
-        user = action.data;
-        AuthStore.setToken(action.data.token);
+        user = action.data
+        AuthStore.setToken(action.data.token)
       } else {
-        errors = action.errors;
-        AuthStore.deleteToken();
+        errors = action.errors
+        AuthStore.deleteToken()
       }
-      AuthStore.emitChange();
-      break;
+      AuthStore.emitChange()
+      break
 
     case ActionTypes.LOGOUT:
-      AuthUtils.logout();
-      AuthStore.deleteToken();
-      break;
+      AuthUtils.logout()
+      AuthStore.deleteToken()
+      break
   }
-});
+})
 
 module.exports = AuthStore;
