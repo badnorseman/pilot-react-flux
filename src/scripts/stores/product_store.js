@@ -1,12 +1,11 @@
-var Dispatcher = require("../dispatcher/dispatcher")
-var EventEmitter = require("events").EventEmitter
-var ActionTypes = require("../constants/action_types")
-var assign = require("react/lib/Object.assign")
-
+import Dispatcher from "../dispatcher/dispatcher"
+import ActionTypes from "../constants/action_types"
+import assign from "react/lib/Object.assign"
 import * as ProductUtils from "../utils/product_utils"
+var EventEmitter = require("events").EventEmitter
 
-var products = []
-var errors = []
+let products = []
+let errors = []
 
 var ProductStore = assign({}, EventEmitter.prototype, {
   getProducts: function() {
