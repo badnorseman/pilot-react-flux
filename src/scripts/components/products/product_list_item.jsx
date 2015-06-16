@@ -1,5 +1,5 @@
-import React from "react";
-import RemoveProduct from "./product_remove";
+import React from "react"
+import RemoveProduct from "./product_remove"
 
 export default class extends React.Component {
   render() {

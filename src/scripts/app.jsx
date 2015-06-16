@@ -1,10 +1,10 @@
-import React from "react/addons";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import Products from "./components/products/products";
+import React from "react/addons"
+import injectTapEventPlugin from "react-tap-event-plugin"
+import Products from "./components/products/products"
 
-window.React = React;
+window.React = React
 
-injectTapEventPlugin();
+injectTapEventPlugin()
 
 React.render(
   <Products />,
