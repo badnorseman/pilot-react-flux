@@ -2,7 +2,8 @@ var Dispatcher = require("../dispatcher/dispatcher")
 var EventEmitter = require("events").EventEmitter
 var ActionTypes = require("../constants/action_types")
 var assign = require("react/lib/Object.assign")
-var ProductUtils = require("../utils/product_utils")
+
+import * as ProductUtils from "../utils/product_utils"
 
 var products = []
 var errors = []

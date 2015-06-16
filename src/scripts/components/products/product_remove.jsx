@@ -1,5 +1,5 @@
 import React from "react"
-import { remove } from "../../actions/product_remove"
+import { remove } from "../../actions/product_actions"
 
 export default class extends React.Component {
   handleClick() {
