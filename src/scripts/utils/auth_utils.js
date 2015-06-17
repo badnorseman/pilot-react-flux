@@ -1,7 +1,7 @@
-import ApiRoutes from "../constants/api_routes"
-import AuthActions from "../actions/auth_actions"
-import AuthStore from "../stores/auth_store"
-import $ from "jquery"
+import ApiRoutes from "../constants/api_routes";
+import AuthActions from "../actions/auth_actions";
+import AuthStore from "../stores/auth_store";
+import $ from "jquery";
 
 export default {
   login(record) {
@@ -30,4 +30,4 @@ export default {
       }.bind(this)
     })
   }
-}
+};
