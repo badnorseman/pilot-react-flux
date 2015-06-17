@@ -8,7 +8,7 @@ import Grid from "./product_grid";
 
 let ThemeManager = new Mui.Styles.ThemeManager()
 
-class Products extends React.Component {
+export default class Products extends React.Component {
   constructor() {
     super()
     this.state = {products: []}
@@ -48,10 +48,8 @@ class Products extends React.Component {
       </div>
     )
   }
-}
+};
 
 Products.childContextTypes = {
   muiTheme: React.PropTypes.object
 }
-
-module.exports = Products;
