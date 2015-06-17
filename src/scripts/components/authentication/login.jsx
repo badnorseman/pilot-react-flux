@@ -3,68 +3,78 @@ import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Mui from "material-ui";
 
-var TextField = Mui.TextField;
-var RaisedButton = Mui.RaisedButton;
-
 function getAuthState() {
   return {
     user: AuthStore.getUser(),
-    errors: AuthStore.getErrors()
+    errors: AuthStore.getErrors(),
   };
 }
 
-module.exports = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
-  getInitialState: function() {
-    return getAuthState();
-  },
+module.exports = class Login extends React.Component {
+  constructor() {
+    super();
 
-  styles: {
-    Input: {
-      cursor: 'pointer',
-      position: 'absolute',
-      top: '0',
-      bottom: '0',
-      right: '0',
-      left: '0',
-      width: '100%',
-      opacity: '0'
+    this.constants = {
+      emailValidation: 'Please enter a email',
+      passwordValidation: 'Please enter a password'
     }
-  },
+    this.state = getAuthState();
+    this.state.email = null;
+    this.state.emailValidation = null;
+    this.state.password = null;
+    this.state.passwordValidation = null;
+    this.styles = {
+      Input: {
+        cursor: 'pointer',
+        position: 'absolute',
+        top: '0',
+        bottom: '0',
+        right: '0',
+        left: '0',
+        width: '100%',
+        opacity: '0'
+      }
+    };
+  }
 
-  componentDidMount: function() {
-    AuthStore.addChangeListener(this.onChange);
-  },
+  // componentDidMount() {
+  //   AuthStore.addChangeListener(this.onChange);
+  // }
+  //
+  // componentWillUnmount() {
+  //   AuthStore.removeChangeListener(this.onChange);
+  // }
 
-  componentWillUnmount: function() {
-    AuthStore.removeChangeListener(this.onChange);
-  },
+  onChange(key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      this.setState(state);
 
-  onChange: function(e) {
-    console.log(e)
-    if (this.state.email && !this.state.emailValidation) {
-      this.setState({emailValidation: null});
-    }
+      if (this.state.email && this.state.email !== '' && this.state.emailValidation === this.constants.emailValidation) {
+        this.setState({emailValidation: null});
+      }
 
-    if (this.state.password && !this.state.passwordValidation) {
-      this.setState({passwordValidation: null});
-    }
+      if (this.state.password && this.state.email !== '' && this.state.passwordValidation === this.constants.passwordValidation) {
+        this.setState({passwordValidation: null});
+      }
 
-    this.setState(getAuthState());
-  },
+    }.bind(this);
 
-  handleSubmit: function(e) {
+    // this.setState(getAuthState());
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
 
     var email = this.state.email;
     var password = this.state.password;
-
     if (!email) {
-      this.setState({emailValidation: 'Please enter a email'});
+      this.setState({emailValidation: this.constants.emailValidation});
     }
 
     if (!password) {
-      this.setState({passwordValidation: 'Please enter a password'});
+      this.setState({passwordValidation: this.constants.passwordValidation});
     }
 
     if (email && password) {
@@ -77,21 +87,27 @@ module.exports = React.createClass({
       this.setState({password: ''});
       AuthActions.login(record);
     }
-  },
+  }
 
-  render: function() {
-    var that = this;
+  render() {
     return (
       <div>
-          <p>
-            {this.state.errors}
-          </p>
-          <TextField floatingLabelText="Email" onChange={this.onChange} errorText={this.state.emailValidation} valueLink={this.linkState('email')} type="email" />
-          <TextField floatingLabelText="Password" errorText={this.state.passwordValidation} valueLink={this.linkState('password')} type="password" />
-          <RaisedButton label="Login">
-            <input type="button" onClick={this.handleSubmit} style={this.styles.Input}/>
-          </RaisedButton>
+        <form>
+          <Mui.TextField
+                value={this.state.email}
+                onChange={this.onChange('email')}
+                floatingLabelText="Email"
+                errorText={this.state.emailValidation} />
+          <Mui.TextField type="password"
+                value={this.state.password}
+                onChange={this.onChange('password')}
+                floatingLabelText="Password"
+                errorText={this.state.passwordValidation} />
+          <Mui.RaisedButton label="Login">
+            <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
+          </Mui.RaisedButton>
+        </form>
       </div>
-    )
+    );
   }
-});
+}
