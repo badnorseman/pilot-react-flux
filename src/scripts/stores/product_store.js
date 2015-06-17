@@ -7,7 +7,7 @@ import * as ProductUtils from "../utils/product_utils"
 let products = []
 let errors = []
 
-var ProductStore = assign({}, EventEmitter.prototype, {
+const ProductStore = assign({}, EventEmitter.prototype, {
   getProducts() {
     return products
   },

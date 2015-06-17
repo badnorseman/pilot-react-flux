@@ -7,7 +7,7 @@ import * as AuthUtils from "../utils/auth_utils"
 let user
 let errors = []
 
-var AuthStore = assign({}, EventEmitter.prototype, {
+const AuthStore = assign({}, EventEmitter.prototype, {
   getUser() {
     return user
   },
