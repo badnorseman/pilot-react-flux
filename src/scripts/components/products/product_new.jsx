@@ -1,6 +1,6 @@
 import React from "react";
 import Mui from "material-ui";
-import { add } from "../../actions/product_actions";
+import ProductActions from "../../actions/product_actions";
 
 export default class extends React.Component {
   constructor() {
@@ -15,7 +15,7 @@ export default class extends React.Component {
     var description = React.findDOMNode(this.refs.description).value
 
     if (name && description) {
-      add({
+      ProductActions.add({
         product : {
           name: name,
           description: description
