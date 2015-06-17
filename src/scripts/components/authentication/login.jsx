@@ -14,6 +14,7 @@ function getAuthState() {
 }
 
 module.exports = React.createClass({
+  mixins: [React.addons.LinkedStateMixin],
   getInitialState: function() {
     return getAuthState();
   },
@@ -39,40 +40,57 @@ module.exports = React.createClass({
     AuthStore.removeChangeListener(this.onChange);
   },
 
-  onChange: function() {
-    this.setState(getAuthState);
+  onChange: function(e) {
+    console.log(e)
+    if (this.state.email && !this.state.emailValidation) {
+      this.setState({emailValidation: null});
+    }
+
+    if (this.state.password && !this.state.passwordValidation) {
+      this.setState({passwordValidation: null});
+    }
+
+    this.setState(getAuthState());
   },
 
   handleSubmit: function(e) {
     e.preventDefault();
 
-    var email = React.findDOMNode(this.refs.email).value;
-    var password = React.findDOMNode(this.refs.password).value;
+    var email = this.state.email;
+    var password = this.state.password;
+
+    if (!email) {
+      this.setState({emailValidation: 'Please enter a email'});
+    }
+
+    if (!password) {
+      this.setState({passwordValidation: 'Please enter a password'});
+    }
 
     if (email && password) {
       var record = {
         auth_key: email,
         password: password
-      }
-      React.findDOMNode(this.refs.email).value = "";
-      React.findDOMNode(this.refs.password).value = "";
+      };
+
+      this.setState({email: ''});
+      this.setState({password: ''});
       AuthActions.login(record);
     }
   },
 
   render: function() {
+    var that = this;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
           <p>
             {this.state.errors}
           </p>
-          <TextField floatingLabelText="Email" value={this.state.email} type="email" ref="email" placeholder="Email" />
-          <TextField floatingLabelText="Password" value={this.state.password} type="password" ref="password" placeholder="Password" />
-        <RaisedButton label="Login">
-          <input type="button" onClick={this.handleSubmit} style={this.styles.Input}/>
-        </RaisedButton>
-        </form>
+          <TextField floatingLabelText="Email" onChange={this.onChange} errorText={this.state.emailValidation} valueLink={this.linkState('email')} type="email" />
+          <TextField floatingLabelText="Password" errorText={this.state.passwordValidation} valueLink={this.linkState('password')} type="password" />
+          <RaisedButton label="Login">
+            <input type="button" onClick={this.handleSubmit} style={this.styles.Input}/>
+          </RaisedButton>
       </div>
     )
   }
