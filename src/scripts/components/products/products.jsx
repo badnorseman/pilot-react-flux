@@ -3,8 +3,8 @@ import Mui from "material-ui";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import NewProduct from "./product_new";
-import Grid from "./product_grid";
 import List from "./product_list";
+import Grid from "./product_grid";
 
 let ThemeManager = new Mui.Styles.ThemeManager()
 

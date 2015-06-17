@@ -1,6 +1,6 @@
 import React from "react";
-var ResponsiveReactGridLayout = require("react-grid-layout").Responsive;
 import Mui from "material-ui";
+var ResponsiveReactGridLayout = require("react-grid-layout").Responsive;
 
 let Paper = Mui.Paper
 
