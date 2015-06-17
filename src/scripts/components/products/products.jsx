@@ -1,12 +1,10 @@
-import React from "react"
-import Mui from "material-ui"
-import AddProduct from "./product_add"
-import Grid from "./product_grid"
-import List from "./product_list"
-import Login from "../authentication/login"
-import Logout from "../authentication/logout"
-import { load } from "../../actions/product_actions"
-import ProductStore from "../../stores/product_store"
+import React from "react";
+import Mui from "material-ui";
+import New from "./product_new";
+import Grid from "./product_grid";
+import List from "./product_list";
+import { load } from "../../actions/product_actions";
+import ProductStore from "../../stores/product_store";
 
 let ThemeManager = new Mui.Styles.ThemeManager()
 
@@ -44,19 +42,11 @@ class Products extends React.Component {
   render() {
     return(
       <div>
-        <div>
-          <Login />
-          <Logout />
-        </div>
-        <div>
-          <AddProduct />
-        </div>
-        <div>
-          <List items={this.state.products} />
-          <Grid />
-        </div>
+        <New />
+        <List items={this.state.products} />
+        <Grid />
       </div>
-    );
+    )
   }
 }
 

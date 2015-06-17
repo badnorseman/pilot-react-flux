@@ -1,4 +1,4 @@
-import keyMirror from "react/lib/keyMirror"
+import keyMirror from "react/lib/keyMirror";
 
 export default keyMirror({
   ADD: null,
@@ -10,4 +10,4 @@ export default keyMirror({
   LOGOUT: null,
   REMOVE: null,
   REMOVE_CB: null
-})
+});

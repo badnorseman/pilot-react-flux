@@ -1,6 +1,6 @@
-import ApiRoutes from "../constants/api_routes"
-import { add_cb, load_cb, remove_cb } from "../actions/product_actions"
-import $ from "jquery"
+import ApiRoutes from "../constants/api_routes";
+import { add_cb, load_cb, remove_cb } from "../actions/product_actions";
+import $ from "jquery";
 
 export default {
   add(record) {
@@ -51,4 +51,4 @@ export default {
       }.bind(this)
     })
   }
-}
+};

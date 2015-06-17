@@ -1,6 +1,6 @@
-import React from "react"
-var ResponsiveReactGridLayout = require("react-grid-layout").Responsive
-import Mui from "material-ui"
+import React from "react";
+var ResponsiveReactGridLayout = require("react-grid-layout").Responsive;
+import Mui from "material-ui";
 
 let Paper = Mui.Paper
 
@@ -26,4 +26,4 @@ export default class extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
-}
+};

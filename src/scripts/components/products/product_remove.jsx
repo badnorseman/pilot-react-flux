@@ -1,5 +1,5 @@
-import React from "react"
-import { remove } from "../../actions/product_actions"
+import React from "react";
+import { remove } from "../../actions/product_actions";
 
 export default class extends React.Component {
   constructor(id) {
@@ -16,4 +16,4 @@ export default class extends React.Component {
       <button onClick={this.handleClick}>Remove</button>
     )
   }
-}
+};

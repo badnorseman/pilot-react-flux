@@ -1,6 +1,6 @@
-import React from "react"
-import Router from "react-router"
-import Mui from "material-ui"
+import React from "react";
+import Router from "react-router";
+import Mui from "material-ui";
 
 class Sidebar extends React.Component {
   constructor(user) {

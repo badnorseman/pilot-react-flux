@@ -1,6 +1,6 @@
-import React from "react"
-import Mui from "material-ui"
-import { add } from "../../actions/product_actions"
+import React from "react";
+import Mui from "material-ui";
+import { add } from "../../actions/product_actions";
 
 export default class extends React.Component {
   constructor() {
@@ -37,4 +37,4 @@ export default class extends React.Component {
       </div>
     )
   }
-}
+};
