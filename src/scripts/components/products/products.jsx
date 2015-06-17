@@ -5,7 +5,7 @@ import Grid from "./product_grid"
 import List from "./product_list"
 import Login from "../authentication/login"
 import Logout from "../authentication/logout"
-import ProductActions from "../../actions/product_actions"
+import { load } from "../../actions/product_actions"
 import ProductStore from "../../stores/product_store"
 
 let ThemeManager = new Mui.Styles.ThemeManager()
@@ -24,7 +24,7 @@ class Products extends React.Component {
   }
 
   componentWillMount() {
-    ProductActions.load()
+    load()
   }
 
   componentDidMount() {

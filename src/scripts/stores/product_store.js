@@ -1,36 +1,37 @@
-var Dispatcher = require("../dispatcher/dispatcher")
-var EventEmitter = require("events").EventEmitter
-var ActionTypes = require("../constants/action_types")
-var assign = require("react/lib/Object.assign")
-var ProductUtils = require("../utils/product_utils")
+import assign from "react/lib/Object.assign"
+import EventEmitter from "events"
+import ActionTypes from "../constants/action_types"
+import Dispatcher from "../dispatcher/dispatcher"
+import ProductUtils from "../utils/product_utils"
 
-var products = []
-var errors = []
+let products = []
+let errors = []
 
-var ProductStore = assign({}, EventEmitter.prototype, {
-  getProducts: function() {
+const ProductStore = assign({}, EventEmitter.prototype, {
+  getProducts() {
     return products
   },
 
-  getErrors: function() {
+  getErrors() {
     return errors
   },
 
-  emitChange: function() {
-    this.emit("change")
+  emitChange() {
+    return this.emit("change")
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on("change", callback)
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener("change", callback)
   }
 })
 
-Dispatcher.register(function(action) {
+ProductStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
+
     case ActionTypes.LOAD:
       ProductUtils.load()
       break
@@ -81,4 +82,4 @@ function removeItem(id) {
   }
 }
 
-module.exports = ProductStore;
+export default ProductStore;
