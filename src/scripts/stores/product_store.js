@@ -1,8 +1,8 @@
 import Dispatcher from "../dispatcher/dispatcher"
-import ActionTypes from "../constants/action_types"
 import assign from "react/lib/Object.assign"
+import EventEmitter from "events"
+import ActionTypes from "../constants/action_types"
 import * as ProductUtils from "../utils/product_utils"
-var EventEmitter = require("events").EventEmitter
 
 let products = []
 let errors = []
