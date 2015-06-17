@@ -30,7 +30,6 @@ var ProductStore = assign({}, EventEmitter.prototype, {
 })
 
 ProductStore.dispatchToken = Dispatcher.register((action) => {
-
   switch(action.actionType) {
 
     case ActionTypes.LOAD:

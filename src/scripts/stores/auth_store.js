@@ -1,45 +1,45 @@
-var Dispatcher = require("../dispatcher/dispatcher")
-var EventEmitter = require("events").EventEmitter
-var ActionTypes = require("../constants/action_types")
-var assign = require("react/lib/Object.assign")
-var AuthUtils = require("../utils/auth_utils")
+import assign from "react/lib/Object.assign"
+import EventEmitter from "events"
+import ActionTypes from "../constants/action_types"
+import Dispatcher from "../dispatcher/dispatcher"
+import * as AuthUtils from "../utils/auth_utils"
 
-var user
-var errors = []
+let user
+let errors = []
 
 var AuthStore = assign({}, EventEmitter.prototype, {
-
-  getUser: function() {
+  getUser() {
     return user
   },
 
-  getErrors: function() {
+  getErrors() {
     return errors
   },
 
-  emitChange: function() {
-    this.emit("change")
+  emitChange() {
+    return this.emit("change")
   },
 
-  setToken: function(token) {
+  setToken(token) {
     localStorage.token = token
   },
 
-  deleteToken: function() {
+  deleteToken() {
     localStorage.removeItem("token")
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on("change", callback)
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener("change", callback);
   }
-});
+})
 
-Dispatcher.register(function(action) {
+AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
+
     case ActionTypes.LOGIN:
       AuthUtils.login(action.record)
       break
@@ -62,4 +62,4 @@ Dispatcher.register(function(action) {
   }
 })
 
-module.exports = AuthStore;
+export default AuthStore;
