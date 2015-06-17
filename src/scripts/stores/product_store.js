@@ -2,7 +2,7 @@ import assign from "react/lib/Object.assign"
 import EventEmitter from "events"
 import ActionTypes from "../constants/action_types"
 import Dispatcher from "../dispatcher/dispatcher"
-import * as ProductUtils from "../utils/product_utils"
+import ProductUtils from "../utils/product_utils"
 
 let products = []
 let errors = []

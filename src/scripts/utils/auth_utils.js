@@ -18,6 +18,7 @@ export default {
       }.bind(this)
     })
   },
+
   logout(record) {
     $.ajax({
       url: ApiRoutes.LOGOUT,

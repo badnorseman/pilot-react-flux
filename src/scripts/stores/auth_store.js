@@ -2,7 +2,7 @@ import assign from "react/lib/Object.assign"
 import EventEmitter from "events"
 import ActionTypes from "../constants/action_types"
 import Dispatcher from "../dispatcher/dispatcher"
-import * as AuthUtils from "../utils/auth_utils"
+import AuthUtils from "../utils/auth_utils"
 
 let user
 let errors = []
