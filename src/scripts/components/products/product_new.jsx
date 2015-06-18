@@ -29,11 +29,30 @@ export default class extends React.Component {
   render() {
     return(
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" ref="name" />
-          <input type="text" ref="description" />
-          <button type="submit">Add</button>
-        </form>
+        <div className="row">
+          <div className="col s12">
+            <form onSubmit={this.handleSubmit}>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input id="name" type="text" ref="name"/>
+                  <label htmlFor="name">Name</label>
+                </div>
+                <div className="input-field col s6">
+                  <input id="description" type="text" ref="description"/>
+                  <label htmlFor="description">Description</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s6">
+                  <a className="waves-effect waves-light btn">Cancel</a>
+                </div>
+                <div className="col s6">
+                  <button className="btn waves-effect waves-light" type="submit">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }

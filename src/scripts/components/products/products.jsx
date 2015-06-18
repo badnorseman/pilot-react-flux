@@ -44,7 +44,6 @@ export default class Products extends React.Component {
       <div>
         <NewProduct />
         <List items={this.state.products} />
-        <Grid />
       </div>
     )
   }

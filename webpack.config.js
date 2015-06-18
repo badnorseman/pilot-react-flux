@@ -14,12 +14,12 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" }
+      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" },
+      { test: /\.(jpg|png)$/, loader: "url-loader?limit=8192" }
     ]
   },
 
   resolve: {
-    root: __dirname + "/src/scripts",
     extensions: ["", ".js", ".jsx"]
   }
 };

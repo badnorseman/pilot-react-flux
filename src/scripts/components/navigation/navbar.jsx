@@ -1,7 +1,4 @@
 import React from "react";
-import Sidebar from "./sidebar";
-import Login from "../authentication/login";
-import Logout from "../authentication/logout";
 
 export default class Navbar extends React.Component {
   constructor() {
@@ -11,10 +8,16 @@ export default class Navbar extends React.Component {
   render() {
     return(
       <div>
-        <Sidebar />
-        <Login />
-        <Logout />
+        <nav>
+          <div className="nav-wrapper">
+            <a href="#" className="brand-logo center">FitBird</a>
+            <ul id="nav-mobile" className="left hide-on-med-and-down">
+              <li><a href="">Log in</a></li>
+              <li><a href="">Log out</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
-    );
+    )
   }
 };

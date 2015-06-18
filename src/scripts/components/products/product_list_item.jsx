@@ -3,11 +3,26 @@ import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   render() {
+    let cardImage = document.createElement("img")
+    cardImage.src = require("../../../images/Central_Park_jogging.png")
     return(
       <div>
-        {this.props.item.name}
-        {this.props.item.description}
-        <RemoveProduct id={this.props.item.id} />
+        <div className="row">
+          <div className="col s12 m6">
+            <div className="card">
+              <div className="card-image">
+                <img src={cardImage.src}/>
+                <span className="card-title">{this.props.item.name}</span>
+              </div>
+              <div className="card-content">
+                {this.props.item.description}
+              </div>
+              <div className="card-action">
+                <RemoveProduct id={this.props.item.id}/>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
