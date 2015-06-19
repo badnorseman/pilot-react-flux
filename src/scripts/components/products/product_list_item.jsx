@@ -9,7 +9,7 @@ export default class extends React.Component {
       <div>
         <div className="row">
           <div className="col s12 m6">
-            <div className="card">
+            <div className="card z-depth-3">
               <div className="card-image">
                 <img src={cardImage.src}/>
                 <span className="card-title">{this.props.item.name}</span>
