@@ -1,8 +1,14 @@
+// Fix transitionTo to "/" after add
 import React from "react";
-import Mui from "material-ui";
+import { Link, Router } from "react-router";
 import ProductActions from "../../actions/product_actions";
+import Products from "./products";
 
 export default class extends React.Component {
+  contextTypes: {
+    router: Router.PropTypes.router.isRequired
+  }
+
   constructor() {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,19 +27,37 @@ export default class extends React.Component {
           description: description
         }
       })
-      React.findDOMNode(this.refs.name).value = ""
-      React.findDOMNode(this.refs.description).value = ""
+      this.context.router.transitionTo("Products")
+      // React.findDOMNode(this.refs.name).value = ""
+      // React.findDOMNode(this.refs.description).value = ""
     }
   }
 
   render() {
     return(
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" ref="name" />
-          <input type="text" ref="description" />
-          <button type="submit">Add</button>
-        </form>
+        <div className="row">
+          <form className="col s12" onSubmit={this.handleSubmit}>
+            <div className="row">
+              <div className="col s6 input-field">
+                <input id="name" type="text" ref="name"/>
+                <label htmlFor="name">Name</label>
+              </div>
+              <div className="col s6 input-field">
+                <input id="description" type="text" ref="description"/>
+                <label htmlFor="description">Description</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col s6">
+                <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
+              </div>
+              <div className="col s6">
+                <button className="btn waves-effect waves-light" type="submit">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

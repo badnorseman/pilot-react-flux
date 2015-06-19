@@ -1,8 +1,5 @@
 import React from "react";
-import Mui from "material-ui";
 var ResponsiveReactGridLayout = require("react-grid-layout").Responsive;
-
-let Paper = Mui.Paper
 
 export default class extends React.Component {
   render() {
@@ -14,15 +11,15 @@ export default class extends React.Component {
         breakpoints={breakpoints}
         cols={columns}
         rowHeight={100}>
-        <Paper zDepth={3} rounded={false} key={1} />
-        <Paper zDepth={3} rounded={false} key={2} />
-        <Paper zDepth={3} rounded={false} key={3} />
-        <Paper zDepth={3} rounded={false} key={4} />
-        <Paper zDepth={3} rounded={false} key={5} />
-        <Paper zDepth={3} rounded={false} key={6} />
-        <Paper zDepth={3} rounded={false} key={7} />
-        <Paper zDepth={3} rounded={false} key={8} />
-        <Paper zDepth={3} rounded={false} key={9} />
+        <div key={1}/>
+        <div key={2}/>
+        <div key={3}/>
+        <div key={4}/>
+        <div key={5}/>
+        <div key={6}/>
+        <div key={7}/>
+        <div key={8}/>
+        <div key={9}/>
       </ResponsiveReactGridLayout>
     )
   }

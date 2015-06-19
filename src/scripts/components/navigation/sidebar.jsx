@@ -33,7 +33,7 @@ export default class Sidebar extends React.Component {
     this.refs.leftNav.close()
   }
 
-  styles() {
+  style() {
     return {
       cursor: "pointer"
     }
@@ -42,7 +42,7 @@ export default class Sidebar extends React.Component {
   render() {
     var header = (
       <div onClick={this.handleHeaderClick}>
-        <h1 style={this.styles()}>
+        <h1 style={this.style()}>
           FitBird
         </h1>
       </div>
@@ -56,7 +56,7 @@ export default class Sidebar extends React.Component {
           header={header}
           isInitiallyOpen={false}
           onChange={this.handleItemClick}
-          menuItems={this.state.menuItems} />
+          menuItems={this.state.menuItems}/>
       </div>
     )
   }

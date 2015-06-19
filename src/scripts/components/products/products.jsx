@@ -1,24 +1,15 @@
 import React from "react";
-import Mui from "material-ui";
+import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import NewProduct from "./product_new";
 import List from "./product_list";
-import Grid from "./product_grid";
-
-let ThemeManager = new Mui.Styles.ThemeManager()
 
 export default class Products extends React.Component {
   constructor() {
     super()
     this.state = {products: []}
     this.onChange = this.onChange.bind(this)
-  }
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    }
   }
 
   componentWillMount() {
@@ -39,17 +30,23 @@ export default class Products extends React.Component {
     })
   }
 
+  addButtonStyle() {
+    return {
+      bottom: 25,
+      right: 25
+    }
+  }
+
   render() {
     return(
       <div>
-        <NewProduct />
-        <List items={this.state.products} />
-        <Grid />
+        <div className="fixed-action-btn" style={this.addButtonStyle()}>
+          <Link to="NewProduct" className="btn-floating btn-large red waves-effect waves-light">
+            <i className="mdi-content-add"></i>
+          </Link>
+        </div>
+        <List items={this.state.products}/>
       </div>
     )
   }
 };
-
-Products.childContextTypes = {
-  muiTheme: React.PropTypes.object
-}
