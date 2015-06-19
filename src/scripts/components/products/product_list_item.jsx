@@ -9,13 +9,13 @@ export default class extends React.Component {
       <div>
         <div className="row">
           <div className="col s12 m6">
-            <div className="card z-depth-3">
+            <div className="card materialboxed z-depth-3">
               <div className="card-image">
-                <img src={cardImage.src}/>
-                <span className="card-title">{this.props.item.name}</span>
+                <img className="responsive-img" src={cardImage.src} alt=""/>
               </div>
-              <div className="card-content">
-                {this.props.item.description}
+              <div className="card-content flow-text">
+                <h3>{this.props.item.name}</h3>
+                <p>{this.props.item.description}</p>
               </div>
               <div className="card-action">
                 <RemoveProduct id={this.props.item.id}/>

@@ -1,5 +1,5 @@
 import React from "react";
-import Mui from "material-ui";
+import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 
 export default class extends React.Component {
@@ -44,7 +44,7 @@ export default class extends React.Component {
               </div>
               <div className="row">
                 <div className="col s6">
-                  <a className="waves-effect waves-light btn">Cancel</a>
+                  <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
                 </div>
                 <div className="col s6">
                   <button className="btn waves-effect waves-light" type="submit">Add</button>
