@@ -1,8 +1,8 @@
-// Fix transitionTo to "/" after add
+// Fix transitionTo
 import React from "react";
-import { Link, Router } from "react-router";
+import Router from "react-router";
 import ProductActions from "../../actions/product_actions";
-import Products from "./products";
+const { Link } = Router;
 
 export default class extends React.Component {
   contextTypes: {
