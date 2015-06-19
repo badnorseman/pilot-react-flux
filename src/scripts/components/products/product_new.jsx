@@ -1,8 +1,7 @@
 // Fix transitionTo
 import React from "react";
-import Router from "react-router";
+import Router, { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
-const { Link } = Router;
 
 export default class extends React.Component {
   contextTypes: {

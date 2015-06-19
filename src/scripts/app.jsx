@@ -15,7 +15,7 @@ window.React = React
 
 injectTapEventPlugin();
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return(
       <div>
@@ -25,7 +25,7 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 const routes = (
   <Route handler={App}>
