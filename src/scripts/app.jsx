@@ -2,13 +2,13 @@ import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
 import Navbar from "./components/navigation/navbar";
+import Footer from "./components/navigation/footer";
 import Login from "./components/authentication/login";
 import Logout from "./components/authentication/logout";
 import Signup from "./components/authentication/signup";
 import Products from "./components/products/products";
 import NewProduct from "./components/products/product_new";
 
-let DefaultRoute = Router.DefaultRoute;
 let Route = Router.Route;
 let RouteHandler = Router.RouteHandler;
 
@@ -22,14 +22,14 @@ const App = React.createClass({
       <div>
         <Navbar/>
         <RouteHandler/>
+        <Footer/>
       </div>
     )
   }
 })
 
 const routes = (
-  <Route handler={App}>
-    <DefaultRoute handler={Products}/>
+  <Route path="/" handler={App}>
     <Route name="Login" path="login" handler={Login}/>
     <Route name="Logout" path="logout" handler={Logout}/>
     <Route name="Signup" path="signup" handler={Signup}/>

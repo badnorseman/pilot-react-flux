@@ -9,7 +9,9 @@ export default class extends React.Component {
 
     return(
       <div>
-        {items}
+        <div className="row">
+          {items}
+        </div>
       </div>
     )
   }

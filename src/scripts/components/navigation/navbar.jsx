@@ -1,4 +1,3 @@
-// TODO
 // Fix loggedIn
 // Fix Signup to depend on loggedIn
 // Move menu items into own class
@@ -9,12 +8,12 @@ export default class Navbar extends React.Component {
   constructor() {
     super()
     this.state = {loggedIn: false}
-    this.toggle = this.toggle.bind(this)
+    this.openSidebar = this.openSidebar.bind(this)
     this.toggleLoggedIn = this.toggleLoggedIn.bind(this)
   }
 
-  toggle() {
-    $(".button-collapse").sideNav();
+  openSidebar() {
+    $(".button-collapse").sideNav("show");
   }
 
   toggleLoggedIn() {
@@ -31,7 +30,7 @@ export default class Navbar extends React.Component {
         <nav>
           <div className="nav-wrapper">
             <a href="#!" className="brand-logo center">FitBird</a>
-            <a href="#" data-activates="mobile-side-nav" className="button-collapse" onClick={this.toggle}>
+            <a href="#" data-activates="nav-mobile" className="button-collapse" onClick={this.openSidebar}>
               <i className="mdi-navigation-menu"></i></a>
             <ul className="right hide-on-med-and-down">
               <li>
@@ -39,16 +38,19 @@ export default class Navbar extends React.Component {
               </li>
               <li>
                 {this.state.loggedIn ? (
-                  <Link to="Logout">Log Out</Link>
+                  <Link to="Logout">
+                    <i className="mdi-action-lock-open"></i></Link>
                 ) : (
-                  <Link to="Login">Log In</Link>
+                  <Link to="Login">
+                    <i className="mdi-action-lock-outline"></i>
+                  </Link>
                 )}
               </li>
               <li>
-                <Link to="Signup">Sign In</Link>
+                <Link to="Signup">Sign Up</Link>
               </li>
             </ul>
-            <ul className="side-nav" id="mobile-side-nav">
+            <ul className="side-nav" id="nav-mobile">
               <li>
                 {this.state.loggedIn ? (
                   <Link to="Logout">Log Out</Link>
@@ -57,7 +59,7 @@ export default class Navbar extends React.Component {
                 )}
               </li>
               <li>
-                <Link to="Signup">Sign In</Link>
+                <Link to="Signup">Sign Up</Link>
               </li>
             </ul>
           </div>

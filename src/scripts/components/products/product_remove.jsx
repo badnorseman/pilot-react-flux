@@ -13,7 +13,7 @@ export default class extends React.Component {
 
   render() {
     return(
-      <button onClick={this.handleClick}>Remove</button>
+      <button className="btn waves-effect waves-light" onClick={this.handleClick}>Remove</button>
     )
   }
 };
