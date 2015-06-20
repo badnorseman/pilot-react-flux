@@ -9,14 +9,13 @@ import Signup from "./components/authentication/signup";
 import Products from "./components/products/products";
 import NewProduct from "./components/products/product_new";
 
-let Route = Router.Route;
-let RouteHandler = Router.RouteHandler;
+const { DefaultRoute, Route, RouteHandler } = Router
 
 window.React = React
 
 injectTapEventPlugin();
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     return(
       <div>
@@ -26,10 +25,11 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 const routes = (
-  <Route path="/" handler={App}>
+  <Route handler={App}>
+    <DefaultRoute handler={Products}/>
     <Route name="Login" path="login" handler={Login}/>
     <Route name="Logout" path="logout" handler={Logout}/>
     <Route name="Signup" path="signup" handler={Signup}/>

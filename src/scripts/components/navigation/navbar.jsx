@@ -8,12 +8,8 @@ export default class Navbar extends React.Component {
   constructor() {
     super()
     this.state = {loggedIn: false}
-    this.openSidebar = this.openSidebar.bind(this)
     this.toggleLoggedIn = this.toggleLoggedIn.bind(this)
-  }
-
-  openSidebar() {
-    $(".button-collapse").sideNav("show");
+    this.toggleSidebar = this.toggleSidebar.bind(this)
   }
 
   toggleLoggedIn() {
@@ -24,13 +20,17 @@ export default class Navbar extends React.Component {
     )
   }
 
+  toggleSidebar() {
+    $(".button-collapse").sideNav("");
+  }
+
   render() {
     return(
       <div>
         <nav>
           <div className="nav-wrapper">
             <a href="#!" className="brand-logo center">FitBird</a>
-            <a href="#" data-activates="nav-mobile" className="button-collapse" onClick={this.openSidebar}>
+            <a href="#" data-activates="nav-mobile" className="button-collapse" onClick={this.toggleSidebar}>
               <i className="mdi-navigation-menu"></i></a>
             <ul className="right hide-on-med-and-down">
               <li>
