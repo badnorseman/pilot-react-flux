@@ -1,11 +1,20 @@
+// Add callback from server to display any error
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
+import ProductStore from "../../stores/product_store";
 
 export default class NewProduct extends React.Component {
   constructor(context) {
     super(context)
+    this.state: {errors: []}
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  onChange() {
+    this.setState({
+      errors: this.state.errors = ProductStore.getErrors()
+    })
   }
 
   handleSubmit(e) {
@@ -30,6 +39,11 @@ export default class NewProduct extends React.Component {
       <div>
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
+            <div className="row">
+              <div className="col s12">
+                {this.errors}
+              </div>
+            </div>
             <div className="row">
               <div className="col s6 input-field">
                 <input id="name" type="text" ref="name"/>
