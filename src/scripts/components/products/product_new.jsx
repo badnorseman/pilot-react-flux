@@ -4,8 +4,7 @@ import ProductActions from "../../actions/product_actions";
 
 export default class NewProduct extends React.Component {
   constructor(context) {
-    super()
-    context.router
+    super(context)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
