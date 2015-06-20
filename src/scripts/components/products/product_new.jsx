@@ -1,15 +1,11 @@
-// Fix transitionTo
 import React from "react";
-import Router, { Link } from "react-router";
+import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 
-export default class extends React.Component {
-  contextTypes: {
-    router: Router.PropTypes.router.isRequired
-  }
-
-  constructor() {
+export default class NewProduct extends React.Component {
+  constructor(context) {
     super()
+    context.router
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -27,8 +23,6 @@ export default class extends React.Component {
         }
       })
       this.context.router.transitionTo("Products")
-      // React.findDOMNode(this.refs.name).value = ""
-      // React.findDOMNode(this.refs.description).value = ""
     }
   }
 
@@ -60,4 +54,8 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+NewProduct.contextTypes = {
+  router: React.PropTypes.func.isRequired
 };

@@ -2,7 +2,7 @@ import React from "react";
 import ProductActions from "../../actions/product_actions";
 
 export default class extends React.Component {
-  constructor(id) {
+  constructor(props) {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
