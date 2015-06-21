@@ -13,7 +13,7 @@ export default class Navbar extends React.Component {
   }
 
   toggleLoggedIn() {
-    this.setState({loggedIn: !this.setState.loggedIn})
+    this.setState({loggedIn: !this.state.loggedIn})
   }
 
   toggleSidebar() {
