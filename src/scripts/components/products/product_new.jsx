@@ -7,7 +7,7 @@ import ProductStore from "../../stores/product_store";
 export default class NewProduct extends React.Component {
   constructor(context) {
     super(context)
-    this.state: {errors: []}
+    this.state = {errors: []}
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
