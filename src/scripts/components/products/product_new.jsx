@@ -1,4 +1,7 @@
 // Add callback from server to display any error
+// Can error be passed down from products.jsx?
+// Form could be own component
+// Add client-side validation
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
@@ -7,8 +10,17 @@ import ProductStore from "../../stores/product_store";
 export default class NewProduct extends React.Component {
   constructor(context) {
     super(context)
-    this.state: {errors: []}
+    this.state = {errors: []}
+    this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    ProductStore.addChangeListener(this.onChange)
+  }
+
+  componentWillUnmount() {
+    ProductStore.removeChangeListener(this.onChange)
   }
 
   onChange() {
@@ -41,7 +53,7 @@ export default class NewProduct extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
-                {this.errors}
+                {this.state.errors}
               </div>
             </div>
             <div className="row">

@@ -59,6 +59,13 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthUtils.logout()
       AuthStore.deleteToken()
       break
+
+    case ActionTypes.SIGNUP:
+      AuthUtils.signup(action.record)
+      break
+
+    case ActionTypes.SIGNUP_CB:
+      break
   }
 })
 
