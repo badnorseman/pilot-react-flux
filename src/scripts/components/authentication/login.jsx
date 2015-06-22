@@ -17,7 +17,7 @@ module.exports = class Login extends React.Component {
     this.constants = {
       emailValidation: 'Please enter a email',
       passwordValidation: 'Please enter a password'
-    }
+    };
     this.state = getAuthState();
     this.state.email = null;
     this.state.emailValidation = null;
@@ -37,13 +37,13 @@ module.exports = class Login extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   AuthStore.addChangeListener(this.onChange);
-  // }
-  //
-  // componentWillUnmount() {
-  //   AuthStore.removeChangeListener(this.onChange);
-  // }
+  componentDidMount() {
+    AuthStore.addChangeListener(this.onChange);
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.onChange);
+  }
 
   onChange(key) {
     return function (e) {
@@ -51,17 +51,15 @@ module.exports = class Login extends React.Component {
       state[key] = e.target.value;
       this.setState(state);
 
-      if (this.state.email && this.state.email !== '' && this.state.emailValidation === this.constants.emailValidation) {
-        this.setState({emailValidation: null});
+      // removes clientsidevalidattion errors if email or password has been added, further email regex check could be added as well
+      if (this.state[key] && this.state[key + 'Validation'] !== null) {
+        var validationState = {};
+        validationState[key+'Validation'] = null;
+        this.setState(validationState);
       }
 
-      if (this.state.password && this.state.email !== '' && this.state.passwordValidation === this.constants.passwordValidation) {
-        this.setState({passwordValidation: null});
-      }
-
+      this.setState(getAuthState());
     }.bind(this);
-
-    // this.setState(getAuthState());
   }
 
   handleSubmit(e) {
@@ -69,6 +67,7 @@ module.exports = class Login extends React.Component {
 
     var email = this.state.email;
     var password = this.state.password;
+
     if (!email) {
       this.setState({emailValidation: this.constants.emailValidation});
     }
@@ -92,22 +91,20 @@ module.exports = class Login extends React.Component {
   render() {
     return (
       <div>
-        <form>
-          <Mui.TextField
-                value={this.state.email}
-                onChange={this.onChange('email')}
-                floatingLabelText="Email"
-                errorText={this.state.emailValidation} />
-          <Mui.TextField type="password"
-                value={this.state.password}
-                onChange={this.onChange('password')}
-                floatingLabelText="Password"
-                errorText={this.state.passwordValidation} />
-          <Mui.RaisedButton label="Login">
-            <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
-          </Mui.RaisedButton>
-        </form>
+        <Mui.TextField
+          value={this.state.email}
+          onChange={this.onChange('email')}
+          floatingLabelText="Email"
+          errorText={this.state.emailValidation} />
+        <Mui.TextField type="password"
+          value={this.state.password}
+          onChange={this.onChange('password')}
+          floatingLabelText="Password"
+          errorText={this.state.passwordValidation} />
+        <Mui.RaisedButton label="Login">
+          <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
+        </Mui.RaisedButton>
       </div>
     );
   }
-}
+};
