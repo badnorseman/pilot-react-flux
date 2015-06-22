@@ -33,6 +33,15 @@ module.exports = class Login extends React.Component {
         left: '0',
         width: '100%',
         opacity: '0'
+      },
+      Button: {
+        'display': 'block',
+        'marginLeft': 'auto',
+        'marginRight': 'auto',
+        'width': '13em'
+      },
+      TextFields: {
+        width: '100%'
       }
     };
   }
@@ -93,16 +102,18 @@ module.exports = class Login extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Mui.TextField
+            style={this.styles.TextFields}
             value={this.state.email}
             onChange={this.onChange('email')}
             floatingLabelText="Email"
             errorText={this.state.emailValidation} />
           <Mui.TextField type="password"
+            style={this.styles.TextFields}
             value={this.state.password}
             onChange={this.onChange('password')}
             floatingLabelText="Password"
             errorText={this.state.passwordValidation} />
-          <Mui.RaisedButton label="Login">
+          <Mui.RaisedButton label="Login" style={this.styles.Button}>
             <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
           </Mui.RaisedButton>
         </form>
