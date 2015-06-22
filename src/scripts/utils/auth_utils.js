@@ -11,14 +11,15 @@ export default {
       type: "GET",
       data: record,
       success: function(data) {
-        AuthActions.login_cb(data, null);
+        AuthActions.login_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        AuthActions.login_cb(null, err);
+        AuthActions.login_cb(null, err.toString())
       }.bind(this)
-    });
+    })
   },
-  logout(record) {
+
+  logout() {
     $.ajax({
       url: ApiRoutes.LOGOUT,
       dataType: "json",
@@ -27,6 +28,21 @@ export default {
       }.bind(this),
       error: function(xhr, status, err) {
       }.bind(this)
-    });
+    })
+  },
+
+  signup(record) {
+    $.ajax({
+      url: ApiRoutes.SIGNUP,
+      dataType: "json",
+      type: "POST",
+      data: record,
+      success: function(data) {
+        AuthActions.signup_cb(data, null)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        AuthActions.signup_cb(null, err.toString())
+      }.bind(this)
+    })
   }
-}
+};

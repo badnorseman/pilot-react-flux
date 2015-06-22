@@ -9,5 +9,7 @@ export default keyMirror({
   LOGIN_CB: null,
   LOGOUT: null,
   REMOVE: null,
-  REMOVE_CB: null
-})
+  REMOVE_CB: null,
+  SIGNUP: null,
+  SIGNUP_CB: null
+});

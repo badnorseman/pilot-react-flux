@@ -1,62 +1,52 @@
 import React from "react";
-import ProductStore from "../../stores/product_store";
+import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
-import Login from "../authentication/login";
-import Logout from "../authentication/logout";
+import ProductStore from "../../stores/product_store";
+import NewProduct from "./product_new";
 import List from "./product_list";
-import AddItem from "./product_add";
-import Mui from "material-ui";
 
-let ThemeManager = new Mui.Styles.ThemeManager();
-
-function getProductState() {
-  return {
-    products: ProductStore.getProducts(),
-    errors: ProductStore.getErrors()
-  };
-}
-
-module.exports = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
-  getChildContext: function() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
-
-  getInitialState: function() {
-    return getProductState();
-  },
-
-  componentDidMount: function() {
-    ProductActions.load();
-    ProductStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount: function() {
-    ProductStore.removeChangeListener(this.onChange);
-  },
-
-  onChange: function() {
-    this.setState(getProductState);
-  },
-
-  render: function() {
-    return (
-      <div>
-        <Login />
-        <Logout />
-        <div>
-          <div>
-            {this.state.errors}
-          </div>
-          <List items={this.state.products} />
-          <AddItem />
-        </div>
-      </div>
-    );
+export default class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {products: []}
+    this.onChange = this.onChange.bind(this)
   }
-});
+
+  componentWillMount() {
+    ProductActions.load()
+  }
+
+  componentDidMount() {
+    ProductStore.addChangeListener(this.onChange)
+  }
+
+  componentWillUnmount() {
+    ProductStore.removeChangeListener(this.onChange)
+  }
+
+  onChange() {
+    this.setState({
+      products: this.state.products = ProductStore.getProducts()
+    })
+  }
+
+  addButtonStyle() {
+    return {
+      bottom: 25,
+      right: 25
+    }
+  }
+
+  render() {
+    return(
+      <div>
+        <div className="fixed-action-btn" style={this.addButtonStyle()}>
+          <Link to="NewProduct" className="btn-floating btn-large red waves-effect waves-light">
+            <i className="mdi-content-add"></i>
+          </Link>
+        </div>
+        <List items={this.state.products}/>
+      </div>
+    )
+  }
+};

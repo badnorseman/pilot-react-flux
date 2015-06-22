@@ -2,24 +2,24 @@
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/scripts/app.jsx",
+  entry: [
+    "webpack/hot/dev-server",
+    "./src/scripts/app.jsx"
+  ],
 
   output: {
     path: __dirname + "/dist",
-    filename: "bundle.js",
-    publicPath: ""
+    filename: "bundle.js"
   },
 
   module: {
     loaders: [
-      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" }
+      { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" },
+      { test: /\.(jpg|png)$/, loader: "url-loader?limit=8192" }
     ]
   },
 
   resolve: {
-    root: __dirname + "./src/scripts",
     extensions: ["", ".js", ".jsx"]
-  },
-
-  devtool: "#eval-source-map"
+  }
 };

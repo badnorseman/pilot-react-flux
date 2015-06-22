@@ -1,65 +1,78 @@
-var Dispatcher = require("../dispatcher/dispatcher");
-var EventEmitter = require("events").EventEmitter;
-var ActionTypes = require("../constants/action_types");
-var assign = require("react/lib/Object.assign");
-var AuthUtils = require("../utils/auth_utils");
+import assign from "react/lib/Object.assign";
+import EventEmitter from "events";
+import ActionTypes from "../constants/action_types";
+import Dispatcher from "../dispatcher/dispatcher";
+import AuthUtils from "../utils/auth_utils";
 
-var user;
-var errors = [];
+let user
+let errors = []
 
-var AuthStore = assign({}, EventEmitter.prototype, {
-
-  getUser: function() {
-    return user;
+const AuthStore = assign({}, EventEmitter.prototype, {
+  getUser() {
+    return user
   },
 
-  getErrors: function() {
-    return errors;
+  getErrors() {
+    return errors
   },
 
-  emitChange: function() {
-    this.emit("change");
+  emitChange() {
+    return this.emit("change")
   },
 
-  setToken: function(token) {
-    localStorage.token = token;
+  setToken(token) {
+    localStorage.token = token
   },
 
-  deleteToken: function() {
-    localStorage.removeItem("token");
+  deleteToken() {
+    localStorage.removeItem("token")
   },
 
-  addChangeListener: function(callback) {
-    this.on("change", callback);
+  addChangeListener(callback) {
+    this.on("change", callback)
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener("change", callback);
   }
-});
+})
 
-Dispatcher.register(function(action) {
+AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
+
     case ActionTypes.LOGIN:
-      AuthUtils.login(action.record);
-      break;
+      AuthUtils.login(action.record)
+      break
 
     case ActionTypes.LOGIN_CB:
       if (action.data) {
-        user = action.data;
-        AuthStore.setToken(action.data.token);
+        user = action.data
+        AuthStore.setToken(action.data.token)
       } else {
-        errors = action.errors;
-        AuthStore.deleteToken();
+        errors = action.errors
+        AuthStore.deleteToken()
       }
-      AuthStore.emitChange();
-      break;
+      AuthStore.emitChange()
+      break
 
     case ActionTypes.LOGOUT:
-      AuthUtils.logout();
-      AuthStore.deleteToken();
-      break;
-  }
-});
+      AuthUtils.logout()
+      AuthStore.deleteToken()
+      break
 
-module.exports = AuthStore;
+    case ActionTypes.SIGNUP:
+      AuthUtils.signup(action.record)
+      break
+
+    case ActionTypes.SIGNUP_CB:
+      if (action.data) {
+        user = action.data
+      } else {
+        errors = action.errors
+      }
+      AuthStore.emitChange()
+      break
+  }
+})
+
+export default AuthStore;

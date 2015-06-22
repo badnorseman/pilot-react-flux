@@ -1,48 +1,48 @@
 import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
-module.exports = {
-  add: function(record) {
+export default {
+  add(record) {
     Dispatcher.dispatch({
       actionType: ActionTypes.ADD,
       record: record
-    });
+    })
   },
 
-  add_cb: function(data, errors) {
+  add_cb(data, errors) {
     Dispatcher.dispatch({
       actionType: ActionTypes.ADD_CB,
       data: data,
       errors: errors
-    });
+    })
   },
 
-  load: function() {
+  load() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOAD
-    });
+    })
   },
 
-  load_cb: function(data, errors) {
+  load_cb(data, errors) {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOAD_CB,
       data: data,
       errors: errors
-    });
+    })
   },
 
-  remove: function(id) {
+  remove(id) {
     Dispatcher.dispatch({
       actionType: ActionTypes.REMOVE,
       id: id
-    });
+    })
   },
 
-  remove_cb: function(id, errors) {
+  remove_cb(id, errors) {
     Dispatcher.dispatch({
       actionType: ActionTypes.REMOVE_CB,
       id: id,
       errors: errors
-    });
+    })
   }
-}
+};

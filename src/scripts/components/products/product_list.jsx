@@ -1,16 +1,18 @@
 import React from "react";
-import Item from "./product_item";
+import Item from "./product_list_item";
 
 export default class extends React.Component {
   render() {
-    let items = this.props.items.map(function(item, index) {
-      return <Item item={item} key={index} />
-    });
+    let items = this.props.items.map(item => (
+      <Item item={item} key={item.id}/>
+    ))
 
-    return (
+    return(
       <div>
-        {items}
+        <div className="row">
+          {items}
+        </div>
       </div>
-    );
+    )
   }
-}
+};
