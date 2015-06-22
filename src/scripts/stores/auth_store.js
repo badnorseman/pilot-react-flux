@@ -65,6 +65,12 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.SIGNUP_CB:
+      if (action.data) {
+        user = action.data
+      } else {
+        errors = action.errors
+      }
+      AuthStore.emitChange()
       break
   }
 })

@@ -28,5 +28,13 @@ export default {
       actionType: ActionTypes.SIGNUP,
       record: record
     })
+  },
+
+  signup_cb(data, errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.SIGNUP_CB,
+      data: data,
+      errors: errors
+    })
   }
 };

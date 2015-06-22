@@ -5,5 +5,6 @@ const root = "/api"
 export default {
   LOGIN: host + root + "/auth/identity/callback",
   LOGOUT: host + root + "/logout",
-  PRODUCTS: host + root + "/products"
+  PRODUCTS: host + root + "/products",
+  SIGNUP: host + root + "/auth/identity/register"
 };
