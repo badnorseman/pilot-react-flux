@@ -32,16 +32,20 @@ module.exports = class Login extends React.Component {
         right: '0',
         left: '0',
         width: '100%',
-        opacity: '0'
+        opacity: '0',
       },
       Button: {
+        'marginTop': '2em',
         'display': 'block',
         'marginLeft': 'auto',
         'marginRight': 'auto',
         'width': '13em'
       },
       TextFields: {
-        width: '100%'
+        width: '85%',
+        'display': 'block',
+        'marginLeft': 'auto',
+        'marginRight': 'auto'
       }
     };
   }
@@ -100,6 +104,12 @@ module.exports = class Login extends React.Component {
   render() {
     return (
       <div>
+        <Mui.RaisedButton label="Login with Facebook" style={this.styles.Button}>
+          <input type="button" style={this.styles.Input}/>
+        </Mui.RaisedButton>
+        <Mui.RaisedButton label="Login with Google" style={this.styles.Button}>
+          <input type="button" style={this.styles.Input}/>
+        </Mui.RaisedButton>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Mui.TextField
             style={this.styles.TextFields}
