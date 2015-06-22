@@ -32,19 +32,6 @@ const ProductStore = assign({}, EventEmitter.prototype, {
 ProductStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
-    case ActionTypes.LOAD:
-      ProductUtils.load()
-      break
-
-    case ActionTypes.LOAD_CB:
-      if (action.data) {
-        products = action.data
-      } else {
-        errors = action.errors
-      }
-      ProductStore.emitChange()
-      break
-
     case ActionTypes.ADD:
       ProductUtils.add(action.record)
       break
@@ -52,6 +39,19 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
     case ActionTypes.ADD_CB:
       if (action.data) {
         products.push(action.data)
+      } else {
+        errors = action.errors
+      }
+      ProductStore.emitChange()
+      break
+
+    case ActionTypes.LOAD:
+      ProductUtils.load()
+      break
+
+    case ActionTypes.LOAD_CB:
+      if (action.data) {
+        products = action.data
       } else {
         errors = action.errors
       }

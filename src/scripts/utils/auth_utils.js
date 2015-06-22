@@ -19,7 +19,7 @@ export default {
     })
   },
 
-  logout(record) {
+  logout() {
     $.ajax({
       url: ApiRoutes.LOGOUT,
       dataType: "json",
@@ -29,5 +29,8 @@ export default {
       error: function(xhr, status, err) {
       }.bind(this)
     })
+  },
+
+  signup(record) {
   }
 };

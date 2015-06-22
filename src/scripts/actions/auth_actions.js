@@ -21,5 +21,12 @@ export default {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOGOUT,
     })
+  },
+
+  signup(record) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.SIGNUP,
+      record: record
+    })
   }
 };

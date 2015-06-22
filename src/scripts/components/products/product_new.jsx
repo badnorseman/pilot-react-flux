@@ -1,5 +1,5 @@
 // Add callback from server to display any error
-// Shall error be passed down from products.jsx
+// Can error be passed down from products.jsx?
 // Form could be own component
 // Add client-side validation
 import React from "react";
