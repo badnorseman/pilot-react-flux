@@ -91,19 +91,21 @@ module.exports = class Login extends React.Component {
   render() {
     return (
       <div>
-        <Mui.TextField
-          value={this.state.email}
-          onChange={this.onChange('email')}
-          floatingLabelText="Email"
-          errorText={this.state.emailValidation} />
-        <Mui.TextField type="password"
-          value={this.state.password}
-          onChange={this.onChange('password')}
-          floatingLabelText="Password"
-          errorText={this.state.passwordValidation} />
-        <Mui.RaisedButton label="Login">
-          <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
-        </Mui.RaisedButton>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <Mui.TextField
+            value={this.state.email}
+            onChange={this.onChange('email')}
+            floatingLabelText="Email"
+            errorText={this.state.emailValidation} />
+          <Mui.TextField type="password"
+            value={this.state.password}
+            onChange={this.onChange('password')}
+            floatingLabelText="Password"
+            errorText={this.state.passwordValidation} />
+          <Mui.RaisedButton label="Login">
+            <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
+          </Mui.RaisedButton>
+        </form>
       </div>
     );
   }
