@@ -14,7 +14,7 @@ export default {
         AuthActions.login_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        AuthActions.login_cb(null, err)
+        AuthActions.login_cb(null, err.toString())
       }.bind(this)
     })
   },

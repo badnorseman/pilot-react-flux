@@ -1,10 +1,6 @@
 import React from "react";
 
-export default class extends React.Component {
-  constructor() {
-    super()
-  }
-
+export default class Footer extends React.Component {
   render() {
     return(
       <div>

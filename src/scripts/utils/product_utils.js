@@ -1,3 +1,4 @@
+// Fix error to xhr.responseText
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 import $ from "jquery";
@@ -16,7 +17,7 @@ export default {
         ProductActions.add_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.add_cb(null, err)
+        ProductActions.add_cb(null, err.toString())
       }.bind(this)
     })
   },
@@ -30,7 +31,7 @@ export default {
         ProductActions.load_cb(data, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.load_cb(null, err)
+        ProductActions.load_cb(null, err.toString())
       }.bind(this)
     })
   },
@@ -47,7 +48,7 @@ export default {
         ProductActions.remove_cb(id, null)
       }.bind(this),
       error: function(xhr, status, err) {
-        ProductActions.remove_cb(null, err)
+        ProductActions.remove_cb(null, err.toString())
       }.bind(this)
     })
   }

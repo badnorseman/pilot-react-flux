@@ -1,6 +1,7 @@
 // Fix loggedIn
 // Fix Signup to depend on loggedIn
 // Move menu items into own class
+// Fix toggleSidebar without jQuery
 import React from "react";
 import { Link } from "react-router";
 
@@ -43,7 +44,8 @@ export default class Navbar extends React.Component {
                 )}
               </li>
               <li>
-                <Link to="Signup">Sign Up</Link>
+                <Link to="Signup">
+                  <i className="mdi-social-person-outline"></i></Link>
               </li>
             </ul>
             <ul className="side-nav" id="nav-mobile">
