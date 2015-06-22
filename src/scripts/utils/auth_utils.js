@@ -32,5 +32,17 @@ export default {
   },
 
   signup(record) {
+    $.ajax({
+      url: ApiRoutes.SIGNUP,
+      dataType: "json",
+      type: "POST",
+      data: record,
+      success: function(data) {
+        AuthActions.signup_cb(data, null)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        AuthActions.signup_cb(null, err.toString())
+      }.bind(this)
+    })
   }
 };

@@ -3,7 +3,6 @@
 // Form could be own component
 // Add client-side validation
 // Can Login and Signup forms be one?
-// Add flux actions for Signup and callback
 // Add avatar, paperclip functionality
 import React from "react"
 import { Link } from "react-router";
@@ -35,8 +34,18 @@ export default class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    var email = React.findDOMNode(this.refs.email).value
-    var password = React.findDOMNode(this.refs.password).value
+    let email = React.findDOMNode(this.refs.email).value
+    let password = React.findDOMNode(this.refs.password).value
+    let passwordConfirmation = React.findDOMNode(this.refs.passwordConfirmation).value
+
+    if (email && password && passwordConfirmation) {
+      AuthActions.signup({
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation
+      })
+      this.context.router.transitionTo("Login")
+    }
   }
 
   render() {
@@ -50,13 +59,21 @@ export default class Signup extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col s6 input-field">
+              <div className="col s12 input-field">
                 <input id="email" type="text" ref="email"/>
                 <label htmlFor="email">Email</label>
               </div>
-              <div className="col s6 input-field">
+            </div>
+            <div className="row">
+              <div className="col s12 input-field">
                 <input id="password" type="text" ref="password"/>
                 <label htmlFor="password">Password</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col s12 input-field">
+                <input id="passwordConfirmation" type="text" ref="passwordConfirmation"/>
+                <label htmlFor="passwordConfirmation">Password</label>
               </div>
             </div>
             <div className="row">
