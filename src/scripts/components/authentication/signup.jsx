@@ -73,7 +73,7 @@ export default class Signup extends React.Component {
             <div className="row">
               <div className="col s12 input-field">
                 <input id="passwordConfirmation" type="text" ref="passwordConfirmation"/>
-                <label htmlFor="passwordConfirmation">Password</label>
+                <label htmlFor="passwordConfirmation">Password confirmation</label>
               </div>
             </div>
             <div className="row">
