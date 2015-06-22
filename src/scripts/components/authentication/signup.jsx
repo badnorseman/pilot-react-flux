@@ -4,7 +4,7 @@
 // Add client-side validation
 // Can Login and Signup forms be one?
 // Add flux actions for Signup and callback
-// Add avatar, paperclick functionality
+// Add avatar, paperclip functionality
 import React from "react"
 import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
