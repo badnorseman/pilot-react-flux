@@ -23,6 +23,13 @@ export default {
     })
   },
 
+  oauth(provider) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.OAUTH,
+      provider: provider
+    })
+  },
+
   signup(record) {
     Dispatcher.dispatch({
       actionType: ActionTypes.SIGNUP,

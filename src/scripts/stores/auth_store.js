@@ -60,6 +60,10 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.deleteToken()
       break
 
+    case ActionTypes.OAUTH:
+      AuthUtils.oauth(action.provider)
+      break
+
     case ActionTypes.SIGNUP:
       AuthUtils.signup(action.record)
       break
