@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router";
-import ProductActions from "../../actions/product_actions";
-import ProductStore from "../../stores/product_store";
-import NewProduct from "./product_new";
-import List from "./product_list";
+import React from "react"
+import { Link } from "react-router"
+import ProductActions from "../../actions/product_actions"
+import ProductStore from "../../stores/product_store"
+import NewProduct from "./product_new"
+import List from "./product_list"
 
 export default class Products extends React.Component {
   constructor() {
@@ -49,4 +49,4 @@ export default class Products extends React.Component {
       </div>
     )
   }
-};
+}

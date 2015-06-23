@@ -2,8 +2,8 @@
 // Fix Signup to depend on loggedIn
 // Move menu items into own class
 // Fix toggleSidebar without jQuery
-import React from "react";
-import { Link } from "react-router";
+import React from "react"
+import { Link } from "react-router"
 
 export default class Navbar extends React.Component {
   constructor() {
@@ -18,7 +18,7 @@ export default class Navbar extends React.Component {
   }
 
   toggleSidebar() {
-    $(".button-collapse").sideNav("");
+    $(".button-collapse").sideNav("")
   }
 
   render() {
@@ -65,4 +65,4 @@ export default class Navbar extends React.Component {
       </div>
     )
   }
-};
+}

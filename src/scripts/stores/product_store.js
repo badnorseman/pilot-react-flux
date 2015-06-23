@@ -1,8 +1,8 @@
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
-import ActionTypes from "../constants/action_types";
-import Dispatcher from "../dispatcher/dispatcher";
-import ProductUtils from "../utils/product_utils";
+import assign from "react/lib/Object.assign"
+import EventEmitter from "events"
+import ActionTypes from "../constants/action_types"
+import Dispatcher from "../dispatcher/dispatcher"
+import ProductUtils from "../utils/product_utils"
 
 let products = []
 let errors = []
@@ -74,7 +74,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
 })
 
 function removeItem(id) {
-  for (var i = 0; i < products.length; i++) {
+  for (var i = 0 i < products.length i++) {
     if (products[i].id === id) {
       products.splice(i, 1)
       return products
@@ -82,4 +82,4 @@ function removeItem(id) {
   }
 }
 
-export default ProductStore;
+export default ProductStore

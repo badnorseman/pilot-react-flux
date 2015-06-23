@@ -5,11 +5,11 @@
 // Can Login and Signup forms be one?
 // Add avatar, paperclip functionality
 import React from "react"
-import { Link } from "react-router";
-import AuthActions from "../../actions/auth_actions";
-import AuthStore from "../../stores/auth_store";
-import Oauth from "./oauth";
-import RequiredField from "./required_field";
+import { Link } from "react-router"
+import AuthActions from "../../actions/auth_actions"
+import AuthStore from "../../stores/auth_store"
+import Oauth from "./oauth"
+import RequiredField from "./required_field"
 
 export default class Signup extends React.Component {
   constructor(context) {
@@ -106,4 +106,4 @@ export default class Signup extends React.Component {
 
 Signup.contextTypes = {
   router: React.PropTypes.func.isRequired
-};
+}

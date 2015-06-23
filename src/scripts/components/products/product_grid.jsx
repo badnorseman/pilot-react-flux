@@ -1,5 +1,5 @@
-import React from "react";
-var ResponsiveReactGridLayout = require("react-grid-layout").Responsive;
+import React from "react"
+var ResponsiveReactGridLayout = require("react-grid-layout").Responsive
 
 export default class extends React.Component {
   render() {
@@ -23,4 +23,4 @@ export default class extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
-};
+}
