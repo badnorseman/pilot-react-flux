@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export default class extends React.Component {
   constructor() {
@@ -12,4 +12,4 @@ export default class extends React.Component {
       </div>
     )
   }
-};
+}

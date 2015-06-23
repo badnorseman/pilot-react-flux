@@ -1,7 +1,7 @@
 // Fix error to xhr.responseText
-import ApiRoutes from "../constants/api_routes";
-import ProductActions from "../actions/product_actions";
-import $ from "jquery";
+import ApiRoutes from "../constants/api_routes"
+import ProductActions from "../actions/product_actions"
+import $ from "jquery"
 
 export default {
   add(record) {
@@ -52,4 +52,4 @@ export default {
       }.bind(this)
     })
   }
-};
+}

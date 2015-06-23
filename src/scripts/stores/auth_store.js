@@ -1,8 +1,8 @@
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
-import ActionTypes from "../constants/action_types";
-import Dispatcher from "../dispatcher/dispatcher";
-import AuthUtils from "../utils/auth_utils";
+import assign from "react/lib/Object.assign"
+import EventEmitter from "events"
+import ActionTypes from "../constants/action_types"
+import Dispatcher from "../dispatcher/dispatcher"
+import AuthUtils from "../utils/auth_utils"
 
 let user
 let errors = []
@@ -33,7 +33,7 @@ const AuthStore = assign({}, EventEmitter.prototype, {
   },
 
   removeChangeListener(callback) {
-    this.removeListener("change", callback);
+    this.removeListener("change", callback)
   }
 })
 
@@ -79,4 +79,4 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
   }
 })
 
-export default AuthStore;
+export default AuthStore

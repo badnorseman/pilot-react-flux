@@ -8,4 +8,4 @@ export default {
   OAUTH: host + root + "/auth/",
   PRODUCTS: host + root + "/products",
   SIGNUP: host + root + "/auth/identity/register"
-};
+}

@@ -2,10 +2,10 @@
 // Can error be passed down from products.jsx?
 // Form could be own component
 // Add client-side validation
-import React from "react";
-import { Link } from "react-router";
-import ProductActions from "../../actions/product_actions";
-import ProductStore from "../../stores/product_store";
+import React from "react"
+import { Link } from "react-router"
+import ProductActions from "../../actions/product_actions"
+import ProductStore from "../../stores/product_store"
 
 export default class NewProduct extends React.Component {
   constructor(context) {
@@ -83,4 +83,4 @@ export default class NewProduct extends React.Component {
 
 NewProduct.contextTypes = {
   router: React.PropTypes.func.isRequired
-};
+}

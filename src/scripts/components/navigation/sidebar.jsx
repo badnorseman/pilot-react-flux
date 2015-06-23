@@ -1,5 +1,5 @@
-import React from "react";
-import Mui from "material-ui";
+import React from "react"
+import Mui from "material-ui"
 
 let ThemeManager = new Mui.Styles.ThemeManager()
 let LeftNav = Mui.LeftNav
@@ -71,7 +71,7 @@ Sidebar.childContextTypes = {
 }
 
 function getMenuItems(props) {
-  let menuItems;
+  let menuItems
 
   if (props.user) {
     menuItems = [
@@ -81,7 +81,7 @@ function getMenuItems(props) {
     menuItems = [
     { route: "signup", text: "Sign Up" },
     { route: "login", text: "Log In" },
-    { route: "discover", text: "Discover", disabled: true }];
+    { route: "discover", text: "Discover", disabled: true }]
   }
   return menuItems
 }
