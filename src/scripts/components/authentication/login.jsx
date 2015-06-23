@@ -2,7 +2,7 @@ import React from "react";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Mui from "material-ui";
-
+import { Router, Route, Link, Navigation, TransitionHook } from 'react-router';
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 let Colors = Mui.Styles.Colors;
@@ -14,9 +14,10 @@ function getAuthState() {
     errors: AuthStore.getErrors(),
   };
 }
- var contextTypes = {
-    muiTheme: React.PropTypes.object
-  };
+// needed for muiTheme not to be undefined... https://github.com/callemall/material-ui/issues/686
+var contextTypes = {
+  muiTheme: React.PropTypes.object,
+};
 
 class Login extends React.Component {
   constructor() {
@@ -53,6 +54,13 @@ class Login extends React.Component {
         'display': 'block',
         'marginLeft': 'auto',
         'marginRight': 'auto'
+      },
+      ErrorText: {
+        'display': 'block',
+        'marginLeft': 'auto',
+        'marginRight': 'auto',
+        'color': 'red',
+        'text-align': 'center'
       }
     };
   }
@@ -64,11 +72,21 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    AuthStore.addChangeListener(this.onChange);
+    AuthStore.addChangeListener(this.onAuthCallBack.bind(this));
   }
 
   componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onChange);
+    AuthStore.removeChangeListener(this.onAuthCallBack.bind(this));
+  }
+
+  onAuthCallBack() {
+    var authState = getAuthState();
+    if (authState.user) {
+      // TODO: this the correct route?
+      this.context.router.transitionTo('/');
+    }
+
+    this.setState({errors: authState.errors})
   }
 
   onChange(key) {
@@ -83,8 +101,6 @@ class Login extends React.Component {
         validationState[key+'Validation'] = null;
         this.setState(validationState);
       }
-
-      this.setState(getAuthState());
     }.bind(this);
   }
 
@@ -136,6 +152,7 @@ class Login extends React.Component {
             onChange={this.onChange('password')}
             floatingLabelText="Password"
             errorText={this.state.passwordValidation} />
+          <div style={this.styles.ErrorText}>{this.state.errors}</div>
           <Mui.RaisedButton label="Login" style={this.styles.Button}>
             <input type="button" onClick={this.handleSubmit.bind(this)} style={this.styles.Input}/>
           </Mui.RaisedButton>
@@ -145,4 +162,7 @@ class Login extends React.Component {
   }
 };
 Login.childContextTypes = contextTypes;
+Login.contextTypes = {
+    router: React.PropTypes.func.isRequired
+};
 module.exports = Login;
