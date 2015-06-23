@@ -31,6 +31,20 @@ export default {
     })
   },
 
+  oauth(provider) {
+    $.ajax({
+      url: ApiRoutes.OAUTH + provider + "/callback",
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        console.log("Data: ", data)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log("Error: ", xhr)
+      }.bind(this)
+    })
+  },
+
   signup(record) {
     $.ajax({
       url: ApiRoutes.SIGNUP,

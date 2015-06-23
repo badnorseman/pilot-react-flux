@@ -8,6 +8,7 @@ import React from "react"
 import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
+import Oauth from "./oauth";
 
 export default class Signup extends React.Component {
   constructor(context) {
@@ -49,6 +50,8 @@ export default class Signup extends React.Component {
   }
 
   render() {
+    let provider = "facebook"
+
     return(
       <div>
         <div className="row">
@@ -60,7 +63,7 @@ export default class Signup extends React.Component {
             </div>
             <div className="row">
               <div className="col s12">
-                FACEBOOK
+                <Oauth provider={provider}/>
               </div>
             </div>
             <div className="row">

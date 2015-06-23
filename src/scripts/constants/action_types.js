@@ -8,6 +8,7 @@ export default keyMirror({
   LOGIN: null,
   LOGIN_CB: null,
   LOGOUT: null,
+  OAUTH: null,
   REMOVE: null,
   REMOVE_CB: null,
   SIGNUP: null,
