@@ -9,6 +9,7 @@ import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
+import RequiredField from "./required_field";
 
 export default class Signup extends React.Component {
   constructor(context) {
@@ -50,8 +51,6 @@ export default class Signup extends React.Component {
   }
 
   render() {
-    let provider = "facebook"
-
     return(
       <div>
         <div className="row">
@@ -63,25 +62,22 @@ export default class Signup extends React.Component {
             </div>
             <div className="row">
               <div className="col s12">
-                <Oauth provider={provider}/>
+                <Oauth provider="facebook"/>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <input id="email" type="text" ref="email"/>
-                <label htmlFor="email">Email</label>
+                <RequiredField fieldName="email" fieldType="text"/>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <input id="password" type="password" ref="password"/>
-                <label htmlFor="password">Password</label>
+                <RequiredField fieldName="password" fieldType="password"/>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <input id="passwordConfirmation" type="password" ref="passwordConfirmation"/>
-                <label htmlFor="passwordConfirmation">Password confirmation</label>
+                <RequiredField fieldName="passwordConfirmation" fieldType="password"/>
               </div>
             </div>
             <div className="row">
