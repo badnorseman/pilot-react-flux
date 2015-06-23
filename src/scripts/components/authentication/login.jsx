@@ -3,17 +3,24 @@ import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Mui from "material-ui";
 
+
+let ThemeManager = new Mui.Styles.ThemeManager();
+let Colors = Mui.Styles.Colors;
+
+
 function getAuthState() {
   return {
     user: AuthStore.getUser(),
     errors: AuthStore.getErrors(),
   };
 }
+ var contextTypes = {
+    muiTheme: React.PropTypes.object
+  };
 
-module.exports = class Login extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
-
     this.constants = {
       emailValidation: 'Please enter a email',
       passwordValidation: 'Please enter a password'
@@ -47,6 +54,12 @@ module.exports = class Login extends React.Component {
         'marginLeft': 'auto',
         'marginRight': 'auto'
       }
+    };
+  }
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
     };
   }
 
@@ -131,3 +144,5 @@ module.exports = class Login extends React.Component {
     );
   }
 };
+Login.childContextTypes = contextTypes;
+module.exports = Login;
