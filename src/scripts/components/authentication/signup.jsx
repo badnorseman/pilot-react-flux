@@ -59,6 +59,11 @@ export default class Signup extends React.Component {
               </div>
             </div>
             <div className="row">
+              <div className="col s12">
+                FACEBOOK
+              </div>
+            </div>
+            <div className="row">
               <div className="col s12 input-field">
                 <input id="email" type="text" ref="email"/>
                 <label htmlFor="email">Email</label>
@@ -66,14 +71,23 @@ export default class Signup extends React.Component {
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <input id="password" type="text" ref="password"/>
+                <input id="password" type="password" ref="password"/>
                 <label htmlFor="password">Password</label>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <input id="passwordConfirmation" type="text" ref="passwordConfirmation"/>
-                <label htmlFor="passwordConfirmation">Password</label>
+                <input id="passwordConfirmation" type="password" ref="passwordConfirmation"/>
+                <label htmlFor="passwordConfirmation">Password confirmation</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col s12 file-field input-field">
+                <input className="file-path" type="text"/>
+                <div className="btn">
+                  <span>Avatar</span>
+                  <input type="file"/>
+                </div>
               </div>
             </div>
             <div className="row">
