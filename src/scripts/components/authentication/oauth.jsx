@@ -1,5 +1,5 @@
-import React from "react"
-import AuthActions from "../../actions/auth_actions"
+import React from "react";
+import AuthActions from "../../actions/auth_actions";
 
 export default class extends React.Component {
   constructor(props) {
@@ -16,4 +16,4 @@ export default class extends React.Component {
       <button className="btn waves-effect waves-light" onClick={this.handleClick}>{this.props.provider}</button>
     )
   }
-}
+};

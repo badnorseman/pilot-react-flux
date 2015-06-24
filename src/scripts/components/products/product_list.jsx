@@ -1,5 +1,5 @@
-import React from "react"
-import Item from "./product_list_item"
+import React from "react";
+import Item from "./product_list_item";
 
 export default class extends React.Component {
   render() {
@@ -15,4 +15,4 @@ export default class extends React.Component {
       </div>
     )
   }
-}
+};

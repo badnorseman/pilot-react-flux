@@ -1,7 +1,7 @@
-import ApiRoutes from "../constants/api_routes"
-import AuthActions from "../actions/auth_actions"
-import AuthStore from "../stores/auth_store"
-import $ from "jquery"
+import ApiRoutes from "../constants/api_routes";
+import AuthActions from "../actions/auth_actions";
+import AuthStore from "../stores/auth_store";
+import $ from "jquery";
 
 export default {
   login(record) {
@@ -33,7 +33,7 @@ export default {
 
   oauth(provider) {
     $.ajax({
-      url: ApiRoutes.OAUTH + provider + "/callback",
+      url: ApiRoutes.OAUTH + provider,
       dataType: "json",
       type: "GET",
       success: function(data) {
@@ -59,4 +59,4 @@ export default {
       }.bind(this)
     })
   }
-}
+};

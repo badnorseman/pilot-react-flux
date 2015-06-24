@@ -1,5 +1,5 @@
 // Fix titleCase function
-import React from "react"
+import React from "react";
 
 export default class extends React.Component {
   constructor(props) {
@@ -30,8 +30,8 @@ export default class extends React.Component {
       </div>
     )
   }
-}
+};
 
 function titleCase(str) {
   return str.toUpperCase()
-}
+};
