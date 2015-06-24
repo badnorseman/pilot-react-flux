@@ -1,6 +1,6 @@
-const host = "https://matrix-api.herokuapp.com"
-// const host = "http://localhost:3000"
-const root = "/api"
+// let host = "https://matrix-api.herokuapp.com";
+let host = "http://localhost:3000";
+let root = "/api";
 
 export default {
   LOGIN: host + root + "/auth/identity/callback",
@@ -8,4 +8,4 @@ export default {
   OAUTH: host + root + "/auth/",
   PRODUCTS: host + root + "/products",
   SIGNUP: host + root + "/auth/identity/register"
-}
+};

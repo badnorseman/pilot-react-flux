@@ -1,13 +1,13 @@
-import assign from "react/lib/Object.assign"
-import EventEmitter from "events"
-import ActionTypes from "../constants/action_types"
-import Dispatcher from "../dispatcher/dispatcher"
-import ProductUtils from "../utils/product_utils"
+import assign from "react/lib/Object.assign";
+import EventEmitter from "events";
+import ActionTypes from "../constants/action_types";
+import Dispatcher from "../dispatcher/dispatcher";
+import ProductUtils from "../utils/product_utils";
 
-let products = []
-let errors = []
+let products = [];
+let errors = [];
 
-const ProductStore = assign({}, EventEmitter.prototype, {
+let ProductStore = assign({}, EventEmitter.prototype, {
   getProducts() {
     return products
   },
@@ -27,7 +27,7 @@ const ProductStore = assign({}, EventEmitter.prototype, {
   removeChangeListener(callback) {
     this.removeListener("change", callback)
   }
-})
+});
 
 ProductStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
@@ -71,15 +71,15 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductStore.emitChange()
       break
   }
-})
+});
 
 function removeItem(id) {
-  for (var i = 0 i < products.length i++) {
+  for (var i = 0; i < products.length; i++) {
     if (products[i].id === id) {
       products.splice(i, 1)
       return products
     }
   }
-}
+};
 
-export default ProductStore
+export default ProductStore;

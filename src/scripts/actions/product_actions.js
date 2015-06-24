@@ -1,5 +1,5 @@
-import Dispatcher from "../dispatcher/dispatcher"
-import ActionTypes from "../constants/action_types"
+import Dispatcher from "../dispatcher/dispatcher";
+import ActionTypes from "../constants/action_types";
 
 export default {
   add(record) {
@@ -45,4 +45,4 @@ export default {
       errors: errors
     })
   }
-}
+};
