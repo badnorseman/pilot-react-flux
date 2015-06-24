@@ -33,7 +33,7 @@ export default {
 
   oauth(provider) {
     $.ajax({
-      url: ApiRoutes.OAUTH + provider + "/callback",
+      url: ApiRoutes.OAUTH + provider,
       dataType: "json",
       type: "GET",
       success: function(data) {

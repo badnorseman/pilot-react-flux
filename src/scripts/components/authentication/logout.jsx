@@ -1,5 +1,5 @@
-import React from "react"
-import AuthActions from "../../actions/auth_actions"
+import React from "react";
+import AuthActions from "../../actions/auth_actions";
 
 export default class extends React.Component {
   handleClick() {
@@ -13,4 +13,4 @@ export default class extends React.Component {
       </div>
     )
   }
-}
+};
