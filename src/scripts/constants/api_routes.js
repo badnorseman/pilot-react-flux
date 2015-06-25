@@ -1,5 +1,5 @@
 let host = "https://matrix-api.herokuapp.com";
-// let host = "http://lvh.me:3000";
+// let host = "http://localhost:3000";
 let root = "/api";
 
 export default {

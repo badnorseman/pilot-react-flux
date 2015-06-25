@@ -59,8 +59,11 @@ export default class Signup extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col s12">
+          <div className="col s6">
             <Oauth provider="facebook"/>
+          </div>
+          <div className="col s6">
+            <Oauth provider="google_oauth2"/>
           </div>
         </div>
         <div className="row">
