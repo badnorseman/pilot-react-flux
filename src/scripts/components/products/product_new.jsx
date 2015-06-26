@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
-export class NewProduct extends React.Component {
+export default class NewProduct extends React.Component {
   constructor(context) {
     super(context)
     this.state = {errors: []}

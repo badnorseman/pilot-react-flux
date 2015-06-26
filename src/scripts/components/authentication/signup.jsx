@@ -11,7 +11,7 @@ import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
 import RequiredField from "./required_field";
 
-export class Signup extends React.Component {
+export default class Signup extends React.Component {
   constructor(context) {
     super(context)
     this.state = {errors: []}
