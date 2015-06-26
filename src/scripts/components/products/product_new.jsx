@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
-export default class NewProduct extends React.Component {
+export class NewProduct extends React.Component {
   constructor(context) {
     super(context)
     this.state = {errors: []}
@@ -32,8 +32,8 @@ export default class NewProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    var name = React.findDOMNode(this.refs.name).value
-    var description = React.findDOMNode(this.refs.description).value
+    let name = React.findDOMNode(this.refs.name).value
+    let description = React.findDOMNode(this.refs.description).value
 
     if (name && description) {
       ProductActions.add({

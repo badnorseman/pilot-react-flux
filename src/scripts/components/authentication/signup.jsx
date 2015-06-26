@@ -11,7 +11,7 @@ import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
 import RequiredField from "./required_field";
 
-export default class Signup extends React.Component {
+export class Signup extends React.Component {
   constructor(context) {
     super(context)
     this.state = {errors: []}
@@ -70,17 +70,20 @@ export default class Signup extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="email" fieldType="text"/>
+                <RequiredField fieldName="email" fieldType="text">
+                  Email</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="password" fieldType="password"/>
+                <RequiredField fieldName="password" fieldType="password">
+                  Password</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="passwordConfirmation" fieldType="password"/>
+                <RequiredField fieldName="passwordConfirmation" fieldType="password">
+                  Password Confirmation</RequiredField>
               </div>
             </div>
             <div className="row">

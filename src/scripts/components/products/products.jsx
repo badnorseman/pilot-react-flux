@@ -5,7 +5,7 @@ import ProductStore from "../../stores/product_store";
 import NewProduct from "./product_new";
 import List from "./product_list";
 
-export default class Products extends React.Component {
+export class Products extends React.Component {
   constructor() {
     super()
     this.state = {products: []}

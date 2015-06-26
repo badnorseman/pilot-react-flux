@@ -1,37 +1,30 @@
-// Fix titleCase function
 import React from "react";
 
-export default class extends React.Component {
+export class RequiredField extends React.Component {
   constructor(props) {
     super()
-    this.state = {isEmpty: false}
+    this.state = {isInvalid: false}
     this.handleKeyUp = this.handleKeyUp.bind(this)
   }
 
   handleKeyUp() {
     let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value
-    this.setState({isEmpty: (fieldValue === "")})
+    this.setState({isInvalid: (fieldValue === "")})
   }
 
   render() {
     let errors = ""
 
-    if (this.state.isEmpty) {
+    if (this.state.isInvalid) {
       errors = <span>Is required.</span>
     }
-
-    let fieldTitle = titleCase(this.props.fieldName)
 
     return(
       <div>
         <input id={this.props.fieldName} type={this.props.fieldType} ref={this.props.fieldName} onKeyUp={this.handleKeyUp}/>
-        <label htmlFor={this.props.fieldName}>{fieldTitle}</label>
+        <label htmlFor={this.props.fieldName}>{this.props.children}</label>
         {errors}
       </div>
     )
   }
-};
-
-function titleCase(str) {
-  return str.toUpperCase()
 };
