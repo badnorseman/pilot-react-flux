@@ -8,8 +8,8 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
 export default class NewProduct extends React.Component {
-  constructor(context) {
-    super(context)
+  constructor() {
+    super()
     this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,8 +32,8 @@ export default class NewProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    var name = React.findDOMNode(this.refs.name).value
-    var description = React.findDOMNode(this.refs.description).value
+    let name = React.findDOMNode(this.refs.name).value
+    let description = React.findDOMNode(this.refs.description).value
 
     if (name && description) {
       ProductActions.add({

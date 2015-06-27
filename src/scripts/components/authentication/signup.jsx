@@ -36,9 +36,9 @@ export default class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let email = React.findDOMNode(this.refs.email).value
-    let password = React.findDOMNode(this.refs.password).value
-    let passwordConfirmation = React.findDOMNode(this.refs.passwordConfirmation).value
+    let email = this.refs.email.state.fieldValue
+    let password = this.refs.password.state.fieldValue
+    let passwordConfirmation = this.refs.passwordConfirmation.state.fieldValue
 
     if (email && password && passwordConfirmation) {
       AuthActions.signup({
@@ -63,24 +63,27 @@ export default class Signup extends React.Component {
             <Oauth provider="facebook"/>
           </div>
           <div className="col s6">
-            <Facebook/>
+            <Oauth provider="google_oauth2"/>
           </div>
         </div>
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="email" fieldType="text"/>
+                <RequiredField fieldName="email" fieldType="text" ref="email">
+                Email</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="password" fieldType="password"/>
+                <RequiredField fieldName="password" fieldType="password" ref="password">
+                Password</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="passwordConfirmation" fieldType="password"/>
+                <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
+                Password Confirmation</RequiredField>
               </div>
             </div>
             <div className="row">
