@@ -3,16 +3,13 @@ import React from "react";
 export default class RequiredField extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      fieldValue: "",
-      isInvalid: false
-    }
+    this.state = {isInvalid: false}
     this.handleKeyUp = this.handleKeyUp.bind(this)
   }
 
   handleKeyUp() {
+    let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value.trim();
     this.setState({
-      fieldValue: React.findDOMNode(this.refs[this.props.fieldName]).value,
       isInvalid: (fieldValue === "")
     })
   }
@@ -26,7 +23,7 @@ export default class RequiredField extends React.Component {
 
     return(
       <div>
-        <input id={this.props.fieldName} type={this.props.fieldType} value={this.state.fieldValue} onKeyUp={this.handleKeyUp}/>
+        <input id={this.props.fieldName} type={this.props.fieldType} ref={this.props.fieldName} onKeyUp={this.handleKeyUp}/>
         <label htmlFor={this.props.fieldName}>{this.props.children}</label>
         {errors}
       </div>

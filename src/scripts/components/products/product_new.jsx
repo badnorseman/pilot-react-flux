@@ -8,8 +8,8 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
 export default class NewProduct extends React.Component {
-  constructor(context) {
-    super(context)
+  constructor() {
+    super()
     this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
