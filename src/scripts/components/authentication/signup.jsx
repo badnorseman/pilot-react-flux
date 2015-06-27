@@ -70,20 +70,26 @@ export default class Signup extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="email" fieldType="text">
-                  Email</RequiredField>
+                <RequiredField fieldName="test" fieldType="text">
+                  Test</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="password" fieldType="password">
-                  Password</RequiredField>
+                <input id="email" type="text" ref="email"/>
+                <label htmlFor="email">Email</label>
               </div>
             </div>
             <div className="row">
               <div className="col s12 input-field">
-                <RequiredField fieldName="passwordConfirmation" fieldType="password">
-                  Password Confirmation</RequiredField>
+                <input id="password" type="password" ref="password"/>
+                <label htmlFor="password">Password</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col s12 input-field">
+                <input id="passwordConfirmation" type="password" ref="passwordConfirmation"/>
+                <label htmlFor="passwordConfirmation">Password</label>
               </div>
             </div>
             <div className="row">
