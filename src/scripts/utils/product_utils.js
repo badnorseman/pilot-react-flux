@@ -22,6 +22,24 @@ export default {
     })
   },
 
+  edit(record) {
+    $.ajax({
+      url: ApiRoutes.PRODUCTS + "/" + id,
+      dataType: "json",
+      type: "PATCH",
+      headers: {
+        "Authorization": "Token token=" + localStorage.token
+      },
+      data: record,
+      success: function(data) {
+        ProductActions.edit_cb(data, null)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        ProductActions.edit_cb(null, err.toString())
+      }.bind(this)
+    })
+  },
+
   load() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,

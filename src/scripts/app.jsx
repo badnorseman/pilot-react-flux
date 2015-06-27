@@ -25,7 +25,7 @@ class App extends React.Component {
       </div>
     )
   }
-};
+}
 
 let routes = (
   <Route handler={App}>
@@ -40,4 +40,4 @@ let routes = (
 
 Router.run(routes, Router.HashLocation, (Root) => {
   React.render(<Root/>, document.getElementById("app"))
-});
+})

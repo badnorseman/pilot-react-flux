@@ -11,7 +11,7 @@ export default class extends React.Component {
               xfbml      : true,
               version    : 'v2.3'
             });
-          };
+          }
 
           (function(d, s, id){
              var js, fjs = d.getElementsByTagName(s)[0];
@@ -30,4 +30,4 @@ export default class extends React.Component {
       </div>
     )
   }
-};
+}

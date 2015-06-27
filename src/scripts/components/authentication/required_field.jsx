@@ -8,7 +8,8 @@ export default class RequiredField extends React.Component {
   }
 
   handleKeyUp() {
-    let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value.trim();
+    let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value.trim()
+
     this.setState({
       fieldValue: fieldValue,
       isInvalid: (fieldValue === "")
@@ -35,4 +36,4 @@ export default class RequiredField extends React.Component {
       </div>
     )
   }
-};
+}

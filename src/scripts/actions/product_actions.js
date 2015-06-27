@@ -17,6 +17,21 @@ export default {
     })
   },
 
+  edit(record) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.EDIT,
+      record: record
+    })
+  },
+
+  edit_cb(data, errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.EDIT_CB,
+      data: data,
+      errors: errors
+    })
+  },
+
   load() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOAD
@@ -45,4 +60,4 @@ export default {
       errors: errors
     })
   }
-};
+}

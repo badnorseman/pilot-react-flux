@@ -16,4 +16,4 @@ export default class extends React.Component {
       <button className="btn waves-effect waves-light" onClick={this.handleClick}>Remove</button>
     )
   }
-};
+}

@@ -1,5 +1,5 @@
-let host = "https://matrix-api.herokuapp.com";
-// let host = "http://localhost:3000";
+// let host = "https://matrix-api.herokuapp.com";
+let host = "http://localhost:3000";
 let root = "/api";
 
 export default {
@@ -8,4 +8,4 @@ export default {
   OAUTH: host + root + "/auth/",
   PRODUCTS: host + root + "/products",
   SIGNUP: host + root + "/auth/identity/register"
-};
+}

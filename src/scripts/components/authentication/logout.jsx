@@ -9,8 +9,8 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>Logout</button>
+        <button className="btn waves-effect waves-light" onClick={this.handleClick}>Logout</button>
       </div>
     )
   }
-};
+}
