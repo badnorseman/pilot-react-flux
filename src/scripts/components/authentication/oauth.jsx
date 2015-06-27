@@ -3,7 +3,7 @@ import AuthActions from "../../actions/auth_actions";
 
 export default class extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -16,4 +16,4 @@ export default class extends React.Component {
       <button className="btn waves-effect waves-light" onClick={this.handleClick}>{this.props.provider}</button>
     )
   }
-};
+}

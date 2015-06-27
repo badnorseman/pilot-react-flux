@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
-export default class NewProduct extends React.Component {
+export default class EditProduct extends React.Component {
   constructor() {
     super()
     this.state = {errors: []}
@@ -37,7 +37,7 @@ export default class NewProduct extends React.Component {
     let image = React.findDOMNode(this.refs.image).value.trim()
 
     if (name && description) {
-      ProductActions.add({
+      ProductActions.edit({
         product : {
           name: name,
           description: description,
@@ -82,7 +82,7 @@ export default class NewProduct extends React.Component {
                 <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
               </div>
               <div className="col s6">
-                <button className="btn waves-effect waves-light" type="submit">Add</button>
+                <button className="btn waves-effect waves-light" type="submit">Save</button>
               </div>
             </div>
           </form>
@@ -92,6 +92,6 @@ export default class NewProduct extends React.Component {
   }
 }
 
-NewProduct.contextTypes = {
+EditProduct.contextTypes = {
   router: React.PropTypes.func.isRequired
 }

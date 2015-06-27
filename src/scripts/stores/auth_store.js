@@ -77,6 +77,6 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.emitChange()
       break
   }
-});
+})
 
-export default AuthStore;
+export default AuthStore

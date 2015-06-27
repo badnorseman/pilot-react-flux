@@ -3,6 +3,8 @@ import keyMirror from "react/lib/keyMirror";
 export default keyMirror({
   ADD: null,
   ADD_CB: null,
+  EDIT: null,
+  EDIT_CB: null,
   LOAD: null,
   LOAD_CB: null,
   LOGIN: null,
@@ -13,4 +15,4 @@ export default keyMirror({
   REMOVE_CB: null,
   SIGNUP: null,
   SIGNUP_CB: null
-});
+})

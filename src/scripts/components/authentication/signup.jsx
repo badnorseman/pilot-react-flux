@@ -87,15 +87,6 @@ export default class Signup extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col s12 file-field input-field">
-                <input className="file-path" type="text"/>
-                <div className="btn">
-                  <span>Avatar</span>
-                  <input type="file"/>
-                </div>
-              </div>
-            </div>
-            <div className="row">
               <div className="col s6">
                 <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
               </div>
@@ -108,8 +99,8 @@ export default class Signup extends React.Component {
       </div>
     )
   }
-};
+}
 
 Signup.contextTypes = {
   router: React.PropTypes.func.isRequired
-};
+}

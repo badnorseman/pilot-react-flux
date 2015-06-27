@@ -1,3 +1,3 @@
 let Dispatcher = require("flux").Dispatcher;
 
-module.exports = new Dispatcher();
+module.exports = new Dispatcher()

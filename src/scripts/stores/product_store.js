@@ -71,7 +71,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductStore.emitChange()
       break
   }
-});
+})
 
 function removeItem(id) {
   for (var i = 0; i < products.length; i++) {
@@ -80,6 +80,6 @@ function removeItem(id) {
       return products
     }
   }
-};
+}
 
-export default ProductStore;
+export default ProductStore
