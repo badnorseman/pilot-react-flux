@@ -1,7 +1,7 @@
 // Add callback from server to display any error
 // Can error be passed down from products.jsx?
-// Form could be own component
-// Add client-side validation
+// Merge Add and Edit form
+// Add client-side validation e.g. RequiredField
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
@@ -52,7 +52,7 @@ export default class EditProduct extends React.Component {
     return(
       <div>
         <div className="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
+          <form action="#" className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
                 {this.state.errors}
@@ -69,7 +69,7 @@ export default class EditProduct extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div action="#" className="col s12 file-field input-field">
+              <div className="col s12 file-field input-field">
                 <input className="file-path validate" type="text" ref="image"/>
                 <div className="btn">
                   <span>Image</span>
