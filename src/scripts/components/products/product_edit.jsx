@@ -52,7 +52,7 @@ export default class EditProduct extends React.Component {
     return(
       <div>
         <div className="row">
-          <form action="#" className="col s12" onSubmit={this.handleSubmit}>
+          <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
                 {this.state.errors}
