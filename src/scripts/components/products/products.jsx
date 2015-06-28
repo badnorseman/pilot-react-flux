@@ -42,8 +42,7 @@ export default class Products extends React.Component {
       <div>
         <div className="fixed-action-btn" style={this.addButtonStyle()}>
           <Link to="NewProduct" className="btn-floating btn-large red waves-effect waves-light">
-            <i className="mdi-content-add"></i>
-          </Link>
+            <i className="mdi-content-add"></i></Link>
         </div>
         <List items={this.state.products}/>
       </div>

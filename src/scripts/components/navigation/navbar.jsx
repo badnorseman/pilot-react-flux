@@ -9,12 +9,7 @@ export default class Navbar extends React.Component {
   constructor() {
     super()
     this.state = {loggedIn: false}
-    this.toggleLoggedIn = this.toggleLoggedIn.bind(this)
     this.toggleSidebar = this.toggleSidebar.bind(this)
-  }
-
-  toggleLoggedIn() {
-    this.setState({loggedIn: !this.state.loggedIn})
   }
 
   toggleSidebar() {
@@ -31,7 +26,17 @@ export default class Navbar extends React.Component {
               <i className="mdi-navigation-menu"></i></a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <a onClick={this.toggleLoggedIn}>LOGIN</a>
+                <Link to="Products">
+                  <i className="mdi-action-search"></i></Link>
+              </li>
+              <li>
+                {this.state.loggedIn ? (
+                  <Link to="Login">
+                    <i className="mdi-action-lock-outline"></i></Link>
+                ) : (
+                  <Link to="Logout">
+                    <i className="mdi-action-lock-open"></i></Link>
+                )}
               </li>
               <li>
                 {this.state.loggedIn ? (
@@ -39,8 +44,7 @@ export default class Navbar extends React.Component {
                     <i className="mdi-action-lock-open"></i></Link>
                 ) : (
                   <Link to="Login">
-                    <i className="mdi-action-lock-outline"></i>
-                  </Link>
+                    <i className="mdi-action-lock-outline"></i></Link>
                 )}
               </li>
               <li>
@@ -49,16 +53,10 @@ export default class Navbar extends React.Component {
               </li>
             </ul>
             <ul className="side-nav" id="nav-mobile">
-              <li>
-                {this.state.loggedIn ? (
-                  <Link to="Logout">Log Out</Link>
-                ) : (
-                  <Link to="Login">Log In</Link>
-                )}
-              </li>
-              <li>
-                <Link to="Signup">Sign Up</Link>
-              </li>
+              <li><Link to="Products">Discover</Link></li>
+              <li><Link to="Logout">Log Out</Link></li>
+              <li><Link to="Login">Log In</Link></li>
+              <li><Link to="Signup">Sign Up</Link></li>
             </ul>
           </div>
         </nav>
