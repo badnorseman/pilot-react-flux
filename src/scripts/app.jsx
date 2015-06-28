@@ -7,6 +7,7 @@ import Login from "./components/authentication/login";
 import Logout from "./components/authentication/logout";
 import Signup from "./components/authentication/signup";
 import Products from "./components/products/products";
+import EditProduct from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
 
 let { DefaultRoute, Route, RouteHandler } = Router;
@@ -33,7 +34,9 @@ let routes = (
     <Route name="Login" path="login" handler={Login}/>
     <Route name="Logout" path="logout" handler={Logout}/>
     <Route name="Signup" path="signup" handler={Signup}/>
-    <Route name="Products" path="products" handler={Products}/>
+    <Route name="Products" path="products" handler={Products}>
+      <Route name="EditProduct" path="/product/:id" handler={EditProduct}/>
+    </Route>
     <Route name="NewProduct" path="product/new" handler={NewProduct}/>
   </Route>
 );
