@@ -1,4 +1,4 @@
-// Move ReturnFrom...Server actions into own file
+// Move ReceieveFrom...Server actions into own file
 import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
@@ -18,9 +18,9 @@ export default {
     })
   },
 
-  query() {
+  load() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.QUERY
+      actionType: ActionTypes.LOAD
     })
   },
 
@@ -31,16 +31,16 @@ export default {
     })
   },
 
-  returnDataFromServer(data) {
+  receiveDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RETURN_DATA,
+      actionType: ActionTypes.RECEIVE_DATA,
       data: data
     })
   },
 
-  returnErrorFromServer(errors) {
+  receiveErrorsFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RETURN_ERROR,
+      actionType: ActionTypes.RECEIVE_ERRORS,
       errors: errors
     })
   }

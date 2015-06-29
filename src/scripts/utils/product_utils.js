@@ -4,7 +4,7 @@ import ProductActions from "../actions/product_actions";
 import $ from "jquery";
 
 export default {
-  add(data) {
+  create(data) {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
@@ -14,15 +14,46 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.query()
+        ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.returnErrorFromServer(error.toString())
+        ProductActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
 
-  edit(id, data) {
+  delete(id) {
+    $.ajax({
+      url: ApiRoutes.PRODUCTS + "/" + id,
+      dataType: "json",
+      type: "DELETE",
+      headers: {
+        "Authorization": "Token token=" + localStorage.token
+      },
+      success: function(data) {
+        ProductActions.load()
+      }.bind(this),
+      error: function(xhr, status, error) {
+        ProductActions.receiveErrorsFromServer(error.toString())
+      }.bind(this)
+    })
+  },
+
+  load() {
+    $.ajax({
+      url: ApiRoutes.PRODUCTS,
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        ProductActions.receiveDataFromServer(data)
+      }.bind(this),
+      error: function(xhr, status, error) {
+        ProductActions.receiveErrorsFromServer(error.toString())
+      }.bind(this)
+    })
+  },
+
+  update(id, data) {
     $.ajax({
       url: ApiRoutes.PRODUCTS + "/" + id,
       dataType: "json",
@@ -32,41 +63,10 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.query()
+        ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.returnErrorFromServer(error.toString())
-      }.bind(this)
-    })
-  },
-
-  remove(id) {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS + "/" + id,
-      dataType: "json",
-      type: "DELETE",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      success: function(data) {
-        ProductActions.query()
-      }.bind(this),
-      error: function(xhr, status, error) {
-        ProductActions.returnErrorFromServer(error.toString())
-      }.bind(this)
-    })
-  },
-
-  query() {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS,
-      dataType: "json",
-      type: "GET",
-      success: function(data) {
-        ProductActions.returnDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        ProductActions.returnErrorFromServer(error.toString())
+        ProductActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   }

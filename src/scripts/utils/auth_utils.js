@@ -12,10 +12,10 @@ export default {
       data: record,
       success: function(data) {
         localStorage.token = data.token
-        AuthActions.returnDataFromServer(data)
+        AuthActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        AuthActions.returnErrorFromServer(error.toString())
+        AuthActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -29,7 +29,7 @@ export default {
         localStorage.removeItem("token")
       }.bind(this),
       error: function(xhr, status, error) {
-        AuthActions.returnErrorFromServer(error.toString())
+        AuthActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -40,10 +40,10 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        AuthActions.returnDataFromServer(data)
+        AuthActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        AuthActions.returnErrorFromServer(error.toString())
+        AuthActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -55,10 +55,10 @@ export default {
       type: "POST",
       data: record,
       success: function(data) {
-        AuthActions.returnDataFromServer(data)
+        AuthActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        AuthActions.returnErrorFromServer(error.toString())
+        AuthActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   }
