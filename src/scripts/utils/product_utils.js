@@ -13,7 +13,7 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       data: data,
-      success: function(success) {
+      success: function(data) {
         ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
@@ -31,7 +31,7 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       data: data,
-      success: function(success) {
+      success: function(data) {
         ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
@@ -48,7 +48,7 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      success: function() {
+      success: function(data) {
         ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
@@ -62,8 +62,8 @@ export default {
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
       type: "GET",
-      success: function(success) {
-        ProductActions.returnDataFromServer(success)
+      success: function(data) {
+        ProductActions.returnDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         ProductActions.returnErrorFromServer(error.toString())

@@ -20,14 +20,6 @@ let AuthStore = assign({}, EventEmitter.prototype, {
     return this.emit("change")
   },
 
-  setToken(token) {
-    localStorage.token = token
-  },
-
-  deleteToken() {
-    localStorage.removeItem("token")
-  },
-
   addChangeListener(callback) {
     this.on("change", callback)
   },
@@ -41,40 +33,29 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
     case ActionTypes.LOGIN:
-      AuthUtils.login(action.record)
-      break
-
-    case ActionTypes.LOGIN_CB:
-      if (action.data) {
-        user = action.data
-        AuthStore.setToken(action.data.token)
-      } else {
-        errors = action.errors
-        AuthStore.deleteToken()
-      }
-      AuthStore.emitChange()
+      AuthUtils.login(action.data)
       break
 
     case ActionTypes.LOGOUT:
       AuthUtils.logout()
-      AuthStore.deleteToken()
       break
 
     case ActionTypes.OAUTH:
       AuthUtils.oauth(action.provider)
       break
 
-    case ActionTypes.SIGNUP:
-      AuthUtils.signup(action.record)
+    case ActionTypes.RETURN_DATA:
+      user = action.data
+      AuthStore.emitChange()
       break
 
-    case ActionTypes.SIGNUP_CB:
-      if (action.data) {
-        user = action.data
-      } else {
-        errors = action.errors
-      }
+    case ActionTypes.RETURN_ERROR:
+      errors = action.errors
       AuthStore.emitChange()
+      break
+
+    case ActionTypes.SIGNUP:
+      AuthUtils.signup(action.data)
       break
   }
 })

@@ -1,9 +1,15 @@
 import React from "react";
 import AuthActions from "../../actions/auth_actions";
 
-export default class extends React.Component {
+export default class Logout extends React.Component {
+  constructor(context) {
+    super(context)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick() {
     AuthActions.logout()
+    this.context.router.transitionTo("Products")
   }
 
   render() {
@@ -13,4 +19,8 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+Logout.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
