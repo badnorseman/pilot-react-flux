@@ -38,7 +38,7 @@ export default class NewProduct extends React.Component {
 
     if (name && description) {
       ProductActions.add({
-        product : {
+        product: {
           name: name,
           description: description,
           image: image

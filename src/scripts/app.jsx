@@ -34,9 +34,8 @@ let routes = (
     <Route name="Login" path="login" handler={Login}/>
     <Route name="Logout" path="logout" handler={Logout}/>
     <Route name="Signup" path="signup" handler={Signup}/>
-    <Route name="Products" path="products" handler={Products}>
-      <Route name="EditProduct" path="/product/:id" handler={EditProduct}/>
-    </Route>
+    <Route name="Products" path="products" handler={Products}/>
+    <Route name="EditProduct" path="product/edit" handler={EditProduct}/>
     <Route name="NewProduct" path="product/new" handler={NewProduct}/>
   </Route>
 );

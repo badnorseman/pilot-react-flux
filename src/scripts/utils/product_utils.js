@@ -4,7 +4,7 @@ import ProductActions from "../actions/product_actions";
 import $ from "jquery";
 
 export default {
-  add(record) {
+  add(data) {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
@@ -12,17 +12,18 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      data: record,
-      success: function(data) {
-        ProductActions.add_cb(data, null)
+      data: data,
+      success: function(success) {
+        ProductActions.load()
       }.bind(this),
-      error: function(xhr, status, err) {
-        ProductActions.add_cb(null, err.toString())
+      error: function(xhr, status, error) {
+        // ProductActions.add_cb(null, error.toString())
+        ProductActions.callback_error(error.toString())
       }.bind(this)
     })
   },
 
-  edit(record) {
+  edit(id, data) {
     $.ajax({
       url: ApiRoutes.PRODUCTS + "/" + id,
       dataType: "json",
@@ -30,12 +31,13 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      data: record,
-      success: function(data) {
-        ProductActions.edit_cb(data, null)
+      data: data,
+      success: function(success) {
+        ProductActions.load()
       }.bind(this),
-      error: function(xhr, status, err) {
-        ProductActions.edit_cb(null, err.toString())
+      error: function(xhr, status, error) {
+        // ProductActions.edit_cb(null, error.toString())
+        ProductActions.callback_error(error.toString())
       }.bind(this)
     })
   },
@@ -45,11 +47,12 @@ export default {
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
       type: "GET",
-      success: function(data) {
-        ProductActions.load_cb(data, null)
+      success: function(success) {
+        ProductActions.load_cb(success)
       }.bind(this),
-      error: function(xhr, status, err) {
-        ProductActions.load_cb(null, err.toString())
+      error: function(xhr, status, error) {
+        // ProductActions.load_cb(null, error.toString())
+        ProductActions.callback_error(error.toString())
       }.bind(this)
     })
   },
@@ -62,11 +65,12 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      success: function(data) {
-        ProductActions.remove_cb(id, null)
+      success: function() {
+        ProductActions.load()
       }.bind(this),
-      error: function(xhr, status, err) {
-        ProductActions.remove_cb(null, err.toString())
+      error: function(xhr, status, error) {
+        // ProductActions.remove_cb(null, error.toString())
+        ProductActions.callback_error(error.toString())
       }.bind(this)
     })
   }

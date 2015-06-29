@@ -3,6 +3,7 @@ import keyMirror from "react/lib/keyMirror";
 export default keyMirror({
   ADD: null,
   ADD_CB: null,
+  CALLBACK_ERROR: null,
   EDIT: null,
   EDIT_CB: null,
   LOAD: null,

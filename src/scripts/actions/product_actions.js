@@ -2,33 +2,25 @@ import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
 export default {
-  add(record) {
+  add(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.ADD,
-      record: record
+      data: data
     })
   },
 
-  add_cb(data, errors) {
+  callback_error(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ADD_CB,
-      data: data,
+      actionType: ActionTypes.CALLBACK_ERROR,
       errors: errors
     })
   },
 
-  edit(record) {
+  edit(id, data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.EDIT,
-      record: record
-    })
-  },
-
-  edit_cb(data, errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.EDIT_CB,
-      data: data,
-      errors: errors
+      id: id,
+      data: data
     })
   },
 
@@ -38,11 +30,10 @@ export default {
     })
   },
 
-  load_cb(data, errors) {
+  load_cb(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOAD_CB,
-      data: data,
-      errors: errors
+      data: data
     })
   },
 
@@ -53,11 +44,27 @@ export default {
     })
   },
 
-  remove_cb(id, errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.REMOVE_CB,
-      id: id,
-      errors: errors
-    })
-  }
+  // add_cb(data, errors) {
+  //   Dispatcher.dispatch({
+  //     actionType: ActionTypes.ADD_CB,
+  //     data: data,
+  //     errors: errors
+  //   })
+  // },
+
+  // edit_cb(data, errors) {
+  //   Dispatcher.dispatch({
+  //     actionType: ActionTypes.EDIT_CB,
+  //     data: data,
+  //     errors: errors
+  //   })
+  // },
+
+  // remove_cb(id, errors) {
+  //   Dispatcher.dispatch({
+  //     actionType: ActionTypes.REMOVE_CB,
+  //     id: id,
+  //     errors: errors
+  //   })
+  // }
 }
