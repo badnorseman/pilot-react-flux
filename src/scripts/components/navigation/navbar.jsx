@@ -4,12 +4,18 @@
 // Fix toggleSidebar without jQuery
 import React from "react";
 import { Link } from "react-router";
+import AuthActions from "../../actions/auth_actions";
 
 export default class Navbar extends React.Component {
-  constructor() {
-    super()
+  constructor(context) {
+    super(context)
     this.state = {loggedIn: false}
     this.toggleSidebar = this.toggleSidebar.bind(this)
+  }
+
+  handleLogout() {
+    AuthActions.logout()
+    this.context.router.transitionTo("Products")
   }
 
   toggleSidebar() {
@@ -34,14 +40,12 @@ export default class Navbar extends React.Component {
                   <Link to="Login">
                     <i className="mdi-action-lock-outline"></i></Link>
                 ) : (
-                  <Link to="Logout">
-                    <i className="mdi-action-lock-open"></i></Link>
+                  <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
                 )}
               </li>
               <li>
                 {this.state.loggedIn ? (
-                  <Link to="Logout">
-                    <i className="mdi-action-lock-open"></i></Link>
+                  <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
                 ) : (
                   <Link to="Login">
                     <i className="mdi-action-lock-outline"></i></Link>
@@ -63,4 +67,8 @@ export default class Navbar extends React.Component {
       </div>
     )
   }
+}
+
+Navbar.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
