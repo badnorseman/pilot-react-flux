@@ -4,12 +4,12 @@ import AuthStore from "../stores/auth_store";
 import $ from "jquery";
 
 export default {
-  login(record) {
+  login(data) {
     $.ajax({
       url: ApiRoutes.LOGIN,
       dataType: "json",
       type: "GET",
-      data: record,
+      data: data,
       success: function(data) {
         localStorage.token = data.token
         AuthActions.receiveDataFromServer(data)
@@ -48,12 +48,12 @@ export default {
     })
   },
 
-  signup(record) {
+  signup(data) {
     $.ajax({
       url: ApiRoutes.SIGNUP,
       dataType: "json",
       type: "POST",
-      data: record,
+      data: data,
       success: function(data) {
         AuthActions.receiveDataFromServer(data)
       }.bind(this),
