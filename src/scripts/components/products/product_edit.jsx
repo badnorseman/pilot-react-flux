@@ -1,15 +1,11 @@
-// Add callback from server to display any error
-// Can error be passed down from products.jsx?
-// Merge Add and Edit form
-// Add client-side validation e.g. RequiredField
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 
 export default class EditProduct extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,13 +28,14 @@ export default class EditProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
+    let id = 4 // this.props.id
     let name = React.findDOMNode(this.refs.name).value.trim()
     let description = React.findDOMNode(this.refs.description).value.trim()
     let image = React.findDOMNode(this.refs.image).value.trim()
 
     if (name && description) {
-      ProductActions.edit({
-        product : {
+      ProductActions.edit(
+        id, { product: {
           name: name,
           description: description,
           image: image
@@ -52,7 +49,7 @@ export default class EditProduct extends React.Component {
     return(
       <div>
         <div className="row">
-          <form action="#" className="col s12" onSubmit={this.handleSubmit}>
+          <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
                 {this.state.errors}

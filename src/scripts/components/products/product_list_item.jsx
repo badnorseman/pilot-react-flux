@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
@@ -18,7 +19,15 @@ export default class extends React.Component {
               <h6>{this.props.item.description}</h6>
             </div>
             <div className="card-action">
-              <RemoveProduct id={this.props.item.id}/>
+              <div className="row">
+                <div className="col s6">
+                  <Link to="EditProduct" className="btn waves-effect waves-light">
+                    Edit</Link>
+                </div>
+                <div className="col s6">
+                  <RemoveProduct id={this.props.item.id}/>
+                </div>
+              </div>
             </div>
           </div>
         </div>
