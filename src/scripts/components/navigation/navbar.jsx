@@ -33,7 +33,7 @@ export default class Navbar extends React.Component {
             <ul className="right hide-on-med-and-down">
               <li>
                 <Link to="Products">
-                  <i className="mdi-action-search"></i></Link>
+                  <i className="mdi-action-home"></i></Link>
               </li>
               <li>
                 {this.state.loggedIn ? (

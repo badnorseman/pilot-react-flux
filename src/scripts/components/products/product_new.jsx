@@ -34,14 +34,12 @@ export default class NewProduct extends React.Component {
 
     let name = React.findDOMNode(this.refs.name).value.trim()
     let description = React.findDOMNode(this.refs.description).value.trim()
-    let image = React.findDOMNode(this.refs.image).value.trim()
 
     if (name && description) {
       ProductActions.add({
         product: {
           name: name,
-          description: description,
-          image: image
+          description: description
         }
       })
       this.context.router.transitionTo("Products")
@@ -66,15 +64,6 @@ export default class NewProduct extends React.Component {
               <div className="col s6 input-field">
                 <input id="description" type="text" ref="description"/>
                 <label htmlFor="description">Description</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12 file-field input-field">
-                <input className="file-path validate" type="text" ref="image"/>
-                <div className="btn">
-                  <span>Image</span>
-                  <input type="file"/>
-                </div>
               </div>
             </div>
             <div className="row">

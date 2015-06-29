@@ -20,11 +20,15 @@ export default class extends React.Component {
             </div>
             <div className="card-action">
               <div className="row">
-                <div className="col s6">
-                  <Link to="EditProduct" className="btn waves-effect waves-light">
-                    Edit</Link>
+                <div className="col s4">
+                  <Link to="EditProduct" className="btn-floating btn-large green waves-effect waves-light">
+                    <i className="mdi-content-create"></i></Link>
                 </div>
-                <div className="col s6">
+                <div className="col s4">
+                  <Link to="ProductImage" className="btn-floating btn-large blue waves-effect waves-light">
+                    <i className="mdi-image-image"></i></Link>
+                </div>
+                <div className="col s4">
                   <RemoveProduct id={this.props.item.id}/>
                 </div>
               </div>

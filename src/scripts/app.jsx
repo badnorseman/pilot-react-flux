@@ -9,6 +9,7 @@ import Signup from "./components/authentication/signup";
 import Products from "./components/products/products";
 import EditProduct from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
+import ProductImage from "./components/products/product_image";
 
 let { DefaultRoute, Route, RouteHandler } = Router;
 
@@ -37,6 +38,7 @@ let routes = (
     <Route name="Products" path="products" handler={Products}/>
     <Route name="EditProduct" path="product/edit" handler={EditProduct}/>
     <Route name="NewProduct" path="product/new" handler={NewProduct}/>
+    <Route name="ProductImage" path="product/image" handler={ProductImage}/>
   </Route>
 );
 
