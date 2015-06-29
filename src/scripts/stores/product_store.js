@@ -36,60 +36,28 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductUtils.add(action.data)
       break
 
-    case ActionTypes.CALLBACK_ERROR:
-      errors = action.errors
-      ProductStore.emitChange()
-      break
-
     case ActionTypes.EDIT:
       ProductUtils.edit(action.id, action.data)
       break
 
-    case ActionTypes.LOAD:
-      ProductUtils.load()
-      break
-
-    case ActionTypes.LOAD_CB:
-      products = action.data
-      // if (action.data) {
-      //   products = action.data
-      // } else {
-      //   errors = action.errors
-      // }
-      ProductStore.emitChange()
+    case ActionTypes.QUERY:
+      ProductUtils.query()
       break
 
     case ActionTypes.REMOVE:
       ProductUtils.remove(action.id)
       break
 
-    // case ActionTypes.ADD_CB:
-    //   if (action.data) {
-    //     products.push(action.data)
-    //   } else {
-    //     errors = action.errors
-    //   }
-    //   ProductStore.emitChange()
-    //   break
+    case ActionTypes.RETURN_DATA:
+      products = action.data
+      ProductStore.emitChange()
+      break
 
-    // case ActionTypes.REMOVE_CB:
-    //   if (action.errors) {
-    //     errors = action.errors
-    //   } else {
-    //     products = removeItem(action.id)
-    //   }
-    //   ProductStore.emitChange()
-    //   break
+    case ActionTypes.RETURN_ERROR:
+      errors = action.errors
+      ProductStore.emitChange()
+      break
   }
 })
-
-function removeItem(id) {
-  for (var i = 0; i < products.length; i++) {
-    if (products[i].id === id) {
-      products.splice(i, 1)
-      return products
-    }
-  }
-}
 
 export default ProductStore

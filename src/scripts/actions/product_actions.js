@@ -9,13 +9,6 @@ export default {
     })
   },
 
-  callback_error(errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.CALLBACK_ERROR,
-      errors: errors
-    })
-  },
-
   edit(id, data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.EDIT,
@@ -24,16 +17,9 @@ export default {
     })
   },
 
-  load() {
+  query() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LOAD
-    })
-  },
-
-  load_cb(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LOAD_CB,
-      data: data
+      actionType: ActionTypes.QUERY
     })
   },
 
@@ -44,27 +30,17 @@ export default {
     })
   },
 
-  // add_cb(data, errors) {
-  //   Dispatcher.dispatch({
-  //     actionType: ActionTypes.ADD_CB,
-  //     data: data,
-  //     errors: errors
-  //   })
-  // },
+  returnDataFromServer(data) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RETURN_DATA,
+      data: data
+    })
+  },
 
-  // edit_cb(data, errors) {
-  //   Dispatcher.dispatch({
-  //     actionType: ActionTypes.EDIT_CB,
-  //     data: data,
-  //     errors: errors
-  //   })
-  // },
-
-  // remove_cb(id, errors) {
-  //   Dispatcher.dispatch({
-  //     actionType: ActionTypes.REMOVE_CB,
-  //     id: id,
-  //     errors: errors
-  //   })
-  // }
+  returnErrorFromServer(errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RETURN_ERROR,
+      errors: errors
+    })
+  }
 }
