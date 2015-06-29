@@ -59,8 +59,7 @@ class Login extends React.Component {
         'display': 'block',
         'marginLeft': 'auto',
         'marginRight': 'auto',
-        'color': 'red',
-        'text-align': 'center'
+        'color': 'red'
       }
     };
   }
@@ -86,7 +85,7 @@ class Login extends React.Component {
       this.context.router.transitionTo('/');
     }
 
-    this.setState({errors: authState.errors})
+    this.setState({errors: authState.errors});
   }
 
   onChange(key) {
@@ -160,7 +159,7 @@ class Login extends React.Component {
       </div>
     );
   }
-};
+}
 Login.childContextTypes = contextTypes;
 Login.contextTypes = {
     router: React.PropTypes.func.isRequired
