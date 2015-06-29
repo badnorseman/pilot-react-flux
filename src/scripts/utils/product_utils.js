@@ -13,12 +13,11 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       data: data,
-      success: function(success) {
-        ProductActions.load()
+      success: function(data) {
+        ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
-        // ProductActions.add_cb(null, error.toString())
-        ProductActions.callback_error(error.toString())
+        ProductActions.returnErrorFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -32,27 +31,11 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       data: data,
-      success: function(success) {
-        ProductActions.load()
+      success: function(data) {
+        ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
-        // ProductActions.edit_cb(null, error.toString())
-        ProductActions.callback_error(error.toString())
-      }.bind(this)
-    })
-  },
-
-  load() {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS,
-      dataType: "json",
-      type: "GET",
-      success: function(success) {
-        ProductActions.load_cb(success)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        // ProductActions.load_cb(null, error.toString())
-        ProductActions.callback_error(error.toString())
+        ProductActions.returnErrorFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -65,12 +48,25 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      success: function() {
-        ProductActions.load()
+      success: function(data) {
+        ProductActions.query()
       }.bind(this),
       error: function(xhr, status, error) {
-        // ProductActions.remove_cb(null, error.toString())
-        ProductActions.callback_error(error.toString())
+        ProductActions.returnErrorFromServer(error.toString())
+      }.bind(this)
+    })
+  },
+
+  query() {
+    $.ajax({
+      url: ApiRoutes.PRODUCTS,
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        ProductActions.returnDataFromServer(data)
+      }.bind(this),
+      error: function(xhr, status, error) {
+        ProductActions.returnErrorFromServer(error.toString())
       }.bind(this)
     })
   }

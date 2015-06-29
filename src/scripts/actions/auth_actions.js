@@ -1,19 +1,12 @@
+// Move ReturnFrom...Server actions into own file
 import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
 export default {
-  login(record) {
+  login(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.LOGIN,
-      record: record
-    })
-  },
-
-  login_cb(data, errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LOGIN_CB,
-      data: data,
-      errors: errors
+      data: data
     })
   },
 
@@ -30,18 +23,24 @@ export default {
     })
   },
 
-  signup(record) {
+  returnDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.SIGNUP,
-      record: record
+      actionType: ActionTypes.RETURN_DATA,
+      data: data
     })
   },
 
-  signup_cb(data, errors) {
+  returnErrorFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.SIGNUP_CB,
-      data: data,
+      actionType: ActionTypes.RETURN_ERROR,
       errors: errors
+    })
+  },
+
+  signup(data) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.SIGNUP,
+      data: data
     })
   }
 }

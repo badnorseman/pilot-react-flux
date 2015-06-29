@@ -13,7 +13,7 @@ export default class Products extends React.Component {
   }
 
   componentWillMount() {
-    ProductActions.load()
+    ProductActions.query()
   }
 
   componentDidMount() {
