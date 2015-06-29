@@ -33,27 +33,27 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
     case ActionTypes.ADD:
-      ProductUtils.add(action.data)
+      ProductUtils.create(action.data)
       break
 
     case ActionTypes.EDIT:
-      ProductUtils.edit(action.id, action.data)
+      ProductUtils.update(action.id, action.data)
       break
 
-    case ActionTypes.QUERY:
-      ProductUtils.query()
+    case ActionTypes.LOAD:
+      ProductUtils.load()
       break
 
     case ActionTypes.REMOVE:
-      ProductUtils.remove(action.id)
+      ProductUtils.delete(action.id)
       break
 
-    case ActionTypes.RETURN_DATA:
+    case ActionTypes.RECEIVE_DATA:
       products = action.data
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RETURN_ERROR:
+    case ActionTypes.RECEIVE_ERROR:
       errors = action.errors
       ProductStore.emitChange()
       break

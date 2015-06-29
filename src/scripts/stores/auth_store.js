@@ -44,12 +44,12 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthUtils.oauth(action.provider)
       break
 
-    case ActionTypes.RETURN_DATA:
+    case ActionTypes.RECEIVE_DATA:
       user = action.data
       AuthStore.emitChange()
       break
 
-    case ActionTypes.RETURN_ERROR:
+    case ActionTypes.RECEIVE_ERROR:
       errors = action.errors
       AuthStore.emitChange()
       break
