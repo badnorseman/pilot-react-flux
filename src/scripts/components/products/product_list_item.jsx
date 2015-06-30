@@ -21,11 +21,11 @@ export default class extends React.Component {
             <div className="card-action">
               <div className="row">
                 <div className="col s4">
-                  <Link to="EditProduct" className="btn-floating btn-large green waves-effect waves-light">
+                  <Link to="EditProduct" className="btn-floating btn-large yellow waves-effect waves-light">
                     <i className="mdi-content-create"></i></Link>
                 </div>
                 <div className="col s4">
-                  <Link to="ProductImage" className="btn-floating btn-large blue waves-effect waves-light">
+                  <Link to="UploadImage" className="btn-floating btn-large blue waves-effect waves-light">
                     <i className="mdi-image-image"></i></Link>
                 </div>
                 <div className="col s4">
