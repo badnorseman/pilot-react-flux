@@ -1,6 +1,7 @@
 // Fix error to xhr.responseText
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
+import ServerActions from "../actions/server_actions";
 import $ from "jquery";
 
 export default {
@@ -17,7 +18,7 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.receiveErrorsFromServer(error.toString())
+        ServerActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -34,7 +35,7 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.receiveErrorsFromServer(error.toString())
+        ServerActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -45,10 +46,10 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ProductActions.receiveDataFromServer(data)
+        ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.receiveErrorsFromServer(error.toString())
+        ServerActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   },
@@ -66,7 +67,7 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.receiveErrorsFromServer(error.toString())
+        ServerActions.receiveErrorsFromServer(error.toString())
       }.bind(this)
     })
   }
