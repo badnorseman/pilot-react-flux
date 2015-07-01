@@ -9,11 +9,10 @@ import Signup from "./components/authentication/signup";
 import Products from "./components/products/products";
 import EditProduct from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
-import UploadImage from "./components/products/upload_image";
 
-let { DefaultRoute, Route, RouteHandler } = Router;
+let { DefaultRoute, Route, RouteHandler } = Router
 
-window.React = React;
+window.React = React
 
 injectTapEventPlugin();
 
@@ -38,9 +37,8 @@ let routes = (
     <Route name="Products" path="products" handler={Products}/>
     <Route name="EditProduct" path="product/edit" handler={EditProduct}/>
     <Route name="NewProduct" path="product/new" handler={NewProduct}/>
-    <Route name="UploadImage" path="product/image" handler={UploadImage}/>
   </Route>
-);
+)
 
 Router.run(routes, Router.HashLocation, (Root) => {
   React.render(<Root/>, document.getElementById("app"))

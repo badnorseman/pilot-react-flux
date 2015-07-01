@@ -88,7 +88,7 @@ export default class Signup extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
+                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Sign Up</button>
