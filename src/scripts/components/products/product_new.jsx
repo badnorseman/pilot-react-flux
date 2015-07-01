@@ -6,6 +6,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
+import RequiredField from "../authentication/required_field";
 
 export default class NewProduct extends React.Component {
   constructor() {
@@ -32,8 +33,8 @@ export default class NewProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let name = React.findDOMNode(this.refs.name).value.trim()
-    let description = React.findDOMNode(this.refs.description).value.trim()
+    let name = this.refs.name.state.fieldValue
+    let description = this.refs.description.state.fieldValue
 
     if (name && description) {
       ProductActions.add({
@@ -58,17 +59,17 @@ export default class NewProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6 input-field">
-                <input id="name" type="text" ref="name"/>
-                <label htmlFor="name">Name</label>
+                <RequiredField fieldName="name" fieldType="text" ref="name">
+                Name</RequiredField>
               </div>
               <div className="col s6 input-field">
-                <input id="description" type="text" ref="description"/>
-                <label htmlFor="description">Description</label>
+                <RequiredField fieldName="description" fieldType="text" ref="description">
+                Description</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
+                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Add</button>

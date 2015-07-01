@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
+import RequiredField from "../authentication/required_field";
+import UploadFile from "./upload_file";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
+    // this.props.id = 4
     this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,9 +31,9 @@ export default class EditProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let id = 4 // this.props.id
-    let name = React.findDOMNode(this.refs.name).value.trim()
-    let description = React.findDOMNode(this.refs.description).value.trim()
+    let id = 4 //this.props.id
+    let name = this.refs.name.state.fieldValue
+    let description = this.refs.description.state.fieldValue
 
     if (name && description) {
       ProductActions.edit(
@@ -44,6 +47,8 @@ export default class EditProduct extends React.Component {
   }
 
   render() {
+    let id = 4 //this.props.id
+
     return(
       <div>
         <div className="row">
@@ -55,23 +60,28 @@ export default class EditProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6 input-field">
-                <input id="name" type="text" ref="name"/>
-                <label htmlFor="name">Name</label>
+                <RequiredField fieldName="name" fieldType="text" ref="name">
+                Name</RequiredField>
               </div>
               <div className="col s6 input-field">
-                <input id="description" type="text" ref="description"/>
-                <label htmlFor="description">Description</label>
+                <RequiredField fieldName="description" fieldType="text" ref="description">
+                Description</RequiredField>
               </div>
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="waves-effect waves-light btn">Cancel</Link>
+                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Save</button>
               </div>
             </div>
           </form>
+          <div className="row">
+            <div className="col s12">
+              <UploadFile id={id} ref="file"/>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -13,8 +13,8 @@ export default class extends React.Component {
 
   render() {
     return(
-      <button className="btn-floating btn-large red waves-effect waves-light" onClick={this.handleClick}>
-        <i className="mdi-content-remove"></i></button>
+      <button className="btn waves-effect waves-light" onClick={this.handleClick}>
+        Remove</button>
     )
   }
 }
