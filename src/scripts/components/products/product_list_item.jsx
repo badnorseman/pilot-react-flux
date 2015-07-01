@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router";
+import ApiRoutes from "../../constants/api_routes";
 import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   render() {
-    let cardImage = document.createElement("img")
-    cardImage.src = require("../../../images/Central_Park_jogging.png")
+    let img = ApiRoutes.HOST + this.props.item.image;
 
     return(
       <div>
         <div className="col s12 m3">
           <div className="card z-depth-3">
             <div className="card-image">
-              <img className="responsive-img" src={cardImage.src} alt=""/>
+              <img className="responsive-img" src={img} alt=""/>
             </div>
             <div className="card-content flow-text">
               <h5>{this.props.item.name}</h5>
