@@ -1,7 +1,6 @@
 // Add callback from server to display any error
 // Can error be passed down from products.jsx?
 // Merge Add and Edit form
-// Add client-side validation e.g. RequiredField
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
@@ -43,7 +42,7 @@ export default class NewProduct extends React.Component {
           description: description
         }
       })
-      this.context.router.transitionTo("Products")
+      this.context.router.transitionTo("products")
     }
   }
 
@@ -69,7 +68,7 @@ export default class NewProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
+                <Link to="products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Add</button>

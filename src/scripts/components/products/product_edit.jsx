@@ -8,7 +8,6 @@ import UploadFile from "./upload_file";
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
-    // this.props.id = 4
     this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,24 +30,22 @@ export default class EditProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let id = 4 //this.props.id
     let name = this.refs.name.state.fieldValue
     let description = this.refs.description.state.fieldValue
 
     if (name && description) {
       ProductActions.edit(
-        id, { product: {
+        this.props.params.id, {
+        product: {
           name: name,
           description: description
         }
       })
-      this.context.router.transitionTo("Products")
+      this.context.router.transitionTo("products")
     }
   }
 
   render() {
-    let id = 4 //this.props.id
-
     return(
       <div>
         <div className="row">
@@ -70,7 +67,7 @@ export default class EditProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
+                <Link to="products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Save</button>
@@ -79,7 +76,7 @@ export default class EditProduct extends React.Component {
           </form>
           <div className="row">
             <div className="col s12">
-              <UploadFile id={id} ref="file"/>
+              <UploadFile id={this.props.params.id} ref="file"/>
             </div>
           </div>
         </div>

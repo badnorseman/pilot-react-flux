@@ -32,12 +32,12 @@ export default class Navbar extends React.Component {
               <i className="mdi-navigation-menu"></i></a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link to="Products">
+                <Link to="products">
                   <i className="mdi-action-home"></i></Link>
               </li>
               <li>
                 {this.state.loggedIn ? (
-                  <Link to="Login">
+                  <Link to="login">
                     <i className="mdi-action-lock-outline"></i></Link>
                 ) : (
                   <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
@@ -47,20 +47,20 @@ export default class Navbar extends React.Component {
                 {this.state.loggedIn ? (
                   <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
                 ) : (
-                  <Link to="Login">
+                  <Link to="login">
                     <i className="mdi-action-lock-outline"></i></Link>
                 )}
               </li>
               <li>
-                <Link to="Signup">
+                <Link to="signup">
                   <i className="mdi-social-person-outline"></i></Link>
               </li>
             </ul>
             <ul className="side-nav" id="nav-mobile">
-              <li><Link to="Products">Discover</Link></li>
-              <li><Link to="Logout">Log Out</Link></li>
-              <li><Link to="Login">Log In</Link></li>
-              <li><Link to="Signup">Sign Up</Link></li>
+              <li><Link to="products">Discover</Link></li>
+              <li><Link to="logout">Log Out</Link></li>
+              <li><Link to="login">Log In</Link></li>
+              <li><Link to="signup">Sign Up</Link></li>
             </ul>
           </div>
         </nav>
