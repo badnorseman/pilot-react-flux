@@ -19,7 +19,7 @@ export default {
 
   load() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LOAD
+      actionType: ActionTypes.LIST
     })
   },
 

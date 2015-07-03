@@ -8,9 +8,14 @@ import UploadFile from "./upload_file";
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {errors: []}
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    this.setState({
+      product: ProductStore.getProduct(this.props.params.id)
+    })
   }
 
   componentDidMount() {
@@ -23,8 +28,10 @@ export default class EditProduct extends React.Component {
 
   onChange() {
     this.setState({
-      errors: this.state.errors = ProductStore.getErrors()
+      product: ProductStore.getProduct(this.props.params.id),
+      errors: ProductStore.getErrors()
     })
+    console.log("onChange ", this.state)
   }
 
   handleSubmit(e) {
@@ -46,22 +53,26 @@ export default class EditProduct extends React.Component {
   }
 
   render() {
+    let description = this.state.product.description
+    let errors = this.state.errors
+    let name = this.state.product.name
+
     return(
       <div>
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
-                {this.state.errors}
+                {errors}
               </div>
             </div>
             <div className="row">
               <div className="col s6 input-field">
-                <RequiredField fieldName="name" fieldType="text" ref="name">
+                <RequiredField fieldName="name" fieldType="text" fieldValue={name} ref="name">
                 Name</RequiredField>
               </div>
               <div className="col s6 input-field">
-                <RequiredField fieldName="description" fieldType="text" ref="description">
+                <RequiredField fieldName="description" fieldType="text" fieldValue={description} ref="description">
                 Description</RequiredField>
               </div>
             </div>
