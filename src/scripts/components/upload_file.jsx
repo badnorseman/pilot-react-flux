@@ -1,5 +1,5 @@
 import React from "react";
-import FileUtils from "../../utils/file_utils";
+import FileUtils from "../utils/file_utils";
 
 export default class uploadFile extends React.Component {
   constructor(props) {

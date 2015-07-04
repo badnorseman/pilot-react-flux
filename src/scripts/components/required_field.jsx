@@ -35,7 +35,9 @@ export default class RequiredField extends React.Component {
           value={value}
           ref={this.props.fieldName}
           onChange={this.handleChange}/>
-        <label htmlFor={this.props.fieldName}>
+        <label
+          className={this.props.fieldActive}
+          htmlFor={this.props.fieldName}>
           {this.props.children}</label>
         {errors}
       </div>

@@ -9,7 +9,7 @@ import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
-import RequiredField from "./required_field";
+import RequiredField from "../required_field";
 
 export default class Signup extends React.Component {
   constructor(context) {

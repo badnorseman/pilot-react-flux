@@ -1,11 +1,10 @@
 // Add callback from server to display any error
-// Can error be passed down from products.jsx?
 // Merge Add and Edit form
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import RequiredField from "../authentication/required_field";
+import RequiredField from "../required_field";
 
 export default class NewProduct extends React.Component {
   constructor() {

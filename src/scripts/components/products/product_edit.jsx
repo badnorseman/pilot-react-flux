@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import RequiredField from "../authentication/required_field";
-import UploadFile from "./upload_file";
+import RequiredField from "../required_field";
+import UploadFile from "../upload_file";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class EditProduct extends React.Component {
           name: name
         }
       })
-      // this.context.router.transitionTo("/products")
+      this.context.router.transitionTo("/products")
     }
   }
 
@@ -61,11 +61,11 @@ export default class EditProduct extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s6 input-field">
-                <RequiredField fieldName="name" fieldType="text" fieldValue={name} ref="name">
+                <RequiredField fieldName="name" fieldType="text" fieldActive="active" fieldValue={name} ref="name">
                 Name</RequiredField>
               </div>
               <div className="col s6 input-field">
-                <RequiredField fieldName="description" fieldType="text" fieldValue={description} ref="description">
+                <RequiredField fieldName="description" fieldType="text" fieldActive="active" fieldValue={description} ref="description">
                 Description</RequiredField>
               </div>
             </div>
