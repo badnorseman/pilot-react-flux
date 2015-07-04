@@ -10,11 +10,10 @@ export default class uploadFile extends React.Component {
   handleChange(e) {
     e.preventDefault()
 
-    let id = this.props.id
     let file = document.getElementById("file-selected").files[0]
 
     if (file) {
-      FileUtils.uploadFile(id, file)
+      FileUtils.uploadFile(this.props.id, file)
     }
   }
 

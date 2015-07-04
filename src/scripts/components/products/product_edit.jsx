@@ -47,7 +47,7 @@ export default class EditProduct extends React.Component {
           name: name
         }
       })
-      this.context.router.transitionTo("/products")
+      // this.context.router.transitionTo("/products")
     }
   }
 
@@ -70,6 +70,11 @@ export default class EditProduct extends React.Component {
               </div>
             </div>
             <div className="row">
+              <div className="col s12">
+                <UploadFile id={this.props.params.id} ref="file"/>
+              </div>
+            </div>
+            <div className="row">
               <div className="col s6">
                 <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
@@ -78,11 +83,6 @@ export default class EditProduct extends React.Component {
               </div>
             </div>
           </form>
-          <div className="row">
-            <div className="col s12">
-              <UploadFile id={this.props.params.id} ref="file"/>
-            </div>
-          </div>
         </div>
       </div>
     )
