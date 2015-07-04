@@ -42,7 +42,7 @@ export default class NewProduct extends React.Component {
           description: description
         }
       })
-      this.context.router.transitionTo("products")
+      this.context.router.transitionTo("/products")
     }
   }
 
@@ -53,6 +53,7 @@ export default class NewProduct extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
+                <h5>NEW</h5>
                 {this.state.errors}
               </div>
             </div>
@@ -68,7 +69,7 @@ export default class NewProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="products" className="btn waves-effect waves-light">Cancel</Link>
+                <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Add</button>

@@ -8,14 +8,12 @@ import UploadFile from "./upload_file";
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
-    this.onChange = this.onChange.bind(this)
+    this.getStateFromStore = this.getStateFromStore.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentWillMount() {
-    this.setState({
-      product: ProductStore.getProduct(this.props.params.id)
-    })
+    this.onChange = this.onChange.bind(this)
+    this.state = this.getStateFromStore(props)
+    console.log("constructor ", props)
+    console.log("constructor ", this.state)
   }
 
   componentDidMount() {
@@ -26,35 +24,44 @@ export default class EditProduct extends React.Component {
     ProductStore.removeChangeListener(this.onChange)
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.getStateFromStore(nextProps));
+    console.log("componentWillReceiveProps ", this.state)
+  }
+
+  getStateFromStore(props) {
+    let id = props ? props.params : this.props.params
+
+    return {
+      product: ProductStore.getProduct(id)
+    }
+  }
+
   onChange() {
-    this.setState({
-      product: ProductStore.getProduct(this.props.params.id),
-      errors: ProductStore.getErrors()
-    })
+    this.setState(getStateFromStore())
     console.log("onChange ", this.state)
   }
 
   handleSubmit(e) {
     e.preventDefault()
 
-    let name = this.refs.name.state.fieldValue
     let description = this.refs.description.state.fieldValue
+    let name = this.refs.name.state.fieldValue
 
-    if (name && description) {
+    if (description && name) {
       ProductActions.edit(
         this.props.params.id, {
         product: {
-          name: name,
-          description: description
+          description: description,
+          name: name
         }
       })
-      this.context.router.transitionTo("products")
+      this.context.router.transitionTo("/products")
     }
   }
 
   render() {
     let description = this.state.product.description
-    let errors = this.state.errors
     let name = this.state.product.name
 
     return(
@@ -63,7 +70,7 @@ export default class EditProduct extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
-                {errors}
+                <h5>{description}</h5>
               </div>
             </div>
             <div className="row">
@@ -78,7 +85,7 @@ export default class EditProduct extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="products" className="btn waves-effect waves-light">Cancel</Link>
+                <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Save</button>
@@ -96,6 +103,4 @@ export default class EditProduct extends React.Component {
   }
 }
 
-EditProduct.contextTypes = {
-  router: React.PropTypes.func.isRequired
-}
+EditProduct.contextTypes = { router: React.PropTypes.func.isRequired }

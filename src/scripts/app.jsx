@@ -31,12 +31,12 @@ class App extends React.Component {
 let routes = (
   <Route handler={App}>
     <DefaultRoute handler={Products}/>
-    <Route name="login" path="login" handler={Login}/>
-    <Route name="logout" path="logout" handler={Logout}/>
-    <Route name="signup" path="signup" handler={Signup}/>
-    <Route name="products" path="products" handler={Products}/>
-    <Route name="product" path="products/:id" handler={Product}/>
-    <Route name="newProduct" path="product/new" handler={NewProduct}/>
+    <Route path="login" handler={Login}/>
+    <Route path="logout" handler={Logout}/>
+    <Route path="signup" handler={Signup}/>
+    <Route path="products" handler={Products}/>
+    <Route path="products/:id" handler={Product}/>
+    <Route path="product/new" handler={NewProduct}/>
   </Route>
 )
 
