@@ -4,6 +4,7 @@ import FileUtils from "../../utils/file_utils";
 export default class uploadFile extends React.Component {
   constructor(props) {
     super(props)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(e) {
@@ -19,17 +20,13 @@ export default class uploadFile extends React.Component {
 
   render() {
     return(
-      <div>
-        <form encType="multipart/form-data" onChange={this.handleChange.bind(this)}>
-          <div className="file-field input-field">
-            <input className="file-path validate" type="text"/>
-            <div className="btn">
-              <span>Select</span>
-              <input type="file" id="file-selected" ref="selectedFile"
-                accept="image/jpeg, image/jpg, image/png"/>
-            </div>
-          </div>
-        </form>
+      <div className="file-field input-field" onChange={this.handleChange}>
+        <input className="file-path validate" type="text"/>
+        <div className="btn">
+          <span>Select</span>
+          <input type="file" id="file-selected" ref="selectedFile"
+            accept="image/jpeg, image/jpg, image/png"/>
+        </div>
       </div>
     )
   }
