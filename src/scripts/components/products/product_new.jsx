@@ -53,7 +53,6 @@ export default class NewProduct extends React.Component {
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col s12">
-                <h5>NEW</h5>
                 {this.state.errors}
               </div>
             </div>

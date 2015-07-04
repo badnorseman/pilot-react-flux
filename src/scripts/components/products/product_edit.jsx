@@ -8,37 +8,28 @@ import UploadFile from "./upload_file";
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
-    this.getStateFromStore = this.getStateFromStore.bind(this)
+    this.state = {
+      product: ProductStore.getProduct(this.props.params.id)
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.state = this.getStateFromStore(props)
-    console.log("constructor ", props)
     console.log("constructor ", this.state)
   }
 
   componentDidMount() {
     ProductStore.addChangeListener(this.onChange)
+    console.log("componentDidMount ", this.state)
   }
 
   componentWillUnmount() {
     ProductStore.removeChangeListener(this.onChange)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.getStateFromStore(nextProps));
-    console.log("componentWillReceiveProps ", this.state)
-  }
-
-  getStateFromStore(props) {
-    let id = props ? props.params : this.props.params
-
-    return {
-      product: ProductStore.getProduct(id)
-    }
+    console.log("componentWillUnmount ", this.state)
   }
 
   onChange() {
-    this.setState(getStateFromStore())
+    this.setState({
+      product: ProductStore.getProduct(this.props.params.id)
+    })
     console.log("onChange ", this.state)
   }
 
@@ -68,11 +59,6 @@ export default class EditProduct extends React.Component {
       <div>
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="col s12">
-                <h5>{description}</h5>
-              </div>
-            </div>
             <div className="row">
               <div className="col s6 input-field">
                 <RequiredField fieldName="name" fieldType="text" fieldValue={name} ref="name">
