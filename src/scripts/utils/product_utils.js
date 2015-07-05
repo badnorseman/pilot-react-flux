@@ -1,3 +1,4 @@
+// getErrorsFromXhr is also in auth_utils. It needs to be a separate script
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 import ServerActions from "../actions/server_actions";
