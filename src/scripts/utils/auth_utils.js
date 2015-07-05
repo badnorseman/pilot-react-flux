@@ -1,7 +1,18 @@
+// getErrorsFromXhr is also in product_utils. It needs to be a separate script
 import ApiRoutes from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
 import ServerActions from "../actions/server_actions";
 import $ from "jquery";
+
+function getErrorsFromXhr(xhr) {
+  let parsedErrors = JSON.parse(xhr.responseText)
+  let errors = []
+
+  for (let k in parsedErrors)
+    errors.push(parsedErrors[k])
+
+  return errors
+}
 
 export default {
   login(data) {
@@ -15,7 +26,8 @@ export default {
         ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -29,7 +41,8 @@ export default {
         localStorage.removeItem("token")
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -43,7 +56,8 @@ export default {
         ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -58,7 +72,8 @@ export default {
         ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   }

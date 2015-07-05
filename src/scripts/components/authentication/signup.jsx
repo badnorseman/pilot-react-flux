@@ -1,7 +1,4 @@
-// Add callback from server to display any error
-// Can error be passed down from products.jsx?
 // Form could be own component
-// Add client-side validation
 // Can Login and Signup forms be one?
 // Add avatar, paperclip functionality
 import React from "react";
@@ -29,7 +26,7 @@ export default class Signup extends React.Component {
 
   onChange() {
     this.setState({
-      errors: this.state.errors = AuthStore.getErrors()
+      errors: AuthStore.getErrors()
     })
   }
 
@@ -46,7 +43,7 @@ export default class Signup extends React.Component {
         password: password,
         password_confirmation: passwordConfirmation
       })
-      this.context.router.transitionTo("login")
+      this.context.router.transitionTo("/login")
     }
   }
 

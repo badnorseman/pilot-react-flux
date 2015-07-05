@@ -16,6 +16,10 @@ let AuthStore = assign({}, EventEmitter.prototype, {
     return errors
   },
 
+  loggedIn() {
+    return !!localStorage.token
+  },
+
   emitChange() {
     return this.emit("change")
   },
@@ -49,7 +53,7 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERROR:
+    case ActionTypes.RECEIVE_ERRORS:
       errors = action.errors
       AuthStore.emitChange()
       break
