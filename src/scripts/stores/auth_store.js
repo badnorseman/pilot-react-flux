@@ -4,8 +4,8 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import AuthUtils from "../utils/auth_utils";
 
-let user;
-let errors = [];
+let user
+let errors = []
 
 let AuthStore = assign({}, EventEmitter.prototype, {
   getUser() {
