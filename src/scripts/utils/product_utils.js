@@ -4,6 +4,16 @@ import ProductActions from "../actions/product_actions";
 import ServerActions from "../actions/server_actions";
 import $ from "jquery";
 
+function parseErrorsFromServer(xhr) {
+  let parsedErrors = JSON.parse(xhr.responseText)
+  let errors = []
+
+  for (let k in parsedErrors)
+    errors.push(parsedErrors[k])
+
+  return errors
+}
+
 export default {
   create(data) {
     $.ajax({
@@ -18,7 +28,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = parseErrorsFromServer(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -71,4 +82,4 @@ export default {
       }.bind(this)
     })
   }
-};
+}

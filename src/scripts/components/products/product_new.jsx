@@ -24,21 +24,21 @@ export default class NewProduct extends React.Component {
 
   onChange() {
     this.setState({
-      errors: this.state.errors = ProductStore.getErrors()
+      errors: ProductStore.getErrors()
     })
   }
 
   handleSubmit(e) {
     e.preventDefault()
 
-    let name = this.refs.name.state.fieldValue
     let description = this.refs.description.state.fieldValue
+    let name = this.refs.name.state.fieldValue
 
-    if (name && description) {
+    if (name) {
       ProductActions.add({
         product: {
-          name: name,
-          description: description
+          description: description,
+          name: name
         }
       })
       this.context.router.transitionTo("/products")

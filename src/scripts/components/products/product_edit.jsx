@@ -13,24 +13,20 @@ export default class EditProduct extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
-    console.log("constructor ", this.state)
   }
 
   componentDidMount() {
     ProductStore.addChangeListener(this.onChange)
-    console.log("componentDidMount ", this.state)
   }
 
   componentWillUnmount() {
     ProductStore.removeChangeListener(this.onChange)
-    console.log("componentWillUnmount ", this.state)
   }
 
   onChange() {
     this.setState({
       product: ProductStore.getProduct(this.props.params.id)
     })
-    console.log("onChange ", this.state)
   }
 
   handleSubmit(e) {
