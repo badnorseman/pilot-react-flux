@@ -4,10 +4,20 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import ProductUtils from "../utils/product_utils";
 
-let products = [];
-let errors = [];
+let products = []
+let errors = []
 
 let ProductStore = assign({}, EventEmitter.prototype, {
+  getProduct(id) {
+    let product = {}
+
+    for (let k in products)
+      if (products[k].id == id)
+        product = products[k]
+
+    return product
+  },
+
   getProducts() {
     return products
   },
@@ -40,7 +50,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductUtils.update(action.id, action.data)
       break
 
-    case ActionTypes.LOAD:
+    case ActionTypes.LIST:
       ProductUtils.load()
       break
 
@@ -53,7 +63,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERROR:
+    case ActionTypes.RECEIVE_ERRORS:
       errors = action.errors
       ProductStore.emitChange()
       break

@@ -9,7 +9,7 @@ import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
-import RequiredField from "./required_field";
+import RequiredField from "../required_field";
 
 export default class Signup extends React.Component {
   constructor(context) {
@@ -46,7 +46,7 @@ export default class Signup extends React.Component {
         password: password,
         password_confirmation: passwordConfirmation
       })
-      this.context.router.transitionTo("Login")
+      this.context.router.transitionTo("login")
     }
   }
 
@@ -88,7 +88,7 @@ export default class Signup extends React.Component {
             </div>
             <div className="row">
               <div className="col s6">
-                <Link to="Products" className="btn waves-effect waves-light">Cancel</Link>
+                <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
               </div>
               <div className="col s6">
                 <button className="btn waves-effect waves-light" type="submit">Sign Up</button>

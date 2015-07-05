@@ -21,7 +21,7 @@ export default class extends React.Component {
             <div className="card-action">
               <div className="row">
                 <div className="col s6">
-                  <Link to="EditProduct" className="btn waves-effect waves-light">
+                  <Link to={`/products/${this.props.item.id}`} params={{id: this.props.item.id}} className="btn waves-effect waves-light">
                     Edit</Link>
                 </div>
                 <div className="col s6">

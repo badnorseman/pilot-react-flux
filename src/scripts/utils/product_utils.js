@@ -1,8 +1,17 @@
-// Fix error to xhr.responseText
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 import ServerActions from "../actions/server_actions";
 import $ from "jquery";
+
+function getErrorsFromXhr(xhr) {
+  let parsedErrors = JSON.parse(xhr.responseText)
+  let errors = []
+
+  for (let k in parsedErrors)
+    errors.push(parsedErrors[k])
+
+  return errors
+}
 
 export default {
   create(data) {
@@ -18,7 +27,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -35,7 +45,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -49,7 +60,8 @@ export default {
         ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -67,8 +79,9 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   }
-};
+}

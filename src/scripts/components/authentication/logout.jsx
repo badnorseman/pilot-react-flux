@@ -9,7 +9,7 @@ export default class Logout extends React.Component {
 
   handleClick() {
     AuthActions.logout()
-    this.context.router.transitionTo("Products")
+    this.context.router.transitionTo("/products")
   }
 
   render() {
