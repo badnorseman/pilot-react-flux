@@ -1,4 +1,4 @@
-// Add callback from server to display any error
+// Add callback from server to return when no errors
 // Merge Add and Edit form
 import React from "react";
 import { Link } from "react-router";
@@ -34,47 +34,45 @@ export default class NewProduct extends React.Component {
     let description = this.refs.description.state.fieldValue
     let name = this.refs.name.state.fieldValue
 
-    if (name) {
+    if (description && name) {
       ProductActions.add({
         product: {
           description: description,
           name: name
         }
       })
-      this.context.router.transitionTo("/products")
+      // this.context.router.transitionTo("/products")
     }
   }
 
   render() {
     return(
-      <div>
-        <div className="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="col s12">
-                {this.state.errors}
-              </div>
+      <div className="row">
+        <form className="col s12" onSubmit={this.handleSubmit}>
+          <div className="row">
+            <div className="col s12">
+              {this.state.errors}
             </div>
-            <div className="row">
-              <div className="col s6 input-field">
-                <RequiredField fieldName="name" fieldType="text" ref="name">
-                Name</RequiredField>
-              </div>
-              <div className="col s6 input-field">
-                <RequiredField fieldName="description" fieldType="text" ref="description">
-                Description</RequiredField>
-              </div>
+          </div>
+          <div className="row">
+            <div className="col s6 input-field">
+              <RequiredField fieldName="name" fieldType="text" ref="name">
+              Name</RequiredField>
             </div>
-            <div className="row">
-              <div className="col s6">
-                <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
-              </div>
-              <div className="col s6">
-                <button className="btn waves-effect waves-light" type="submit">Add</button>
-              </div>
+            <div className="col s6 input-field">
+              <RequiredField fieldName="description" fieldType="text" ref="description">
+              Description</RequiredField>
             </div>
-          </form>
-        </div>
+          </div>
+          <div className="row">
+            <div className="col s6">
+              <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
+            </div>
+            <div className="col s6">
+              <button className="btn waves-effect waves-light" type="submit">Add</button>
+            </div>
+          </div>
+        </form>
       </div>
     )
   }

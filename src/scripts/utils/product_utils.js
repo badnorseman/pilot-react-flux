@@ -1,10 +1,9 @@
-// Fix error to xhr.responseText
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 import ServerActions from "../actions/server_actions";
 import $ from "jquery";
 
-function parseErrorsFromServer(xhr) {
+function getErrorsFromXhr(xhr) {
   let parsedErrors = JSON.parse(xhr.responseText)
   let errors = []
 
@@ -28,7 +27,7 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        let errors = parseErrorsFromServer(xhr)
+        let errors = getErrorsFromXhr(xhr)
         ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
@@ -46,7 +45,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -60,7 +60,8 @@ export default {
         ServerActions.receiveDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -78,7 +79,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ServerActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   }

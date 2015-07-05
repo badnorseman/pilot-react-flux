@@ -9,6 +9,6 @@ export default keyMirror({
   OAUTH: null,
   REMOVE: null,
   RECEIVE_DATA: null,
-  RECEIVE_ERROR: null,
+  RECEIVE_ERRORS: null,
   SIGNUP: null
 })

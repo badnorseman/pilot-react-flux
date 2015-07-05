@@ -63,8 +63,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERROR:
-      console.log(action.errors)
+    case ActionTypes.RECEIVE_ERRORS:
       errors = action.errors
       ProductStore.emitChange()
       break
