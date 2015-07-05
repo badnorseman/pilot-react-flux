@@ -36,6 +36,10 @@ export default class Navbar extends React.Component {
                   <i className="mdi-action-home"></i></Link>
               </li>
               <li>
+                <Link to="/payment_plans">
+                  <i className="mdi-action-payment"></i></Link>
+              </li>
+              <li>
                 {this.state.loggedIn ? (
                   <Link to="/login">
                     <i className="mdi-action-lock-outline"></i></Link>
