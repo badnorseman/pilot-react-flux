@@ -2,6 +2,16 @@ import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 import $ from "jquery";
 
+function getErrorsFromXhr(xhr) {
+  let parsedErrors = JSON.parse(xhr.responseText)
+  let errors = []
+
+  for (let k in parsedErrors)
+    errors.push(parsedErrors[k])
+
+  return errors
+}
+
 export default {
   uploadFile(id, file) {
     $.ajax({
@@ -22,7 +32,8 @@ export default {
         ProductActions.load()
       }.bind(this),
       error: function(xhr, status, error) {
-        ProductActions.receiveErrorsFromServer(error.toString())
+        let errors = getErrorsFromXhr(xhr)
+        ServerActions.receiveErrorsFromServer(errors)
       }.bind(this)
     })
   }

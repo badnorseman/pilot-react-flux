@@ -22,8 +22,7 @@ export default {
       type: "GET",
       data: data,
       success: function(data) {
-        localStorage.token = data.token
-        ServerActions.receiveDataFromServer(data)
+        ServerActions.receiveCurrentUserFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
@@ -38,7 +37,7 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        localStorage.removeItem("token")
+        ServerActions.receiveCurrentUserFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
@@ -53,7 +52,7 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ServerActions.receiveDataFromServer(data)
+        ServerActions.receiveCurrentUserFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
@@ -69,7 +68,7 @@ export default {
       type: "POST",
       data: data,
       success: function(data) {
-        ServerActions.receiveDataFromServer(data)
+        ServerActions.receiveCurrentUserFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
