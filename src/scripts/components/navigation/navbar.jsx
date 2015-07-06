@@ -1,16 +1,35 @@
-// Fix loggedIn
-// Fix Signup to depend on loggedIn
 // Move menu items into own class
 // Fix toggleSidebar without jQuery
 import React from "react";
 import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
+import AuthStore from "../../stores/auth_store";
 
 export default class Navbar extends React.Component {
   constructor(context) {
     super(context)
-    this.state = {loggedIn: false}
+    this.state = {
+      loggedIn: false,
+      user: {}
+    }
+    this.onChange = this.onChange.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
     this.toggleSidebar = this.toggleSidebar.bind(this)
+  }
+
+  componentDidMount() {
+    AuthStore.addChangeListener(this.onChange)
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.onChange)
+  }
+
+  onChange() {
+    this.setState({
+      loggedIn: AuthStore.loggedIn(),
+      user: AuthStore.getUser()
+    })
   }
 
   handleLogout() {
@@ -41,18 +60,10 @@ export default class Navbar extends React.Component {
               </li>
               <li>
                 {this.state.loggedIn ? (
-                  <Link to="/login">
-                    <i className="mdi-action-lock-outline"></i></Link>
-                ) : (
-                  <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
-                )}
-              </li>
-              <li>
-                {this.state.loggedIn ? (
-                  <i className="mdi-action-lock-open" onClick={this.handleLogout.bind(this)}></i>
+                  <i className="mdi-action-lock-outline" onClick={this.handleLogout}></i>
                 ) : (
                   <Link to="/login">
-                    <i className="mdi-action-lock-outline"></i></Link>
+                    <i className="mdi-action-lock-open"></i></Link>
                 )}
               </li>
               <li>
@@ -62,9 +73,14 @@ export default class Navbar extends React.Component {
             </ul>
             <ul className="side-nav" id="nav-mobile">
               <li><Link to="/products">Discover</Link></li>
-              <li><Link to="/logout">Log Out</Link></li>
-              <li><Link to="/login">Log In</Link></li>
               <li><Link to="/signup">Sign Up</Link></li>
+              <li>
+                {this.state.loggedIn ? (
+                  <Link to="/logout">Log Out</Link>
+                ) : (
+                  <Link to="/login">Log In</Link>
+                )}
+              </li>
             </ul>
           </div>
         </nav>
