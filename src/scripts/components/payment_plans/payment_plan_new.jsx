@@ -16,7 +16,7 @@ export default class NewPaymentPlan extends React.Component {
   componentDidMount() {
     // ProductStore.addChangeListener(this.onChange)
 
-    let clientToken = ""
+    let clientToken = "someTokenHere"
 
     Braintree.setup(
       clientToken,

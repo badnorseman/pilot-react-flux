@@ -5,14 +5,12 @@ import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   render() {
-    let img = ApiRoutes.HOST + this.props.item.image
-
     return(
       <div>
         <div className="col s12 m3">
-          <div className="card z-depth-3">
+          <div className="card z-depth-1">
             <div className="card-image">
-              <img className="responsive-img" src={img} alt=""/>
+              <img className="responsive-img" src={this.props.item.image} alt=""/>
             </div>
             <div className="card-content flow-text">
               <h5>{this.props.item.name}</h5>
