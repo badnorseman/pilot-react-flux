@@ -14,7 +14,7 @@ export default class AddProduct extends React.Component {
   render() {
     return(
       <button
-        className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--floating-on-bottom"
+        className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--floating-action"
         onClick={this.handleClick}>
         <i className="material-icons">add</i>
       </button>

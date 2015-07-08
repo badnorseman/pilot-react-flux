@@ -8,11 +8,11 @@
   display:inline-block;
 }
 
-.mdl-button--floating-on-bottom {
+.mdl-button--floating-action {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  padding-top: 20px;
+  right: 24px;
+  bottom: 24px;
+  padding-top: 24px;
   margin-bottom: 0;
   z-index: 998;
 }
