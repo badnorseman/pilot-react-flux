@@ -30,19 +30,15 @@ export default class Products extends React.Component {
     })
   }
 
-  addButtonStyle() {
-    return {
-      bottom: 25,
-      right: 25
-    }
-  }
-
   render() {
     return(
       <div>
-        <div className="fixed-action-btn" style={this.addButtonStyle()}>
-          <Link to="/product/new" className="btn-floating btn-large red waves-effect waves-light">
-            <i className="mdi-content-add"></i></Link>
+        <div>
+          <Link
+            className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+            to="/product/new">
+            <i className="material-icons">
+              add</i></Link>
         </div>
         <List items={this.state.products}/>
       </div>

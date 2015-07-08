@@ -16,7 +16,7 @@ let AuthStore = assign({}, EventEmitter.prototype, {
     return user
   },
 
-  loggedIn() {
+  isLoggedIn() {
     return !!localStorage.token
   },
 

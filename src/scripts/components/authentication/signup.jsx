@@ -50,45 +50,37 @@ export default class Signup extends React.Component {
   render() {
     return(
       <div>
-        <div className="row">
-          <div className="col s12">
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--12-col">
             {this.state.errors}
           </div>
         </div>
-        <div className="row">
-          <div className="col s6">
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--6-col">
             <Oauth provider="facebook"/>
           </div>
-          <div className="col s6">
+          <div className="mdl-cell mdl-cell--6-col">
             <Oauth provider="google_oauth2"/>
           </div>
         </div>
-        <div className="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="col s12 input-field">
-                <RequiredField fieldName="email" fieldType="text" ref="email">
-                Email</RequiredField>
+        <div className="mdl-grid">
+          <form className="mdl-cell mdl-cell--12-col" onSubmit={this.handleSubmit}>
+            <RequiredField fieldName="email" fieldType="text" ref="email">
+            Email</RequiredField>
+            <RequiredField fieldName="password" fieldType="password" ref="password">
+            Password</RequiredField>
+            <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
+            Password Confirmation</RequiredField>
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--6-col">
+                <Link
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                  to="/products">Cancel</Link>
               </div>
-            </div>
-            <div className="row">
-              <div className="col s12 input-field">
-                <RequiredField fieldName="password" fieldType="password" ref="password">
-                Password</RequiredField>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12 input-field">
-                <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
-                Password Confirmation</RequiredField>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s6">
-                <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
-              </div>
-              <div className="col s6">
-                <button className="btn waves-effect waves-light" type="submit">Sign Up</button>
+              <div className="mdl-cell mdl-cell--6-col">
+                <button
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                  type="submit">Sign Up</button>
               </div>
             </div>
           </form>

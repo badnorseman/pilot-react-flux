@@ -4,19 +4,14 @@ export default class Footer extends React.Component {
   render() {
     return(
       <div>
-        <footer className="page-footer hide">
-        <div className="row">
-          <div className="col s12 flow-text">
-            <ul>
-              <liv>
-                <i className="mdi-action-info-outline"></i>
-              </liv>
+        <footer className="mdl-mini-footer">
+          <div className="mdl-mini-footer--left-section">
+            <div className="mdl-logo">FitBird</div>
+              <ul className="mdl-mini-footer--link-list">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Privacy & Terms</a></li>
             </ul>
           </div>
-        </div>
-        <div className="footer-copyright">
-          <h5>Add some text...</h5>
-        </div>
         </footer>
       </div>
     )

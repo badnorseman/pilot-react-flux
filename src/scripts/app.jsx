@@ -1,7 +1,8 @@
 import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
-import Navbar from "./components/navigation/navbar";
+import AuthActions from "./actions/auth_actions";
+import AuthStore from "./stores/auth_store";
 import Footer from "./components/navigation/footer";
 import Login from "./components/authentication/login";
 import Logout from "./components/authentication/logout";
@@ -11,19 +12,104 @@ import Products from "./components/products/products";
 import Product from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
 
-let { DefaultRoute, Route, RouteHandler } = Router
+let { DefaultRoute, Link, Route, RouteHandler } = Router
 
 window.React = React
 
 injectTapEventPlugin();
 
 class App extends React.Component {
+  constructor(context) {
+    super(context)
+    this.state = {
+      isLoggedIn: false,
+      user: {}
+    }
+    this.onChange = this.onChange.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  componentDidMount() {
+    AuthStore.addChangeListener(this.onChange)
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.onChange)
+  }
+
+  onChange() {
+    this.setState({
+      isLoggedIn: AuthStore.isLoggedIn(),
+      user: AuthStore.getUser()
+    })
+  }
+
+  handleLogout() {
+    AuthActions.logout()
+    this.context.router.transitionTo("/products")
+  }
+
   render() {
     return(
       <div>
-        <Navbar/>
-        <RouteHandler/>
-        <Footer/>
+        <div className="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
+          <header className="mdl-layout__header mdl-layout__header--waterfall">
+            <div className="mdl-layout__header-row">
+              <span className="mdl-layout-title">FitBird</span>
+              <div className="mdl-layout-spacer"></div>
+              <nav className="mdl-navigation">
+                <div className="mdl-navigation__link">
+                  <Link to="/products">
+                    <i className="material-icons">home</i></Link>
+                </div>
+                <div className="mdl-navigation__link">
+                  <Link to="/payment_plans">
+                    <i className="material-icons">payment</i></Link>
+                </div>
+                <div>
+                  {this.state.isLoggedIn ? (
+                    <i className="mdl-navigation__link material-icons" onClick={this.handleLogout}>
+                      lock</i>
+                  ) : (
+                    <div className="mdl-navigation__link">
+                      <Link to="/login">
+                        <i className="material-icons">lock-open</i></Link>
+                    </div>
+                  )}
+                </div>
+                <div className="mdl-navigation__link">
+                  <Link to="/signup">
+                    <i className="material-icons">person</i></Link>
+                </div>
+              </nav>
+            </div>
+          </header>
+          <div className="mdl-layout__drawer">
+            <span className="mdl-layout-title">FitBird</span>
+            <nav className="mdl-navigation">
+              <div className="mdl-navigation__link">
+                <Link to="/products">Discover</Link>
+              </div>
+              <div>
+                {this.state.isLoggedIn ? (
+                  <div className="mdl-navigation__link">
+                    <Link to="/logout">Log Out</Link>
+                  </div>
+                ) : (
+                  <div className="mdl-navigation__link">
+                    <Link to="/login"></Link>
+                  </div>
+                )}
+              </div>
+            </nav>
+          </div>
+          <main className="mdl-layout__content">
+            <div className="page-content">
+              <RouteHandler/>
+              <Footer/>
+            </div>
+          </main>
+        </div>
       </div>
     )
   }

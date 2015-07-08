@@ -19,10 +19,10 @@ export default class uploadFile extends React.Component {
 
   render() {
     return(
-      <div className="file-field input-field" onChange={this.handleChange}>
-        <input className="file-path validate" type="text"/>
-        <div className="btn">
-          <span>Select</span>
+      <div className="" onChange={this.handleChange}>
+        <input className="" type="text"/>
+        <div className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          <span>Upload</span>
           <input type="file" id="file-selected" ref="selectedFile"
             accept="image/jpeg, image/jpg, image/png"/>
         </div>
