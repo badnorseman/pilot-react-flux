@@ -66,15 +66,12 @@ class App extends React.Component {
                   <Link to="/payment_plans">
                     <i className="material-icons">payment</i></Link>
                 </div>
-                <div>
+                <div className="mdl-navigation__link">
                   {this.state.isLoggedIn ? (
-                    <i className="mdl-navigation__link material-icons" onClick={this.handleLogout}>
-                      lock</i>
+                    <i className="material-icons" onClick={this.handleLogout}>lock</i>
                   ) : (
-                    <div className="mdl-navigation__link">
-                      <Link to="/login">
-                        <i className="material-icons">lock-open</i></Link>
-                    </div>
+                    <Link to="/login">
+                      <i className="material-icons">lock_open</i></Link>
                   )}
                 </div>
                 <div className="mdl-navigation__link">
@@ -90,16 +87,15 @@ class App extends React.Component {
               <div className="mdl-navigation__link">
                 <Link to="/products">Discover</Link>
               </div>
-              <div>
+              <div className="mdl-navigation__link">
                 {this.state.isLoggedIn ? (
-                  <div className="mdl-navigation__link">
-                    <Link to="/logout">Log Out</Link>
-                  </div>
+                  <Link to="/logout">Log Out</Link>
                 ) : (
-                  <div className="mdl-navigation__link">
-                    <Link to="/login"></Link>
-                  </div>
+                  <Link to="/login"></Link>
                 )}
+              </div>
+              <div className="mdl-navigation__link">
+                <Link to="/signup">Sign Up</Link>
               </div>
             </nav>
           </div>
