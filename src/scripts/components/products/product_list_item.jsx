@@ -16,19 +16,14 @@ export default class extends React.Component {
               <h6>{this.props.item.name}</h6>
               <p>{this.props.item.description}</p>
             </div>
-            <div className="mdl-card__actions">
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--6-col">
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to={`/products/${this.props.item.id}`}
-                    params={{id: this.props.item.id}}>Edit
-                  </Link>
-                </div>
-                <div className="mdl-cell mdl-cell--6-col">
-                  <RemoveProduct id={this.props.item.id}/>
-                </div>
-              </div>
+            <div className="mdl-card__actions center">
+              <Link
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                to={`/products/${this.props.item.id}`}
+                params={{id: this.props.item.id}}>Edit
+              </Link>
+              <div className="divider"/>
+              <RemoveProduct id={this.props.item.id}/>
             </div>
           </div>
         </div>

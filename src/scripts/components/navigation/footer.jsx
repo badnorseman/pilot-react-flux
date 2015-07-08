@@ -7,9 +7,11 @@ export default class Footer extends React.Component {
         <footer className="mdl-mini-footer">
           <div className="mdl-mini-footer--left-section">
             <div className="mdl-logo">FitBird</div>
-              <ul className="mdl-mini-footer--link-list">
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Privacy & Terms</a></li>
+          </div>
+          <div className="mdl-mini-footer--right-section">
+            <ul className="mdl-mini-footer--link-list">
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Privacy & Terms</a></li>
             </ul>
           </div>
         </footer>

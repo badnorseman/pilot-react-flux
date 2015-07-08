@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import NewProduct from "./product_new";
+import AddProduct from "./product_add";
 import List from "./product_list";
 
 export default class Products extends React.Component {
@@ -33,14 +33,8 @@ export default class Products extends React.Component {
   render() {
     return(
       <div>
-        <div>
-          <Link
-            className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
-            to="/product/new">
-            <i className="material-icons">
-              add</i></Link>
-        </div>
         <List items={this.state.products}/>
+        <AddProduct/>
       </div>
     )
   }

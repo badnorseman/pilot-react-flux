@@ -1,3 +1,4 @@
+// Merge Edit and New form
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";

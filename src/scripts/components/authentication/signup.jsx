@@ -50,40 +50,33 @@ export default class Signup extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid">
+        <div className="mdl-grid center">
           <div className="mdl-cell mdl-cell--12-col">
-            {this.state.errors}
-          </div>
-        </div>
-        <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--6-col">
-            <Oauth provider="facebook"/>
-          </div>
-          <div className="mdl-cell mdl-cell--6-col">
-            <Oauth provider="google_oauth2"/>
-          </div>
-        </div>
-        <div className="mdl-grid">
-          <form className="mdl-cell mdl-cell--12-col" onSubmit={this.handleSubmit}>
-            <RequiredField fieldName="email" fieldType="text" ref="email">
-            Email</RequiredField>
-            <RequiredField fieldName="password" fieldType="password" ref="password">
-            Password</RequiredField>
-            <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
-            Password Confirmation</RequiredField>
-            <div className="mdl-grid">
-              <div className="mdl-cell mdl-cell--6-col">
-                <Link
-                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                  to="/products">Cancel</Link>
-              </div>
-              <div className="mdl-cell mdl-cell--6-col">
-                <button
-                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                  type="submit">Sign Up</button>
-              </div>
+            <div>{this.state.errors}</div>
+            <div><Oauth provider="facebook"/></div>
+            <div><Oauth provider="google_oauth2"/></div>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <RequiredField fieldName="email" fieldType="text" ref="email">
+                Email</RequiredField>
+                <RequiredField fieldName="password" fieldType="password" ref="password">
+                Password</RequiredField>
+                <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
+                Password Confirmation</RequiredField>
+                <div>
+                  <Link
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    to="/products">Cancel
+                  </Link>
+                  <div className="divider"/>
+                  <button
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    type="submit">Sign Up
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     )

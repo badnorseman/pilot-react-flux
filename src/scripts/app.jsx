@@ -1,6 +1,7 @@
 import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
+import "./app.css";
 import AuthActions from "./actions/auth_actions";
 import AuthStore from "./stores/auth_store";
 import Footer from "./components/navigation/footer";

@@ -1,0 +1,21 @@
+.center {
+  text-align:center;
+}
+
+.divider{
+  width:20px;
+  height:auto;
+  display:inline-block;
+}
+
+.mdl-button--floating-on-bottom {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding-top: 20px;
+  margin-bottom: 0;
+  z-index: 998;
+}
+
+.mdl-mini-footer--fixed-to-bottom {
+}
