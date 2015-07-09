@@ -52,6 +52,7 @@ export default class EditProduct extends React.Component {
 
   render() {
     let description = this.state.product.description
+    let image = this.state.product.image
     let name = this.state.product.name
 
     return(
@@ -76,8 +77,12 @@ export default class EditProduct extends React.Component {
                   ref="description">
                   Description
                 </RequiredField>
+                <div>
+                  <img src={image} alt=""/>
+                </div>
                 <UploadFile
                   id={this.props.params.id}
+                  file={image}
                   ref="file"/>
                 <div>
                   <Link
