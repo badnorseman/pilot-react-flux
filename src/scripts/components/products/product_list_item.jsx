@@ -20,9 +20,10 @@ export default class extends React.Component {
               <Link
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                 to={`/products/${this.props.item.id}`}
-                params={{id: this.props.item.id}}>Edit
+                params={{id: this.props.item.id}}>
+                Edit
               </Link>
-              <div className="divider"/>
+              <div className="divider"></div>
               <RemoveProduct id={this.props.item.id}/>
             </div>
           </div>

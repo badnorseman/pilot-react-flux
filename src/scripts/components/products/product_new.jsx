@@ -50,39 +50,36 @@ export default class NewProduct extends React.Component {
       <div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
+            <div>{this.state.errors}</div>
             <div>
-              {this.state.errors}
-            </div>
-          </div>
-        </div>
-        <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--12-col">
-            <form onSubmit={this.handleSubmit}>
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--6-col">
-                  <RequiredField fieldName="name" fieldType="text" ref="name">
-                  Name</RequiredField>
-                </div>
-                <div className="mdl-cell mdl-cell--6-col">
-                  <RequiredField fieldName="description" fieldType="text" ref="description">
-                  Description</RequiredField>
-                </div>
-              </div>
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--6-col">
+              <form onSubmit={this.handleSubmit}>
+                <RequiredField
+                  fieldName="name"
+                  fieldType="text"
+                  ref="name">
+                  Name
+                </RequiredField>
+                <RequiredField
+                  fieldName="description"
+                  fieldType="text"
+                  ref="description">
+                  Description
+                </RequiredField>
+                <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">Cancel
+                    to="/products">
+                    Cancel
                   </Link>
-                </div>
-                <div className="mdl-cell mdl-cell--6-col">
+                  <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">Add
+                    type="submit">
+                    Add
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

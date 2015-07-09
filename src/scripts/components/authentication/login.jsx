@@ -58,22 +58,26 @@ export default class Login extends React.Component {
                 <RequiredField
                   fieldName="email"
                   fieldType="text"
-                  ref="email">Email
+                  ref="email">
+                  Email
                 </RequiredField>
                 <RequiredField
                   fieldName="password"
                   fieldType="password"
-                  ref="password">Password
+                  ref="password">
+                  Password
                 </RequiredField>
                 <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">Cancel
+                    to="/products">
+                    Cancel
                   </Link>
-                  <div className="divider"/>
+                  <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">Log In
+                    type="submit">
+                    Log In
                   </button>
                 </div>
               </form>

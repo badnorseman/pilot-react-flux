@@ -58,42 +58,42 @@ export default class EditProduct extends React.Component {
       <div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
-            {this.state.errors}
-          </div>
-        </div>
-        <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--12-col">
-            <form onSubmit={this.handleSubmit}>
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--6-col">
-                  <RequiredField fieldName="name" fieldType="text" fieldValue={name} ref="name">
-                  Name</RequiredField>
-                </div>
-                <div className="mdl-cell mdl-cell--6-col">
-                  <RequiredField fieldName="description" fieldType="text" fieldValue={description} ref="description">
-                  Description</RequiredField>
-                </div>
-              </div>
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--12-col">
-                  <UploadFile id={this.props.params.id} ref="file"/>
-                </div>
-              </div>
-              <div className="mdl-grid">
-                <div className="mdl-cell mdl-cell--6-col">
+            <div className="mdl-layout-spacer"></div>
+            <div>{this.state.errors}</div>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <RequiredField
+                  fieldName="name"
+                  fieldType="text"
+                  fieldValue={name}
+                  ref="name">
+                  Name
+                </RequiredField>
+                <RequiredField
+                  fieldName="description"
+                  fieldType="text"
+                  fieldValue={description}
+                  ref="description">
+                  Description
+                </RequiredField>
+                <UploadFile
+                  id={this.props.params.id}
+                  ref="file"/>
+                <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">Cancel
+                    to="/products">
+                    Cancel
                   </Link>
-                </div>
-                <div className="mdl-cell mdl-cell--6-col">
+                  <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">Save
+                    type="submit">
+                    Save
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

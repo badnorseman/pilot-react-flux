@@ -15,7 +15,8 @@ export default class extends React.Component {
     return(
       <button
         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this.handleClick}>Remove
+        onClick={this.handleClick}>
+        Remove
       </button>
     )
   }

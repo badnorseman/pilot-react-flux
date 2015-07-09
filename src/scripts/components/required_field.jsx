@@ -29,7 +29,7 @@ export default class RequiredField extends React.Component {
 
     return(
       <div>
-        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
           <input
             className="mdl-textfield__input"
             id={this.props.fieldName}
@@ -40,8 +40,12 @@ export default class RequiredField extends React.Component {
           <label
             className="mdl-textfield__label"
             htmlFor={this.props.fieldName}>
-            {this.props.children}</label>
-          <span className="mdl-textfield__error">{errors}</span>
+            {this.props.children}
+          </label>
+          <span
+            className="mdl-textfield__error">
+            {errors}
+          </span>
         </div>
       </div>
     )

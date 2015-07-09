@@ -15,7 +15,11 @@ export default class Logout extends React.Component {
   render() {
     return (
       <div>
-        <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this.handleClick}>Logout</button>
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+          onClick={this.handleClick}>
+          Logout
+        </button>
       </div>
     )
   }

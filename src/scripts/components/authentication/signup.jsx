@@ -57,21 +57,35 @@ export default class Signup extends React.Component {
             <div><Oauth provider="google_oauth2"/></div>
             <div>
               <form onSubmit={this.handleSubmit}>
-                <RequiredField fieldName="email" fieldType="text" ref="email">
-                Email</RequiredField>
-                <RequiredField fieldName="password" fieldType="password" ref="password">
-                Password</RequiredField>
-                <RequiredField fieldName="passwordConfirmation" fieldType="password" ref="passwordConfirmation">
-                Password Confirmation</RequiredField>
+                <RequiredField
+                  fieldName="email"
+                  fieldType="text"
+                  ref="email">
+                  Email
+                </RequiredField>
+                <RequiredField
+                  fieldName="password"
+                  fieldType="password"
+                  ref="password">
+                  Password
+                </RequiredField>
+                <RequiredField
+                  fieldName="passwordConfirmation"
+                  fieldType="password"
+                  ref="passwordConfirmation">
+                  Password Confirmation
+                </RequiredField>
                 <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">Cancel
+                    to="/products">
+                    Cancel
                   </Link>
-                  <div className="divider"/>
+                  <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">Sign Up
+                    type="submit">
+                    Sign Up
                   </button>
                 </div>
               </form>

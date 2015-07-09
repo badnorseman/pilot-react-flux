@@ -103,6 +103,10 @@ class App extends React.Component {
           <main className="mdl-layout__content">
             <div className="page-content">
               <RouteHandler/>
+              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input className="mdl-textfield__input" id="myTest" type="text" />
+                <label className="mdl-textfield__label" htmlFor="myTest">Test</label>
+              </div>
               <div className="mdl-layout-spacer"></div>
               <Footer/>
             </div>
