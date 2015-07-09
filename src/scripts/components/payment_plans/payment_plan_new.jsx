@@ -51,32 +51,34 @@ export default class NewPaymentPlan extends React.Component {
 
   render() {
     return(
-      <div className="row">
-        <form className="col s12" onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="col s12">
-              {this.state.errors}
+      <div>
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--12-col">
+            <div>{this.state.errors}</div>
+            <div id="dropin-container"></div>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <RequiredField
+                  fieldName="name"
+                  fieldType="text"
+                  ref="name">
+                  Name
+                </RequiredField>
+                <Link
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                  to="/products">
+                  Cancel
+                </Link>
+                <div className="divider"></div>
+                <button
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                  type="submit">
+                  Add
+                </button>
+              </form>
             </div>
           </div>
-          <div className="row">
-            <div className="col s12" id="dropin-container">
-            </div>
-          </div>
-          <div className="row">
-            <div className="col s12 input-field">
-              <RequiredField fieldName="name" fieldType="text" ref="name">
-              Name</RequiredField>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col s6">
-              <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
-            </div>
-            <div className="col s6">
-              <button className="btn waves-effect waves-light" type="submit">Add</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     )
   }

@@ -59,7 +59,6 @@ export default class EditProduct extends React.Component {
       <div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
-            <div className="mdl-layout-spacer"></div>
             <div>{this.state.errors}</div>
             <div>
               <form onSubmit={this.handleSubmit}>
@@ -106,4 +105,6 @@ export default class EditProduct extends React.Component {
   }
 }
 
-EditProduct.contextTypes = { router: React.PropTypes.func.isRequired }
+EditProduct.contextTypes = {
+  router: React.PropTypes.func.isRequired
+}

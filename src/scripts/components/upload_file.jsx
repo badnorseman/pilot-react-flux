@@ -27,7 +27,7 @@ export default class uploadFile extends React.Component {
           {this.props.file}
         </div>
         <div
-          className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded"
+          className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
           onChange={this.handleChange}>
           <input
             className="mdl-textfield__input"
