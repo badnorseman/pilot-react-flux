@@ -1,3 +1,7 @@
+html, body {
+  height:100%;
+}
+
 .center {
   text-align:center;
 }
@@ -8,14 +12,18 @@
   display:inline-block;
 }
 
-.mdl-button--floating-action {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  padding-top: 24px;
-  margin-bottom: 0;
-  z-index: 998;
+/* Change mdl-layout__content class to flex to allow spacer to work. */
+.mdl-layout__content {
+	display: flex;
+    -webkit-flex-direction: column;
+	        flex-direction: column;
 }
 
-.mdl-mini-footer--fixed-to-bottom {
+.mdl-button--floating-action {
+  bottom:45px;
+  margin-bottom:100px;
+  padding-top:24px;
+  position:fixed;
+  right:24px;
+  z-index:998;
 }

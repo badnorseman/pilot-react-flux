@@ -103,6 +103,7 @@ class App extends React.Component {
           <main className="mdl-layout__content">
             <div className="page-content">
               <RouteHandler/>
+              <div className="mdl-layout-spacer"></div>
               <Footer/>
             </div>
           </main>
