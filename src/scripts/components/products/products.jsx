@@ -4,6 +4,7 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import AddProduct from "./product_add";
 import List from "./product_list";
+import MyTest from "../my_test";
 
 export default class Products extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ export default class Products extends React.Component {
     return(
       <div>
         <List items={this.state.products}/>
+        <MyTest/>
         <AddProduct/>
       </div>
     )

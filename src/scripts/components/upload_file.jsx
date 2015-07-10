@@ -23,9 +23,7 @@ export default class uploadFile extends React.Component {
   render() {
     return(
       <div>
-        <div>
-          {this.props.file}
-        </div>
+        <div>{this.props.file}</div>
         <div
           className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
           onChange={this.handleChange}>

@@ -12,6 +12,7 @@ import PaymentPlans from "./components/payment_plans/payment_plan_new"
 import Products from "./components/products/products";
 import Product from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
+import MyTest from "./components/my_test";
 
 let { DefaultRoute, Link, Route, RouteHandler } = Router
 
@@ -103,10 +104,8 @@ class App extends React.Component {
           <main className="mdl-layout__content">
             <div className="page-content">
               <RouteHandler/>
-              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input className="mdl-textfield__input" id="myTest" type="text"/>
-                <label className="mdl-textfield__label" htmlFor="myTest">Test</label>
-              </div>
+              <div className="mdl-layout-spacer"></div>
+              <MyTest/>
               <div className="mdl-layout-spacer"></div>
               <Footer/>
             </div>
