@@ -1,3 +1,5 @@
+// Export routes to config/routes.js
+// Export Header to navbar.jsx
 import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
@@ -12,7 +14,7 @@ import PaymentPlans from "./components/payment_plans/payment_plan_new"
 import Products from "./components/products/products";
 import Product from "./components/products/product_edit";
 import NewProduct from "./components/products/product_new";
-import MyTest from "./components/my_test";
+import Test from "./components/test";
 
 let { DefaultRoute, Link, Route, RouteHandler } = Router
 
@@ -29,6 +31,7 @@ class App extends React.Component {
     }
     this.onChange = this.onChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleTestClick = this.handleTestClick.bind(this)
   }
 
   componentDidMount() {
@@ -49,6 +52,10 @@ class App extends React.Component {
   handleLogout() {
     AuthActions.logout()
     this.context.router.transitionTo("/products")
+  }
+
+  handleTestClick() {
+    alert("Test was clicked!")
   }
 
   render() {
@@ -103,7 +110,10 @@ class App extends React.Component {
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
-              <MyTest id="app" type="text"/>
+              <Test
+                id="app"
+                type="text"
+                onClick={this.handleTestClick}/>
               <div className="mdl-layout-spacer"></div>
               <RouteHandler/>
               <div className="mdl-layout-spacer"></div>

@@ -1,8 +1,14 @@
 import React from "react";
 
-export default class MyTest extends React.Component {
+export default class Test extends React.Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.onClick()
+    return
   }
 
   render() {
@@ -19,6 +25,12 @@ export default class MyTest extends React.Component {
             Test
           </label>
         </div>
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+          type="button"
+          onClick={this.handleClick}>
+          Click
+        </button>
       </div>
     )
   }
