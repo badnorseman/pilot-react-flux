@@ -54,6 +54,7 @@ export default class Signup extends React.Component {
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div><Oauth provider="facebook"/></div>
+            <div className="divider"></div>
             <div><Oauth provider="google_oauth2"/></div>
             <div>
               <form onSubmit={this.handleSubmit}>

@@ -24,6 +24,12 @@ export default class extends React.Component {
                 Edit
               </Link>
               <div className="divider"></div>
+              <Link
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                to="/payment/new">
+                Buy
+              </Link>
+              <div className="divider"></div>
               <RemoveProduct id={this.props.item.id}/>
             </div>
           </div>

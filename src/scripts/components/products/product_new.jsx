@@ -41,7 +41,7 @@ export default class NewProduct extends React.Component {
           name: name
         }
       })
-      // this.context.router.transitionTo("/products")
+      this.context.router.transitionTo("/products")
     }
   }
 

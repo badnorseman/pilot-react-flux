@@ -9,11 +9,11 @@ import AuthStore from "./stores/auth_store";
 import Footer from "./components/navigation/footer";
 import Login from "./components/authentication/login";
 import Logout from "./components/authentication/logout";
-import Signup from "./components/authentication/signup";
-import PaymentPlans from "./components/payment_plans/payment_plan_new"
-import Products from "./components/products/products";
-import Product from "./components/products/product_edit";
+import NewPayment from "./components/payments/payment_new"
 import NewProduct from "./components/products/product_new";
+import Product from "./components/products/product_edit";
+import Products from "./components/products/products";
+import Signup from "./components/authentication/signup";
 import Test from "./components/test";
 
 let { DefaultRoute, Link, Route, RouteHandler } = Router
@@ -64,17 +64,11 @@ class App extends React.Component {
         <div className="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
           <header className="mdl-layout__header mdl-layout__header--waterfall">
             <div className="mdl-layout__header-row">
-              <span className="mdl-layout-title">FitBird</span>
+              <span className="mdl-layout-title">
+                <Link to="/products">FitBird</Link>
+              </span>
               <div className="mdl-layout-spacer"></div>
               <nav className="mdl-navigation">
-                <div className="mdl-navigation__link">
-                  <Link to="/products">
-                    <i className="material-icons">home</i></Link>
-                </div>
-                <div className="mdl-navigation__link">
-                  <Link to="/payment_plans">
-                    <i className="material-icons">payment</i></Link>
-                </div>
                 <div className="mdl-navigation__link">
                   {this.state.isLoggedIn ? (
                     <i className="material-icons" onClick={this.handleLogout}>lock</i>
@@ -131,11 +125,11 @@ let routes = (
     <DefaultRoute handler={Products}/>
     <Route path="login" handler={Login}/>
     <Route path="logout" handler={Logout}/>
-    <Route path="signup" handler={Signup}/>
-    <Route path="payment_plans" handler={PaymentPlans}/>
+    <Route path="payment/new" handler={NewPayment}/>
+    <Route path="product/new" handler={NewProduct}/>
     <Route path="products" handler={Products}/>
     <Route path="products/:id" handler={Product}/>
-    <Route path="product/new" handler={NewProduct}/>
+    <Route path="signup" handler={Signup}/>
   </Route>
 )
 
