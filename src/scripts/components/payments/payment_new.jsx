@@ -54,7 +54,7 @@ export default class NewPaymentPlan extends React.Component {
                       data-braintree-name="number"
                       id="creditCard"
                       type="text"
-                      pattern="-?[0-9]*(\.[0-9]+)?"
+                      pattern="[0-9]{13,16}"
                       ref="creditCard"/>
                     <label
                       className="mdl-textfield__label"
@@ -74,6 +74,7 @@ export default class NewPaymentPlan extends React.Component {
                       data-braintree-name="expiration_date"
                       id="expirationDate"
                       type="text"
+                      pattern="(?:0[1-9]|1[0-2])/([0-9]{2})"
                       ref="expirationDate"/>
                     <label
                       className="mdl-textfield__label"
