@@ -103,9 +103,9 @@ class App extends React.Component {
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
-              <RouteHandler/>
-              <div className="mdl-layout-spacer"></div>
               <MyTest id="app" type="text"/>
+              <div className="mdl-layout-spacer"></div>
+              <RouteHandler/>
               <div className="mdl-layout-spacer"></div>
               <Footer/>
             </div>

@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
-import ProductActions from "../../actions/auth_actions";
-// import ProductStore from "../../stores/product_store";
-import RequiredField from "../required_field";
 
 export default class NewPaymentPlan extends React.Component {
   constructor(context) {
@@ -14,8 +11,6 @@ export default class NewPaymentPlan extends React.Component {
   }
 
   componentDidMount() {
-    // ProductStore.addChangeListener(this.onChange)
-
     let clientToken = "someTokenHere"
 
     Braintree.setup(
@@ -27,26 +22,16 @@ export default class NewPaymentPlan extends React.Component {
   }
 
   componentWillUnmount() {
-    // ProductStore.removeChangeListener(this.onChange)
   }
 
   onChange() {
     this.setState({
-      // errors: ProductStore.getErrors()
+      errors: {}
     })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-
-    let name = this.refs.name.state.fieldValue
-
-    if (name) {
-      // ProductActions.create({
-      //   name: name
-      // })
-      // this.context.router.transitionTo("/products")
-    }
   }
 
   render() {
@@ -55,15 +40,9 @@ export default class NewPaymentPlan extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
-            <div id="dropin-container"></div>
             <div>
               <form onSubmit={this.handleSubmit}>
-                <RequiredField
-                  fieldName="name"
-                  fieldType="text"
-                  ref="name">
-                  Name
-                </RequiredField>
+                <div id="dropin-container"></div>
                 <Link
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                   to="/products">
@@ -73,7 +52,7 @@ export default class NewPaymentPlan extends React.Component {
                 <button
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                   type="submit">
-                  Add
+                  Save
                 </button>
               </form>
             </div>
