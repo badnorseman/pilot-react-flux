@@ -23,16 +23,15 @@ export default class uploadFile extends React.Component {
   render() {
     return(
       <div>
-        <div>{this.props.file}</div>
         <div
-          className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
-          onChange={this.handleChange}>
+          className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input
             className="mdl-textfield__input"
             id="file--selected"
             type="file"
             ref="selectedFile"
-            accept="image/jpeg, image/jpg, image/png"/>
+            accept="image/jpeg, image/jpg, image/png"
+            onChange={this.handleChange}/>
           <label
             htmlFor="file--selected">
           </label>
