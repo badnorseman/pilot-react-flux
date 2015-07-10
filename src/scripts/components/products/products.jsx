@@ -35,7 +35,7 @@ export default class Products extends React.Component {
     return(
       <div>
         <List items={this.state.products}/>
-        <MyTest/>
+        <MyTest id="products" type="text"/>
         <AddProduct/>
       </div>
     )
