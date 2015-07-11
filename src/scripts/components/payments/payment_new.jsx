@@ -15,15 +15,16 @@ export default class NewPaymentPlan extends React.Component {
 
   componentDidMount() {
     let clientToken = PaymentUtils.fetchClientToken()
+    console.log("clientToken ", clientToken)
 
-    console.log("Braintree.setup ", clientToken)
-
-    Braintree.setup(
-      clientToken,
-      "custom", {
-      id: "payment"
-      }
-    )
+    // console.log("Braintree.setup ", clientToken)
+    //
+    // Braintree.setup(
+    //   clientToken,
+    //   "custom", {
+    //   id: "payment"
+    //   }
+    // )
   }
 
   componentWillUnmount() {

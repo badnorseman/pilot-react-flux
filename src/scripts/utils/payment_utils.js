@@ -24,12 +24,12 @@ export default {
       },
       success: function(data) {
         clientToken = data.responseText
-        console.log("Success ", clientToken)
+        console.log("Success ", data)
       }.bind(this),
       error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+        // let errors = getErrorsFromXhr(xhr)
         clientToken = xhr.responseText
-        console.log("Error ", clientToken, errors)
+        console.log("Error ", xhr)
       }.bind(this)
     })
 
