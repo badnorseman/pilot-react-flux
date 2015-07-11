@@ -5,6 +5,7 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import UploadFile from "../upload_file";
+import Test from "../test";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class EditProduct extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.handleTestClick = this.handleTestClick.bind(this)
   }
 
   componentDidMount() {
@@ -48,6 +50,10 @@ export default class EditProduct extends React.Component {
       })
       this.context.router.transitionTo("/products")
     }
+  }
+
+  handleTestClick() {
+    alert("Test was clicked!")
   }
 
   render() {
@@ -95,6 +101,10 @@ export default class EditProduct extends React.Component {
                     type="submit">
                     Save
                   </button>
+                  <Test
+                    id="products"
+                    type="text"
+                    onClick={this.handleTestClick}/>
                 </div>
               </form>
             </div>

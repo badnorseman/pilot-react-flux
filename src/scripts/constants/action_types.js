@@ -8,7 +8,9 @@ export default keyMirror({
   LOGOUT: null,
   OAUTH: null,
   REMOVE: null,
-  RECEIVE_DATA: null,
-  RECEIVE_ERRORS: null,
+  RECEIVE_AUTH_DATA: null,
+  RECEIVE_AUTH_ERRORS: null,
+  RECEIVE_PRODUCT_DATA: null,
+  RECEIVE_PRODUCT_ERRORS: null,
   SIGNUP: null
 })

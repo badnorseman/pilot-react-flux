@@ -58,12 +58,12 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       ProductUtils.delete(action.id)
       break
 
-    case ActionTypes.RECEIVE_DATA:
+    case ActionTypes.RECEIVE_PRODUCT_DATA:
       products = action.data
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERRORS:
+    case ActionTypes.RECEIVE_PRODUCT_ERRORS:
       errors = action.errors
       ProductStore.emitChange()
       break

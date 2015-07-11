@@ -33,7 +33,7 @@ export default {
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   }

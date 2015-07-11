@@ -1,7 +1,7 @@
 // getErrorsFromXhr is also in product_utils. It needs to be a separate script
 import ApiRoutes from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
-import ServerActions from "../actions/server_actions";
+import AuthActions from "../actions/auth_actions";
 import $ from "jquery";
 
 function getErrorsFromXhr(xhr) {
@@ -22,11 +22,11 @@ export default {
       type: "GET",
       data: data,
       success: function(data) {
-        ServerActions.receiveCurrentUserFromServer(data)
+        AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -37,11 +37,11 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ServerActions.receiveCurrentUserFromServer(data)
+        AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -52,11 +52,11 @@ export default {
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ServerActions.receiveCurrentUserFromServer(data)
+        AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -68,11 +68,11 @@ export default {
       type: "POST",
       data: data,
       success: function(data) {
-        ServerActions.receiveCurrentUserFromServer(data)
+        AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
   }

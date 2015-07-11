@@ -14,7 +14,6 @@ import NewProduct from "./components/products/product_new";
 import Product from "./components/products/product_edit";
 import Products from "./components/products/products";
 import Signup from "./components/authentication/signup";
-import Test from "./components/test";
 
 let { DefaultRoute, Link, Route, RouteHandler } = Router
 
@@ -31,7 +30,6 @@ class App extends React.Component {
     }
     this.onChange = this.onChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.handleTestClick = this.handleTestClick.bind(this)
   }
 
   componentDidMount() {
@@ -40,6 +38,10 @@ class App extends React.Component {
 
   componentWillUnmount() {
     AuthStore.removeChangeListener(this.onChange)
+  }
+
+  componentDidUpdate() {
+    componentHandler.upgradeDom()
   }
 
   onChange() {
@@ -52,10 +54,6 @@ class App extends React.Component {
   handleLogout() {
     AuthActions.logout()
     this.context.router.transitionTo("/products")
-  }
-
-  handleTestClick() {
-    alert("Test was clicked!")
   }
 
   render() {
@@ -104,11 +102,6 @@ class App extends React.Component {
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
-              <Test
-                id="app"
-                type="text"
-                onClick={this.handleTestClick}/>
-              <div className="mdl-layout-spacer"></div>
               <RouteHandler/>
               <div className="mdl-layout-spacer"></div>
               <Footer/>
