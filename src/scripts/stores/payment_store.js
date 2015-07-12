@@ -52,7 +52,7 @@ PaymentStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.RECEIVE_CLIENT_TOKEN:
-      clientToken = action.client_token
+      clientToken = action.clientToken
       PaymentStore.emitChange()
       break
 

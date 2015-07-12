@@ -1,4 +1,3 @@
-// Replace api call to action call
 // Replace input and label with RequiredField
 import React from "react";
 import { Link } from "react-router";
@@ -50,11 +49,13 @@ export default class NewPaymentPlan extends React.Component {
     let creditCard = React.findDOMNode(this.refs.creditCard).value
     let expirationDate = React.findDOMNode(this.refs.expirationDate).value
 
-    PaymentActions.create({
-      amount: amount,
-      creditCard: creditCard,
-      expirationDate: expirationDate
-    })
+    if (creditCard && expirationDate) {
+      PaymentActions.create({
+        amount: amount,
+        creditCard: creditCard,
+        expirationDate: expirationDate
+      })
+    }
   }
 
   render() {
