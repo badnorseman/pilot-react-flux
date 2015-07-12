@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import NewProduct from "./product_new";
+import AddProduct from "./product_add";
 import List from "./product_list";
 
 export default class Products extends React.Component {
@@ -13,7 +13,7 @@ export default class Products extends React.Component {
   }
 
   componentWillMount() {
-    ProductActions.load()
+    ProductActions.list()
   }
 
   componentDidMount() {
@@ -30,21 +30,11 @@ export default class Products extends React.Component {
     })
   }
 
-  addButtonStyle() {
-    return {
-      bottom: 25,
-      right: 25
-    }
-  }
-
   render() {
     return(
       <div>
-        <div className="fixed-action-btn" style={this.addButtonStyle()}>
-          <Link to="/product/new" className="btn-floating btn-large red waves-effect waves-light">
-            <i className="mdi-content-add"></i></Link>
-        </div>
         <List items={this.state.products}/>
+        <AddProduct/>
       </div>
     )
   }

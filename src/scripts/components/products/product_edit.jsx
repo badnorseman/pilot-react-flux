@@ -1,9 +1,11 @@
+// Merge Edit and New form
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import UploadFile from "../upload_file";
+import Test from "../test";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -13,6 +15,7 @@ export default class EditProduct extends React.Component {
       product: ProductStore.getProduct(this.props.params.id)
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleTestClick = this.handleTestClick.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
@@ -49,45 +52,69 @@ export default class EditProduct extends React.Component {
     }
   }
 
+  handleTestClick() {
+    alert("Test was clicked!")
+  }
+
   render() {
     let description = this.state.product.description
+    let image = this.state.product.image
     let name = this.state.product.name
 
     return(
-      <div className="row">
-        <form className="col s12" onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="col s12">
-              {this.state.errors}
+      <div>
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--12-col">
+            <div>{this.state.errors}</div>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <RequiredField
+                  fieldName="name"
+                  fieldType="text"
+                  fieldValue={name}
+                  ref="name">
+                  Name
+                </RequiredField>
+                <RequiredField
+                  fieldName="description"
+                  fieldType="text"
+                  fieldValue={description}
+                  ref="description">
+                  Description
+                </RequiredField>
+                <div>
+                  <img src={image} alt=""/>
+                </div>
+                <UploadFile
+                  id={this.props.params.id}
+                  file={image}
+                  ref="file"/>
+                <div>
+                  <Link
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    to="/products">
+                    Cancel
+                  </Link>
+                  <div className="divider"></div>
+                  <button
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    type="submit">
+                    Save
+                  </button>
+                  <Test
+                    id="products"
+                    type="text"
+                    onClick={this.handleTestClick}/>
+                </div>
+              </form>
             </div>
           </div>
-          <div className="row">
-            <div className="col s6 input-field">
-              <RequiredField fieldName="name" fieldType="text" fieldActive="active" fieldValue={name} ref="name">
-              Name</RequiredField>
-            </div>
-            <div className="col s6 input-field">
-              <RequiredField fieldName="description" fieldType="text" fieldActive="active" fieldValue={description} ref="description">
-              Description</RequiredField>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col s12">
-              <UploadFile id={this.props.params.id} ref="file"/>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col s6">
-              <Link to="/products" className="btn waves-effect waves-light">Cancel</Link>
-            </div>
-            <div className="col s6">
-              <button className="btn waves-effect waves-light" type="submit">Save</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     )
   }
 }
 
-EditProduct.contextTypes = { router: React.PropTypes.func.isRequired }
+EditProduct.contextTypes = {
+  router: React.PropTypes.func.isRequired
+}

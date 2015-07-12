@@ -1,7 +1,6 @@
 // getErrorsFromXhr is also in auth_utils. It needs to be a separate script
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
-import ServerActions from "../actions/server_actions";
 import $ from "jquery";
 
 function getErrorsFromXhr(xhr) {
@@ -25,11 +24,11 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -43,26 +42,26 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   },
 
-  load() {
+  fetchProducts() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
       type: "GET",
       success: function(data) {
-        ServerActions.receiveDataFromServer(data)
+        ProductActions.receiveProductDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   },
@@ -77,11 +76,11 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        ServerActions.receiveErrorsFromServer(errors)
+        ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   }

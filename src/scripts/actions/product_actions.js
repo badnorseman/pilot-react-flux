@@ -17,9 +17,23 @@ export default {
     })
   },
 
-  load() {
+  list() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LIST
+    })
+  },
+
+  receiveProductDataFromServer(data) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RECEIVE_PRODUCT_DATA,
+      data: data
+    })
+  },
+
+  receiveProductErrorsFromServer(errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RECEIVE_PRODUCT_ERRORS,
+      errors: errors
     })
   },
 

@@ -13,8 +13,11 @@ export default class extends React.Component {
 
   render() {
     return(
-      <button className="btn waves-effect waves-light" onClick={this.handleClick}>
-        Remove</button>
+      <button
+        className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+        onClick={this.handleClick}>
+        Remove
+      </button>
     )
   }
 }

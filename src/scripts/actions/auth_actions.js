@@ -22,6 +22,20 @@ export default {
     })
   },
 
+  receiveAuthDataFromServer(data) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RECEIVE_AUTH_DATA,
+      data: data
+    })
+  },
+
+  receiveAuthErrorsFromServer(errors) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.RECEIVE_AUTH_ERRORS,
+      errors: errors
+    })
+  },
+
   signup(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.SIGNUP,

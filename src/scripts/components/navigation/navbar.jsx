@@ -1,5 +1,3 @@
-// Move menu items into own class
-// Fix toggleSidebar without jQuery
 import React from "react";
 import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
@@ -9,12 +7,11 @@ export default class Navbar extends React.Component {
   constructor(context) {
     super(context)
     this.state = {
-      loggedIn: false,
+      isLoggedIn: false,
       user: {}
     }
-    this.onChange = this.onChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.toggleSidebar = this.toggleSidebar.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {
@@ -27,7 +24,7 @@ export default class Navbar extends React.Component {
 
   onChange() {
     this.setState({
-      loggedIn: AuthStore.loggedIn(),
+      isLoggedIn: AuthStore.isLoggedIn(),
       user: AuthStore.getUser()
     })
   }
@@ -37,53 +34,57 @@ export default class Navbar extends React.Component {
     this.context.router.transitionTo("/products")
   }
 
-  toggleSidebar() {
-    $(".button-collapse").sideNav("")
-  }
-
   render() {
     return(
       <div>
-        <nav>
-          <div className="nav-wrapper">
-            <a href="#!" className="brand-logo center">FitBird</a>
-            <a href="#" data-activates="nav-mobile" className="button-collapse" onClick={this.toggleSidebar}>
-              <i className="mdi-navigation-menu"></i></a>
-            <ul className="right hide-on-med-and-down">
-              <li>
-                <Link to="/products">
-                  <i className="mdi-action-home"></i></Link>
-              </li>
-              <li>
-                <Link to="/payment_plans">
-                  <i className="mdi-action-payment"></i></Link>
-              </li>
-              <li>
-                {this.state.loggedIn ? (
-                  <i className="mdi-action-lock-outline" onClick={this.handleLogout}></i>
+        <div className="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
+          <header className="mdl-layout__header mdl-layout__header--waterfall">
+            <div className="mdl-layout__header-row">
+              <span className="mdl-layout-title">FitBird</span>
+              <div className="mdl-layout-spacer"></div>
+              <nav className="mdl-navigation">
+                <div className="mdl-navigation__link">
+                  <Link to="/products"><i className="material-icons">home</i></Link>
+                </div>
+                <div>
+                  {this.state.isLoggedIn ? (
+                    <i className="mdl-navigation__link material-icons" onClick={this.handleLogout}>lock</i>
+                  ) : (
+                    <div className="mdl-navigation__link">
+                      <Link to="/login"><i className="material-icons">unlock</i></Link>
+                    </div>
+                  )}
+                </div>
+                <div className="mdl-navigation__link">
+                  <Link to="/signup"><i className="material-icons">person</i></Link>
+                </div>
+              </nav>
+            </div>
+          </header>
+          <div className="mdl-layout__drawer">
+            <span className="mdl-layout-title">FitBird</span>
+            <nav className="mdl-navigation">
+              <div className="mdl-navigation__link">
+                <Link to="/products">Discover</Link>
+              </div>
+              <div>
+                {this.state.isLoggedIn ? (
+                  <div className="mdl-navigation__link">
+                    <Link to="/logout">Log Out</Link>
+                  </div>
                 ) : (
-                  <Link to="/login">
-                    <i className="mdi-action-lock-open"></i></Link>
+                  <div className="mdl-navigation__link">
+                    <Link to="/login"></Link>
+                  </div>
                 )}
-              </li>
-              <li>
-                <Link to="/signup">
-                  <i className="mdi-social-person-outline"></i></Link>
-              </li>
-            </ul>
-            <ul className="side-nav" id="nav-mobile">
-              <li><Link to="/products">Discover</Link></li>
-              <li><Link to="/signup">Sign Up</Link></li>
-              <li>
-                {this.state.loggedIn ? (
-                  <Link to="/logout">Log Out</Link>
-                ) : (
-                  <Link to="/login">Log In</Link>
-                )}
-              </li>
-            </ul>
+              </div>
+            </nav>
           </div>
-        </nav>
+          <main className="mdl-layout__content">
+            <div className="page-content">
+            </div>
+          </main>
+        </div>
       </div>
     )
   }

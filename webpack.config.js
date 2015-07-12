@@ -15,6 +15,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/, include: __dirname + "/src/scripts", loader: "babel-loader" },
+      { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.(jpg|png)$/, loader: "url-loader?limit=8192" }
     ]
   },

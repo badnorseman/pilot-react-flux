@@ -1,0 +1,29 @@
+html, body {
+  height:100%;
+}
+
+.center {
+  text-align:center;
+}
+
+.divider {
+  width:20px;
+  height:auto;
+  display:inline-block;
+}
+
+/* Change mdl-layout__content class to flex to allow spacer to work. */
+.mdl-layout__content {
+	display: flex;
+    -webkit-flex-direction: column;
+	        flex-direction: column;
+}
+
+.mdl-button--floating-action {
+  bottom:45px;
+  margin-bottom:100px;
+  padding-top:24px;
+  position:fixed;
+  right:24px;
+  z-index:998;
+}

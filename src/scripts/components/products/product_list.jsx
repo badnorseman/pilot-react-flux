@@ -9,7 +9,7 @@ export default class extends React.Component {
 
     return(
       <div>
-        <div className="row">
+        <div className="mdl-grid">
           {items}
         </div>
       </div>
