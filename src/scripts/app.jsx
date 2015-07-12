@@ -129,3 +129,7 @@ let routes = (
 Router.run(routes, Router.HashLocation, (Root) => {
   React.render(<Root/>, document.getElementById("app"))
 })
+
+App.contextTypes = {
+  router: React.PropTypes.func.isRequired
+}

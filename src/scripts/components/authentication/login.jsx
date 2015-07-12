@@ -9,8 +9,8 @@ export default class Login extends React.Component {
   constructor(context) {
     super(context)
     this.state = {errors: []}
-    this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {

@@ -37,7 +37,7 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   removeChangeListener(callback) {
     this.removeListener("change", callback)
   }
-});
+})
 
 ProductStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
@@ -51,7 +51,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.LIST:
-      ProductUtils.load()
+      ProductUtils.fetchProducts()
       break
 
     case ActionTypes.REMOVE:

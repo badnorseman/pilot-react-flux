@@ -10,8 +10,8 @@ export default class NewProduct extends React.Component {
   constructor() {
     super()
     this.state = {errors: []}
-    this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {

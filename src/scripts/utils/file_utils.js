@@ -29,7 +29,7 @@ export default {
         return fd;
       }(),
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)

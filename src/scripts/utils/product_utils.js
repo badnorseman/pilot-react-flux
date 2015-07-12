@@ -24,7 +24,7 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
@@ -42,7 +42,7 @@ export default {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
@@ -51,7 +51,7 @@ export default {
     })
   },
 
-  load() {
+  fetchProducts() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
@@ -76,7 +76,7 @@ export default {
       },
       data: data,
       success: function(data) {
-        ProductActions.load()
+        ProductActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)

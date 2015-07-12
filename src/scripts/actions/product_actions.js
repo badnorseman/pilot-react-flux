@@ -17,7 +17,7 @@ export default {
     })
   },
 
-  load() {
+  list() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LIST
     })

@@ -15,8 +15,8 @@ export default class EditProduct extends React.Component {
       product: ProductStore.getProduct(this.props.params.id)
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
     this.handleTestClick = this.handleTestClick.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {

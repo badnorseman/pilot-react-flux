@@ -1,4 +1,5 @@
 import ApiRoutes from "../constants/api_routes";
+import PaymentActions from "../actions/payment_actions";
 import $ from "jquery";
 
 function getErrorsFromXhr(xhr) {
@@ -12,44 +13,53 @@ function getErrorsFromXhr(xhr) {
 }
 
 export default {
-  fetchClientToken() {
-    let clientToken = ""
+  create(data) {
+    // $.ajax({
+    //   url: ApiRoutes.HOST + "/api/transactions",
+    //   dataType: "json",
+    //   type: "POST",
+    //   headers: {
+    //     "Authorization": "Token token=" + localStorage.token
+    //   },
+    //   data: data,
+    //   success: function(data) {
+    //   }.bind(this),
+    //   error: function(xhr, status, error) {
+    //     let errors = getErrorsFromXhr(xhr)
+    //     PaymentActions.receivePaymentErrorsFromServer(errors)
+    //   }.bind(this)
+    // })
+  },
 
+  fetchClientToken() {
     $.ajax({
-      url: ApiRoutes.HOST + "/api/payments/new",
+      url: ApiRoutes.PAYMENTS + "/new",
       dataType: "json",
       type: "GET",
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        clientToken = data.responseText
-        console.log("Success ", data)
+        PaymentActions.receiveClientTokenFromServer(data.client_token)
       }.bind(this),
       error: function(xhr, status, error) {
-        // let errors = getErrorsFromXhr(xhr)
-        clientToken = xhr.responseText
-        console.log("Error ", xhr)
+        let errors = getErrorsFromXhr(xhr)
+        PaymentActions.receivePaymentErrorsFromServer(errors)
       }.bind(this)
     })
-
-    return clientToken
   },
 
-  createPayment(data) {
+  fetchPayments() {
     $.ajax({
-      url: ApiRoutes.HOST + "/api/transactions",
+      url: ApiRoutes.PAYMENTS,
       dataType: "json",
-      type: "POST",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      data: data,
+      type: "GET",
       success: function(data) {
-        console.log("create success ", data)
+        PaymentActions.receivePaymentDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
-        console.log("create error ", xhr)
+        let errors = getErrorsFromXhr(xhr)
+        PaymentActions.receivePaymentErrorsFromServer(errors)
       }.bind(this)
     })
   }

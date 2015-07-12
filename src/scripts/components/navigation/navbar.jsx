@@ -10,8 +10,8 @@ export default class Navbar extends React.Component {
       isLoggedIn: false,
       user: {}
     }
-    this.onChange = this.onChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {

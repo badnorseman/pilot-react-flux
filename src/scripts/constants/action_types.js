@@ -10,7 +10,11 @@ export default keyMirror({
   REMOVE: null,
   RECEIVE_AUTH_DATA: null,
   RECEIVE_AUTH_ERRORS: null,
+  RECEIVE_CLIENT_TOKEN: null,
+  RECEIVE_PAYMENT_DATA: null,
+  RECEIVE_PAYMENT_ERRORS: null,
   RECEIVE_PRODUCT_DATA: null,
   RECEIVE_PRODUCT_ERRORS: null,
+  REQUEST_CLIENT_TOKEN: null,
   SIGNUP: null
 })

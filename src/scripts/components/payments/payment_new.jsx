@@ -3,22 +3,27 @@
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
-import PaymentUtils from "../../utils/payment_utils";
+import PaymentActions from "../../actions/payment_actions";
+import PaymentStore from "../../stores/payment_store";
 
 export default class NewPaymentPlan extends React.Component {
   constructor(context) {
     super(context)
-    this.state = {errors: []}
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      clientToken: "",
+      errors: []
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  componentWillMount() {
+    PaymentActions.requestClientToken()
   }
 
   componentDidMount() {
-    let clientToken = PaymentUtils.fetchClientToken()
-    console.log("clientToken ", clientToken)
+    PaymentStore.addChangeListener(this.onChange)
 
-    // console.log("Braintree.setup ", clientToken)
-    //
     // Braintree.setup(
     //   clientToken,
     //   "custom", {
@@ -28,18 +33,27 @@ export default class NewPaymentPlan extends React.Component {
   }
 
   componentWillUnmount() {
+    PaymentStore.removeChangeListener(this.onChange)
   }
 
   onChange() {
+    this.setState({
+      clientToken: PaymentStore.getClientToken(),
+      errors: PaymentStore.getErrors()
+    })
   }
 
   handleSubmit(e) {
     e.preventDefault()
 
-    PaymentUtils.createPayment({
-      amount: "100",
-      creditCard: React.findDOMNode(this.refs.creditCard).value,
-      expirationDate: React.findDOMNode(this.refs.expirationDate).value
+    let amount = "100"
+    let creditCard = React.findDOMNode(this.refs.creditCard).value
+    let expirationDate = React.findDOMNode(this.refs.expirationDate).value
+
+    PaymentActions.create({
+      amount: amount,
+      creditCard: creditCard,
+      expirationDate: expirationDate
     })
   }
 
@@ -49,6 +63,7 @@ export default class NewPaymentPlan extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
+            <div>{this.state.clientToken}</div>
             <div>
               <form id="payment" onSubmit={this.handleSubmit}>
                 <div>
