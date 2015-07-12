@@ -51,7 +51,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.LIST:
-      ProductUtils.fetchProducts()
+      ProductUtils.load()
       break
 
     case ActionTypes.REMOVE:

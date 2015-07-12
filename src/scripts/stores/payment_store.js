@@ -47,8 +47,12 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
 PaymentStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
+    case ActionTypes.ADD_PAYMENT:
+      PaymentUtils.create(action.data)
+      break
+
     case ActionTypes.REQUEST_CLIENT_TOKEN:
-      PaymentUtils.fetchClientToken()
+      PaymentUtils.requestClientToken()
       break
 
     case ActionTypes.RECEIVE_CLIENT_TOKEN:

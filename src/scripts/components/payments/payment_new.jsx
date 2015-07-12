@@ -1,4 +1,5 @@
 // Replace input and label with RequiredField
+// Accept USD in format 1.00 with pattern "\d+(\.\d{2})?"
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
@@ -22,17 +23,23 @@ export default class NewPaymentPlan extends React.Component {
 
   componentDidMount() {
     PaymentStore.addChangeListener(this.onChange)
-
-    // Braintree.setup(
-    //   clientToken,
-    //   "custom", {
-    //   id: "payment"
-    //   }
-    // )
   }
 
   componentWillUnmount() {
     PaymentStore.removeChangeListener(this.onChange)
+  }
+
+  componentDidUpdate() {
+    let clientToken = this.state.clientToken
+
+    if (clientToken) {
+      Braintree.setup(
+        clientToken,
+        "custom", {
+        id: "payment"
+        }
+      )
+    }
   }
 
   onChange() {
@@ -45,14 +52,16 @@ export default class NewPaymentPlan extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let amount = "100"
+    let amount = React.findDOMNode(this.refs.amount).value
     let creditCard = React.findDOMNode(this.refs.creditCard).value
+    let currency = React.findDOMNode(this.refs.currency).value
     let expirationDate = React.findDOMNode(this.refs.expirationDate).value
 
     if (creditCard && expirationDate) {
-      PaymentActions.create({
+      PaymentActions.addPayment({
         amount: amount,
         creditCard: creditCard,
+        currency: currency,
         expirationDate: expirationDate
       })
     }
@@ -61,12 +70,50 @@ export default class NewPaymentPlan extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid">
+        <div className="mdl-grid center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
-            <div>{this.state.clientToken}</div>
             <div>
               <form id="payment" onSubmit={this.handleSubmit}>
+                <div>
+                  <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input
+                      className="mdl-textfield__input"
+                      id="amount"
+                      type="text"
+                      pattern="\d{5}+(,\d{2})?"
+                      ref="amount"/>
+                    <label
+                      className="mdl-textfield__label"
+                      htmlFor="amount">
+                      Amount
+                    </label>
+                    <span
+                      className="mdl-textfield__error">
+                      "must be in format 99999,99"
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input
+                      className="mdl-textfield__input"
+                      id="currency"
+                      type="text"
+                      defaultValue="DKK"
+                      pattern="DKK"
+                      ref="currency"/>
+                    <label
+                      className="mdl-textfield__label"
+                      htmlFor="currency">
+                      Currency
+                    </label>
+                    <span
+                      className="mdl-textfield__error">
+                      "must be DKK"
+                    </span>
+                  </div>
+                </div>
                 <div>
                   <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input
@@ -74,7 +121,7 @@ export default class NewPaymentPlan extends React.Component {
                       data-braintree-name="number"
                       id="creditCard"
                       type="text"
-                      pattern="[0-9]{13,16}"
+                      pattern="[0-9]{16}"
                       ref="creditCard"/>
                     <label
                       className="mdl-textfield__label"
