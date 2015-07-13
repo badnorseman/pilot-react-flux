@@ -41,11 +41,10 @@ export default {
       },
       data: data,
       success: function(data) {
-        console.log("success ", data)
+        PaymentActions.listPayments()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        console.log("error ", errors)
         PaymentActions.receivePaymentErrorsFromServer(errors)
       }.bind(this)
     })
@@ -56,6 +55,9 @@ export default {
       url: ApiRoutes.PAYMENTS,
       dataType: "json",
       type: "GET",
+      headers: {
+        "Authorization": "Token token=" + localStorage.token
+      },
       success: function(data) {
         PaymentActions.receivePaymentDataFromServer(data)
       }.bind(this),

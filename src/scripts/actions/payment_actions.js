@@ -9,6 +9,12 @@ export default {
     })
   },
 
+  listPayments() {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.LIST_PAYMENTS
+    })
+  },
+
   requestClientToken() {
     Dispatcher.dispatch({
       actionType: ActionTypes.REQUEST_CLIENT_TOKEN,

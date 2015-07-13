@@ -5,12 +5,28 @@ import Dispatcher from "../dispatcher/dispatcher";
 import PaymentUtils from "../utils/payment_utils";
 
 let clientToken = ""
-let payment = []
+let payments = []
 let errors = []
 
 let PaymentStore = assign({}, EventEmitter.prototype, {
+  addChangeListener(callback) {
+    this.on("change", callback)
+  },
+
+  emitChange() {
+    return this.emit("change")
+  },
+
+  removeChangeListener(callback) {
+    this.removeListener("change", callback)
+  },
+
   getClientToken() {
     return clientToken
+  },
+
+  getErrors() {
+    return errors
   },
 
   getPayment(id) {
@@ -25,22 +41,6 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
 
   getPayments() {
     return payments
-  },
-
-  getErrors() {
-    return errors
-  },
-
-  emitChange() {
-    return this.emit("change")
-  },
-
-  addChangeListener(callback) {
-    this.on("change", callback)
-  },
-
-  removeChangeListener(callback) {
-    this.removeListener("change", callback)
   }
 });
 
@@ -49,6 +49,10 @@ PaymentStore.dispatchToken = Dispatcher.register((action) => {
 
     case ActionTypes.ADD_PAYMENT:
       PaymentUtils.create(action.data)
+      break
+
+    case ActionTypes.LIST_PAYMENTS:
+      PaymentUtils.load()
       break
 
     case ActionTypes.REQUEST_CLIENT_TOKEN:

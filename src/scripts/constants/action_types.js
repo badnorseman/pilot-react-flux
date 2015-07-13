@@ -5,6 +5,7 @@ export default keyMirror({
   ADD_PAYMENT: null,
   EDIT: null,
   LIST: null,
+  LIST_PAYMENTS: null,
   LOGIN: null,
   LOGOUT: null,
   OAUTH: null,

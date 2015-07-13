@@ -8,6 +8,22 @@ let products = []
 let errors = []
 
 let ProductStore = assign({}, EventEmitter.prototype, {
+  addChangeListener(callback) {
+    this.on("change", callback)
+  },
+
+  emitChange() {
+    return this.emit("change")
+  },
+
+  removeChangeListener(callback) {
+    this.removeListener("change", callback)
+  },
+
+  getErrors() {
+    return errors
+  },
+
   getProduct(id) {
     let product = {}
 
@@ -20,22 +36,6 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 
   getProducts() {
     return products
-  },
-
-  getErrors() {
-    return errors
-  },
-
-  emitChange() {
-    return this.emit("change")
-  },
-
-  addChangeListener(callback) {
-    this.on("change", callback)
-  },
-
-  removeChangeListener(callback) {
-    this.removeListener("change", callback)
   }
 })
 

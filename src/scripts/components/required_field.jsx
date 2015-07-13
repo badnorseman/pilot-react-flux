@@ -1,3 +1,5 @@
+// Enable to pass in validators e.g. required, number, amount etc.
+// Each validators would have own pattern and each pattern world have an error message.
 import React from "react";
 
 export default class RequiredField extends React.Component {
