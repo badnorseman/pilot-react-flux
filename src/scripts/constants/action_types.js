@@ -2,8 +2,10 @@ import keyMirror from "react/lib/keyMirror";
 
 export default keyMirror({
   ADD: null,
+  ADD_PAYMENT: null,
   EDIT: null,
   LIST: null,
+  LIST_PAYMENTS: null,
   LOGIN: null,
   LOGOUT: null,
   OAUTH: null,

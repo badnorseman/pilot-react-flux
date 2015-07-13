@@ -1,11 +1,14 @@
-// Replace input and label with RequiredField
+// Pass in Product id and getProduct from ProductStore
+// Change fixed amount to Product price
+// Accept USD in format 1.00 with pattern "\d+(\.\d{2})?"
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
 import PaymentActions from "../../actions/payment_actions";
 import PaymentStore from "../../stores/payment_store";
+import RequiredField from "../required_field";
 
-export default class NewPaymentPlan extends React.Component {
+export default class NewPayment extends React.Component {
   constructor(context) {
     super(context)
     this.state = {
@@ -13,6 +16,7 @@ export default class NewPaymentPlan extends React.Component {
       errors: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.onPaymentMethodReceived = this.onPaymentMethodReceived.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
@@ -22,17 +26,22 @@ export default class NewPaymentPlan extends React.Component {
 
   componentDidMount() {
     PaymentStore.addChangeListener(this.onChange)
-
-    // Braintree.setup(
-    //   clientToken,
-    //   "custom", {
-    //   id: "payment"
-    //   }
-    // )
   }
 
   componentWillUnmount() {
     PaymentStore.removeChangeListener(this.onChange)
+  }
+
+  componentDidUpdate() {
+    let clientToken = this.state.clientToken
+
+    Braintree.setup(
+      clientToken,
+      "dropin", {
+        container: "dropin-container",
+        onPaymentMethodReceived: this.onPaymentMethodReceived
+      }
+    )
   }
 
   onChange() {
@@ -44,69 +53,40 @@ export default class NewPaymentPlan extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+  }
 
-    let amount = "100"
-    let creditCard = React.findDOMNode(this.refs.creditCard).value
-    let expirationDate = React.findDOMNode(this.refs.expirationDate).value
+  onPaymentMethodReceived(paymentMethod) {
+    let amount = this.refs.amount.state.fieldValue
+    let paymentMethodNonce = paymentMethod.nonce
 
-    if (creditCard && expirationDate) {
-      PaymentActions.create({
+    PaymentActions.addPayment({
+      transaction: {
         amount: amount,
-        creditCard: creditCard,
-        expirationDate: expirationDate
-      })
-    }
+        payment_method_nonce: paymentMethodNonce
+      }
+    })
   }
 
   render() {
+    let amount = 100
+
     return(
       <div>
-        <div className="mdl-grid">
+        <div className="mdl-grid center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
-            <div>{this.state.clientToken}</div>
             <div>
-              <form id="payment" onSubmit={this.handleSubmit}>
-                <div>
-                  <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input
-                      className="mdl-textfield__input"
-                      data-braintree-name="number"
-                      id="creditCard"
-                      type="text"
-                      pattern="[0-9]{13,16}"
-                      ref="creditCard"/>
-                    <label
-                      className="mdl-textfield__label"
-                      htmlFor="creditCard">
-                      Credit Card
-                    </label>
-                    <span
-                      className="mdl-textfield__error">
-                      "must be 16 digits"
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input
-                      className="mdl-textfield__input"
-                      data-braintree-name="expiration_date"
-                      id="expirationDate"
-                      type="text"
-                      pattern="(?:0[1-9]|1[0-2])/([0-9]{2})"
-                      ref="expirationDate"/>
-                    <label
-                      className="mdl-textfield__label"
-                      htmlFor="expirationDate">
-                      Expiration Date
-                    </label>
-                    <span
-                      className="mdl-textfield__error">
-                      "must be in mm/yy format"
-                    </span>
-                  </div>
-                </div>
+              <form onSubmit={this.handleSubmit}>
+                <div id="dropin-container"></div>
+                <RequiredField
+                  fieldName="amout"
+                  fieldType="text"
+                  fieldValue={amount}
+                  fieldPattern="\d{5}+(,\d{2})?"
+                  fieldErrorMessage="must be in format 99999,99"
+                  ref="amount">
+                  Amount
+                </RequiredField>
                 <Link
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                   to="/products">
@@ -127,6 +107,6 @@ export default class NewPaymentPlan extends React.Component {
   }
 }
 
-NewPaymentPlan.contextTypes = {
+NewPayment.contextTypes = {
   router: React.PropTypes.func.isRequired
 }

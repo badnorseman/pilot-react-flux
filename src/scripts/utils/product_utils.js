@@ -51,7 +51,7 @@ export default {
     })
   },
 
-  fetchProducts() {
+  load() {
     $.ajax({
       url: ApiRoutes.PRODUCTS,
       dataType: "json",

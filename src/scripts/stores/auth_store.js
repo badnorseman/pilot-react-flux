@@ -8,8 +8,28 @@ let errors = []
 let user = {}
 
 let AuthStore = assign({}, EventEmitter.prototype, {
+  addChangeListener(callback) {
+    this.on("change", callback)
+  },
+
+  emitChange() {
+    return this.emit("change")
+  },
+
+  removeChangeListener(callback) {
+    this.removeListener("change", callback)
+  },
+
+  deleteToken() {
+    localStorage.removeItem("token")
+  },
+
   getErrors() {
     return errors
+  },
+
+  getToken() {
+    localStorage.token
   },
 
   getUser() {
@@ -22,22 +42,6 @@ let AuthStore = assign({}, EventEmitter.prototype, {
 
   setToken(token) {
     localStorage.token = token
-  },
-
-  deleteToken() {
-    localStorage.removeItem("token")
-  },
-
-  emitChange() {
-    return this.emit("change")
-  },
-
-  addChangeListener(callback) {
-    this.on("change", callback)
-  },
-
-  removeChangeListener(callback) {
-    this.removeListener("change", callback)
   }
 })
 
