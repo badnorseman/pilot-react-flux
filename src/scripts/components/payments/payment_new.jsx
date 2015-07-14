@@ -56,19 +56,22 @@ export default class NewPayment extends React.Component {
   }
 
   onPaymentMethodReceived(paymentMethod) {
-    let amount = this.refs.amount.state.fieldValue
+    let amount = 100
     let paymentMethodNonce = paymentMethod.nonce
+    let product_id = 1
 
     PaymentActions.addPayment({
       transaction: {
         amount: amount,
-        payment_method_nonce: paymentMethodNonce
+        payment_method_nonce: paymentMethodNonce,
+        product_id: product_id
       }
     })
   }
 
   render() {
     let amount = 100
+    let product_id = 1
 
     return(
       <div>
@@ -78,15 +81,11 @@ export default class NewPayment extends React.Component {
             <div>
               <form onSubmit={this.handleSubmit}>
                 <div id="dropin-container"></div>
-                <RequiredField
-                  fieldName="amount"
-                  fieldType="text"
-                  fieldValue={amount}
-                  fieldPattern="\d{5}+(,\d{2})?"
-                  fieldErrorMessage="must be in format 99999,99"
-                  ref="amount">
-                  Amount
-                </RequiredField>
+                <div>
+                  Product {product_id}
+                  <div className="divider"></div>
+                  Amount {amount}
+                </div>
                 <Link
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                   to="/products">
