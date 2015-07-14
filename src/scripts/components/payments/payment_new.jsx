@@ -79,7 +79,7 @@ export default class NewPayment extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <div id="dropin-container"></div>
                 <RequiredField
-                  fieldName="amout"
+                  fieldName="amount"
                   fieldType="text"
                   fieldValue={amount}
                   fieldPattern="\d{5}+(,\d{2})?"
