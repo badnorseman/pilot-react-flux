@@ -1,19 +1,18 @@
-// Pass in Product id and getProduct from ProductStore
-// Change fixed amount to Product price
 // Accept USD in format 1.00 with pattern "\d+(\.\d{2})?"
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
 import PaymentActions from "../../actions/payment_actions";
 import PaymentStore from "../../stores/payment_store";
-import RequiredField from "../required_field";
+import ProductStore from "../../stores/product_store";
 
 export default class NewPayment extends React.Component {
-  constructor(context) {
-    super(context)
+  constructor(context, props) {
+    super(context, props)
     this.state = {
       clientToken: "",
-      errors: []
+      errors: [],
+      product: ProductStore.getProduct(this.props.query.productId)
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onPaymentMethodReceived = this.onPaymentMethodReceived.bind(this)
@@ -56,10 +55,10 @@ export default class NewPayment extends React.Component {
   }
 
   onPaymentMethodReceived(paymentMethod) {
-    let amount = 100
-    let currency = "USD"
+    let amount = this.state.product.price
+    let currency = this.state.product.currency
     let paymentMethodNonce = paymentMethod.nonce
-    let product_id = 1
+    let product_id = this.state.product.id
 
     PaymentActions.addPayment({
       payment: {
@@ -72,22 +71,19 @@ export default class NewPayment extends React.Component {
   }
 
   render() {
-    let amount = 100
-    let currency = "USD"
-    let product_id = 1
-
     return(
       <div>
         <div className="mdl-grid center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
-              Product {product_id}
+              {this.state.product.name}
               <div className="divider"></div>
-              Amount {amount}
+              {this.state.product.price}
               <div className="divider"></div>
-              {currency}
+              {this.state.product.currency}
             </div>
+            <div className="divider"></div>
             <div>
               <form onSubmit={this.handleSubmit}>
                 <div id="dropin-container"></div>
