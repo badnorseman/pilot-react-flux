@@ -12,7 +12,7 @@ import Logout from "./components/authentication/logout";
 import NewPayment from "./components/payments/payment_new"
 import NewProduct from "./components/products/product_new";
 import Product from "./components/products/product_edit";
-import Products from "./components/products/products";
+import Products from "./components/products/product_list";
 import Signup from "./components/authentication/signup";
 
 let { DefaultRoute, Link, Route, RouteHandler } = Router
