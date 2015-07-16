@@ -11,6 +11,7 @@ import Login from "./components/authentication/login";
 import Logout from "./components/authentication/logout";
 import NewPayment from "./components/payments/payment_new"
 import NewProduct from "./components/products/product_new";
+import Payments from "./components/payments/payment_list";
 import Product from "./components/products/product_edit";
 import Products from "./components/products/product_list";
 import Signup from "./components/authentication/signup";
@@ -89,6 +90,9 @@ class App extends React.Component {
                 <Link to="/products">Discover</Link>
               </div>
               <div className="mdl-navigation__link">
+                <Link to="/payments">My Account</Link>
+              </div>
+              <div className="mdl-navigation__link">
                 {this.state.isLoggedIn ? (
                   <Link to="/logout">Log Out</Link>
                 ) : (
@@ -119,6 +123,7 @@ let routes = (
     <Route path="login" handler={Login}/>
     <Route path="logout" handler={Logout}/>
     <Route path="payment/new" handler={NewPayment}/>
+    <Route path="payments" handler={Payments}/>
     <Route path="product/new" handler={NewProduct}/>
     <Route path="products" handler={Products}/>
     <Route path="products/:id" handler={Product}/>

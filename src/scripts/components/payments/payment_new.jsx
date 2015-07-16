@@ -60,7 +60,7 @@ export default class NewPayment extends React.Component {
     let paymentMethodNonce = paymentMethod.nonce
     let product_id = this.state.product.id
 
-    PaymentActions.addPayment({
+    PaymentActions.add({
       payment: {
         amount: amount,
         currency: currency,

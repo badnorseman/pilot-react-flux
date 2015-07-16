@@ -41,7 +41,7 @@ export default {
       },
       data: data,
       success: function(data) {
-        PaymentActions.listPayments()
+        PaymentActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
