@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, RouteHandler } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
+import Footer from "./footer";
 
 export default class Navbar extends React.Component {
   constructor(context) {
@@ -31,7 +32,6 @@ export default class Navbar extends React.Component {
 
   handleLogout() {
     AuthActions.logout()
-    this.context.router.transitionTo("/products")
   }
 
   render() {
@@ -40,23 +40,22 @@ export default class Navbar extends React.Component {
         <div className="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
           <header className="mdl-layout__header mdl-layout__header--waterfall">
             <div className="mdl-layout__header-row">
-              <span className="mdl-layout-title">FitBird</span>
+              <span className="mdl-layout-title">
+                <Link to="/products">FitBird</Link>
+              </span>
               <div className="mdl-layout-spacer"></div>
               <nav className="mdl-navigation">
                 <div className="mdl-navigation__link">
-                  <Link to="/products"><i className="material-icons">home</i></Link>
-                </div>
-                <div>
                   {this.state.isLoggedIn ? (
-                    <i className="mdl-navigation__link material-icons" onClick={this.handleLogout}>lock</i>
+                    <i className="material-icons" onClick={this.handleLogout}>lock</i>
                   ) : (
-                    <div className="mdl-navigation__link">
-                      <Link to="/login"><i className="material-icons">unlock</i></Link>
-                    </div>
+                    <Link to="/login">
+                      <i className="material-icons">lock_open</i></Link>
                   )}
                 </div>
                 <div className="mdl-navigation__link">
-                  <Link to="/signup"><i className="material-icons">person</i></Link>
+                  <Link to="/signup">
+                    <i className="material-icons">person</i></Link>
                 </div>
               </nav>
             </div>
@@ -67,21 +66,26 @@ export default class Navbar extends React.Component {
               <div className="mdl-navigation__link">
                 <Link to="/products">Discover</Link>
               </div>
-              <div>
+              <div className="mdl-navigation__link">
+                <Link to="/payments">My Account</Link>
+              </div>
+              <div className="mdl-navigation__link">
                 {this.state.isLoggedIn ? (
-                  <div className="mdl-navigation__link">
-                    <Link to="/logout">Log Out</Link>
-                  </div>
+                  <Link to="/logout">Log Out</Link>
                 ) : (
-                  <div className="mdl-navigation__link">
-                    <Link to="/login"></Link>
-                  </div>
+                  <Link to="/login"></Link>
                 )}
+              </div>
+              <div className="mdl-navigation__link">
+                <Link to="/signup">Sign Up</Link>
               </div>
             </nav>
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
+              <RouteHandler/>
+              <div className="mdl-layout-spacer"></div>
+              <Footer/>
             </div>
           </main>
         </div>
