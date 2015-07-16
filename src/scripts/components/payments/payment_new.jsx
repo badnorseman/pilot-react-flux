@@ -57,12 +57,14 @@ export default class NewPayment extends React.Component {
 
   onPaymentMethodReceived(paymentMethod) {
     let amount = 100
+    let currency = "USD"
     let paymentMethodNonce = paymentMethod.nonce
     let product_id = 1
 
     PaymentActions.addPayment({
-      transaction: {
+      payment: {
         amount: amount,
+        currency: currency,
         payment_method_nonce: paymentMethodNonce,
         product_id: product_id
       }
@@ -71,6 +73,7 @@ export default class NewPayment extends React.Component {
 
   render() {
     let amount = 100
+    let currency = "USD"
     let product_id = 1
 
     return(
@@ -79,13 +82,15 @@ export default class NewPayment extends React.Component {
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
+              Product {product_id}
+              <div className="divider"></div>
+              Amount {amount}
+              <div className="divider"></div>
+              {currency}
+            </div>
+            <div>
               <form onSubmit={this.handleSubmit}>
                 <div id="dropin-container"></div>
-                <div>
-                  Product {product_id}
-                  <div className="divider"></div>
-                  Amount {amount}
-                </div>
                 <Link
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                   to="/products">

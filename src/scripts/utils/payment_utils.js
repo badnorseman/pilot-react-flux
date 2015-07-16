@@ -33,7 +33,7 @@ export default {
 
   create(data) {
     $.ajax({
-      url: ApiRoutes.HOST + "/api/transactions",
+      url: ApiRoutes.PAYMENTS,
       dataType: "json",
       type: "POST",
       headers: {
