@@ -33,7 +33,7 @@ export default {
 
   create(data) {
     $.ajax({
-      url: ApiRoutes.HOST + "/api/transactions",
+      url: ApiRoutes.PAYMENTS,
       dataType: "json",
       type: "POST",
       headers: {
@@ -41,7 +41,7 @@ export default {
       },
       data: data,
       success: function(data) {
-        PaymentActions.listPayments()
+        PaymentActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)

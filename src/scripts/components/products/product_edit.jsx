@@ -37,15 +37,19 @@ export default class EditProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
+    let currency = this.refs.currency.state.fieldValue
     let description = this.refs.description.state.fieldValue
     let name = this.refs.name.state.fieldValue
+    let price = this.refs.price.state.fieldValue
 
     if (description && name) {
       ProductActions.edit(
         this.props.params.id, {
         product: {
+          currency: currency,
           description: description,
-          name: name
+          name: name,
+          price: price
         }
       })
       this.context.router.transitionTo("/products")
@@ -57,10 +61,6 @@ export default class EditProduct extends React.Component {
   }
 
   render() {
-    let description = this.state.product.description
-    let image = this.state.product.image
-    let name = this.state.product.name
-
     return(
       <div>
         <div className="mdl-grid">
@@ -71,23 +71,37 @@ export default class EditProduct extends React.Component {
                 <RequiredField
                   fieldName="name"
                   fieldType="text"
-                  fieldValue={name}
+                  fieldValue={this.state.product.name}
                   ref="name">
                   Name
                 </RequiredField>
                 <RequiredField
                   fieldName="description"
                   fieldType="text"
-                  fieldValue={description}
+                  fieldValue={this.state.product.description}
                   ref="description">
                   Description
                 </RequiredField>
+                <RequiredField
+                  fieldName="price"
+                  fieldType="number"
+                  fieldValue={this.state.product.price}
+                  ref="price">
+                  Price
+                </RequiredField>
+                <RequiredField
+                  fieldName="currency"
+                  fieldType="text"
+                  fieldValue={this.state.product.currency}
+                  ref="currency">
+                  Currency
+                </RequiredField>
                 <div>
-                  <img src={image} alt=""/>
+                  <img src={this.state.product.image} alt=""/>
                 </div>
                 <UploadFile
                   id={this.props.params.id}
-                  file={image}
+                  file={this.state.product.image}
                   ref="file"/>
                 <div>
                   <Link

@@ -31,14 +31,18 @@ export default class NewProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
+    let currency = this.refs.currency.state.fieldValue
     let description = this.refs.description.state.fieldValue
     let name = this.refs.name.state.fieldValue
+    let price = this.refs.price.state.fieldValue
 
     if (description && name) {
       ProductActions.add({
         product: {
+          currency: currency,
           description: description,
-          name: name
+          name: name,
+          price: price
         }
       })
       this.context.router.transitionTo("/products")
@@ -64,6 +68,18 @@ export default class NewProduct extends React.Component {
                   fieldType="text"
                   ref="description">
                   Description
+                </RequiredField>
+                <RequiredField
+                  fieldName="price"
+                  fieldType="number"
+                  ref="price">
+                  Price
+                </RequiredField>
+                <RequiredField
+                  fieldName="currency"
+                  fieldType="text"
+                  ref="currency">
+                  Currency
                 </RequiredField>
                 <div>
                   <Link

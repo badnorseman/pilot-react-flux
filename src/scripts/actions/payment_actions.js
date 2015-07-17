@@ -2,14 +2,14 @@ import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
 
 export default {
-  addPayment(data) {
+  add(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.ADD_PAYMENT,
       data: data
     })
   },
 
-  listPayments() {
+  list() {
     Dispatcher.dispatch({
       actionType: ActionTypes.LIST_PAYMENTS
     })
