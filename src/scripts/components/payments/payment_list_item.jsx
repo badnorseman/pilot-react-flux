@@ -13,16 +13,18 @@ export default class extends React.Component {
         <table className="mdl-data-table mdl-js-data-table">
           <thead>
             <tr>
-              <th>Amount</th>
-              <th>Currency</th>
-              <th>Transaction</th>
+              <th>PRICE</th>
+              <th>CURRENCY</th>
+              <th>TRANSACTION ID</th>
+              <th>TRANSACTION DATE</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{this.props.item.amount}</td>
+              <td>{this.props.item.price}</td>
               <td className="mdl-data-table__cell--non-numeric">{this.props.item.currency}</td>
               <td className="mdl-data-table__cell--non-numeric">{this.props.item.transaction_id}</td>
+              <td className="mdl-data-table__cell--non-numeric">{this.props.item.transaction_date}</td>
             </tr>
           </tbody>
         </table>

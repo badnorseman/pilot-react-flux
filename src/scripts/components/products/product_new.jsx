@@ -1,5 +1,7 @@
 // Add callback from server to return when no errors
 // Merge Edit and New form
+// Accept price in format 1.00 with pattern "\d{5}+(\.\d{2})?"
+// Accept price in format 1,00 with pattern "\d{5}+(\,\d{2})?"
 import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";

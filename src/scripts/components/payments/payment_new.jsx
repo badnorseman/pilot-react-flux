@@ -1,4 +1,3 @@
-// Accept USD in format 1.00 with pattern "\d+(\.\d{2})?"
 import React from "react";
 import { Link } from "react-router";
 import Braintree from "braintree-web";
@@ -58,16 +57,18 @@ export default class NewPayment extends React.Component {
     let amount = this.state.product.price
     let currency = this.state.product.currency
     let paymentMethodNonce = paymentMethod.nonce
-    let product_id = this.state.product.id
+    let productId = this.state.product.id
 
-    PaymentActions.add({
-      payment: {
-        amount: amount,
-        currency: currency,
-        payment_method_nonce: paymentMethodNonce,
-        product_id: product_id
-      }
-    })
+    if (amount && currency && paymentMethodNonce && productId) {
+      PaymentActions.add({
+        payment: {
+          amount: amount,
+          currency: currency,
+          payment_method_nonce: paymentMethodNonce,
+          product_id: productId
+        }
+      })
+    }
   }
 
   render() {
