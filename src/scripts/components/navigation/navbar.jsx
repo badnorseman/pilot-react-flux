@@ -15,6 +15,13 @@ export default class Navbar extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
+  componentWillMount() {
+    this.setState({
+      isLoggedIn: AuthStore.isLoggedIn(),
+      user: AuthStore.getUser()
+    })
+  }
+
   componentDidMount() {
     AuthStore.addChangeListener(this.onChange)
   }
@@ -32,13 +39,13 @@ export default class Navbar extends React.Component {
 
   handleLogout() {
     AuthActions.logout()
-  }
+   }
 
   render() {
     return(
       <div>
-        <div className="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
-          <header className="mdl-layout__header mdl-layout__header--waterfall">
+        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--overlay-drawer-button">
+          <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
               <span className="mdl-layout-title">
                 <Link to="/products">FitBird</Link>
@@ -47,15 +54,13 @@ export default class Navbar extends React.Component {
               <nav className="mdl-navigation">
                 <div className="mdl-navigation__link">
                   {this.state.isLoggedIn ? (
-                    <i className="material-icons" onClick={this.handleLogout}>lock</i>
+                    <a onClick={this.handleLogout} href="#">Log Out</a>
                   ) : (
-                    <Link to="/login">
-                      <i className="material-icons">lock_open</i></Link>
+                    <Link to="/login">Log In</Link>
                   )}
                 </div>
                 <div className="mdl-navigation__link">
-                  <Link to="/signup">
-                    <i className="material-icons">person</i></Link>
+                  <Link to="/signup">Sign Up</Link>
                 </div>
               </nav>
             </div>
@@ -71,9 +76,9 @@ export default class Navbar extends React.Component {
               </div>
               <div className="mdl-navigation__link">
                 {this.state.isLoggedIn ? (
-                  <Link to="/logout">Log Out</Link>
+                  <a onClick={this.handleLogout} href="#">Log Out</a>
                 ) : (
-                  <Link to="/login"></Link>
+                  <Link to="/login">Log In</Link>
                 )}
               </div>
               <div className="mdl-navigation__link">
@@ -84,7 +89,6 @@ export default class Navbar extends React.Component {
           <main className="mdl-layout__content">
             <div className="page-content">
               <RouteHandler/>
-              <div className="mdl-layout-spacer"></div>
               <Footer/>
             </div>
           </main>
