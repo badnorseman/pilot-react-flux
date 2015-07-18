@@ -63,7 +63,7 @@ export default class EditProduct extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid">
+        <div className="mdl-grid center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
