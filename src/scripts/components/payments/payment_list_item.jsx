@@ -10,22 +10,15 @@ export default class extends React.Component {
   render() {
     return(
       <div>
-        <table className="mdl-data-table mdl-js-data-table">
-          <thead>
-            <tr>
-              <th>ORDER DATE</th>
-              <th>PRICE</th>
-              <th>ORDER ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="mdl-data-table__cell--non-numeric">{this.props.item.transaction_date}</td>
-              <td className="mdl-data-table__cell--non-numeric">{this.props.item.currency} {this.props.item.amount}</td>
-              <td className="mdl-data-table__cell--non-numeric">{this.props.item.transaction_id}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="mdl-cell mdl-cell--12-col">
+          {this.props.item.transaction_date}
+          <div className="divider"></div>
+          {this.props.item.currency}
+          <div className="divider"></div>
+          {this.props.item.amount}
+          <div className="divider"></div>
+          {this.props.item.transaction_id}
+        </div>
       </div>
     )
   }
