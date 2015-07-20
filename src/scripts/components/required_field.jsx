@@ -2,7 +2,7 @@
 // Each validators would have own pattern and each pattern world have an error message.
 import React from "react";
 
-export default class RequiredField extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,25 +30,23 @@ export default class RequiredField extends React.Component {
     var value = this.state.fieldValue
 
     return(
-      <div>
-        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input
-            className="mdl-textfield__input"
-            id={this.props.fieldName}
-            type={this.props.fieldType}
-            value={value}
-            ref={this.props.fieldName}
-            onChange={this.handleChange}/>
-          <label
-            className="mdl-textfield__label"
-            htmlFor={this.props.fieldName}>
-            {this.props.children}
-          </label>
-          <span
-            className="mdl-textfield__error">
-            {errors}
-          </span>
-        </div>
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input
+          className="mdl-textfield__input"
+          id={this.props.fieldName}
+          type={this.props.fieldType}
+          value={value}
+          ref={this.props.fieldName}
+          onChange={this.handleChange}/>
+        <label
+          className="mdl-textfield__label"
+          htmlFor={this.props.fieldName}>
+          {this.props.children}
+        </label>
+        <span
+          className="mdl-textfield__error">
+          {errors}
+        </span>
       </div>
     )
   }

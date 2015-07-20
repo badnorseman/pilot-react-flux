@@ -4,14 +4,14 @@ import ActionTypes from "../constants/action_types";
 export default {
   add(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ADD,
+      actionType: ActionTypes.ADD_PRODUCT,
       data: data
     })
   },
 
   edit(id, data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.EDIT,
+      actionType: ActionTypes.EDIT_PRODUCT,
       id: id,
       data: data
     })
@@ -19,27 +19,27 @@ export default {
 
   list() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LIST
+      actionType: ActionTypes.LIST_PRODUCT
     })
   },
 
   receiveProductDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_PRODUCT_DATA,
+      actionType: ActionTypes.RECEIVE_DATA_PRODUCT,
       data: data
     })
   },
 
   receiveProductErrorsFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_PRODUCT_ERRORS,
+      actionType: ActionTypes.RECEIVE_ERRORS_PRODUCT,
       errors: errors
     })
   },
 
   remove(id) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.REMOVE,
+      actionType: ActionTypes.REMOVE_PRODUCT,
       id: id
     })
   }

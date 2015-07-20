@@ -24,14 +24,14 @@ export default {
 
   receiveAuthDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_AUTH_DATA,
+      actionType: ActionTypes.RECEIVE_DATA_AUTH,
       data: data
     })
   },
 
   receiveAuthErrorsFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_AUTH_ERRORS,
+      actionType: ActionTypes.RECEIVE_ERRORS_AUTH,
       errors: errors
     })
   },

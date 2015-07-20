@@ -11,7 +11,7 @@ export default {
 
   list() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LIST_PAYMENTS
+      actionType: ActionTypes.LIST_PAYMENT
     })
   },
 
@@ -30,14 +30,14 @@ export default {
 
   receivePaymentDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_PAYMENT_DATA,
+      actionType: ActionTypes.RECEIVE_DATA_PAYMENT,
       data: data
     })
   },
 
   receivePaymentErrorsFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_PAYMENT_ERRORS,
+      actionType: ActionTypes.RECEIVE_ERRORS_PAYMENT,
       errors: errors
     })
   }
