@@ -74,7 +74,17 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      data: data,
+      processData: false,
+      contentType: false,
+      data: function() {
+        var fd = new FormData();
+        fd.append("product[currency]", data.product.currency);
+        fd.append("product[description]", data.product.description);
+        fd.append("product[image]", data.product.image);
+        fd.append("product[name]", data.product.name);
+        fd.append("product[price]", data.product.price);
+        return fd;
+      }(),
       success: function(data) {
         ProductActions.list()
       }.bind(this),

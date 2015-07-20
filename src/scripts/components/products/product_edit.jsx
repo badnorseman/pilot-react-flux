@@ -37,6 +37,7 @@ export default class EditProduct extends React.Component {
 
     let currency = e.target.elements.currency.value
     let description = this.refs.description.state.fieldValue
+    let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
 
@@ -46,6 +47,7 @@ export default class EditProduct extends React.Component {
         product: {
           currency: currency,
           description: description,
+          image: image,
           name: name,
           price: price
         }
@@ -85,7 +87,7 @@ export default class EditProduct extends React.Component {
                 </RequiredField>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
-                    <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency" ref="currency" defaultChecked/>
+                    <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency" ref="currency"/>
                     <span className="mdl-radio__label">DKK</span>
                   </label>
                   <div className="divider"></div>
@@ -105,7 +107,7 @@ export default class EditProduct extends React.Component {
                 <UploadFile
                   id={this.props.params.id}
                   file={this.state.product.image}
-                  ref="file"/>
+                  ref="image"/>
                 <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

@@ -15,9 +15,9 @@ export default class uploadFile extends React.Component {
 
     let file = document.getElementById("file--selected").files[0]
 
-    if (file) {
-      FileUtils.uploadFile(this.props.id, file)
-    }
+    this.setState({
+      file: file
+    })
   }
 
   render() {
@@ -39,8 +39,4 @@ export default class uploadFile extends React.Component {
       </div>
     )
   }
-}
-
-uploadFile.contextTypes = {
-  router: React.PropTypes.func.isRequired
 }
