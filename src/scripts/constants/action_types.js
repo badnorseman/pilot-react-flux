@@ -1,22 +1,22 @@
 import keyMirror from "react/lib/keyMirror";
 
 export default keyMirror({
-  ADD: null,
   ADD_PAYMENT: null,
-  EDIT: null,
-  LIST: null,
-  LIST_PAYMENTS: null,
+  ADD_PRODUCT: null,
+  EDIT_PRODUCT: null,
+  LIST_PAYMENT: null,
+  LIST_PRODUCT: null,
   LOGIN: null,
   LOGOUT: null,
   OAUTH: null,
-  REMOVE: null,
-  RECEIVE_AUTH_DATA: null,
-  RECEIVE_AUTH_ERRORS: null,
+  REMOVE_PRODUCT: null,
   RECEIVE_CLIENT_TOKEN: null,
-  RECEIVE_PAYMENT_DATA: null,
-  RECEIVE_PAYMENT_ERRORS: null,
-  RECEIVE_PRODUCT_DATA: null,
-  RECEIVE_PRODUCT_ERRORS: null,
+  RECEIVE_DATA_AUTH: null,
+  RECEIVE_DATA_PAYMENT: null,
+  RECEIVE_DATA_PRODUCT: null,
+  RECEIVE_ERRORS_AUTH: null,
+  RECEIVE_ERRORS_PAYMENT: null,
+  RECEIVE_ERRORS_PRODUCT: null,
   REQUEST_CLIENT_TOKEN: null,
   SIGNUP: null
 })

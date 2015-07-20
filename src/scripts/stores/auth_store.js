@@ -60,7 +60,7 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthUtils.oauth(action.provider)
       break
 
-    case ActionTypes.RECEIVE_AUTH_DATA:
+    case ActionTypes.RECEIVE_DATA_AUTH:
       if (action.data.token) {
         AuthStore.setToken(action.data.token)
         user = action.data
@@ -71,7 +71,7 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_AUTH_ERRORS:
+    case ActionTypes.RECEIVE_ERRORS_AUTH:
       errors = action.errors
       AuthStore.emitChange()
       break

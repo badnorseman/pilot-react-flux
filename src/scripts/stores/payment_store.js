@@ -51,7 +51,7 @@ PaymentStore.dispatchToken = Dispatcher.register((action) => {
       PaymentUtils.create(action.data)
       break
 
-    case ActionTypes.LIST_PAYMENTS:
+    case ActionTypes.LIST_PAYMENT:
       PaymentUtils.load()
       break
 
@@ -64,12 +64,12 @@ PaymentStore.dispatchToken = Dispatcher.register((action) => {
       PaymentStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_PAYMENT_DATA:
+    case ActionTypes.RECEIVE_DATA_PAYMENT:
       payments = action.data
       PaymentStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_PAYMENT_ERRORS:
+    case ActionTypes.RECEIVE_ERRORS_PAYMENT:
       errors = action.errors
       PaymentStore.emitChange()
       break
