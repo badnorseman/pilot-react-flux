@@ -5,7 +5,6 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import UploadFile from "../upload_file";
-import Test from "../test";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -15,7 +14,6 @@ export default class EditProduct extends React.Component {
       product: ProductStore.getProduct(this.props.params.id)
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleTestClick = this.handleTestClick.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
@@ -37,12 +35,12 @@ export default class EditProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    let currency = this.refs.currency.state.fieldValue
+    let currency = e.target.elements.currency.value
     let description = this.refs.description.state.fieldValue
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
 
-    if (description && name) {
+    if (description && name && price) {
       ProductActions.edit(
         this.props.params.id, {
         product: {
@@ -54,10 +52,6 @@ export default class EditProduct extends React.Component {
       })
       this.context.router.transitionTo("/products")
     }
-  }
-
-  handleTestClick() {
-    alert("Test was clicked!")
   }
 
   render() {
@@ -89,13 +83,22 @@ export default class EditProduct extends React.Component {
                   ref="price">
                   Price
                 </RequiredField>
-                <RequiredField
-                  fieldName="currency"
-                  fieldType="text"
-                  fieldValue={this.state.product.currency}
-                  ref="currency">
-                  Currency
-                </RequiredField>
+                <div>
+                  <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
+                    <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency" ref="currency" defaultChecked/>
+                    <span className="mdl-radio__label">DKK</span>
+                  </label>
+                  <div className="divider"></div>
+                  <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-eur">
+                    <input className="mdl-radio__button" id="currency-eur" type="radio" value="EUR" name="currency" ref="currency"/>
+                    <span className="mdl-radio__label">EUR</span>
+                  </label>
+                  <div className="divider"></div>
+                  <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-usd">
+                    <input className="mdl-radio__button" id="currency-usd" type="radio" value="USD" name="currency" ref="currency"/>
+                    <span className="mdl-radio__label">USD</span>
+                  </label>
+                </div>
                 <div>
                   <img src={this.state.product.image} alt=""/>
                 </div>
@@ -115,10 +118,6 @@ export default class EditProduct extends React.Component {
                     type="submit">
                     Save
                   </button>
-                  <Test
-                    id="products"
-                    type="text"
-                    onClick={this.handleTestClick}/>
                 </div>
               </form>
             </div>
