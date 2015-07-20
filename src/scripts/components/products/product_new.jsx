@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
+import UploadFile from "../upload_file";
 
 export default class NewProduct extends React.Component {
   constructor() {
@@ -35,14 +36,16 @@ export default class NewProduct extends React.Component {
 
     let currency = e.target.elements.currency.value
     let description = this.refs.description.state.fieldValue
+    let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
 
-    if (description && name && price) {
+    if (currency && description && name && price) {
       ProductActions.add({
         product: {
           currency: currency,
           description: description,
+          image: image,
           name: name,
           price: price
         }
@@ -71,6 +74,12 @@ export default class NewProduct extends React.Component {
                   ref="description">
                   Description
                 </RequiredField>
+                <RequiredField
+                  fieldName="price"
+                  fieldType="number"
+                  ref="price">
+                  Price
+                </RequiredField>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
                     <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency" ref="currency" defaultChecked/>
@@ -87,12 +96,8 @@ export default class NewProduct extends React.Component {
                     <span className="mdl-radio__label">USD</span>
                   </label>
                 </div>
-                <RequiredField
-                  fieldName="price"
-                  fieldType="number"
-                  ref="price">
-                  Price
-                </RequiredField>
+                <UploadFile
+                  ref="image"/>
                 <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

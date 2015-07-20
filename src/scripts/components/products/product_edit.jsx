@@ -41,7 +41,7 @@ export default class EditProduct extends React.Component {
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
 
-    if (description && name && price) {
+    if (currency && description && name && price) {
       ProductActions.edit(
         this.props.params.id, {
         product: {
