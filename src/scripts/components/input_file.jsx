@@ -1,5 +1,4 @@
 import React from "react";
-import FileUtils from "../utils/file_utils";
 
 export default class extends React.Component {
   constructor() {
