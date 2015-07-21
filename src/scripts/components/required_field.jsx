@@ -2,7 +2,7 @@
 // Each validators would have own pattern and each pattern world have an error message.
 import React from "react";
 
-export default class extends React.Component {
+export default class RequiredFile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,4 +49,9 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+RequiredFile.propTypes = {
+  fieldName: React.PropTypes.string.isRequired,
+  fieldType: React.PropTypes.string.isRequired
 }
