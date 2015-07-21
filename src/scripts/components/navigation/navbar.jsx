@@ -30,6 +30,10 @@ export default class Navbar extends React.Component {
     AuthStore.removeChangeListener(this.onChange)
   }
 
+  componentDidUpdate() {
+    componentHandler.upgradeDom()
+  }
+
   onChange() {
     this.setState({
       isLoggedIn: AuthStore.isLoggedIn(),
