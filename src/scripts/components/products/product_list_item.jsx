@@ -10,7 +10,6 @@ export default class extends React.Component {
   render() {
     return(
       <div>
-        <Link to={`/products/${this.props.item.id}`} params={{id: this.props.item.id}}>
         <div className="mdl-cell mdl-cell--6-col-phone mdl-cell--4-col-tablet mdl-cell--3-col-desktop">
           <div className="mdl-card mdl-shadow--2dp">
             <div className="mdl-card__media">
@@ -22,7 +21,6 @@ export default class extends React.Component {
             </div>
           </div>
         </div>
-        </Link>
       </div>
     )
   }

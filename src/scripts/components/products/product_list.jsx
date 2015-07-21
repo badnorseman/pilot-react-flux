@@ -32,7 +32,9 @@ export default class ProductList extends React.Component {
 
   render() {
     let items = this.state.products.map(item => (
-      <Item item={item} key={item.id}/>
+      <Link to={`/products/${item.id}`} params={{id: item.id}}>
+        <Item item={item} key={item.id}/>
+      </Link>
     ))
 
     return(
