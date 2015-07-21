@@ -5,6 +5,7 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
+import RemoveProduct from "./product_remove";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -124,6 +125,8 @@ export default class EditProduct extends React.Component {
                     type="submit">
                     Save
                   </button>
+                  <div className="divider"></div>
+                  <RemoveProduct id={this.state.product.id}/>
                 </div>
               </form>
             </div>

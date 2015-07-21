@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
 import ApiRoutes from "../../constants/api_routes";
-import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   constructor(props) {
@@ -34,8 +33,6 @@ export default class extends React.Component {
                 query={{productId: this.props.item.id}}>
                 Buy
               </Link>
-              <div className="divider"></div>
-              <RemoveProduct id={this.props.item.id}/>
             </div>
           </div>
         </div>
