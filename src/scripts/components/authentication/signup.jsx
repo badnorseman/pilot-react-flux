@@ -50,7 +50,7 @@ export default class Signup extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid center">
+        <div className="mdl-grid text-center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div><Oauth provider="facebook"/></div>

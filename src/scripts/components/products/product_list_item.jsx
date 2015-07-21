@@ -20,7 +20,7 @@ export default class extends React.Component {
               <h6>{this.props.item.name}</h6>
               <p>{this.props.item.description}</p>
             </div>
-            <div className="mdl-card__actions center">
+            <div className="mdl-card__actions text-center">
               <Link
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                 to={`/products/${this.props.item.id}`}
