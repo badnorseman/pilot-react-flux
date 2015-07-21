@@ -4,7 +4,6 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
 import "./app.css";
 import Login from "./components/authentication/login";
-import Logout from "./components/authentication/logout";
 import Navbar from "./components/navigation/navbar";
 import NewPayment from "./components/payments/payment_new"
 import NewProduct from "./components/products/product_new";
@@ -41,7 +40,6 @@ let routes = (
   <Route handler={App}>
     <DefaultRoute handler={Products}/>
     <Route path="login" handler={Login}/>
-    <Route path="logout" handler={Logout}/>
     <Route path="payment/new" handler={NewPayment}/>
     <Route path="payments" handler={Payments}/>
     <Route path="product/new" handler={NewProduct}/>

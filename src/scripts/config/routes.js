@@ -1,12 +1,13 @@
 import React from "react";
 import Router from "react-router";
 import App from "../app";
-import Login from "../components/authentication/login";
-import Logout from "../components/authentication/logout";
-import Signup from "../components/authentication/signup";
-import Products from "../components/products/products";
-import Product from "../components/products/product_edit";
-import NewProduct from "../components/products/product_new";
+import Login from "./components/authentication/login";
+import NewPayment from "./components/payments/payment_new"
+import NewProduct from "./components/products/product_new";
+import Payments from "./components/payments/payment_list";
+import Product from "./components/products/product_edit";
+import Products from "./components/products/product_list";
+import Signup from "./components/authentication/signup";
 
 let { DefaultRoute, Route, RouteHandler } = Router
 
@@ -14,10 +15,11 @@ export default (
   <Route handler={App}>
     <DefaultRoute handler={Products}/>
     <Route path="login" handler={Login}/>
-    <Route path="logout" handler={Logout}/>
-    <Route path="signup" handler={Signup}/>
+    <Route path="payment/new" handler={NewPayment}/>
+    <Route path="payments" handler={Payments}/>
+    <Route path="product/new" handler={NewProduct}/>
     <Route path="products" handler={Products}/>
     <Route path="products/:id" handler={Product}/>
-    <Route path="product/new" handler={NewProduct}/>
+    <Route path="signup" handler={Signup}/>
   </Route>
 )
