@@ -21,9 +21,7 @@ export default class EditProduct extends React.Component {
   componentDidMount() {
     ProductStore.addChangeListener(this.onChange)
 
-    if (this.state.product.currency === "DKK") document.getElementById("currency-dkk").checked = true
-    if (this.state.product.currency === "EUR") document.getElementById("currency-eur").checked = true
-    if (this.state.product.currency === "USD") document.getElementById("currency-usd").checked = true
+    document.getElementById(`currency-${this.state.product.currency.toLowerCase()}`).checked = true
   }
 
   componentWillUnmount() {
