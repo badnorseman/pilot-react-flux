@@ -64,27 +64,33 @@ export default class EditProduct extends React.Component {
             <div>{this.state.errors}</div>
             <div>
               <form onSubmit={this.handleSubmit}>
-                <RequiredField
-                  fieldName="name"
-                  fieldType="text"
-                  fieldValue={this.state.product.name}
-                  ref="name">
-                  Name
-                </RequiredField>
-                <RequiredField
-                  fieldName="description"
-                  fieldType="text"
-                  fieldValue={this.state.product.description}
-                  ref="description">
-                  Description
-                </RequiredField>
-                <RequiredField
-                  fieldName="price"
-                  fieldType="number"
-                  fieldValue={this.state.product.price}
-                  ref="price">
-                  Price
-                </RequiredField>
+                <div>
+                  <RequiredField
+                    fieldName="name"
+                    fieldType="text"
+                    fieldValue={this.state.product.name}
+                    ref="name">
+                    Name
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="description"
+                    fieldType="text"
+                    fieldValue={this.state.product.description}
+                    ref="description">
+                    Description
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="price"
+                    fieldType="number"
+                    fieldValue={this.state.product.price}
+                    ref="price">
+                    Price
+                  </RequiredField>
+                </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
                     <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency"/>

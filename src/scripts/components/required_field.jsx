@@ -29,25 +29,23 @@ export default class extends React.Component {
     }
 
     return(
-      <div>
-        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input
-            className="mdl-textfield__input"
-            id={this.props.fieldName}
-            type={this.props.fieldType}
-            value={this.state.fieldValue}
-            ref={this.props.fieldName}
-            onChange={this.handleChange}/>
-          <label
-            className="mdl-textfield__label"
-            htmlFor={this.props.fieldName}>
-            {this.props.children}
-          </label>
-          <span
-            className="mdl-textfield__error">
-            {errors}
-          </span>
-        </div>
+      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input
+          className="mdl-textfield__input"
+          id={this.props.fieldName}
+          type={this.props.fieldType}
+          value={this.state.fieldValue}
+          ref={this.props.fieldName}
+          onChange={this.handleChange}/>
+        <label
+          className="mdl-textfield__label"
+          htmlFor={this.props.fieldName}>
+          {this.props.children}
+        </label>
+        <span
+          className="mdl-textfield__error">
+          {errors}
+        </span>
       </div>
     )
   }
