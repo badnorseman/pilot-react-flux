@@ -5,8 +5,8 @@ import AuthStore from "../../stores/auth_store";
 import Footer from "./footer";
 
 export default class Navbar extends React.Component {
-  constructor(context) {
-    super(context)
+  constructor() {
+    super()
     this.state = {
       isLoggedIn: false,
       user: {}
@@ -92,7 +92,7 @@ export default class Navbar extends React.Component {
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
-              <RouteHandler/>
+              <RouteHandler {...this.props}/>
               <Footer/>
             </div>
           </main>
@@ -100,8 +100,4 @@ export default class Navbar extends React.Component {
       </div>
     )
   }
-}
-
-Navbar.contextTypes = {
-  router: React.PropTypes.func.isRequired
 }
