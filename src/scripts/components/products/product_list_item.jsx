@@ -26,13 +26,6 @@ export default class extends React.Component {
                 params={{id: this.props.item.id}}>
                 Edit
               </Link>
-              <div className="divider"></div>
-              <Link
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                to="/payment/new"
-                query={{productId: this.props.item.id}}>
-                Buy
-              </Link>
             </div>
           </div>
         </div>

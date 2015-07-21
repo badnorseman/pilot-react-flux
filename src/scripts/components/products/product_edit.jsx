@@ -120,6 +120,13 @@ export default class EditProduct extends React.Component {
                     Cancel
                   </Link>
                   <div className="divider"></div>
+                  <Link
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    to="/payment/new"
+                    query={{productId: this.state.product.id}}>
+                    Buy
+                  </Link>
+                  <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                     type="submit">
