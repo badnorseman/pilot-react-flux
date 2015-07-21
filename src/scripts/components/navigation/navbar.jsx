@@ -93,8 +93,9 @@ export default class Navbar extends React.Component {
           <main className="mdl-layout__content">
             <div className="page-content">
               <RouteHandler {...this.props}/>
-              <Footer/>
             </div>
+            <div className="mdl-layout-spacer"></div>
+            <Footer/>
           </main>
         </div>
       </div>
