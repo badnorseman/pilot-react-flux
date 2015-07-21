@@ -9,10 +9,10 @@ import Product from "./components/products/product_edit";
 import Products from "./components/products/product_list";
 import Signup from "./components/authentication/signup";
 
-let { DefaultRoute, Route, RouteHandler } = Router
+let { DefaultRoute, Route } = Router
 
 export default (
-  <Route handler={App}>
+  <Route path="/" handler={App}>
     <DefaultRoute handler={Products}/>
     <Route path="login" handler={Login}/>
     <Route path="payment/new" handler={NewPayment}/>

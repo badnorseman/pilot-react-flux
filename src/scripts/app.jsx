@@ -37,7 +37,7 @@ class App extends React.Component {
 }
 
 let routes = (
-  <Route handler={App}>
+  <Route path="/" handler={App}>
     <DefaultRoute handler={Products}/>
     <Route path="login" handler={Login}/>
     <Route path="payment/new" handler={NewPayment}/>
