@@ -1,5 +1,5 @@
 import React from "react";
-import Router from "react-router";
+import { DefaultRoute, Route, Router } from "react-router";
 import Login from "../components/authentication/login";
 import Navbar from "../components/navigation/navbar";
 import NewPayment from "../components/payments/payment_new"
@@ -8,8 +8,6 @@ import Payments from "../components/payments/payment_list";
 import Product from "../components/products/product_edit";
 import Products from "../components/products/product_list";
 import Signup from "../components/authentication/signup";
-
-let { DefaultRoute, Route } = Router
 
 export default (
   <Route path="/" handler={Navbar}>

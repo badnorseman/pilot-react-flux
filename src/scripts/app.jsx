@@ -8,6 +8,6 @@ window.React = React
 
 injectTapEventPlugin();
 
-Router.run(routes, Router.HashLocation, (Root) => {
-  React.render(<Root/>, document.getElementById("app"))
+Router.run(routes, Router.HashLocation, (Root, state) => {
+  React.render(<Root {...state}/>, document.getElementById("app"))
 })
