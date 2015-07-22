@@ -36,12 +36,11 @@ export default class NewProduct extends React.Component {
   }
 
   handleSave() {
-    let currencies = document.getElementsByName("currency")
-    let currency = ""
-    for (let i=0; i < currencies.length; i++) {
-      if (currencies[i].checked === true) currency = currencies[i].value
+    function currencySelected(currencies) {
+      for (let i in currencies)
+        if (currencies[k].checked === true) return currencies[k].value
     }
-
+    let currency = currencySelected(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue

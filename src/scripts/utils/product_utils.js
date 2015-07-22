@@ -7,7 +7,7 @@ function getErrorsFromXhr(xhr) {
   let parsedErrors = JSON.parse(xhr.responseText)
   let errors = []
 
-  for (let k in parsedErrors)
+  for (let i in parsedErrors)
     errors.push(parsedErrors[k])
 
   return errors

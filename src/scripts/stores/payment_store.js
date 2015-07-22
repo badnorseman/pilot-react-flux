@@ -42,7 +42,7 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
   getPayments() {
     return payments
   }
-});
+})
 
 PaymentStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
