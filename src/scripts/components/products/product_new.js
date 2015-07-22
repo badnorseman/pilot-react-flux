@@ -37,7 +37,7 @@ export default class NewProduct extends React.Component {
 
   handleSave() {
     function currencySelected(currencies) {
-      for (let i in currencies)
+      for (let k in currencies)
         if (currencies[k].checked === true) return currencies[k].value
     }
     let currency = currencySelected(document.getElementsByName("currency"))
