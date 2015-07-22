@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
 import ApiRoutes from "../../constants/api_routes";
-import RemoveProduct from "./product_remove";
 
 export default class extends React.Component {
   constructor(props) {
@@ -19,23 +18,6 @@ export default class extends React.Component {
             <div className="mdl-card__supporting-text">
               <h6>{this.props.item.name}</h6>
               <p>{this.props.item.description}</p>
-            </div>
-            <div className="mdl-card__actions center">
-              <Link
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                to={`/products/${this.props.item.id}`}
-                params={{id: this.props.item.id}}>
-                Edit
-              </Link>
-              <div className="divider"></div>
-              <Link
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                to="/payment/new"
-                query={{productId: this.props.item.id}}>
-                Buy
-              </Link>
-              <div className="divider"></div>
-              <RemoveProduct id={this.props.item.id}/>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ export default class extends React.Component {
 
   render() {
     return(
-      <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <div className="mdl-textfield mdl-js-textfield">
         <input
           className="mdl-textfield__input"
           id="file--selected"

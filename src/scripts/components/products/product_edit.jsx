@@ -5,6 +5,7 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
+import RemoveProduct from "./product_remove";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -13,12 +14,13 @@ export default class EditProduct extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.params.id)
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {
     ProductStore.addChangeListener(this.onChange)
+
+    document.getElementById(`currency-${this.state.product.currency.toLowerCase()}`).checked = true
   }
 
   componentWillUnmount() {
@@ -32,7 +34,19 @@ export default class EditProduct extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleCancel() {
+    this.context.router.transitionTo("/products")
+  }
+
+  handleBuy() {
+
+  }
+
+  handleRemove() {
+
+  }
+
+  handleSave(e) {
     e.preventDefault()
 
     let currency = e.target.elements.currency.value
@@ -59,32 +73,38 @@ export default class EditProduct extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid center">
+        <div className="mdl-grid text-center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
-              <form onSubmit={this.handleSubmit}>
-                <RequiredField
-                  fieldName="name"
-                  fieldType="text"
-                  fieldValue={this.state.product.name}
-                  ref="name">
-                  Name
-                </RequiredField>
-                <RequiredField
-                  fieldName="description"
-                  fieldType="text"
-                  fieldValue={this.state.product.description}
-                  ref="description">
-                  Description
-                </RequiredField>
-                <RequiredField
-                  fieldName="price"
-                  fieldType="number"
-                  fieldValue={this.state.product.price}
-                  ref="price">
-                  Price
-                </RequiredField>
+              <form onSubmit={this.handleSave.bind(this)}>
+                <div>
+                  <RequiredField
+                    fieldName="name"
+                    fieldType="text"
+                    fieldValue={this.state.product.name}
+                    ref="name">
+                    Name
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="description"
+                    fieldType="text"
+                    fieldValue={this.state.product.description}
+                    ref="description">
+                    Description
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="price"
+                    fieldType="number"
+                    fieldValue={this.state.product.price}
+                    ref="price">
+                    Price
+                  </RequiredField>
+                </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
                     <input className="mdl-radio__button" id="currency-dkk" type="radio" value="DKK" name="currency"/>
@@ -107,10 +127,17 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
+                  <button
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                    onClick={this.handleCancel.bind(this)}>
+                    Cancel
+                  </button>
+                  <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">
-                    Cancel
+                    to="/payment/new"
+                    query={{productId: this.state.product.id}}>
+                    Buy
                   </Link>
                   <div className="divider"></div>
                   <button
@@ -118,6 +145,8 @@ export default class EditProduct extends React.Component {
                     type="submit">
                     Save
                   </button>
+                  <div className="divider"></div>
+                  <RemoveProduct id={this.state.product.id} onClick={this.handleRemove.bind(this)}/>
                 </div>
               </form>
             </div>

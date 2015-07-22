@@ -3,7 +3,6 @@ let host = "http://localhost:3000";
 let root = "/api";
 
 export default {
-  HOST: host,
   LOGIN: host + root + "/auth/identity/callback",
   LOGOUT: host + root + "/logout",
   OAUTH: host + root + "/auth/",

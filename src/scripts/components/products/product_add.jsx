@@ -1,5 +1,4 @@
 import React from "react";
-import ProductActions from "../../actions/product_actions";
 
 export default class AddProduct extends React.Component {
   constructor(props) {

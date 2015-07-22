@@ -50,7 +50,7 @@ export default class Signup extends React.Component {
   render() {
     return(
       <div>
-        <div className="mdl-grid center">
+        <div className="mdl-grid text-center">
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div><Oauth provider="facebook"/></div>
@@ -58,24 +58,30 @@ export default class Signup extends React.Component {
             <div><Oauth provider="google_oauth2"/></div>
             <div>
               <form onSubmit={this.handleSubmit}>
-                <RequiredField
-                  fieldName="email"
-                  fieldType="text"
-                  ref="email">
-                  Email
-                </RequiredField>
-                <RequiredField
-                  fieldName="password"
-                  fieldType="password"
-                  ref="password">
-                  Password
-                </RequiredField>
-                <RequiredField
-                  fieldName="passwordConfirmation"
-                  fieldType="password"
-                  ref="passwordConfirmation">
-                  Password Confirmation
-                </RequiredField>
+                <div>
+                  <RequiredField
+                    fieldName="email"
+                    fieldType="text"
+                    ref="email">
+                    Email
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="password"
+                    fieldType="password"
+                    ref="password">
+                    Password
+                  </RequiredField>
+                </div>
+                <div>
+                  <RequiredField
+                    fieldName="passwordConfirmation"
+                    fieldType="password"
+                    ref="passwordConfirmation">
+                    Password Confirmation
+                  </RequiredField>
+                </div>
                 <div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

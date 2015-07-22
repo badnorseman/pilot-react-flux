@@ -5,8 +5,8 @@ import AuthStore from "../../stores/auth_store";
 import Footer from "./footer";
 
 export default class Navbar extends React.Component {
-  constructor(context) {
-    super(context)
+  constructor() {
+    super()
     this.state = {
       isLoggedIn: false,
       user: {}
@@ -30,6 +30,10 @@ export default class Navbar extends React.Component {
     AuthStore.removeChangeListener(this.onChange)
   }
 
+  componentDidUpdate() {
+    componentHandler.upgradeDom()
+  }
+
   onChange() {
     this.setState({
       isLoggedIn: AuthStore.isLoggedIn(),
@@ -48,56 +52,41 @@ export default class Navbar extends React.Component {
           <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
               <span className="mdl-layout-title">
-                <Link to="/products">FitBird</Link>
+                <Link className="mdl-navigation__link" to="/products">FitBird</Link>
               </span>
               <div className="mdl-layout-spacer"></div>
               <nav className="mdl-navigation">
-                <div className="mdl-navigation__link">
-                  {this.state.isLoggedIn ? (
-                    <a onClick={this.handleLogout} href="#">Log Out</a>
-                  ) : (
-                    <Link to="/login">Log In</Link>
-                  )}
-                </div>
-                <div className="mdl-navigation__link">
-                  <Link to="/signup">Sign Up</Link>
-                </div>
+                {this.state.isLoggedIn ? (
+                  <a className="mdl-navigation__link" onClick={this.handleLogout} href="#">Log Out</a>
+                ) : (
+                  <Link className="mdl-navigation__link" to="/login">Log In</Link>
+                )}
+                <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>
               </nav>
             </div>
           </header>
           <div className="mdl-layout__drawer">
             <span className="mdl-layout-title">FitBird</span>
             <nav className="mdl-navigation">
-              <div className="mdl-navigation__link">
-                <Link to="/products">Discover</Link>
-              </div>
-              <div className="mdl-navigation__link">
-                <Link to="/payments">My Account</Link>
-              </div>
-              <div className="mdl-navigation__link">
-                {this.state.isLoggedIn ? (
-                  <a onClick={this.handleLogout} href="#">Log Out</a>
-                ) : (
-                  <Link to="/login">Log In</Link>
-                )}
-              </div>
-              <div className="mdl-navigation__link">
-                <Link to="/signup">Sign Up</Link>
-              </div>
+              <Link className="mdl-navigation__link" to="/products">Discover</Link>
+              <Link className="mdl-navigation__link" to="/payments">My Account</Link>
+              {this.state.isLoggedIn ? (
+                <a className="mdl-navigation__link" onClick={this.handleLogout} href="#">Log Out</a>
+              ) : (
+                <Link to="/login">Log In</Link>
+              )}
+              <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>
             </nav>
           </div>
           <main className="mdl-layout__content">
             <div className="page-content">
-              <RouteHandler/>
-              <Footer/>
+              <RouteHandler {...this.props}/>
             </div>
+            <div className="mdl-layout-spacer"></div>
+            <Footer/>
           </main>
         </div>
       </div>
     )
   }
-}
-
-Navbar.contextTypes = {
-  router: React.PropTypes.func.isRequired
 }

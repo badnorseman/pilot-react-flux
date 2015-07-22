@@ -2,7 +2,7 @@
 // Each validators would have own pattern and each pattern world have an error message.
 import React from "react";
 
-export default class extends React.Component {
+export default class RequiredFile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,7 +27,6 @@ export default class extends React.Component {
     if (this.state.isInvalid) {
       var errors = <span>Is required.</span>
     }
-    var value = this.state.fieldValue
 
     return(
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -35,7 +34,7 @@ export default class extends React.Component {
           className="mdl-textfield__input"
           id={this.props.fieldName}
           type={this.props.fieldType}
-          value={value}
+          value={this.state.fieldValue}
           ref={this.props.fieldName}
           onChange={this.handleChange}/>
         <label
@@ -50,4 +49,9 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+RequiredFile.propTypes = {
+  fieldName: React.PropTypes.string.isRequired,
+  fieldType: React.PropTypes.string.isRequired
 }
