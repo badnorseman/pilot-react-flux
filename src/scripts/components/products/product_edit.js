@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
+import Button from "../button";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
-import Button from "../button";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -38,23 +38,17 @@ export default class EditProduct extends React.Component {
     this.context.router.transitionTo("/products")
   }
 
-  handleBuy() {
-    console.log("handleBuy ", this.state.product.id)
-    this.context.router.transitionTo("/payment/new", {productId: this.state.product.id})
-  }
-
   handleRemove() {
     ProductActions.remove(this.state.product.id)
     this.context.router.transitionTo("/products")
   }
 
   handleSave() {
-    let currencies = document.getElementsByName("currency")
-    let currency = ""
-    for (let i=0; i < currencies.length; i++) {
-      if (currencies[i].checked === true) currency = currencies[i].value
+    function currencySelected(currencies) {
+      for (let k in currencies)
+        if (currencies[k].checked === true) return currencies[k].value
     }
-
+    let currency = currencySelected(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -132,9 +126,7 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button
-                    name="Cancel"
-                    onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
                   <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -143,17 +135,9 @@ export default class EditProduct extends React.Component {
                     Buy
                   </Link>
                   <div className="divider"></div>
-                  <Button
-                    name="Save"
-                    onClick={this.handleSave.bind(this)}/>
+                  <Button name="Save" onClick={this.handleSave.bind(this)}/>
                   <div className="divider"></div>
-                  <Button
-                    name="Remove"
-                    onClick={this.handleRemove.bind(this)}/>
-                  <div className="divider"></div>
-                  <Button
-                    name="Test Buy"
-                    onClick={this.handleBuy.bind(this)}/>
+                  <Button name="Remove" onClick={this.handleRemove.bind(this)}/>
                 </div>
               </form>
             </div>

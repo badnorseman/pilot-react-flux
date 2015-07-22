@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import AddProduct from "./product_add";
 import Item from "./product_list_item";
 
 export default class ProductList extends React.Component {
@@ -42,7 +41,11 @@ export default class ProductList extends React.Component {
         <div className="mdl-grid">
           {items}
         </div>
-        <AddProduct/>
+        <Link to="/product/new">
+          <button className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--floating-action">
+            <i className="material-icons">add</i>
+          </button>
+        </Link>
       </div>
     )
   }
