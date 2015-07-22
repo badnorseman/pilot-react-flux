@@ -14,7 +14,6 @@ export default class EditProduct extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.params.id)
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
@@ -35,7 +34,19 @@ export default class EditProduct extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleCancel() {
+    this.context.router.transitionTo("/products")
+  }
+
+  handleBuy() {
+
+  }
+
+  handleRemove() {
+
+  }
+
+  handleSave(e) {
     e.preventDefault()
 
     let currency = e.target.elements.currency.value
@@ -66,7 +77,7 @@ export default class EditProduct extends React.Component {
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSave.bind(this)}>
                 <div>
                   <RequiredField
                     fieldName="name"
@@ -116,11 +127,11 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Link
+                  <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">
+                    onClick={this.handleCancel.bind(this)}>
                     Cancel
-                  </Link>
+                  </button>
                   <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -135,7 +146,7 @@ export default class EditProduct extends React.Component {
                     Save
                   </button>
                   <div className="divider"></div>
-                  <RemoveProduct id={this.state.product.id}/>
+                  <RemoveProduct id={this.state.product.id} onClick={this.handleRemove.bind(this)}/>
                 </div>
               </form>
             </div>
