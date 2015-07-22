@@ -6,6 +6,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
+import Button from "../button";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
 
@@ -13,7 +14,6 @@ export default class NewProduct extends React.Component {
   constructor() {
     super()
     this.state = {errors: []}
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
 
@@ -31,10 +31,17 @@ export default class NewProduct extends React.Component {
     })
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
+  handleCancel() {
+    this.context.router.transitionTo("/products")
+  }
 
-    let currency = e.target.elements.currency.value
+  handleSave() {
+    let currencies = document.getElementsByName("currency")
+    let currency = ""
+    for (let i=0; i < currencies.length; i++) {
+      if (currencies[i].checked === true) currency = currencies[i].value
+    }
+
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -61,7 +68,7 @@ export default class NewProduct extends React.Component {
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
-              <form onSubmit={this.handleSubmit}>
+              <form>
                 <div>
                   <RequiredField
                     fieldName="name"
@@ -105,17 +112,9 @@ export default class NewProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">
-                    Cancel
-                  </Link>
+                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
                   <div className="divider"></div>
-                  <button
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">
-                    Add
-                  </button>
+                  <Button name="Add" onClick={this.handleSave.bind(this)}/>
                 </div>
               </form>
             </div>

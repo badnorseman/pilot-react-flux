@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
+import Button from "../button";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
-import Button from "../button";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -36,11 +36,6 @@ export default class EditProduct extends React.Component {
 
   handleCancel() {
     this.context.router.transitionTo("/products")
-  }
-
-  handleBuy() {
-    console.log("handleBuy ", this.state.product.id)
-    this.context.router.transitionTo("/payment/new", {productId: this.state.product.id})
   }
 
   handleRemove() {
@@ -132,9 +127,7 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button
-                    name="Cancel"
-                    onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
                   <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -143,17 +136,9 @@ export default class EditProduct extends React.Component {
                     Buy
                   </Link>
                   <div className="divider"></div>
-                  <Button
-                    name="Save"
-                    onClick={this.handleSave.bind(this)}/>
+                  <Button name="Save" onClick={this.handleSave.bind(this)}/>
                   <div className="divider"></div>
-                  <Button
-                    name="Remove"
-                    onClick={this.handleRemove.bind(this)}/>
-                  <div className="divider"></div>
-                  <Button
-                    name="Test Buy"
-                    onClick={this.handleBuy.bind(this)}/>
+                  <Button name="Remove" onClick={this.handleRemove.bind(this)}/>
                 </div>
               </form>
             </div>
