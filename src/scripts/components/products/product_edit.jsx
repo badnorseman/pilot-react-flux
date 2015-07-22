@@ -5,7 +5,7 @@ import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
-import RemoveProduct from "./product_remove";
+import Button from "../button";
 
 export default class EditProduct extends React.Component {
   constructor(props) {
@@ -39,17 +39,22 @@ export default class EditProduct extends React.Component {
   }
 
   handleBuy() {
-
+    console.log("handleBuy ", this.state.product.id)
+    this.context.router.transitionTo("/payment/new", {productId: this.state.product.id})
   }
 
   handleRemove() {
-
+    ProductActions.remove(this.state.product.id)
+    this.context.router.transitionTo("/products")
   }
 
-  handleSave(e) {
-    e.preventDefault()
+  handleSave() {
+    let currencies = document.getElementsByName("currency")
+    let currency = ""
+    for (let i=0; i < currencies.length; i++) {
+      if (currencies[i].checked === true) currency = currencies[i].value
+    }
 
-    let currency = e.target.elements.currency.value
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -77,7 +82,7 @@ export default class EditProduct extends React.Component {
           <div className="mdl-cell mdl-cell--12-col">
             <div>{this.state.errors}</div>
             <div>
-              <form onSubmit={this.handleSave.bind(this)}>
+              <form>
                 <div>
                   <RequiredField
                     fieldName="name"
@@ -127,11 +132,9 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <button
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    onClick={this.handleCancel.bind(this)}>
-                    Cancel
-                  </button>
+                  <Button
+                    name="Cancel"
+                    onClick={this.handleCancel.bind(this)}/>
                   <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -140,13 +143,17 @@ export default class EditProduct extends React.Component {
                     Buy
                   </Link>
                   <div className="divider"></div>
-                  <button
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">
-                    Save
-                  </button>
+                  <Button
+                    name="Save"
+                    onClick={this.handleSave.bind(this)}/>
                   <div className="divider"></div>
-                  <RemoveProduct id={this.state.product.id} onClick={this.handleRemove.bind(this)}/>
+                  <Button
+                    name="Remove"
+                    onClick={this.handleRemove.bind(this)}/>
+                  <div className="divider"></div>
+                  <Button
+                    name="Test Buy"
+                    onClick={this.handleBuy.bind(this)}/>
                 </div>
               </form>
             </div>
