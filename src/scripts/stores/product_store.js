@@ -25,13 +25,8 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   },
 
   getProduct(id) {
-    let product = {}
-
     for (let k in products)
-      if (products[k].id == id)
-        product = products[k]
-
-    return product
+      if (products[k].id == id) return products[k]
   },
 
   getProducts() {

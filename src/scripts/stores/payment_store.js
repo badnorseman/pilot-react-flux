@@ -30,13 +30,8 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
   },
 
   getPayment(id) {
-    let payment = {}
-
     for (let k in payments)
-      if (payments[k].id == id)
-        payment = payments[k]
-
-    return payment
+      if (payments[k].id == id) return payments[k]
   },
 
   getPayments() {
