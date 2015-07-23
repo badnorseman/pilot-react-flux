@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
-import Item from "./product_list_item";
+import ProductListItem from "./product_list_item";
 
 export default class ProductList extends React.Component {
   constructor() {
@@ -32,7 +32,7 @@ export default class ProductList extends React.Component {
   render() {
     let items = this.state.products.map(item => (
       <Link to={`/products/${item.id}`} params={{id: item.id}}>
-        <Item item={item} key={item.id}/>
+        <ProductListItem item={item} key={item.id}/>
       </Link>
     ))
 
