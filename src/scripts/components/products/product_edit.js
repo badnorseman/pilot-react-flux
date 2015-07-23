@@ -7,6 +7,16 @@ import Button from "../button";
 import RequiredField from "../required_field";
 import InputFile from "../input_file";
 
+function getCurrency() {
+  let currencies = document.getElementsByName("currency")
+  for (let k in currencies)
+    if (currencies[k].checked === true) return currencies[k].value
+}
+
+function setCurrency(currency) {
+  document.getElementById(`currency-${currency.toLowerCase()}`).checked = true
+}
+
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
@@ -19,8 +29,7 @@ export default class EditProduct extends React.Component {
 
   componentDidMount() {
     ProductStore.addChangeListener(this.onChange)
-
-    document.getElementById(`currency-${this.state.product.currency.toLowerCase()}`).checked = true
+    setCurrency(this.state.product.currency)
   }
 
   componentWillUnmount() {
@@ -44,11 +53,7 @@ export default class EditProduct extends React.Component {
   }
 
   handleSave() {
-    function currencySelected(currencies) {
-      for (let k in currencies)
-        if (currencies[k].checked === true) return currencies[k].value
-    }
-    let currency = currencySelected(document.getElementsByName("currency"))
+    let currency = getCurrency()
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -148,6 +153,10 @@ export default class EditProduct extends React.Component {
       </div>
     )
   }
+}
+
+EditProduct.propTypes = {
+  params: React.PropTypes.object.isRequired,
 }
 
 EditProduct.contextTypes = {

@@ -5,7 +5,7 @@ import Dispatcher from "../dispatcher/dispatcher";
 import PaymentUtils from "../utils/payment_utils";
 
 let clientToken = ""
-let payments = []
+let payments = {}
 let errors = []
 
 let PaymentStore = assign({}, EventEmitter.prototype, {

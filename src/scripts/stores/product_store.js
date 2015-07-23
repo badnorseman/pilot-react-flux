@@ -4,7 +4,7 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import ProductUtils from "../utils/product_utils";
 
-let products = []
+let products = {}
 let errors = []
 
 let ProductStore = assign({}, EventEmitter.prototype, {
