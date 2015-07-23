@@ -6,8 +6,7 @@ export default class RequiredFile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      fieldValue: this.props.fieldValue,
-      isInvalid: false
+      fieldValue: this.props.fieldValue
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -18,21 +17,17 @@ export default class RequiredFile extends React.Component {
     let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value
 
     this.setState({
-      fieldValue: fieldValue,
-      isInvalid: (fieldValue === "")
+      fieldValue: fieldValue
     })
   }
 
   render() {
-    if (this.state.isInvalid) {
-      var errors = <span>Is required.</span>
-    }
-
     return(
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input
           className="mdl-textfield__input"
           id={this.props.fieldName}
+          pattern={this.props.fieldPattern}
           type={this.props.fieldType}
           value={this.state.fieldValue}
           ref={this.props.fieldName}
@@ -44,7 +39,6 @@ export default class RequiredFile extends React.Component {
         </label>
         <span
           className="mdl-textfield__error">
-          {errors}
         </span>
       </div>
     )

@@ -61,7 +61,7 @@ export default class Navbar extends React.Component {
                 ) : (
                   <Link className="mdl-navigation__link" to="/login">Log In</Link>
                 )}
-                <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>
+                {!this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>}
               </nav>
             </div>
           </header>
@@ -75,7 +75,7 @@ export default class Navbar extends React.Component {
               ) : (
                 <Link to="/login">Log In</Link>
               )}
-              <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>
+              {!this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>}
             </nav>
           </div>
           <main className="mdl-layout__content">

@@ -80,6 +80,7 @@ export default class EditProduct extends React.Component {
                 <div>
                   <RequiredField
                     fieldName="name"
+                    fieldPattern="[a-zA-Z0-9.:-]{1,}?"
                     fieldType="text"
                     fieldValue={this.state.product.name}
                     ref="name">
@@ -98,7 +99,8 @@ export default class EditProduct extends React.Component {
                 <div>
                   <RequiredField
                     fieldName="price"
-                    fieldType="number"
+                    fieldPattern="[0-9]{1,}((\.|\,)[0-9]{2,2})?"
+                    fieldType="text"
                     fieldValue={this.state.product.price}
                     ref="price">
                     Price
