@@ -7,32 +7,28 @@ import Button from "../button";
 import InputField from "../input_field";
 import InputFile from "../input_file";
 
-function getCurrency() {
-  let currencies = document.getElementsByName("currency")
-  for (let k in currencies)
-    if (currencies[k].checked === true) return currencies[k].value
-}
-
-function setCurrency(currency) {
-  document.getElementById(`currency-${currency.toLowerCase()}`).checked = true
-}
-
 export default class EditProduct extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       errors: [],
-      product: ProductStore.getProduct(this.props.params.id)
+      product: ProductStore.getById(this.props.params.id)
     }
+    this._getCurrency = this._getCurrency.bind(this)
+    this._setCurrency = this._setCurrency.bind(this)
     this._handleCancel = this._handleCancel.bind(this)
     this._handleRemove = this._handleRemove.bind(this)
     this._handleSave = this._handleSave.bind(this)
     this._onChange = this._onChange.bind(this)
   }
 
+  componentWillMount() {
+    ProductActions.list()
+  }
+
   componentDidMount() {
     ProductStore.addChangeListener(this._onChange)
-    setCurrency(this.state.product.currency)
+    this._setCurrency(this.state.product.currency)
   }
 
   componentWillUnmount() {
@@ -42,8 +38,17 @@ export default class EditProduct extends React.Component {
   _onChange() {
     this.setState({
       errors: ProductStore.getErrors(),
-      product: ProductStore.getProduct(this.props.params.id)
+      product: ProductStore.getById(this.props.params.id)
     })
+  }
+
+  _getCurrency(currencies) {
+    for (let k in currencies)
+      if (currencies[k].checked === true) return currencies[k].value
+  }
+
+  _setCurrency(currency) {
+    document.getElementById(`currency-${currency.toLowerCase()}`).checked = true
   }
 
   _handleCancel() {
@@ -56,7 +61,7 @@ export default class EditProduct extends React.Component {
   }
 
   _handleSave() {
-    let currency = getCurrency()
+    let currency = this._getCurrency(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue

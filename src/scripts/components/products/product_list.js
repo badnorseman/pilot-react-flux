@@ -27,7 +27,7 @@ export default class ProductList extends React.Component {
 
   _onChange() {
     this.setState({
-      products: this.state.products = ProductStore.getProducts()
+      products: this.state.products = ProductStore.getAll()
     })
   }
 

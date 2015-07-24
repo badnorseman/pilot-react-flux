@@ -21,21 +21,21 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
     this.removeListener("change", callback)
   },
 
+  getAll() {
+    return payments
+  },
+
+  getById(id) {
+    for (let k in payments)
+      if (payments[k].id == id) return payments[k]
+  },
+
   getClientToken() {
     return clientToken
   },
 
   getErrors() {
     return errors
-  },
-
-  getPayment(id) {
-    for (let k in payments)
-      if (payments[k].id == id) return payments[k]
-  },
-
-  getPayments() {
-    return payments
   }
 })
 

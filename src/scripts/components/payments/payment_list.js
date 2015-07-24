@@ -26,7 +26,7 @@ export default class PaymentList extends React.Component {
 
   _onChange() {
     this.setState({
-      payments: this.state.payments = PaymentStore.getPayments()
+      payments: this.state.payments = PaymentStore.getAll()
     })
   }
 

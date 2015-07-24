@@ -35,16 +35,17 @@ export default class NewProduct extends React.Component {
     })
   }
 
+  _getCurrency(currencies) {
+    for (let k in currencies)
+      if (currencies[k].checked === true) return currencies[k].value
+  }
+
   _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
   _handleSave() {
-    function currencySelected(currencies) {
-      for (let k in currencies)
-        if (currencies[k].checked === true) return currencies[k].value
-    }
-    let currency = currencySelected(document.getElementsByName("currency"))
+    let currency = this._getCurrency(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue

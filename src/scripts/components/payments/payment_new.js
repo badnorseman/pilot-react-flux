@@ -12,7 +12,7 @@ export default class NewPayment extends React.Component {
     this.state = {
       clientToken: "",
       errors: [],
-      product: ProductStore.getProduct(this.props.query.productId)
+      product: ProductStore.getById(this.props.query.productId)
     }
     this._handleCancel = this._handleCancel.bind(this)
     this.onPaymentMethodReceived = this.onPaymentMethodReceived.bind(this)

@@ -20,17 +20,17 @@ let ProductStore = assign({}, EventEmitter.prototype, {
     this.removeListener("change", callback)
   },
 
-  getErrors() {
-    return errors
+  getAll() {
+    return products
   },
 
-  getProduct(id) {
+  getById(id) {
     for (let k in products)
       if (products[k].id == id) return products[k]
   },
 
-  getProducts() {
-    return products
+  getErrors() {
+    return errors
   }
 })
 
