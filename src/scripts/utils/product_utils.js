@@ -26,11 +26,11 @@ export default {
       contentType: false,
       data: function() {
         var fd = new FormData();
-        fd.append("product[currency]", data.product.currency);
-        fd.append("product[description]", data.product.description);
-        fd.append("product[image]", data.product.image);
-        fd.append("product[name]", data.product.name);
-        fd.append("product[price]", data.product.price);
+        fd.append("product[currency]", data.currency);
+        fd.append("product[description]", data.description);
+        fd.append("product[image]", data.image);
+        fd.append("product[name]", data.name);
+        fd.append("product[price]", data.price);
         return fd;
       }(),
       success: function(data) {

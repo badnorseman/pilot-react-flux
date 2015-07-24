@@ -53,13 +53,11 @@ export default class NewProduct extends React.Component {
 
     if (currency && description && name && price) {
       ProductActions.add({
-        product: {
-          currency: currency,
-          description: description,
-          image: image,
-          name: name,
-          price: price
-        }
+        currency: currency,
+        description: description,
+        image: image,
+        name: name,
+        price: price
       })
       this.context.router.transitionTo("/products")
     }
