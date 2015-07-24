@@ -1,5 +1,6 @@
 import React from "react";
 import AuthActions from "../../actions/auth_actions";
+import Button from "../button";
 
 export default class extends React.Component {
   constructor(props) {
@@ -13,11 +14,7 @@ export default class extends React.Component {
 
   render() {
     return(
-      <button
-        className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this._handleClick}>
-        {this.props.provider}
-      </button>
+      <Button name={this.props.provider} onClick={this._handleClick}/>
     )
   }
 }
