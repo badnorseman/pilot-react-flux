@@ -135,11 +135,10 @@ export default class EditProduct extends React.Component {
                 <div>
                   <Button name="Cancel" onClick={this._handleCancel.bind(this)}/>
                   <div className="divider"></div>
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/payment/new"
-                    query={{productId: this.state.product.id}}>
-                    Buy
+                  <Link to="/payment/new" query={{productId: this.state.product.id}}>
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      Buy
+                    </button>
                   </Link>
                   <div className="divider"></div>
                   <Button name="Save" onClick={this._handleSave.bind(this)}/>

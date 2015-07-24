@@ -8,7 +8,7 @@ export default class ProductList extends React.Component {
   constructor() {
     super()
     this.state = {
-      products: {}
+      products: []
     }
     this._onChange = this._onChange.bind(this)
   }
