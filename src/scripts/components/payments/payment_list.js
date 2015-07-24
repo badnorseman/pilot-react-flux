@@ -7,7 +7,7 @@ export default class PaymentList extends React.Component {
   constructor() {
     super()
     this.state = {
-      payments: {}
+      payments: []
     }
     this._onChange = this._onChange.bind(this)
   }
