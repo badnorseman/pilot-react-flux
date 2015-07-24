@@ -13,7 +13,11 @@ import InputFile from "../input_file";
 export default class NewProduct extends React.Component {
   constructor() {
     super()
-    this.state = {errors: []}
+    this.state = {
+      errors: []
+    }
+    this._handleCancel = this._handleCancel.bind(this)
+    this._handleSave = this._handleSave.bind(this)
     this._onChange = this._onChange.bind(this)
   }
 
@@ -111,9 +115,9 @@ export default class NewProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this._handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
-                  <Button name="Add" onClick={this._handleSave.bind(this)}/>
+                  <Button name="Add" onClick={this._handleSave}/>
                 </div>
               </form>
             </div>

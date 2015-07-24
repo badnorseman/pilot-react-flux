@@ -24,6 +24,9 @@ export default class EditProduct extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.params.id)
     }
+    this._handleCancel = this._handleCancel.bind(this)
+    this._handleRemove = this._handleRemove.bind(this)
+    this._handleSave = this._handleSave.bind(this)
     this._onChange = this._onChange.bind(this)
   }
 
@@ -133,7 +136,7 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this._handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
                   <Link to="/payment/new" query={{productId: this.state.product.id}}>
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
@@ -141,9 +144,9 @@ export default class EditProduct extends React.Component {
                     </button>
                   </Link>
                   <div className="divider"></div>
-                  <Button name="Save" onClick={this._handleSave.bind(this)}/>
+                  <Button name="Save" onClick={this._handleSave}/>
                   <div className="divider"></div>
-                  <Button name="Remove" onClick={this._handleRemove.bind(this)}/>
+                  <Button name="Remove" onClick={this._handleRemove}/>
                 </div>
               </form>
             </div>
