@@ -4,7 +4,7 @@ import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
 import Button from "../button";
-import RequiredField from "../required_field";
+import InputField from "../input_field";
 
 export default class Login extends React.Component {
   constructor(context) {
@@ -65,20 +65,20 @@ export default class Login extends React.Component {
             <div>
               <form onSubmit={this._handleSubmit}>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="email"
                     fieldType="text"
                     ref="email">
                     Email
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="password"
                     fieldType="password"
                     ref="password">
                     Password
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
                   <Button name="Cancel" onClick={this._handleCancel}/>

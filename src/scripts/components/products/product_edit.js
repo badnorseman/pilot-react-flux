@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import Button from "../button";
-import RequiredField from "../required_field";
+import InputField from "../input_field";
 import InputFile from "../input_file";
 
 function getCurrency() {
@@ -86,33 +86,33 @@ export default class EditProduct extends React.Component {
             <div>
               <form>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="name"
                     fieldPattern="[a-zA-Z0-9.:-]{1,}?"
                     fieldType="text"
                     fieldValue={this.state.product.name}
                     ref="name">
                     Name
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="description"
                     fieldType="text"
                     fieldValue={this.state.product.description}
                     ref="description">
                     Description
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="price"
                     fieldPattern="[0-9]{1,}((\.|\,)[0-9]{2,2})?"
                     fieldType="text"
                     fieldValue={this.state.product.price}
                     ref="price">
                     Price
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">

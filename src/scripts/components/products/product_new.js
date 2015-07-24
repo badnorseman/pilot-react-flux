@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import Button from "../button";
-import RequiredField from "../required_field";
+import InputField from "../input_field";
 import InputFile from "../input_file";
 
 export default class NewProduct extends React.Component {
@@ -73,28 +73,28 @@ export default class NewProduct extends React.Component {
             <div>
               <form>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="name"
                     fieldType="text"
                     ref="name">
                     Name
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="description"
                     fieldType="text"
                     ref="description">
                     Description
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="price"
                     fieldType="number"
                     ref="price">
                     Price
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
