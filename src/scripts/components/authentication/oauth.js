@@ -4,10 +4,10 @@ import AuthActions from "../../actions/auth_actions";
 export default class extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this._handleClick = this._handleClick.bind(this)
   }
 
-  handleClick() {
+  _handleClick() {
     AuthActions.oauth(this.props.provider)
   }
 
@@ -15,7 +15,7 @@ export default class extends React.Component {
     return(
       <button
         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this.handleClick}>
+        onClick={this._handleClick}>
         {this.props.provider}
       </button>
     )

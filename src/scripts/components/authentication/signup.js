@@ -11,26 +11,28 @@ import RequiredField from "../required_field";
 export default class Signup extends React.Component {
   constructor(context) {
     super(context)
-    this.state = {errors: []}
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      errors: []
+    }
+    this._handleSubmit = this._handleSubmit.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount() {
-    AuthStore.addChangeListener(this.onChange)
+    AuthStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onChange)
+    AuthStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: AuthStore.getErrors()
     })
   }
 
-  handleSubmit(e) {
+  _handleSubmit(e) {
     e.preventDefault()
 
     let email = this.refs.email.state.fieldValue
@@ -57,7 +59,7 @@ export default class Signup extends React.Component {
             <div className="divider"></div>
             <div><Oauth provider="google_oauth2"/></div>
             <div>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this._handleSubmit}>
                 <div>
                   <RequiredField
                     fieldName="email"
