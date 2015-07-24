@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
+import Button from "../button";
 import RequiredField from "../required_field";
 
 export default class Signup extends React.Component {
@@ -14,6 +15,7 @@ export default class Signup extends React.Component {
     this.state = {
       errors: []
     }
+    this._handleCancel = this._handleCancel.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
     this._onChange = this._onChange.bind(this)
   }
@@ -30,6 +32,10 @@ export default class Signup extends React.Component {
     this.setState({
       errors: AuthStore.getErrors()
     })
+  }
+
+  _handleCancel() {
+    this.context.router.transitionTo("/products")
   }
 
   _handleSubmit(e) {
@@ -85,11 +91,7 @@ export default class Signup extends React.Component {
                   </RequiredField>
                 </div>
                 <div>
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">
-                    Cancel
-                  </Link>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

@@ -4,6 +4,7 @@ import Braintree from "braintree-web";
 import PaymentActions from "../../actions/payment_actions";
 import PaymentStore from "../../stores/payment_store";
 import ProductStore from "../../stores/product_store";
+import Button from "../button";
 
 export default class NewPayment extends React.Component {
   constructor(context, props) {
@@ -13,6 +14,7 @@ export default class NewPayment extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.query.productId)
     }
+    this._handleCancel = this._handleCancel.bind(this)
     this.onPaymentMethodReceived = this.onPaymentMethodReceived.bind(this)
     this._onChange = this._onChange.bind(this)
   }
@@ -46,6 +48,10 @@ export default class NewPayment extends React.Component {
       clientToken: PaymentStore.getClientToken(),
       errors: PaymentStore.getErrors()
     })
+  }
+
+  _handleCancel() {
+    this.context.router.transitionTo("/products")
   }
 
   _handleSubmit(e) {
@@ -87,11 +93,7 @@ export default class NewPayment extends React.Component {
             <div>
               <form onSubmit={this._handleSubmit.bind(this)}>
                 <div id="dropin-container"></div>
-                <Link
-                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                  to="/products">
-                  Cancel
-                </Link>
+                <Button name="Cancel" onClick={this._handleCancel}/>
                 <div className="divider"></div>
                 <button
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
