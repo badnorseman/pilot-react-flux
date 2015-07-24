@@ -24,35 +24,35 @@ export default class EditProduct extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.params.id)
     }
-    this.onChange = this.onChange.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange)
+    ProductStore.addChangeListener(this._onChange)
     setCurrency(this.state.product.currency)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: ProductStore.getErrors(),
       product: ProductStore.getProduct(this.props.params.id)
     })
   }
 
-  handleCancel() {
+  _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
-  handleRemove() {
+  _handleRemove() {
     ProductActions.remove(this.state.product.id)
     this.context.router.transitionTo("/products")
   }
 
-  handleSave() {
+  _handleSave() {
     let currency = getCurrency()
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
@@ -133,7 +133,7 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel.bind(this)}/>
                   <div className="divider"></div>
                   <Link
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -142,9 +142,9 @@ export default class EditProduct extends React.Component {
                     Buy
                   </Link>
                   <div className="divider"></div>
-                  <Button name="Save" onClick={this.handleSave.bind(this)}/>
+                  <Button name="Save" onClick={this._handleSave.bind(this)}/>
                   <div className="divider"></div>
-                  <Button name="Remove" onClick={this.handleRemove.bind(this)}/>
+                  <Button name="Remove" onClick={this._handleRemove.bind(this)}/>
                 </div>
               </form>
             </div>

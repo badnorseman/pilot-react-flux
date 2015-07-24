@@ -14,28 +14,28 @@ export default class NewProduct extends React.Component {
   constructor() {
     super()
     this.state = {errors: []}
-    this.onChange = this.onChange.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange)
+    ProductStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: ProductStore.getErrors()
     })
   }
 
-  handleCancel() {
+  _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
-  handleSave() {
+  _handleSave() {
     function currencySelected(currencies) {
       for (let k in currencies)
         if (currencies[k].checked === true) return currencies[k].value
@@ -111,9 +111,9 @@ export default class NewProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel.bind(this)}/>
                   <div className="divider"></div>
-                  <Button name="Add" onClick={this.handleSave.bind(this)}/>
+                  <Button name="Add" onClick={this._handleSave.bind(this)}/>
                 </div>
               </form>
             </div>

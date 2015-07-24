@@ -8,7 +8,7 @@ export default class ProductList extends React.Component {
   constructor() {
     super()
     this.state = {products: []}
-    this.onChange = this.onChange.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentWillMount() {
@@ -16,14 +16,14 @@ export default class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange)
+    ProductStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       products: this.state.products = ProductStore.getProducts()
     })
