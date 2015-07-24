@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import Button from "../button";
-import RequiredField from "../required_field";
+import InputField from "../input_field";
 import InputFile from "../input_file";
 
 export default class EditProduct extends React.Component {
@@ -12,43 +12,56 @@ export default class EditProduct extends React.Component {
     super(props)
     this.state = {
       errors: [],
-      product: ProductStore.getProduct(this.props.params.id)
+      product: ProductStore.getById(this.props.params.id)
     }
-    this.onChange = this.onChange.bind(this)
+    this._getCurrency = this._getCurrency.bind(this)
+    this._setCurrency = this._setCurrency.bind(this)
+    this._handleCancel = this._handleCancel.bind(this)
+    this._handleRemove = this._handleRemove.bind(this)
+    this._handleSave = this._handleSave.bind(this)
+    this._onChange = this._onChange.bind(this)
+  }
+
+  componentWillMount() {
+    ProductActions.list()
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange)
-
-    document.getElementById(`currency-${this.state.product.currency.toLowerCase()}`).checked = true
+    ProductStore.addChangeListener(this._onChange)
+    this._setCurrency(this.state.product.currency)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: ProductStore.getErrors(),
-      product: ProductStore.getProduct(this.props.params.id)
+      product: ProductStore.getById(this.props.params.id)
     })
   }
 
-  handleCancel() {
+  _getCurrency(currencies) {
+    for (let k in currencies)
+      if (currencies[k].checked === true) return currencies[k].value
+  }
+
+  _setCurrency(currency) {
+    document.getElementById(`currency-${currency.toLowerCase()}`).checked = true
+  }
+
+  _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
-  handleRemove() {
+  _handleRemove() {
     ProductActions.remove(this.state.product.id)
     this.context.router.transitionTo("/products")
   }
 
-  handleSave() {
-    function currencySelected(currencies) {
-      for (let k in currencies)
-        if (currencies[k].checked === true) return currencies[k].value
-    }
-    let currency = currencySelected(document.getElementsByName("currency"))
+  _handleSave() {
+    let currency = this._getCurrency(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -78,33 +91,33 @@ export default class EditProduct extends React.Component {
             <div>
               <form>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="name"
                     fieldPattern="[a-zA-Z0-9.:-]{1,}?"
                     fieldType="text"
                     fieldValue={this.state.product.name}
                     ref="name">
                     Name
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="description"
                     fieldType="text"
                     fieldValue={this.state.product.description}
                     ref="description">
                     Description
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="price"
                     fieldPattern="[0-9]{1,}((\.|\,)[0-9]{2,2})?"
                     fieldType="text"
                     fieldValue={this.state.product.price}
                     ref="price">
                     Price
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
@@ -128,18 +141,17 @@ export default class EditProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/payment/new"
-                    query={{productId: this.state.product.id}}>
-                    Buy
+                  <Link to="/payment/new" query={{productId: this.state.product.id}}>
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                      Buy
+                    </button>
                   </Link>
                   <div className="divider"></div>
-                  <Button name="Save" onClick={this.handleSave.bind(this)}/>
+                  <Button name="Save" onClick={this._handleSave}/>
                   <div className="divider"></div>
-                  <Button name="Remove" onClick={this.handleRemove.bind(this)}/>
+                  <Button name="Remove" onClick={this._handleRemove}/>
                 </div>
               </form>
             </div>
@@ -148,6 +160,10 @@ export default class EditProduct extends React.Component {
       </div>
     )
   }
+}
+
+EditProduct.propTypes = {
+  params: React.PropTypes.object.isRequired,
 }
 
 EditProduct.contextTypes = {

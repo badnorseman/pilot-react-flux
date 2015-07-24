@@ -8,10 +8,10 @@ export default class RequiredFile extends React.Component {
     this.state = {
       fieldValue: this.props.fieldValue
     }
-    this.handleChange = this.handleChange.bind(this)
+    this._handleChange = this._handleChange.bind(this)
   }
 
-  handleChange(e) {
+  _handleChange(e) {
     e.preventDefault()
 
     let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value
@@ -31,7 +31,7 @@ export default class RequiredFile extends React.Component {
           type={this.props.fieldType}
           value={this.state.fieldValue}
           ref={this.props.fieldName}
-          onChange={this.handleChange}/>
+          onChange={this._handleChange}/>
         <label
           className="mdl-textfield__label"
           htmlFor={this.props.fieldName}>

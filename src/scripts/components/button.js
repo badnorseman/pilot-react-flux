@@ -3,10 +3,10 @@ import React from "react";
 export default class Button extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this._handleClick = this._handleClick.bind(this)
   }
 
-  handleClick() {
+  _handleClick() {
     this.props.onClick()
   }
 
@@ -14,7 +14,7 @@ export default class Button extends React.Component {
     return(
       <button
         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this.handleClick}>
+        onClick={this._handleClick}>
         {this.props.name}
       </button>
     )

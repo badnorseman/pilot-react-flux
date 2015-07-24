@@ -11,8 +11,8 @@ export default class Navbar extends React.Component {
       isLoggedIn: false,
       user: {}
     }
-    this.handleLogout = this.handleLogout.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this._handleLogout = this._handleLogout.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentWillMount() {
@@ -23,25 +23,25 @@ export default class Navbar extends React.Component {
   }
 
   componentDidMount() {
-    AuthStore.addChangeListener(this.onChange)
+    AuthStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onChange)
+    AuthStore.removeChangeListener(this._onChange)
   }
 
   componentDidUpdate() {
     componentHandler.upgradeDom()
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       isLoggedIn: AuthStore.isLoggedIn(),
       user: AuthStore.getUser()
     })
   }
 
-  handleLogout() {
+  _handleLogout() {
     AuthActions.logout()
    }
 
@@ -57,7 +57,7 @@ export default class Navbar extends React.Component {
               <div className="mdl-layout-spacer"></div>
               <nav className="mdl-navigation">
                 {this.state.isLoggedIn ? (
-                  <a className="mdl-navigation__link" onClick={this.handleLogout} href="#">Log Out</a>
+                  <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
                 ) : (
                   <Link className="mdl-navigation__link" to="/login">Log In</Link>
                 )}
@@ -71,9 +71,9 @@ export default class Navbar extends React.Component {
               <Link className="mdl-navigation__link" to="/products">Discover</Link>
               <Link className="mdl-navigation__link" to="/payments">My Account</Link>
               {this.state.isLoggedIn ? (
-                <a className="mdl-navigation__link" onClick={this.handleLogout} href="#">Log Out</a>
+                <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
               ) : (
-                <Link to="/login">Log In</Link>
+                <Link className="mdl-navigation__link" to="/login">Log In</Link>
               )}
               {!this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>}
             </nav>

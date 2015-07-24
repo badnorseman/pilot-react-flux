@@ -20,22 +20,17 @@ let ProductStore = assign({}, EventEmitter.prototype, {
     this.removeListener("change", callback)
   },
 
+  getAll() {
+    return products
+  },
+
+  getById(id) {
+    for (let k in products)
+      if (products[k].id == id) return products[k]
+  },
+
   getErrors() {
     return errors
-  },
-
-  getProduct(id) {
-    let product = {}
-
-    for (let k in products)
-      if (products[k].id == id)
-        product = products[k]
-
-    return product
-  },
-
-  getProducts() {
-    return products
   }
 })
 

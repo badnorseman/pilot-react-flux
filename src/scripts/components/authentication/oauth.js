@@ -1,23 +1,20 @@
 import React from "react";
 import AuthActions from "../../actions/auth_actions";
+import Button from "../button";
 
 export default class extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this._handleClick = this._handleClick.bind(this)
   }
 
-  handleClick() {
+  _handleClick() {
     AuthActions.oauth(this.props.provider)
   }
 
   render() {
     return(
-      <button
-        className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this.handleClick}>
-        {this.props.provider}
-      </button>
+      <Button name={this.props.provider} onClick={this._handleClick}/>
     )
   }
 }

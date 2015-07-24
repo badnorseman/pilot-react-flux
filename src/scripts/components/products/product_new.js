@@ -7,40 +7,45 @@ import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import Button from "../button";
-import RequiredField from "../required_field";
+import InputField from "../input_field";
 import InputFile from "../input_file";
 
 export default class NewProduct extends React.Component {
   constructor() {
     super()
-    this.state = {errors: []}
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      errors: []
+    }
+    this._handleCancel = this._handleCancel.bind(this)
+    this._handleSave = this._handleSave.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this.onChange)
+    ProductStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this.onChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: ProductStore.getErrors()
     })
   }
 
-  handleCancel() {
+  _getCurrency(currencies) {
+    for (let k in currencies)
+      if (currencies[k].checked === true) return currencies[k].value
+  }
+
+  _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
-  handleSave() {
-    function currencySelected(currencies) {
-      for (let k in currencies)
-        if (currencies[k].checked === true) return currencies[k].value
-    }
-    let currency = currencySelected(document.getElementsByName("currency"))
+  _handleSave() {
+    let currency = this._getCurrency(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
@@ -69,28 +74,28 @@ export default class NewProduct extends React.Component {
             <div>
               <form>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="name"
                     fieldType="text"
                     ref="name">
                     Name
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="description"
                     fieldType="text"
                     ref="description">
                     Description
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="price"
                     fieldType="number"
                     ref="price">
                     Price
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
                   <label className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor="currency-dkk">
@@ -111,9 +116,9 @@ export default class NewProduct extends React.Component {
                 <InputFile
                   ref="image"/>
                 <div>
-                  <Button name="Cancel" onClick={this.handleCancel.bind(this)}/>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
-                  <Button name="Add" onClick={this.handleSave.bind(this)}/>
+                  <Button name="Add" onClick={this._handleSave}/>
                 </div>
               </form>
             </div>

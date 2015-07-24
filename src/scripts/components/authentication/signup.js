@@ -6,31 +6,39 @@ import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
 import Oauth from "./oauth";
-import RequiredField from "../required_field";
+import Button from "../button";
+import InputField from "../input_field";
 
 export default class Signup extends React.Component {
   constructor(context) {
     super(context)
-    this.state = {errors: []}
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      errors: []
+    }
+    this._handleCancel = this._handleCancel.bind(this)
+    this._handleSubmit = this._handleSubmit.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount() {
-    AuthStore.addChangeListener(this.onChange)
+    AuthStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onChange)
+    AuthStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       errors: AuthStore.getErrors()
     })
   }
 
-  handleSubmit(e) {
+  _handleCancel() {
+    this.context.router.transitionTo("/products")
+  }
+
+  _handleSubmit(e) {
     e.preventDefault()
 
     let email = this.refs.email.state.fieldValue
@@ -57,37 +65,33 @@ export default class Signup extends React.Component {
             <div className="divider"></div>
             <div><Oauth provider="google_oauth2"/></div>
             <div>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this._handleSubmit}>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="email"
                     fieldType="text"
                     ref="email">
                     Email
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="password"
                     fieldType="password"
                     ref="password">
                     Password
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <RequiredField
+                  <InputField
                     fieldName="passwordConfirmation"
                     fieldType="password"
                     ref="passwordConfirmation">
                     Password Confirmation
-                  </RequiredField>
+                  </InputField>
                 </div>
                 <div>
-                  <Link
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    to="/products">
-                    Cancel
-                  </Link>
+                  <Button name="Cancel" onClick={this._handleCancel}/>
                   <div className="divider"></div>
                   <button
                     className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

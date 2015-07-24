@@ -6,10 +6,10 @@ export default class extends React.Component {
     this.state = {
       file: ""
     }
-    this.handleChange = this.handleChange.bind(this)
+    this._handleChange = this._handleChange.bind(this)
   }
 
-  handleChange(e) {
+  _handleChange(e) {
     e.preventDefault()
 
     let file = document.getElementById("file--selected").files[0]
@@ -28,7 +28,7 @@ export default class extends React.Component {
           type="file"
           ref="selectedFile"
           accept="image/jpeg, image/jpg, image/png"
-          onChange={this.handleChange}/>
+          onChange={this._handleChange}/>
         <label
           htmlFor="file--selected">
         </label>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ApiRoutes from "../../constants/api_routes";
 
-export default class extends React.Component {
+export default class PaymentListItem extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -22,4 +22,8 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+PaymentListItem.propTypes = {
+  item: React.PropTypes.object.isRequired,
 }
