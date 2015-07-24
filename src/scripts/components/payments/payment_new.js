@@ -13,9 +13,8 @@ export default class NewPayment extends React.Component {
       errors: [],
       product: ProductStore.getProduct(this.props.query.productId)
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.onPaymentMethodReceived = this.onPaymentMethodReceived.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this._onChange = this._onChange.bind(this)
   }
 
   componentWillMount() {
@@ -23,11 +22,11 @@ export default class NewPayment extends React.Component {
   }
 
   componentDidMount() {
-    PaymentStore.addChangeListener(this.onChange)
+    PaymentStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    PaymentStore.removeChangeListener(this.onChange)
+    PaymentStore.removeChangeListener(this._onChange)
   }
 
   componentDidUpdate() {
@@ -42,14 +41,14 @@ export default class NewPayment extends React.Component {
     )
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       clientToken: PaymentStore.getClientToken(),
       errors: PaymentStore.getErrors()
     })
   }
 
-  handleSubmit(e) {
+  _handleSubmit(e) {
     e.preventDefault()
   }
 
@@ -86,7 +85,7 @@ export default class NewPayment extends React.Component {
             </div>
             <div className="divider"></div>
             <div>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this._handleSubmit.bind(this)}>
                 <div id="dropin-container"></div>
                 <Link
                   className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"

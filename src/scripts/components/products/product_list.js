@@ -7,7 +7,9 @@ import ProductListItem from "./product_list_item";
 export default class ProductList extends React.Component {
   constructor() {
     super()
-    this.state = {products: []}
+    this.state = {
+      products: {}
+    }
     this._onChange = this._onChange.bind(this)
   }
 

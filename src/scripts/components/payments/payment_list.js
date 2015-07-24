@@ -6,8 +6,10 @@ import Item from "./payment_list_item";
 export default class PaymentList extends React.Component {
   constructor() {
     super()
-    this.state = {payments: []}
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      payments: {}
+    }
+    this._onChange = this._onChange.bind(this)
   }
 
   componentWillMount() {
@@ -15,14 +17,14 @@ export default class PaymentList extends React.Component {
   }
 
   componentDidMount() {
-    PaymentStore.addChangeListener(this.onChange)
+    PaymentStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    PaymentStore.removeChangeListener(this.onChange)
+    PaymentStore.removeChangeListener(this._onChange)
   }
 
-  onChange() {
+  _onChange() {
     this.setState({
       payments: this.state.payments = PaymentStore.getPayments()
     })
