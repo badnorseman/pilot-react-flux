@@ -92,7 +92,7 @@ export default class EditProduct extends React.Component {
                 <div>
                   <InputField
                     fieldName="name"
-                    fieldPattern="[a-zA-Z0-9.:-]{1,}?"
+                    fieldPattern="([a-zA-Z0-9.:-]{1,}[\s]{0,})+?"
                     fieldType="text"
                     fieldValue={this.state.product.name}
                     ref="name">
