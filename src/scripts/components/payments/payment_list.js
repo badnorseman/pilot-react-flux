@@ -1,7 +1,7 @@
 import React from "react";
 import PaymentActions from "../../actions/payment_actions";
 import PaymentStore from "../../stores/payment_store";
-import Item from "./payment_list_item";
+import PaymentListItem from "./payment_list_item";
 
 export default class PaymentList extends React.Component {
   constructor() {
@@ -31,9 +31,9 @@ export default class PaymentList extends React.Component {
   }
 
   render() {
-    let items = this.state.payments.map(item => (
-      <Item item={item} key={item.id}/>
-    ))
+    let items = this.state.payments.map(item => {
+      return <PaymentListItem key={item.id} item={item}/>
+    })
 
     return(
       <div>
