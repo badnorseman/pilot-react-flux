@@ -53,13 +53,11 @@ export default class NewProduct extends React.Component {
 
     if (currency && description && name && price) {
       ProductActions.add({
-        product: {
-          currency: currency,
-          description: description,
-          image: image,
-          name: name,
-          price: price
-        }
+        currency: currency,
+        description: description,
+        image: image,
+        name: name,
+        price: price
       })
       this.context.router.transitionTo("/products")
     }
@@ -76,6 +74,7 @@ export default class NewProduct extends React.Component {
                 <div>
                   <InputField
                     fieldName="name"
+                    fieldPattern="([a-zA-Z0-9.:-]{1,}[\s]{0,})+?"
                     fieldType="text"
                     ref="name">
                     Name
@@ -92,6 +91,7 @@ export default class NewProduct extends React.Component {
                 <div>
                   <InputField
                     fieldName="price"
+                    fieldPattern="[0-9]{1,}((\.|\,)[0-9]{2,2})?"
                     fieldType="number"
                     ref="price">
                     Price

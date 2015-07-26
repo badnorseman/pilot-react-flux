@@ -42,7 +42,7 @@ ProductStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.EDIT_PRODUCT:
-      ProductUtils.update(action.id, action.data)
+      ProductUtils.update(action.data)
       break
 
     case ActionTypes.LIST_PRODUCT:

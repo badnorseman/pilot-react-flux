@@ -63,20 +63,19 @@ export default class EditProduct extends React.Component {
   _handleSave() {
     let currency = this._getCurrency(document.getElementsByName("currency"))
     let description = this.refs.description.state.fieldValue
+    let id = this.props.params.id
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
 
-    if (currency && description && name && price) {
-      ProductActions.edit(
-        this.props.params.id, {
-        product: {
-          currency: currency,
-          description: description,
-          image: image,
-          name: name,
-          price: price
-        }
+    if (currency && description && id && name && price) {
+      ProductActions.edit({
+        id: id,
+        currency: currency,
+        description: description,
+        image: image,
+        name: name,
+        price: price
       })
       this.context.router.transitionTo("/products")
     }
@@ -93,7 +92,8 @@ export default class EditProduct extends React.Component {
                 <div>
                   <InputField
                     fieldName="name"
-                    fieldPattern="[a-zA-Z0-9.:-]{1,}?"
+                    fieldPattern="[a-zA-Z0-9]{1,}[.:-\s]{0,}?"
+                    fieldError="Must be letter, number, .,: or -"
                     fieldType="text"
                     fieldValue={this.state.product.name}
                     ref="name">

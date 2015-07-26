@@ -9,10 +9,9 @@ export default {
     })
   },
 
-  edit(id, data) {
+  edit(data) {
     Dispatcher.dispatch({
       actionType: ActionTypes.EDIT_PRODUCT,
-      id: id,
       data: data
     })
   },
