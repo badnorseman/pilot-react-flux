@@ -32,7 +32,7 @@ export default class EditProduct extends React.Component {
   }
 
   _handleRemove() {
-    this.props.onRemove(this.props.product.id)
+    this.props.onRemove(this.props.id)
   }
 
   render() {
