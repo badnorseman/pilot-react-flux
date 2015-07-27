@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router";
-import ApiRoutes from "../../constants/api_routes";
 
 export default class ProductListItem extends React.Component {
   constructor(props) {
     super(props)
+    this._handleSelect = this._handleSelect.bind(this)
+  }
+
+  _handleSelect() {
+    this.props.onSelect(this.props.item.id)
   }
 
   render() {
@@ -19,7 +22,7 @@ export default class ProductListItem extends React.Component {
 
     return(
       <div>
-        <Link to={`/products/${this.props.item.id}`} params={{id: this.props.item.id}}>
+        <a onClick={this._handleSelect} href="#">
           <div className="mdl-cell mdl-cell--6-col-phone mdl-cell--4-col-tablet mdl-cell--3-col-desktop">
             <div className="mdl-card mdl-shadow--2dp">
               <div className="mdl-card__title" style={titleStyle}>
@@ -30,12 +33,8 @@ export default class ProductListItem extends React.Component {
               </div>
             </div>
           </div>
-        </Link>
+        </a>
       </div>
     )
   }
-}
-
-ProductListItem.propTypes = {
-  item: React.PropTypes.object.isRequired,
 }
