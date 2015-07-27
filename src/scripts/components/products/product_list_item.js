@@ -7,7 +7,7 @@ export default class ProductListItem extends React.Component {
   }
 
   _handleSelect() {
-    this.props.onSelect(this.props.item.id)
+    this.props.onClick(this.props.item.id)
   }
 
   render() {

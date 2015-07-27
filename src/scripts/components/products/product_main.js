@@ -10,10 +10,10 @@ export default class ProductMain extends React.Component {
   constructor() {
     super()
     this.state = {
-      product: {},
-      products: [],
       isNew: false,
-      isSelected: false
+      isSelected: false,
+      products: [],
+      selectedProduct: {}
     }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
@@ -46,39 +46,25 @@ export default class ProductMain extends React.Component {
     this.setState({
       products: this.state.products = ProductStore.getAll()
     })
-    console.log("ProductMain _handleChange", this.state, this.props)
+    console.log("_handleChange", this.state)
   }
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this.setState({
-      isNew: false,
-      isSelected: false
-    })
+    this.setState({ isNew: false, isSelected: false })
   }
 
   _handleBuy(id) {
-    this.setState({
-      isNew: false,
-      isSelected: false
-    })
-    console.log("ProductMain _handleBuy", this.state)
+    this.setState({ isNew: false, isSelected: false })
   }
 
   _handleCancel() {
-    this.setState({
-      isNew: false,
-      isSelected: false
-    })
+    this.setState({ isNew: false, isSelected: false })
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this.setState({
-      isNew: false,
-      isSelected: false
-    })
-    console.log("ProductMain _handleEdit", this.state)
+    this.setState({ isNew: false, isSelected: false })
   }
 
   _handleNew() {
@@ -90,17 +76,14 @@ export default class ProductMain extends React.Component {
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this.setState({
-      isNew: false,
-      isSelected: false
-    })
+    this.setState({ isNew: false, isSelected: false })
   }
 
   _handleSelect(id) {
     this.setState({
+      selectedProduct: ProductStore.getById(id),
       isNew: false,
-      isSelected: true,
-      product: ProductStore.getById(id)
+      isSelected: true
     })
   }
 
@@ -109,7 +92,6 @@ export default class ProductMain extends React.Component {
       isNew: isNew,
       isSelected: isSelected
     })
-    console.log("ProductMain _setState", this.state)
   }
 
   render() {
@@ -122,7 +104,12 @@ export default class ProductMain extends React.Component {
       } else if (this.state.isSelected) {
       content =
         <EditProduct
-          product={this.state.product}
+          currency={this.state.selectedProduct.currency}
+          description={this.state.selectedProduct.description}
+          id={this.state.selectedProduct.id}
+          image={this.state.selectedProduct.image}
+          name={this.state.selectedProduct.name}
+          price={this.state.selectedProduct.price}
           onBuy={this._handleBuy}
           onCancel={this._handleCancel}
           onEdit={this._handleEdit}
@@ -134,7 +121,6 @@ export default class ProductMain extends React.Component {
           onNew={this._handleNew}
           onSelect={this._handleSelect}/>
     }
-    console.log("ProductMain render", this.state)
     return(
       <div>
         {content}

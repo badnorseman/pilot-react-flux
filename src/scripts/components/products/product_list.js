@@ -19,7 +19,7 @@ export default class ProductList extends React.Component {
   // How do I update this onSelect as describe https://facebook.github.io/react/tips/communicate-between-components.html
   render() {
     let items = this.props.products.map(item => {
-      return <ProductListItem key={item.id} item={item} onSelect={this._handleSelect}/>
+      return <ProductListItem key={item.id} item={item} onClick={this._handleSelect}/>
     })
 
     return(
