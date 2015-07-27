@@ -46,37 +46,33 @@ export default class ProductMain extends React.Component {
     this.setState({
       products: this.state.products = ProductStore.getAll()
     })
-    console.log("_handleChange", this.state)
   }
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this.setState({ isNew: false, isSelected: false })
+    this._setState(false, false)
   }
 
   _handleBuy(id) {
-    this.setState({ isNew: false, isSelected: false })
+    this._setState(false, false)
   }
 
   _handleCancel() {
-    this.setState({ isNew: false, isSelected: false })
+    this._setState(false, false)
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this.setState({ isNew: false, isSelected: false })
+    this._setState(false, false)
   }
 
   _handleNew() {
-    this.setState({
-      isNew: true,
-      isSelected: false
-    })
+    this._setState(true, false)
   }
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this.setState({ isNew: false, isSelected: false })
+    this._setState(false, false)
   }
 
   _handleSelect(id) {
@@ -101,7 +97,7 @@ export default class ProductMain extends React.Component {
         <NewProduct
           onCancel={this._handleCancel}
           onAdd={this._handleAdd}/>
-      } else if (this.state.isSelected) {
+    } else if (this.state.isSelected) {
       content =
         <EditProduct
           currency={this.state.selectedProduct.currency}
