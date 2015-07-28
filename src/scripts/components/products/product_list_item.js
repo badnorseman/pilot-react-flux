@@ -38,3 +38,7 @@ export default class ProductListItem extends React.Component {
     )
   }
 }
+
+ProductListItem.propTypes = {
+  item: React.PropTypes.object.isRequired,
+}
