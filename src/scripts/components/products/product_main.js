@@ -1,17 +1,18 @@
 import React from "react";
-import { Link } from "react-router";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
 import NewProduct from "./new_product";
 import EditProduct from "./edit_product";
+import NewPayment from "../payments/new_payment";
 
 function _getStateFromStores() {
   return {
+    isBuy: false,
     isNew: false,
     isSelected: false,
-    products: ProductStore.getAll(),
-    selectedProduct: {}
+    product: {},
+    products: ProductStore.getAll()
   }
 }
 
@@ -48,36 +49,42 @@ export default class ProductMain extends React.Component {
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this._setState(false, false)
+    this._setState(false, false, false)
   }
 
   _handleBuy(id) {
-    this._setState(false, false)
+    this.setState({
+      isBuy: true,
+      isNew: false,
+      isSelected: false,
+      product: ProductStore.getById(id)
+    })
   }
 
   _handleClose() {
-    this._setState(false, false)
+    this._setState(false, false, false)
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this._setState(false, false)
+    this._setState(false, false, false)
   }
 
   _handleNew() {
-    this._setState(true, false)
+    this._setState(false, true, false)
   }
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this._setState(false, false)
+    this._setState(false, false, false)
   }
 
   _handleSelect(id) {
     this.setState({
-      selectedProduct: ProductStore.getById(id),
+      isBuy: false,
       isNew: false,
-      isSelected: true
+      isSelected: true,
+      product: ProductStore.getById(id)
     })
   }
 
@@ -85,8 +92,9 @@ export default class ProductMain extends React.Component {
     this.setState(_getStateFromStores())
   }
 
-  _setState(isNew, isSelected) {
+  _setState(isBuy, isNew, isSelected) {
     this.setState({
+      isBuy: isBuy,
       isNew: isNew,
       isSelected: isSelected
     })
@@ -94,19 +102,24 @@ export default class ProductMain extends React.Component {
 
   render() {
     let content;
-    if (this.state.isNew) {
+    if (this.state.isBuy && this.state.product) {
+      content =
+        <NewPayment
+          product={this.state.product}
+          onClose={this._handleClose}/>
+    } else if (this.state.isNew) {
       content =
         <NewProduct
           onAdd={this._handleAdd}
           onClose={this._handleClose}/>
-      } else if (this.state.isSelected && this.state.selectedProduct) {
-      content =
-        <EditProduct
-          product={this.state.selectedProduct}
-          onBuy={this._handleBuy}
-          onClose={this._handleClose}
-          onEdit={this._handleEdit}
-          onRemove={this._handleRemove}/>
+    } else if (this.state.isSelected && this.state.product) {
+    content =
+      <EditProduct
+        product={this.state.product}
+        onBuy={this._handleBuy}
+        onClose={this._handleClose}
+        onEdit={this._handleEdit}
+        onRemove={this._handleRemove}/>
     } else {
       content =
         <ProductList
