@@ -17,12 +17,12 @@ export default class ProductMain extends React.Component {
     }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
-    this._handleChange = this._handleChange.bind(this)
     this._handleClose = this._handleClose.bind(this)
     this._handleEdit = this._handleEdit.bind(this)
     this._handleNew = this._handleNew.bind(this)
     this._handleRemove = this._handleRemove.bind(this)
     this._handleSelect = this._handleSelect.bind(this)
+    this._onChange = this._onChange.bind(this)
     this._setState = this._setState.bind(this)
   }
 
@@ -31,11 +31,11 @@ export default class ProductMain extends React.Component {
   }
 
   componentDidMount() {
-    ProductStore.addChangeListener(this._handleChange)
+    ProductStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    ProductStore.removeChangeListener(this._handleChange)
+    ProductStore.removeChangeListener(this._onChange)
   }
 
   componentDidUpdate() {
@@ -49,12 +49,6 @@ export default class ProductMain extends React.Component {
 
   _handleBuy(id) {
     this._setState(false, false)
-  }
-
-  _handleChange() {
-    this.setState({
-      products: this.state.products = ProductStore.getAll()
-    })
   }
 
   _handleClose() {
@@ -80,6 +74,12 @@ export default class ProductMain extends React.Component {
       selectedProduct: ProductStore.getById(id),
       isNew: false,
       isSelected: true
+    })
+  }
+
+  _onChange() {
+    this.setState({
+      products: this.state.products = ProductStore.getAll()
     })
   }
 

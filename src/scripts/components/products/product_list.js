@@ -4,8 +4,19 @@ import ProductListItem from "./product_list_item";
 export default class ProductList extends React.Component {
   constructor(props) {
     super(props)
+    this._getProductListItems = this._getProductListItems.bind(this)
     this._handleNew = this._handleNew.bind(this)
     this._handleSelect = this._handleSelect.bind(this)
+  }
+
+  // How do I update this onSelect as describe https://facebook.github.io/react/tips/communicate-between-components.html
+  _getProductListItems(item) {
+    return(
+      <ProductListItem
+        key={item.id}
+        item={item}
+        onClick={this._handleSelect}/>
+    )
   }
 
   _handleNew() {
@@ -16,11 +27,8 @@ export default class ProductList extends React.Component {
     this.props.onSelect(id)
   }
 
-  // How do I update this onSelect as describe https://facebook.github.io/react/tips/communicate-between-components.html
   render() {
-    let items = this.props.products.map(item => {
-      return <ProductListItem key={item.id} item={item} onClick={this._handleSelect}/>
-    })
+    let items = this.props.products.map(this._getProductListItems)
 
     return(
       <div>
