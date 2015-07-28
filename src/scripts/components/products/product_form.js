@@ -8,7 +8,7 @@ export default class ProductForm extends React.Component {
   constructor(props) {
     super(props)
     this._getCurrency = this._getCurrency.bind(this)
-    this._handleCancel = this._handleCancel.bind(this)
+    this._handleClose = this._handleClose.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
     this._isCurrency = this._isCurrency.bind(this)
   }
@@ -19,13 +19,14 @@ export default class ProductForm extends React.Component {
       if (currencies[k].checked === true) return currencies[k].value
   }
 
-  _handleCancel() {
-    this.props.onCancel()
+  _handleClose() {
+    this.props.onClose()
   }
 
   _handleSubmit() {
     let currency = this._getCurrency()
     let description = this.refs.description.state.fieldValue
+    let id = this.props.id
     let image = this.refs.image.state.file
     let name = this.refs.name.state.fieldValue
     let price = this.refs.price.state.fieldValue
@@ -34,6 +35,7 @@ export default class ProductForm extends React.Component {
       this.props.onSubmit({
         currency: currency,
         description: description,
+        id: id,
         image: image,
         name: name,
         price: price
@@ -101,7 +103,7 @@ export default class ProductForm extends React.Component {
           <InputFile
             ref="image"/>
           <div>
-            <Button name="Cancel" onClick={this._handleCancel}/>
+            <Button name="Close" onClick={this._handleClose}/>
             <div className="divider"></div>
             <Button name="Save" onClick={this._handleSubmit}/>
           </div>
@@ -114,15 +116,14 @@ export default class ProductForm extends React.Component {
 ProductForm.propTypes = {
   currency: React.PropTypes.string,
   description: React.PropTypes.string,
+  id: React.PropTypes.number,
   image: React.PropTypes.string,
   name: React.PropTypes.string,
-  price: React.PropTypes.string
+  price: React.PropTypes.number,
+  onClose: React.PropTypes.func.isRequired,
+  onSubmit: React.PropTypes.func.isRequired
 }
 
 ProductForm.defaultProps = {
-  currency: "DKK",
-  description: "",
-  image: "",
-  name: "",
-  price: ""
+  currency: "DKK"
 }

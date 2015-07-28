@@ -5,22 +5,16 @@ import Button from "../button";
 export default class NewProduct extends React.Component {
   constructor(props) {
     super(props)
-    this._handleCancel = this._handleCancel.bind(this)
     this._handleAdd = this._handleAdd.bind(this)
+    this._handleClose = this._handleClose.bind(this)
   }
 
   _handleAdd(product) {
-    this.props.onAdd({
-      currency: product.currency,
-      description: product.description,
-      image: product.image,
-      name: product.name,
-      price: product.price
-    })
+    this.props.onAdd(product)
   }
 
-  _handleCancel() {
-    this.props.onCancel()
+  _handleClose() {
+    this.props.onClose()
   }
 
   render() {
@@ -33,7 +27,7 @@ export default class NewProduct extends React.Component {
             image={this.props.image}
             name={this.props.name}
             price={this.props.price}
-            onCancel={this._handleCancel}
+            onClose={this._handleClose}
             onSubmit={this._handleAdd}/>
         </div>
       </div>
@@ -44,7 +38,10 @@ export default class NewProduct extends React.Component {
 NewProduct.propTypes = {
   currency: React.PropTypes.string,
   description: React.PropTypes.string,
+  id: React.PropTypes.number,
   image: React.PropTypes.string,
   name: React.PropTypes.string,
-  price: React.PropTypes.string
+  price: React.PropTypes.number,
+  onAdd: React.PropTypes.func.isRequired,
+  onClose: React.PropTypes.func.isRequired
 }

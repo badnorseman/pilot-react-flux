@@ -17,8 +17,8 @@ export default class ProductMain extends React.Component {
     }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
-    this._handleCancel = this._handleCancel.bind(this)
     this._handleChange = this._handleChange.bind(this)
+    this._handleClose = this._handleClose.bind(this)
     this._handleEdit = this._handleEdit.bind(this)
     this._handleNew = this._handleNew.bind(this)
     this._handleRemove = this._handleRemove.bind(this)
@@ -42,12 +42,6 @@ export default class ProductMain extends React.Component {
     componentHandler.upgradeDom()
   }
 
-  _handleChange() {
-    this.setState({
-      products: this.state.products = ProductStore.getAll()
-    })
-  }
-
   _handleAdd(product) {
     ProductActions.add(product)
     this._setState(false, false)
@@ -57,7 +51,13 @@ export default class ProductMain extends React.Component {
     this._setState(false, false)
   }
 
-  _handleCancel() {
+  _handleChange() {
+    this.setState({
+      products: this.state.products = ProductStore.getAll()
+    })
+  }
+
+  _handleClose() {
     this._setState(false, false)
   }
 
@@ -95,19 +95,14 @@ export default class ProductMain extends React.Component {
     if (this.state.isNew) {
       content =
         <NewProduct
-          onCancel={this._handleCancel}
-          onAdd={this._handleAdd}/>
-    } else if (this.state.isSelected) {
+          onAdd={this._handleAdd}
+          onClose={this._handleClose}/>
+      } else if (this.state.isSelected && this.state.selectedProduct) {
       content =
         <EditProduct
-          currency={this.state.selectedProduct.currency}
-          description={this.state.selectedProduct.description}
-          id={this.state.selectedProduct.id}
-          image={this.state.selectedProduct.image}
-          name={this.state.selectedProduct.name}
-          price={this.state.selectedProduct.price}
+          product={this.state.selectedProduct}
           onBuy={this._handleBuy}
-          onCancel={this._handleCancel}
+          onClose={this._handleClose}
           onEdit={this._handleEdit}
           onRemove={this._handleRemove}/>
     } else {
