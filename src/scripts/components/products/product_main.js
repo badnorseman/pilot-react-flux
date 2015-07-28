@@ -6,15 +6,19 @@ import ProductList from "./product_list";
 import NewProduct from "./new_product";
 import EditProduct from "./edit_product";
 
+function _getStateFromStores() {
+  return {
+    isNew: false,
+    isSelected: false,
+    products: ProductStore.getAll(),
+    selectedProduct: {}
+  }
+}
+
 export default class ProductMain extends React.Component {
   constructor() {
     super()
-    this.state = {
-      isNew: false,
-      isSelected: false,
-      products: [],
-      selectedProduct: {}
-    }
+    this.state = _getStateFromStores()
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
     this._handleClose = this._handleClose.bind(this)
@@ -78,9 +82,7 @@ export default class ProductMain extends React.Component {
   }
 
   _onChange() {
-    this.setState({
-      products: this.state.products = ProductStore.getAll()
-    })
+    this.setState(_getStateFromStores())
   }
 
   _setState(isNew, isSelected) {
