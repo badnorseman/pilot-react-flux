@@ -6,6 +6,7 @@ import NewProduct from "./new_product";
 import EditProduct from "./edit_product";
 import NewPayment from "../payments/new_payment";
 
+// Replace isBuy, isNew, isSelected with contentType
 function _getStateFromStores() {
   return {
     isBuy: false,
@@ -45,6 +46,42 @@ export default class ProductMain extends React.Component {
 
   componentDidUpdate() {
     componentHandler.upgradeDom()
+  }
+
+  _getEditProduct() {
+    return(
+      <EditProduct
+        product={this.state.product}
+        onBuy={this._handleBuy}
+        onClose={this._handleClose}
+        onEdit={this._handleEdit}
+        onRemove={this._handleRemove}/>
+    )
+  }
+
+  _getNewPayment() {
+    return(
+      <NewPayment
+        product={this.state.product}
+        onClose={this._handleClose}/>
+    )
+  }
+
+  _getNewProduct() {
+    return(
+      <NewProduct
+        onAdd={this._handleAdd}
+        onClose={this._handleClose}/>
+    )
+  }
+
+  _getProductList() {
+    return(
+      <ProductList
+        products={this.state.products}
+        onNew={this._handleNew}
+        onSelect={this._handleSelect}/>
+    )
   }
 
   _handleAdd(product) {
@@ -100,32 +137,17 @@ export default class ProductMain extends React.Component {
     })
   }
 
+  // Replace if statement with switch statement and use contentType
   render() {
     let content;
     if (this.state.isBuy && this.state.product) {
-      content =
-        <NewPayment
-          product={this.state.product}
-          onClose={this._handleClose}/>
+      content = this._getNewPayment()
     } else if (this.state.isNew) {
-      content =
-        <NewProduct
-          onAdd={this._handleAdd}
-          onClose={this._handleClose}/>
+      content = this._getNewProduct()
     } else if (this.state.isSelected && this.state.product) {
-    content =
-      <EditProduct
-        product={this.state.product}
-        onBuy={this._handleBuy}
-        onClose={this._handleClose}
-        onEdit={this._handleEdit}
-        onRemove={this._handleRemove}/>
+      content = this._getEditProduct()
     } else {
-      content =
-        <ProductList
-          products={this.state.products}
-          onNew={this._handleNew}
-          onSelect={this._handleSelect}/>
+      content = this._getProductList()
     }
     return(
       <div>
