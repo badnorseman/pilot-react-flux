@@ -6,12 +6,9 @@ import NewProduct from "./new_product";
 import EditProduct from "./edit_product";
 import NewPayment from "../payments/new_payment";
 
-// Replace isBuy, isNew, isSelected with contentType
 function _getStateFromStores() {
   return {
-    isBuy: false,
-    isNew: false,
-    isSelected: false,
+    contentType: "",
     product: {},
     products: ProductStore.getAll()
   }
@@ -86,41 +83,39 @@ export default class ProductMain extends React.Component {
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this._setState(false, false, false)
+    this._setState()
   }
 
   _handleBuy(id) {
     this.setState({
-      isBuy: true,
-      isNew: false,
-      isSelected: false,
+      contentType: "BUY",
       product: ProductStore.getById(id)
     })
   }
 
   _handleClose() {
-    this._setState(false, false, false)
+    this._setState()
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this._setState(false, false, false)
+    this._setState()
   }
 
   _handleNew() {
-    this._setState(false, true, false)
+    this.setState({
+      contentType: "NEW"
+    })
   }
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this._setState(false, false, false)
+    this._setState()
   }
 
   _handleSelect(id) {
     this.setState({
-      isBuy: false,
-      isNew: false,
-      isSelected: true,
+      contentType: "EDIT",
       product: ProductStore.getById(id)
     })
   }
@@ -129,22 +124,20 @@ export default class ProductMain extends React.Component {
     this.setState(_getStateFromStores())
   }
 
-  _setState(isBuy, isNew, isSelected) {
+  _setState() {
     this.setState({
-      isBuy: isBuy,
-      isNew: isNew,
-      isSelected: isSelected
+    contentType: "",
     })
   }
 
   // Replace if statement with switch statement and use contentType
   render() {
     let content;
-    if (this.state.isBuy && this.state.product) {
+    if (this.state.contentType === "BUY" && this.state.product) {
       content = this._getNewPayment()
-    } else if (this.state.isNew) {
+    } else if (this.state.contentType === "NEW") {
       content = this._getNewProduct()
-    } else if (this.state.isSelected && this.state.product) {
+    } else if (this.state.contentType === "EDIT" && this.state.product) {
       content = this._getEditProduct()
     } else {
       content = this._getProductList()
