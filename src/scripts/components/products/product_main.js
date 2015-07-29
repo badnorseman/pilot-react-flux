@@ -126,18 +126,26 @@ export default class ProductMain extends React.Component {
     this.setState({ contentType: "" })
   }
 
-  // Replace if statement with switch statement and use contentType
   render() {
     let content;
-    if (this.state.contentType === "BUY" && this.state.product) {
-      content = this._getNewPayment()
-    } else if (this.state.contentType === "NEW") {
-      content = this._getNewProduct()
-    } else if (this.state.contentType === "EDIT" && this.state.product) {
-      content = this._getEditProduct()
-    } else {
-      content = this._getProductList()
+
+    switch (this.state.contentType) {
+      case "BUY":
+        content = this._getNewPayment()
+        break;
+
+      case "EDIT":
+        content = this._getEditProduct()
+        break;
+
+      case "NEW":
+        content = this._getNewProduct()
+        break;
+
+      default:
+        content = this._getProductList()
     }
+
     return(
       <div>
         {content}
