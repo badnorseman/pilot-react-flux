@@ -103,9 +103,7 @@ export default class ProductMain extends React.Component {
   }
 
   _handleNew() {
-    this.setState({
-      contentType: "NEW"
-    })
+    this.setState({ contentType: "NEW" })
   }
 
   _handleRemove(id) {
@@ -125,9 +123,7 @@ export default class ProductMain extends React.Component {
   }
 
   _setState() {
-    this.setState({
-    contentType: "",
-    })
+    this.setState({ contentType: "" })
   }
 
   // Replace if statement with switch statement and use contentType
