@@ -8,7 +8,7 @@ import NewPayment from "../payments/new_payment";
 
 function _getStateFromStores() {
   return {
-    contentType: "",
+    contentMode: "",
     product: {},
     products: ProductStore.getAll()
   }
@@ -88,7 +88,7 @@ export default class ProductMain extends React.Component {
 
   _handleBuy(id) {
     this.setState({
-      contentType: "BUY",
+      contentMode: "BUY",
       product: ProductStore.getById(id)
     })
   }
@@ -103,7 +103,7 @@ export default class ProductMain extends React.Component {
   }
 
   _handleNew() {
-    this.setState({ contentType: "NEW" })
+    this.setState({ contentMode: "NEW" })
   }
 
   _handleRemove(id) {
@@ -113,7 +113,7 @@ export default class ProductMain extends React.Component {
 
   _handleSelect(id) {
     this.setState({
-      contentType: "EDIT",
+      contentMode: "EDIT",
       product: ProductStore.getById(id)
     })
   }
@@ -123,13 +123,13 @@ export default class ProductMain extends React.Component {
   }
 
   _setState() {
-    this.setState({ contentType: "" })
+    this.setState({ contentMode: "" })
   }
 
   render() {
     let content;
 
-    switch (this.state.contentType) {
+    switch (this.state.contentMode) {
       case "BUY":
         content = this._getNewPayment()
         break;
