@@ -26,7 +26,7 @@ export default class ProductMain extends React.Component {
     this._handleRemove = this._handleRemove.bind(this)
     this._handleSelect = this._handleSelect.bind(this)
     this._onChange = this._onChange.bind(this)
-    this._setState = this._setState.bind(this)
+    this._resetStateOfContentMode = this._resetStateOfContentMode.bind(this)
   }
 
   componentWillMount() {
@@ -83,7 +83,7 @@ export default class ProductMain extends React.Component {
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this._setState()
+    this._resetStateOfContentMode()
   }
 
   _handleBuy(id) {
@@ -94,12 +94,12 @@ export default class ProductMain extends React.Component {
   }
 
   _handleClose() {
-    this._setState()
+    this._resetStateOfContentMode()
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this._setState()
+    this._resetStateOfContentMode()
   }
 
   _handleNew() {
@@ -108,7 +108,7 @@ export default class ProductMain extends React.Component {
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this._setState()
+    this._resetStateOfContentMode()
   }
 
   _handleSelect(id) {
@@ -122,7 +122,7 @@ export default class ProductMain extends React.Component {
     this.setState(_getStateFromStores())
   }
 
-  _setState() {
+  _resetStateOfContentMode() {
     this.setState({ contentMode: "" })
   }
 
