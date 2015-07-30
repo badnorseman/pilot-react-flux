@@ -44,7 +44,7 @@ export default class ProductForm extends React.Component {
   }
 
   _isCurrency(value) {
-    if (value === this.props.currency) { return true } else { return false }
+    return value === this.props.currency
   }
 
   render() {
