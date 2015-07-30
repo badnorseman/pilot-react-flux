@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router";
-import ApiRoutes from "../../constants/api_routes";
 
 export default class PaymentListItem extends React.Component {
   constructor(props) {
