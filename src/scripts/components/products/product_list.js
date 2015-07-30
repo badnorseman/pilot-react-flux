@@ -12,7 +12,7 @@ export default class ProductList extends React.Component {
   // How do I update this onSelect as describe https://facebook.github.io/react/tips/communicate-between-components.html
   // Move <a onClick={this._handleSelect}></a> from ListItem to here
   _getProductListItems(item) {
-    return(
+    return (
       <ProductListItem
         key={item.id}
         item={item}
@@ -31,7 +31,7 @@ export default class ProductList extends React.Component {
   render() {
     let items = this.props.products.map(this._getProductListItems)
 
-    return(
+    return (
       <div>
         <div className="mdl-grid">
           {items}

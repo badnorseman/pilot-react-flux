@@ -46,7 +46,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getEditProduct() {
-    return(
+    return (
       <EditProduct
         product={this.state.product}
         onBuy={this._handleBuy}
@@ -57,7 +57,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getNewPayment() {
-    return(
+    return (
       <NewPayment
         product={this.state.product}
         onClose={this._handleClose}/>
@@ -65,7 +65,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getNewProduct() {
-    return(
+    return (
       <NewProduct
         onAdd={this._handleAdd}
         onClose={this._handleClose}/>
@@ -73,7 +73,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getProductList() {
-    return(
+    return (
       <ProductList
         products={this.state.products}
         onNew={this._handleNew}
@@ -146,7 +146,7 @@ export default class ProductMain extends React.Component {
         content = this._getProductList()
     }
 
-    return(
+    return (
       <div>
         {content}
       </div>

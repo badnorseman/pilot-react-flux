@@ -48,7 +48,7 @@ export default class ProductForm extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
         <form>
           <div>

@@ -29,7 +29,7 @@ export default class PaymentList extends React.Component {
   }
 
   _getPaymentListItems(item) {
-    return(
+    return (
       <PaymentListItem
         key={item.id}
         item={item}/>
@@ -43,7 +43,7 @@ export default class PaymentList extends React.Component {
   render() {
     let items = this.state.payments.map(this._getPaymentListItems)
 
-    return(
+    return (
       <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--12-col">
           <div>

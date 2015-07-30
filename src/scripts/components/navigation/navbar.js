@@ -46,7 +46,7 @@ export default class Navbar extends React.Component {
    }
 
   render() {
-    return(
+    return (
       <div>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--overlay-drawer-button">
           <header className="mdl-layout__header">

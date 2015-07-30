@@ -2,7 +2,7 @@ import React from "react";
 
 export default class Footer extends React.Component {
   render() {
-    return(
+    return (
       <div>
         <footer className="mdl-mini-footer">
           <div className="mdl-mini-footer--left-section">

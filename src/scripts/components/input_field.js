@@ -22,7 +22,7 @@ export default class InputFile extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input
           className="mdl-textfield__input"

@@ -6,7 +6,7 @@ export default class PaymentListItem extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
         <div className="mdl-cell mdl-cell--12-col">
           {this.props.item.transaction_date}

@@ -18,7 +18,7 @@ export default class NewProduct extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className="mdl-grid text-center">
         <div className="mdl-cell mdl-cell--12-col">
           <ProductForm

@@ -11,7 +11,7 @@ export default class Button extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <button
         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         onClick={this._handleClick}>
