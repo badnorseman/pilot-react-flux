@@ -6,16 +6,10 @@ import NewProduct from "./new_product";
 import EditProduct from "./edit_product";
 import NewPayment from "../payments/new_payment";
 
-function _getStateFromStores() {
-  return {
-    content: {}
-  }
-}
-
 export default class ProductMain extends React.Component {
   constructor() {
     super()
-    this.state = _getStateFromStores()
+    this.state = { content: {} }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
     this._handleClose = this._handleClose.bind(this)
@@ -23,7 +17,6 @@ export default class ProductMain extends React.Component {
     this._handleNew = this._handleNew.bind(this)
     this._handleRemove = this._handleRemove.bind(this)
     this._handleSelect = this._handleSelect.bind(this)
-    this._isEmpty = this._isEmpty.bind(this)
     this._onChange = this._onChange.bind(this)
   }
 
@@ -73,7 +66,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getProductList() {
-    let products = ProductStore.getAll();
+    let products = ProductStore.getAll()
     return (
       <ProductList
         products={products}
@@ -82,9 +75,15 @@ export default class ProductMain extends React.Component {
     )
   }
 
+  _getState() {
+    return {
+      content: this._getProductList()
+    }
+  }
+
   _handleAdd(product) {
     ProductActions.add(product)
-    this.setState(_getStateFromStores())
+    this.setState(this._getState())
   }
 
   _handleBuy(id) {
@@ -92,12 +91,12 @@ export default class ProductMain extends React.Component {
   }
 
   _handleClose() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getState())
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this.setState(_getStateFromStores())
+    this.setState(this._getState())
   }
 
   _handleNew() {
@@ -106,33 +105,21 @@ export default class ProductMain extends React.Component {
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this.setState(_getStateFromStores())
+    this.setState(this._getState())
   }
 
   _handleSelect(id) {
     this.setState({ content: this._getEditProduct(id) })
   }
 
-  _isEmpty(obj) {
-    return Object.getOwnPropertyNames(obj).length === 0;
-  }
-
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getState())
   }
 
   render() {
-    let content;
-
-    if (this._isEmpty(this.state.content)) {
-      content = this._getProductList()
-    } else {
-      content = this.state.content
-    }
-
     return (
       <div>
-        {content}
+        {this.state.content}
       </div>
     )
   }
