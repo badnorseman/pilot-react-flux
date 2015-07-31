@@ -25,7 +25,6 @@ export default class ProductMain extends React.Component {
     this._handleSelect = this._handleSelect.bind(this)
     this._isEmpty = this._isEmpty.bind(this)
     this._onChange = this._onChange.bind(this)
-    this._resetContentMode = this._resetContentMode.bind(this)
   }
 
   componentWillMount() {
@@ -44,7 +43,8 @@ export default class ProductMain extends React.Component {
     componentHandler.upgradeDom()
   }
 
-  _getEditProduct(product) {
+  _getEditProduct(id) {
+    let product = ProductStore.getById(id);
     return (
       <EditProduct
         product={product}
@@ -55,7 +55,8 @@ export default class ProductMain extends React.Component {
     )
   }
 
-  _getNewPayment(product) {
+  _getNewPayment(id) {
+    let product = ProductStore.getById(id);
     return (
       <NewPayment
         product={product}
@@ -71,7 +72,8 @@ export default class ProductMain extends React.Component {
     )
   }
 
-  _getProductList(products) {
+  _getProductList() {
+    let products = ProductStore.getAll();
     return (
       <ProductList
         products={products}
@@ -82,39 +84,33 @@ export default class ProductMain extends React.Component {
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this._resetContentMode()
+    this.setState(_getStateFromStores())
   }
 
   _handleBuy(id) {
-    this.setState({
-      content: this._getNewPayment(ProductStore.getById(id))
-    })
+    this.setState({ content: this._getNewPayment(id) })
   }
 
   _handleClose() {
-    this._resetContentMode()
+    this.setState(_getStateFromStores())
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this._resetContentMode()
+    this.setState(_getStateFromStores())
   }
 
   _handleNew() {
-    this.setState({
-      content: this._getNewProduct()
-    })
+    this.setState({ content: this._getNewProduct() })
   }
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this._resetContentMode()
+    this.setState(_getStateFromStores())
   }
 
   _handleSelect(id) {
-    this.setState({
-      content: this._getEditProduct(ProductStore.getById(id))
-    })
+    this.setState({ content: this._getEditProduct(id) })
   }
 
   _isEmpty(obj) {
@@ -125,15 +121,11 @@ export default class ProductMain extends React.Component {
     this.setState(_getStateFromStores())
   }
 
-  _resetContentMode() {
-    this.setState(_getStateFromStores())
-  }
-
   render() {
     let content;
 
     if (this._isEmpty(this.state.content)) {
-      content = this._getProductList(ProductStore.getAll())
+      content = this._getProductList()
     } else {
       content = this.state.content
     }
