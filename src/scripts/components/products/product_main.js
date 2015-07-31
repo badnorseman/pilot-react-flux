@@ -36,6 +36,12 @@ export default class ProductMain extends React.Component {
     componentHandler.upgradeDom()
   }
 
+  _getContent() {
+    return {
+      content: this._getProductList()
+    }
+  }
+
   _getEditProduct(id) {
     let product = ProductStore.getById(id);
     return (
@@ -75,15 +81,9 @@ export default class ProductMain extends React.Component {
     )
   }
 
-  _getState() {
-    return {
-      content: this._getProductList()
-    }
-  }
-
   _handleAdd(product) {
     ProductActions.add(product)
-    this.setState(this._getState())
+    this.setState(this._getContent())
   }
 
   _handleBuy(id) {
@@ -91,12 +91,12 @@ export default class ProductMain extends React.Component {
   }
 
   _handleClose() {
-    this.setState(this._getState())
+    this.setState(this._getContent())
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this.setState(this._getState())
+    this.setState(this._getContent())
   }
 
   _handleNew() {
@@ -105,7 +105,7 @@ export default class ProductMain extends React.Component {
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this.setState(this._getState())
+    this.setState(this._getContent())
   }
 
   _handleSelect(id) {
@@ -113,7 +113,7 @@ export default class ProductMain extends React.Component {
   }
 
   _onChange() {
-    this.setState(this._getState())
+    this.setState(this._getContent())
   }
 
   render() {
