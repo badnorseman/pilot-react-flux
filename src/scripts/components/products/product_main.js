@@ -8,8 +8,8 @@ import NewPayment from "../payments/new_payment";
 
 function _getStateFromStores() {
   return {
+    content: {},
     contentMode: "",
-    product: {},
     products: ProductStore.getAll()
   }
 }
@@ -45,10 +45,10 @@ export default class ProductMain extends React.Component {
     componentHandler.upgradeDom()
   }
 
-  _getEditProduct() {
+  _getEditProduct(product) {
     return (
       <EditProduct
-        product={this.state.product}
+        product={product}
         onBuy={this._handleBuy}
         onClose={this._handleClose}
         onEdit={this._handleEdit}
@@ -56,10 +56,10 @@ export default class ProductMain extends React.Component {
     )
   }
 
-  _getNewPayment() {
+  _getNewPayment(product) {
     return (
       <NewPayment
-        product={this.state.product}
+        product={product}
         onClose={this._handleClose}/>
     )
   }
@@ -88,8 +88,8 @@ export default class ProductMain extends React.Component {
 
   _handleBuy(id) {
     this.setState({
-      contentMode: "BUY",
-      product: ProductStore.getById(id)
+      content: this._getNewPayment(ProductStore.getById(id)),
+      contentMode: "BUY"
     })
   }
 
@@ -103,7 +103,10 @@ export default class ProductMain extends React.Component {
   }
 
   _handleNew() {
-    this.setState({ contentMode: "NEW" })
+    this.setState({
+      content: this._getNewProduct(),
+      contentMode: "NEW"
+    })
   }
 
   _handleRemove(id) {
@@ -113,8 +116,8 @@ export default class ProductMain extends React.Component {
 
   _handleSelect(id) {
     this.setState({
-      contentMode: "EDIT",
-      product: ProductStore.getById(id)
+      content: this._getEditProduct(ProductStore.getById(id)),
+      contentMode: "EDIT"
     })
   }
 
@@ -123,27 +126,19 @@ export default class ProductMain extends React.Component {
   }
 
   _resetStateOfContentMode() {
-    this.setState({ contentMode: "" })
+    this.setState({
+      content: {},
+      contentMode: ""
+    })
   }
 
   render() {
     let content;
 
-    switch (this.state.contentMode) {
-      case "BUY":
-        content = this._getNewPayment()
-        break;
-
-      case "EDIT":
-        content = this._getEditProduct()
-        break;
-
-      case "NEW":
-        content = this._getNewProduct()
-        break;
-
-      default:
-        content = this._getProductList()
+    if (this.state.contentMode) {
+      content = this.state.content
+    } else {
+      content = this._getProductList()
     }
 
     return (
