@@ -126,8 +126,8 @@ export default class ProductMain extends React.Component {
 
   _resetStateOfContentMode() {
     this.setState({
-      content: {},
-      contentMode: ""
+      content: this._getProductList(ProductStore.getAll()),
+      contentMode: "LIST"
     })
   }
 
