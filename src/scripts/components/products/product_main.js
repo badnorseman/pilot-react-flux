@@ -9,8 +9,7 @@ import NewPayment from "../payments/new_payment";
 function _getStateFromStores() {
   return {
     content: {},
-    contentMode: "",
-    products: ProductStore.getAll()
+    contentMode: ""
   }
 }
 
@@ -72,10 +71,10 @@ export default class ProductMain extends React.Component {
     )
   }
 
-  _getProductList() {
+  _getProductList(products) {
     return (
       <ProductList
-        products={this.state.products}
+        products={products}
         onNew={this._handleNew}
         onSelect={this._handleSelect}/>
     )
@@ -138,7 +137,7 @@ export default class ProductMain extends React.Component {
     if (this.state.contentMode) {
       content = this.state.content
     } else {
-      content = this._getProductList()
+      content = this._getProductList(ProductStore.getAll())
     }
 
     return (
