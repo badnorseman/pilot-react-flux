@@ -121,17 +121,11 @@ export default class ProductMain extends React.Component {
   }
 
   _onChange() {
-    this.setState({
-      content: this._getProductList(ProductStore.getAll()),
-      contentMode: "LIST"
-    })
+    this.setState(_getStateFromStores())
   }
 
   _resetStateOfContentMode() {
-    this.setState({
-      content: this._getProductList(ProductStore.getAll()),
-      contentMode: "LIST"
-    })
+    this.setState(_getStateFromStores())
   }
 
   render() {
