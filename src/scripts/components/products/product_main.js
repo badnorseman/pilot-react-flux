@@ -8,8 +8,7 @@ import NewPayment from "../payments/new_payment";
 
 function _getStateFromStores() {
   return {
-    content: {},
-    contentMode: ""
+    content: {}
   }
 }
 
@@ -24,8 +23,9 @@ export default class ProductMain extends React.Component {
     this._handleNew = this._handleNew.bind(this)
     this._handleRemove = this._handleRemove.bind(this)
     this._handleSelect = this._handleSelect.bind(this)
+    this._isEmpty = this._isEmpty.bind(this)
     this._onChange = this._onChange.bind(this)
-    this._resetStateOfContentMode = this._resetStateOfContentMode.bind(this)
+    this._resetContentMode = this._resetContentMode.bind(this)
   }
 
   componentWillMount() {
@@ -82,59 +82,60 @@ export default class ProductMain extends React.Component {
 
   _handleAdd(product) {
     ProductActions.add(product)
-    this._resetStateOfContentMode()
+    this._resetContentMode()
   }
 
   _handleBuy(id) {
     this.setState({
-      content: this._getNewPayment(ProductStore.getById(id)),
-      contentMode: "BUY"
+      content: this._getNewPayment(ProductStore.getById(id))
     })
   }
 
   _handleClose() {
-    this._resetStateOfContentMode()
+    this._resetContentMode()
   }
 
   _handleEdit(product) {
     ProductActions.edit(product)
-    this._resetStateOfContentMode()
+    this._resetContentMode()
   }
 
   _handleNew() {
     this.setState({
-      content: this._getNewProduct(),
-      contentMode: "NEW"
+      content: this._getNewProduct()
     })
   }
 
   _handleRemove(id) {
     ProductActions.remove(id)
-    this._resetStateOfContentMode()
+    this._resetContentMode()
   }
 
   _handleSelect(id) {
     this.setState({
-      content: this._getEditProduct(ProductStore.getById(id)),
-      contentMode: "EDIT"
+      content: this._getEditProduct(ProductStore.getById(id))
     })
+  }
+
+  _isEmpty(obj) {
+    return Object.getOwnPropertyNames(obj).length === 0;
   }
 
   _onChange() {
     this.setState(_getStateFromStores())
   }
 
-  _resetStateOfContentMode() {
+  _resetContentMode() {
     this.setState(_getStateFromStores())
   }
 
   render() {
     let content;
 
-    if (this.state.contentMode) {
-      content = this.state.content
-    } else {
+    if (this._isEmpty(this.state.content)) {
       content = this._getProductList(ProductStore.getAll())
+    } else {
+      content = this.state.content
     }
 
     return (
