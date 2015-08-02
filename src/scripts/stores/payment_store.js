@@ -4,21 +4,22 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import PaymentUtils from "../utils/payment_utils";
 
-let clientToken = ""
-let payments = []
-let errors = []
+const CHANGE_EVENT = "change";
+let clientToken = "";
+let payments = [];
+let errors = [];
 
 let PaymentStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
-    this.on("change", callback)
+    this.on(CHANGE_EVENT, callback)
   },
 
   emitChange() {
-    return this.emit("change")
+    return this.emit(CHANGE_EVENT)
   },
 
   removeChangeListener(callback) {
-    this.removeListener("change", callback)
+    this.removeListener(CHANGE_EVENT, callback)
   },
 
   getAll() {
