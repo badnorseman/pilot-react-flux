@@ -4,20 +4,21 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import ProductUtils from "../utils/product_utils";
 
-let products = []
-let errors = []
+const CHANGE_EVENT = "change";
+let products = [];
+let errors = [];
 
 let ProductStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
-    this.on("change", callback)
+    this.on("CHANGE_EVENT", callback)
   },
 
   emitChange() {
-    return this.emit("change")
+    return this.emit("CHANGE_EVENT")
   },
 
   removeChangeListener(callback) {
-    this.removeListener("change", callback)
+    this.removeListener("CHANGE_EVENT", callback)
   },
 
   getAll() {
@@ -34,7 +35,7 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-ProductStore.dispatchToken = Dispatcher.register((action) => {
+ProductStore.dispatchToken = Dispatcher.register(action => {
   switch(action.actionType) {
 
     case ActionTypes.ADD_PRODUCT:
