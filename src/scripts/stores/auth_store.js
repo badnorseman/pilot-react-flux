@@ -4,24 +4,26 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import AuthUtils from "../utils/auth_utils";
 
-let errors = []
-let user = {}
+const AUTH_TOKEN = "token";
+const CHANGE_EVENT = "change";
+let errors = [];
+let user = {};
 
 let AuthStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
-    this.on("change", callback)
+    this.on(CHANGE_EVENT, callback)
   },
 
   emitChange() {
-    return this.emit("change")
+    return this.emit(CHANGE_EVENT)
   },
 
   removeChangeListener(callback) {
-    this.removeListener("change", callback)
+    this.removeListener(CHANGE_EVENT, callback)
   },
 
   deleteToken() {
-    localStorage.removeItem("token")
+    localStorage.removeItem(AUTH_TOKEN)
   },
 
   getErrors() {

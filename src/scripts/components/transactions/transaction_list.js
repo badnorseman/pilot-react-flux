@@ -1,15 +1,15 @@
 import React from "react";
-import PaymentActions from "../../actions/payment_actions";
-import PaymentStore from "../../stores/payment_store";
-import PaymentListItem from "./payment_list_item";
+import TransactionActions from "../../actions/transaction_actions";
+import TransactionStore from "../../stores/transaction_store";
+import TransactionListItem from "./transaction_list_item";
 
 function _getStateFromStores() {
   return {
-    payments: PaymentStore.getAll()
+    transactions: TransactionStore.getAll()
   }
 }
 
-export default class PaymentList extends React.Component {
+export default class TransactionList extends React.Component {
   constructor() {
     super()
     this.state = _getStateFromStores()
@@ -17,20 +17,20 @@ export default class PaymentList extends React.Component {
   }
 
   componentWillMount() {
-    PaymentActions.list()
+    TransactionActions.list()
   }
 
   componentDidMount() {
-    PaymentStore.addChangeListener(this._onChange)
+    TransactionStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    PaymentStore.removeChangeListener(this._onChange)
+    TransactionStore.removeChangeListener(this._onChange)
   }
 
-  _getPaymentListItems(item) {
-    return(
-      <PaymentListItem
+  _getTransactionListItems(item) {
+    return (
+      <TransactionListItem
         key={item.id}
         item={item}/>
     )
@@ -41,17 +41,17 @@ export default class PaymentList extends React.Component {
   }
 
   render() {
-    let items = this.state.payments.map(this._getPaymentListItems)
+    let items = this.state.transactions.map(this._getTransactionListItems)
 
-    return(
+    return (
       <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--12-col">
           <div>
-            ORDER DATE
+            TRANSACTION DATE
             <div className="divider"></div>
-            PRICE
+            AMOUNT
             <div className="divider"></div>
-            ORDER ID
+            TRANSACTION ID
           </div>
           {items}
         </div>

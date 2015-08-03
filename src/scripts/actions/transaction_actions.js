@@ -4,14 +4,14 @@ import ActionTypes from "../constants/action_types";
 export default {
   add(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.ADD_PAYMENT,
+      actionType: ActionTypes.ADD_TRANSACTION,
       data: data
     })
   },
 
   list() {
     Dispatcher.dispatch({
-      actionType: ActionTypes.LIST_PAYMENT
+      actionType: ActionTypes.LIST_TRANSACTION
     })
   },
 
@@ -28,16 +28,16 @@ export default {
     })
   },
 
-  receivePaymentDataFromServer(data) {
+  receiveTransactionDataFromServer(data) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_DATA_PAYMENT,
+      actionType: ActionTypes.RECEIVE_DATA_TRANSACTION,
       data: data
     })
   },
 
-  receivePaymentErrorsFromServer(errors) {
+  receiveTransactionErrorsFromServer(errors) {
     Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_ERRORS_PAYMENT,
+      actionType: ActionTypes.RECEIVE_ERRORS_TRANSACTION,
       errors: errors
     })
   }

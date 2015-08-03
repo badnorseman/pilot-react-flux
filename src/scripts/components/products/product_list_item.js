@@ -20,7 +20,7 @@ export default class ProductListItem extends React.Component {
       msTransition: 'all'
     }
 
-    return(
+    return (
       <div>
         <a onClick={this._handleSelect} href="#">
           <div className="mdl-cell mdl-cell--6-col-phone mdl-cell--4-col-tablet mdl-cell--3-col-desktop">

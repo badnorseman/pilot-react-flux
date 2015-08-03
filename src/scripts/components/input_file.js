@@ -20,7 +20,7 @@ export default class extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className="mdl-textfield mdl-js-textfield">
         <input
           className="mdl-textfield__input"

@@ -1,5 +1,5 @@
 import ApiRoutes from "../constants/api_routes";
-import PaymentActions from "../actions/payment_actions";
+import TransactionActions from "../actions/transaction_actions";
 import $ from "jquery";
 
 function getErrorsFromXhr(xhr) {
@@ -15,25 +15,25 @@ function getErrorsFromXhr(xhr) {
 export default {
   requestClientToken() {
     $.ajax({
-      url: ApiRoutes.PAYMENTS + "/new",
+      url: ApiRoutes.TRANSACTIONS + "/new",
       dataType: "json",
       type: "GET",
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        PaymentActions.receiveClientTokenFromServer(data.client_token)
+        TransactionActions.receiveClientTokenFromServer(data.client_token)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        PaymentActions.receivePaymentErrorsFromServer(errors)
+        TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
   },
 
   create(data) {
     $.ajax({
-      url: ApiRoutes.PAYMENTS,
+      url: ApiRoutes.TRANSACTIONS,
       dataType: "json",
       type: "POST",
       headers: {
@@ -41,29 +41,29 @@ export default {
       },
       data: data,
       success: function(data) {
-        PaymentActions.list()
+        TransactionActions.list()
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        PaymentActions.receivePaymentErrorsFromServer(errors)
+        TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
   },
 
   load() {
     $.ajax({
-      url: ApiRoutes.PAYMENTS,
+      url: ApiRoutes.TRANSACTIONS,
       dataType: "json",
       type: "GET",
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
       success: function(data) {
-        PaymentActions.receivePaymentDataFromServer(data)
+        TransactionActions.receiveTransactionDataFromServer(data)
       }.bind(this),
       error: function(xhr, status, error) {
         let errors = getErrorsFromXhr(xhr)
-        PaymentActions.receivePaymentErrorsFromServer(errors)
+        TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
   }

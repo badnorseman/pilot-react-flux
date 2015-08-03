@@ -13,7 +13,7 @@ export default class extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <Button name={this.props.provider} onClick={this._handleClick}/>
     )
   }

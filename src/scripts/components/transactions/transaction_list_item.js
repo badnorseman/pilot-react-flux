@@ -1,15 +1,15 @@
 import React from "react";
 
-export default class PaymentListItem extends React.Component {
+export default class TransactionListItem extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render() {
-    return(
+    return (
       <div>
         <div className="mdl-cell mdl-cell--12-col">
-          {this.props.item.transaction_date}
+          {this.props.item.date}
           <div className="divider"></div>
           {this.props.item.currency}
           <div className="divider"></div>
@@ -22,6 +22,6 @@ export default class PaymentListItem extends React.Component {
   }
 }
 
-PaymentListItem.propTypes = {
+TransactionListItem.propTypes = {
   item: React.PropTypes.object.isRequired,
 }
