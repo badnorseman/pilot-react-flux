@@ -1,16 +1,16 @@
 import React from "react";
 import Braintree from "braintree-web";
-import PaymentActions from "../../actions/payment_actions";
-import PaymentStore from "../../stores/payment_store";
+import TransactionActions from "../../actions/transaction_actions";
+import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
 function _getStateFromStores() {
   return {
-    clientToken: PaymentStore.getClientToken()
+    clientToken: TransactionStore.getClientToken()
   }
 }
 
-export default class NewPayment extends React.Component {
+export default class NewTransaction extends React.Component {
   constructor(props) {
     super(props)
     this.state = _getStateFromStores()
@@ -20,15 +20,15 @@ export default class NewPayment extends React.Component {
   }
 
   componentWillMount() {
-    PaymentActions.requestClientToken()
+    TransactionActions.requestClientToken()
   }
 
   componentDidMount() {
-    PaymentStore.addChangeListener(this._onChange)
+    TransactionStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    PaymentStore.removeChangeListener(this._onChange)
+    TransactionStore.removeChangeListener(this._onChange)
   }
 
   componentDidUpdate() {
@@ -60,8 +60,8 @@ export default class NewPayment extends React.Component {
     let paymentMethodNonce = paymentMethod.nonce
 
     if (amount && currency && id && paymentMethodNonce) {
-      PaymentActions.add({
-        payment: {
+      TransactionActions.add({
+        transaction: {
           amount: amount,
           currency: currency,
           product_id: id,
@@ -103,7 +103,7 @@ export default class NewPayment extends React.Component {
   }
 }
 
-NewPayment.propTypes = {
+NewTransaction.propTypes = {
   product: React.PropTypes.object.isRequired,
   onClose: React.PropTypes.func.isRequired
 }

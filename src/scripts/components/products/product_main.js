@@ -2,9 +2,9 @@ import React from "react";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
-import NewProduct from "./new_product";
+import BuyProduct from "../transactions/new_transaction";
 import EditProduct from "./edit_product";
-import NewPayment from "../payments/new_payment";
+import NewProduct from "./new_product";
 
 export default class ProductMain extends React.Component {
   constructor() {
@@ -36,6 +36,15 @@ export default class ProductMain extends React.Component {
     componentHandler.upgradeDom()
   }
 
+  _getBuyProduct(id) {
+    let product = ProductStore.getById(id);
+    return (
+      <BuyProduct
+        product={product}
+        onClose={this._handleClose}/>
+    )
+  }
+
   _getContent() {
     return {
       content: this._getProductList()
@@ -51,15 +60,6 @@ export default class ProductMain extends React.Component {
         onClose={this._handleClose}
         onEdit={this._handleEdit}
         onRemove={this._handleRemove}/>
-    )
-  }
-
-  _getNewPayment(id) {
-    let product = ProductStore.getById(id);
-    return (
-      <NewPayment
-        product={product}
-        onClose={this._handleClose}/>
     )
   }
 
@@ -87,7 +87,7 @@ export default class ProductMain extends React.Component {
   }
 
   _handleBuy(id) {
-    this.setState({ content: this._getNewPayment(id) })
+    this.setState({ content: this._getBuyProduct(id) })
   }
 
   _handleClose() {

@@ -6,7 +6,7 @@ export default {
   LOGIN: host + root + "/auth/identity/callback",
   LOGOUT: host + root + "/logout",
   OAUTH: host + root + "/auth/",
-  PAYMENTS: host + root + "/payments",
   PRODUCTS: host + root + "/products",
-  SIGNUP: host + root + "/auth/identity/register"
+  SIGNUP: host + root + "/auth/identity/register",
+  TRANSACTIONS: host + root + "/transactions"
 }

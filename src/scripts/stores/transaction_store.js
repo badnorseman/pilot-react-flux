@@ -2,14 +2,14 @@ import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
-import PaymentUtils from "../utils/payment_utils";
+import TransactionUtils from "../utils/transaction_utils";
 
 const CHANGE_EVENT = "change";
 let clientToken = "";
-let payments = [];
+let transactions = [];
 let errors = [];
 
-let PaymentStore = assign({}, EventEmitter.prototype, {
+let TransactionStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback)
   },
@@ -23,12 +23,12 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
   },
 
   getAll() {
-    return payments
+    return transactions
   },
 
   getById(id) {
-    for (let k in payments)
-      if (payments[k].id == id) return payments[k]
+    for (let k in transactions)
+      if (transactions[k].id == id) return transactions[k]
   },
 
   getClientToken() {
@@ -40,36 +40,36 @@ let PaymentStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-PaymentStore.dispatchToken = Dispatcher.register((action) => {
+TransactionStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
-    case ActionTypes.ADD_PAYMENT:
-      PaymentUtils.create(action.data)
+    case ActionTypes.ADD_TRANSACTION:
+      TransactionUtils.create(action.data)
       break
 
-    case ActionTypes.LIST_PAYMENT:
-      PaymentUtils.load()
+    case ActionTypes.LIST_TRANSACTION:
+      TransactionUtils.load()
       break
 
     case ActionTypes.REQUEST_CLIENT_TOKEN:
-      PaymentUtils.requestClientToken()
+      TransactionUtils.requestClientToken()
       break
 
     case ActionTypes.RECEIVE_CLIENT_TOKEN:
       clientToken = action.clientToken
-      PaymentStore.emitChange()
+      TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_DATA_PAYMENT:
-      payments = action.data
-      PaymentStore.emitChange()
+    case ActionTypes.RECEIVE_DATA_TRANSACTION:
+      transactions = action.data
+      TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERRORS_PAYMENT:
+    case ActionTypes.RECEIVE_ERRORS_TRANSACTION:
       errors = action.errors
-      PaymentStore.emitChange()
+      TransactionStore.emitChange()
       break
   }
 })
 
-export default PaymentStore
+export default TransactionStore

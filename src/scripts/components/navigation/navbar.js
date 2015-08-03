@@ -69,7 +69,7 @@ export default class Navbar extends React.Component {
             <span className="mdl-layout-title">FitBird</span>
             <nav className="mdl-navigation">
               <Link className="mdl-navigation__link" to="/products">Discover</Link>
-              <Link className="mdl-navigation__link" to="/payments">My Account</Link>
+              <Link className="mdl-navigation__link" to="/transactions">My Account</Link>
               {this.state.isLoggedIn ? (
                 <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
               ) : (
