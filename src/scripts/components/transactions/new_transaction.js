@@ -71,7 +71,7 @@ export default class NewTransaction extends React.Component {
       })
     }
     // There must better way. How to handle errors?
-    this.props.onClose()
+    // this.props.onClose()
   }
 
   render() {
