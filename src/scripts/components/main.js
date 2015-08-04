@@ -1,10 +1,17 @@
 import React from "react";
 import { Link, RouteHandler } from "react-router";
-import AuthActions from "../../actions/auth_actions";
-import AuthStore from "../../stores/auth_store";
+import AuthActions from "../actions/auth_actions";
+import AuthStore from "../stores/auth_store";
 import Footer from "./footer";
 
-export default class Navbar extends React.Component {
+function _getStateFromStores() {
+  return {
+    isLoggedIn: AuthStore.isLoggedIn(),
+    user: AuthStore.getUser()
+  }
+}
+
+export default class Main extends React.Component {
   constructor() {
     super()
     this.state = {
