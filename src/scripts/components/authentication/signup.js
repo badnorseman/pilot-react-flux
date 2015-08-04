@@ -9,12 +9,16 @@ import Oauth from "./oauth";
 import Button from "../button";
 import InputField from "../input_field";
 
+function _getStateFromStores() {
+  return {
+    errors: AuthStore.getErrors()
+  }
+}
+
 export default class Signup extends React.Component {
   constructor(context) {
     super(context)
-    this.state = {
-      errors: []
-    }
+    this.state = _getStateFromStores()
     this._handleCancel = this._handleCancel.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
     this._onChange = this._onChange.bind(this)
@@ -29,9 +33,7 @@ export default class Signup extends React.Component {
   }
 
   _onChange() {
-    this.setState({
-      errors: AuthStore.getErrors()
-    })
+    this.setState(_getStateFromStores())
   }
 
   _handleCancel() {
@@ -57,50 +59,48 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="mdl-grid text-center">
-          <div className="mdl-cell mdl-cell--12-col">
-            <div>{this.state.errors}</div>
-            <div><Oauth provider="facebook"/></div>
-            <div className="divider"></div>
-            <div><Oauth provider="google_oauth2"/></div>
-            <div>
-              <form onSubmit={this._handleSubmit}>
-                <div>
-                  <InputField
-                    fieldName="email"
-                    fieldType="text"
-                    ref="email">
-                    Email
-                  </InputField>
-                </div>
-                <div>
-                  <InputField
-                    fieldName="password"
-                    fieldType="password"
-                    ref="password">
-                    Password
-                  </InputField>
-                </div>
-                <div>
-                  <InputField
-                    fieldName="passwordConfirmation"
-                    fieldType="password"
-                    ref="passwordConfirmation">
-                    Password Confirmation
-                  </InputField>
-                </div>
-                <div>
-                  <Button name="Cancel" onClick={this._handleCancel}/>
-                  <div className="divider"></div>
-                  <button
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-                    type="submit">
-                    Sign Up
-                  </button>
-                </div>
-              </form>
-            </div>
+      <div className="mdl-grid text-center">
+        <div className="mdl-cell mdl-cell--12-col">
+          <div>{this.state.errors}</div>
+          <div><Oauth provider="facebook"/></div>
+          <div className="divider"></div>
+          <div><Oauth provider="google_oauth2"/></div>
+          <div>
+            <form onSubmit={this._handleSubmit}>
+              <div>
+                <InputField
+                  fieldName="email"
+                  fieldType="text"
+                  ref="email">
+                  Email
+                </InputField>
+              </div>
+              <div>
+                <InputField
+                  fieldName="password"
+                  fieldType="password"
+                  ref="password">
+                  Password
+                </InputField>
+              </div>
+              <div>
+                <InputField
+                  fieldName="passwordConfirmation"
+                  fieldType="password"
+                  ref="passwordConfirmation">
+                  Password Confirmation
+                </InputField>
+              </div>
+              <div>
+                <Button name="Cancel" onClick={this._handleCancel}/>
+                <div className="divider"></div>
+                <button
+                  className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                  type="submit">
+                  Sign Up
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

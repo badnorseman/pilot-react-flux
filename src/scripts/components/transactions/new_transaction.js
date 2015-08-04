@@ -78,9 +78,7 @@ export default class NewTransaction extends React.Component {
     return (
       <div className="mdl-grid text-center">
         <div className="mdl-cell mdl-cell--12-col">
-          <div>
-            {this.state.errors}
-          </div>
+          <div>{this.state.errors}</div>
           <div>
             {this.props.product.name}
             <div className="divider"></div>
