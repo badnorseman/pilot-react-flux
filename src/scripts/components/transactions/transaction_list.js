@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
@@ -41,7 +42,7 @@ export default class TransactionList extends React.Component {
   }
 
   render() {
-    let items = this.state.transactions.map(this._getTransactionListItems)
+    let items = this.state.transactions.map(this._getTransactionListItems);
 
     return (
       <div className="mdl-grid">

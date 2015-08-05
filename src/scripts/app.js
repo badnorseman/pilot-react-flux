@@ -1,10 +1,11 @@
+"use strict";
 import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import Router from "react-router";
 import routes from "./config/routes";
 import "./app.css";
 
-window.React = React
+window.React = React;
 
 injectTapEventPlugin();
 

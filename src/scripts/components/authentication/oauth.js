@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import AuthActions from "../../actions/auth_actions";
 import Button from "../button";

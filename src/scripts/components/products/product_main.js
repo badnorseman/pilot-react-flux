@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
@@ -72,7 +73,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getProductList() {
-    let products = ProductStore.getAll()
+    let products = ProductStore.getAll();
     return (
       <ProductList
         products={products}

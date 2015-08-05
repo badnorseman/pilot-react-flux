@@ -1,3 +1,4 @@
+"use strict";
 import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
@@ -26,8 +27,9 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   },
 
   getById(id) {
-    for (let k in products)
+    for (let k in products) {
       if (products[k].id == id) return products[k]
+    }
   },
 
   getErrors() {
@@ -55,12 +57,12 @@ ProductStore.dispatchToken = Dispatcher.register(action => {
       break
 
     case ActionTypes.RECEIVE_DATA_PRODUCT:
-      products = action.data
+      products = action.data;
       ProductStore.emitChange()
       break
 
     case ActionTypes.RECEIVE_ERRORS_PRODUCT:
-      errors = action.errors
+      errors = action.errors;
       ProductStore.emitChange()
       break
   }

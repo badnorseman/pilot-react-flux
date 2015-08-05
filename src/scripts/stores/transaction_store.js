@@ -1,3 +1,4 @@
+"use strict";
 import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
@@ -27,8 +28,9 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
   },
 
   getById(id) {
-    for (let k in transactions)
+    for (let k in transactions) {
       if (transactions[k].id == id) return transactions[k]
+    }
   },
 
   getClientToken() {
@@ -56,17 +58,17 @@ TransactionStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.RECEIVE_CLIENT_TOKEN:
-      clientToken = action.clientToken
+      clientToken = action.clientToken;
       TransactionStore.emitChange()
       break
 
     case ActionTypes.RECEIVE_DATA_TRANSACTION:
-      transactions = action.data
+      transactions = action.data;
       TransactionStore.emitChange()
       break
 
     case ActionTypes.RECEIVE_ERRORS_TRANSACTION:
-      errors = action.errors
+      errors = action.errors;
       TransactionStore.emitChange()
       break
   }

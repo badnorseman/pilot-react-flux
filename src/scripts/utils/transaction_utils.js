@@ -1,13 +1,15 @@
+"use strict";
 import ApiRoutes from "../constants/api_routes";
 import TransactionActions from "../actions/transaction_actions";
 import $ from "jquery";
 
 function getErrorsFromXhr(xhr) {
-  let parsedErrors = JSON.parse(xhr.responseText)
-  let errors = []
+  let parsedErrors = JSON.parse(xhr.responseText);
+  let errors = [];
 
-  for (let k in parsedErrors)
+  for (let k in parsedErrors) {
     errors.push(parsedErrors[k])
+  }
 
   return errors
 }

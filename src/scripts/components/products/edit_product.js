@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import ProductForm from "./product_form";
 import Button from "../button";

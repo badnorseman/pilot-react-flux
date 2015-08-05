@@ -1,3 +1,4 @@
+"use strict";
 import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
@@ -43,7 +44,7 @@ let AuthStore = assign({}, EventEmitter.prototype, {
   },
 
   setToken(token) {
-    localStorage.token = token
+    localStorage.token = token;
   }
 })
 
@@ -65,16 +66,16 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
     case ActionTypes.RECEIVE_DATA_AUTH:
       if (action.data.token) {
         AuthStore.setToken(action.data.token)
-        user = action.data
+        user = action.data;
       } else {
         AuthStore.deleteToken()
-        user = {}
+        user = {};
       }
       AuthStore.emitChange()
       break
 
     case ActionTypes.RECEIVE_ERRORS_AUTH:
-      errors = action.errors
+      errors = action.errors;
       AuthStore.emitChange()
       break
 

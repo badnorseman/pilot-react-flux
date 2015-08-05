@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import { Link } from "react-router";
 import AuthActions from "../../actions/auth_actions";
@@ -44,8 +45,8 @@ export default class Login extends React.Component {
   _handleSubmit(e) {
     e.preventDefault()
 
-    let email = this.refs.email.state.fieldValue
-    let password = this.refs.password.state.fieldValue
+    let email = this.refs.email.state.fieldValue;
+    let password = this.refs.password.state.fieldValue;
 
     if (email && password) {
       AuthActions.login({

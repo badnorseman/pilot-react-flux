@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 import Braintree from "braintree-web";
 import TransactionActions from "../../actions/transaction_actions";
@@ -55,10 +56,10 @@ export default class NewTransaction extends React.Component {
   }
 
   _onPaymentMethodReceived(paymentMethod) {
-    let amount = this.props.product.price
-    let currency = this.props.product.currency
-    let id = this.props.product.id
-    let paymentMethodNonce = paymentMethod.nonce
+    let amount = this.props.product.price;
+    let currency = this.props.product.currency;
+    let id = this.props.product.id;
+    let paymentMethodNonce = paymentMethod.nonce;
 
     if (amount && currency && id && paymentMethodNonce) {
       TransactionActions.add({
