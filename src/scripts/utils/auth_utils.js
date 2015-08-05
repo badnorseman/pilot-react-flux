@@ -1,19 +1,9 @@
 "use strict";
+import $ from "jquery";
 import ApiRoutes from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
 import AuthActions from "../actions/auth_actions";
-import $ from "jquery";
-
-function getErrorsFromXhr(xhr) {
-  let parsedErrors = JSON.parse(xhr.responseText);
-  let errors = [];
-
-  for (let k in parsedErrors) {
-    errors.push(parsedErrors[k])
-  }
-
-  return errors
-}
+import { convertXhrToArray } from "./xhr_converter";
 
 export default {
   login(data) {
@@ -25,8 +15,8 @@ export default {
       success: function(data) {
         AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
@@ -40,8 +30,8 @@ export default {
       success: function(data) {
         AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
@@ -55,8 +45,8 @@ export default {
       success: function(data) {
         AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })
@@ -71,8 +61,8 @@ export default {
       success: function(data) {
         AuthActions.receiveAuthDataFromServer(data)
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         AuthActions.receiveAuthErrorsFromServer(errors)
       }.bind(this)
     })

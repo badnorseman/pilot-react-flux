@@ -1,18 +1,8 @@
 "use strict";
+import $ from "jquery";
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
-import $ from "jquery";
-
-function getErrorsFromXhr(xhr) {
-  let parsedErrors = JSON.parse(xhr.responseText);
-  let errors = [];
-
-  for (let k in parsedErrors) {
-    errors.push(parsedErrors[k])
-  }
-
-  return errors
-}
+import { convertXhrToArray } from "./xhr_converter";
 
 export default {
   create(data) {
@@ -37,8 +27,8 @@ export default {
       success: function(data) {
         ProductActions.list()
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
@@ -55,8 +45,8 @@ export default {
       success: function(data) {
         ProductActions.list()
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
@@ -70,8 +60,8 @@ export default {
       success: function(data) {
         ProductActions.receiveProductDataFromServer(data)
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
@@ -99,8 +89,8 @@ export default {
       success: function(data) {
         ProductActions.list()
       }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
+      error: function(xhr) {
+        let errors = convertXhrToArray(xhr);
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
