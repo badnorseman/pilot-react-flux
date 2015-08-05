@@ -5,12 +5,12 @@ import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
 
 function buildFormData(data) {
-  return function(data, form) {
+  return function(data, formData = new FormData()) {
     Object.keys(data).forEach(key => {
-      form.append(`product[${key}]`, data[key]);
+      formData.append(`product[${key}]`, data[key]);
     })
-    return form;
-  }(data, new FormData())
+    return formData;
+  }(data)
 }
 
 export default {
