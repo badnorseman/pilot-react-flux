@@ -3,16 +3,14 @@ import $ from "jquery";
 import { Promise } from "es6-promise";
 import ApiRoutes from "../constants/api_routes";
 import ProductActions from "../actions/product_actions";
-import { convertXhrToArray } from "./xhr_converter";
 
 function buildFormData(data) {
-  let fd = new FormData();
-  fd.append("product[currency]", data.currency);
-  fd.append("product[description]", data.description);
-  fd.append("product[image]", data.image);
-  fd.append("product[name]", data.name);
-  fd.append("product[price]", data.price);
-  return fd;
+  return function(data, form) {
+    Object.keys(data).forEach(key => {
+      form.append(`product[${key}]`, data[key]);
+    })
+    return form;
+  }(data, new FormData())
 }
 
 export default {
@@ -28,10 +26,10 @@ export default {
         processData: false,
         contentType: false,
         data: buildFormData(data)
-      })).then(function(response) {
+    })).then(function(success) {
         ProductActions.list()
-      }).catch(function(response) {
-        let errors = convertXhrToArray(response);
+      }).catch(function(failure) {
+        let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
       })
   },
@@ -44,11 +42,11 @@ export default {
       headers: {
         "Authorization": "Token token=" + localStorage.token
       },
-      success: function(data) {
+      success: function(success) {
         ProductActions.list()
       }.bind(this),
-      error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+      error: function(failure) {
+        let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
@@ -59,42 +57,33 @@ export default {
       url: ApiRoutes.PRODUCTS,
       dataType: "json",
       type: "GET",
-      success: function(data) {
-        ProductActions.receiveProductDataFromServer(data)
+      success: function(success) {
+        ProductActions.receiveProductDataFromServer(success)
       }.bind(this),
-      error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+      error: function(failure) {
+        let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
       }.bind(this)
     })
   },
 
   update(data) {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS + "/" + data.id,
-      dataType: "json",
-      type: "PATCH",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      processData: false,
-      contentType: false,
-      data: function() {
-        let fd = new FormData();
-        fd.append("product[currency]", data.currency);
-        fd.append("product[description]", data.description);
-        fd.append("product[image]", data.image);
-        fd.append("product[name]", data.name);
-        fd.append("product[price]", data.price);
-        return fd;
-      }(),
-      success: function(data) {
+    Promise.resolve(
+      $.ajax({
+        url: ApiRoutes.PRODUCTS + "/" + data.id,
+        dataType: "json",
+        type: "PATCH",
+        headers: {
+          "Authorization": "Token token=" + localStorage.token
+        },
+        processData: false,
+        contentType: false,
+        data: buildFormData(data)
+    })).then(function(success) {
         ProductActions.list()
-      }.bind(this),
-      error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+      }).catch(function(failure) {
+        let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
-      }.bind(this)
-    })
+      })
   }
 }

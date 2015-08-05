@@ -2,7 +2,6 @@
 import $ from "jquery";
 import ApiRoutes from "../constants/api_routes";
 import TransactionActions from "../actions/transaction_actions";
-import { convertXhrToArray } from "./xhr_converter";
 
 export default {
   requestClientToken() {
@@ -17,7 +16,7 @@ export default {
         TransactionActions.receiveClientTokenFromServer(data.client_token)
       }.bind(this),
       error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+        let errors = JSON.parse(xhr.responseText).errors;
         TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
@@ -36,7 +35,7 @@ export default {
         TransactionActions.list()
       }.bind(this),
       error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+        let errors = JSON.parse(xhr.responseText).errors;
         TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
@@ -54,7 +53,7 @@ export default {
         TransactionActions.receiveTransactionDataFromServer(data)
       }.bind(this),
       error: function(xhr) {
-        let errors = convertXhrToArray(xhr);
+        let errors = JSON.parse(xhr.responseText).errors;
         TransactionActions.receiveTransactionErrorsFromServer(errors)
       }.bind(this)
     })
