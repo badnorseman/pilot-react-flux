@@ -1,13 +1,15 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
+var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
+  devtool: "eval-source-map",
   entry: [
     "webpack/hot/dev-server",
     "./src/scripts/app.js"
   ],
   output: {
-    path: __dirname + "/dist",
+    path: path.join(__dirname, "/dist"),
     filename: "bundle.js"
   },
   resolve: {
@@ -15,8 +17,8 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.js?$/,
-      include: __dirname + "/src/scripts",
+      test: /\.jsx?$/,
+      include: path.join(__dirname, "/src/scripts"),
       loader: "babel-loader"
     }, {
       test: /\.css$/,

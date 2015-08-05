@@ -24,6 +24,6 @@
     "node": ">= 0.10"
   },
   "scripts": {
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base dist"
+    "start": "webpack-dev-server --progress --colors --hot --content-base dist"
   }
 }
