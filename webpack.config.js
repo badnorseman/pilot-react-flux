@@ -23,7 +23,7 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, "/src/scripts"),
-      loader: "babel-loader"
+      loader: "babel"
     }, {
       test: /\.css$/,
       loader: "style-loader!css-loader"
