@@ -1,9 +1,8 @@
 "use strict";
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
+import assign from "react/lib/Object.assign";
 import Dispatcher from "../dispatcher/dispatcher";
-import ProductUtils from "../utils/product_utils";
+import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
 let products = [];
@@ -39,22 +38,6 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 
 ProductStore.dispatchToken = Dispatcher.register(action => {
   switch(action.actionType) {
-
-    case ActionTypes.ADD_PRODUCT:
-      ProductUtils.create(action.data)
-      break
-
-    case ActionTypes.EDIT_PRODUCT:
-      ProductUtils.update(action.data)
-      break
-
-    case ActionTypes.LIST_PRODUCT:
-      ProductUtils.load()
-      break
-
-    case ActionTypes.REMOVE_PRODUCT:
-      ProductUtils.delete(action.id)
-      break
 
     case ActionTypes.RECEIVE_DATA_PRODUCT:
       products = action.data;

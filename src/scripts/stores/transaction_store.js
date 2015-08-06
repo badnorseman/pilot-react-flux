@@ -1,9 +1,8 @@
 "use strict";
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
 import ActionTypes from "../constants/action_types";
+import assign from "react/lib/Object.assign";
 import Dispatcher from "../dispatcher/dispatcher";
-import TransactionUtils from "../utils/transaction_utils";
+import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
 let clientToken = "";
@@ -44,18 +43,6 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 
 TransactionStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
-
-    case ActionTypes.ADD_TRANSACTION:
-      TransactionUtils.create(action.data)
-      break
-
-    case ActionTypes.LIST_TRANSACTION:
-      TransactionUtils.load()
-      break
-
-    case ActionTypes.REQUEST_CLIENT_TOKEN:
-      TransactionUtils.requestClientToken()
-      break
 
     case ActionTypes.RECEIVE_CLIENT_TOKEN:
       clientToken = action.clientToken;
