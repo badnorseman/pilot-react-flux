@@ -1,7 +1,7 @@
 "use strict";
 import $ from "jquery";
 import ApiRoutes from "../constants/api_routes";
-import TransactionActions from "../actions/transaction_actions";
+import * as TransactionActions from "../actions/transaction_actions";
 
 export default {
   requestClientToken() {

@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import ProductActions from "../../actions/product_actions";
+import * as ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
 import BuyProduct from "../transactions/new_transaction";

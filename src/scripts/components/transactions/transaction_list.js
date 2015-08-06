@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import TransactionActions from "../../actions/transaction_actions";
+import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 

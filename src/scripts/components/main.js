@@ -1,7 +1,7 @@
 "use strict";
 import React from "react";
 import { Link, RouteHandler } from "react-router";
-import AuthActions from "../actions/auth_actions";
+import * as AuthActions from "../actions/auth_actions";
 import AuthStore from "../stores/auth_store";
 import Footer from "./footer";
 

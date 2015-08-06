@@ -2,7 +2,7 @@
 import $ from "jquery";
 import { Promise } from "es6-promise";
 import ApiRoutes from "../constants/api_routes";
-import ProductActions from "../actions/product_actions";
+import * as ProductActions from "../actions/product_actions";
 
 function buildFormData(data) {
   return function(data, formData = new FormData()) {

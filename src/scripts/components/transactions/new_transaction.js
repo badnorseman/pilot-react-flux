@@ -1,7 +1,7 @@
 "use strict";
 import React from "react";
 import Braintree from "braintree-web";
-import TransactionActions from "../../actions/transaction_actions";
+import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 

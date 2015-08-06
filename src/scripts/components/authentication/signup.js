@@ -4,11 +4,11 @@
 "use strict";
 import React from "react";
 import { Link } from "react-router";
-import AuthActions from "../../actions/auth_actions";
+import * as AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
-import Oauth from "./oauth";
 import Button from "../button";
 import InputField from "../input_field";
+import Oauth from "./oauth";
 
 function _getStateFromStores() {
   return {

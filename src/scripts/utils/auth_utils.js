@@ -2,7 +2,7 @@
 import $ from "jquery";
 import ApiRoutes from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
-import AuthActions from "../actions/auth_actions";
+import * as AuthActions from "../actions/auth_actions";
 
 export default {
   login(data) {

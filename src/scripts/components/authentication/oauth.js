@@ -1,6 +1,6 @@
 "use strict";
 import React from "react";
-import AuthActions from "../../actions/auth_actions";
+import * as AuthActions from "../../actions/auth_actions";
 import Button from "../button";
 
 export default class extends React.Component {
