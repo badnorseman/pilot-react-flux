@@ -26,45 +26,46 @@ export default {
         processData: false,
         contentType: false,
         data: buildFormData(data)
-    })).then(function(success) {
+      })
+    ).then(success => {
         ProductActions.list()
-      }).catch(function(failure) {
+      }).catch(failure => {
         let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
       })
   },
 
   delete(id) {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS + "/" + id,
-      dataType: "json",
-      type: "DELETE",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      success: function(success) {
+    Promise.resolve(
+      $.ajax({
+        url: ApiRoutes.PRODUCTS + "/" + id,
+        dataType: "json",
+        type: "DELETE",
+        headers: {
+          "Authorization": "Token token=" + localStorage.token
+        }
+      })
+    ).then(success => {
         ProductActions.list()
-      }.bind(this),
-      error: function(failure) {
+      }).catch(failure => {
         let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
-      }.bind(this)
-    })
+      })
   },
 
   load() {
-    $.ajax({
-      url: ApiRoutes.PRODUCTS,
-      dataType: "json",
-      type: "GET",
-      success: function(success) {
+    Promise.resolve(
+      $.ajax({
+        url: ApiRoutes.PRODUCTS,
+        dataType: "json",
+        type: "GET"
+      })
+    ).then(success => {
         ProductActions.receiveProductDataFromServer(success)
-      }.bind(this),
-      error: function(failure) {
+      }).catch(failure => {
         let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
-      }.bind(this)
-    })
+      })
   },
 
   update(data) {
@@ -79,9 +80,10 @@ export default {
         processData: false,
         contentType: false,
         data: buildFormData(data)
-    })).then(function(success) {
+      })
+    ).then(success => {
         ProductActions.list()
-      }).catch(function(failure) {
+      }).catch(failure => {
         let errors = JSON.parse(failure.responseText).errors;
         ProductActions.receiveProductErrorsFromServer(errors)
       })
