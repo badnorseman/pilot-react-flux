@@ -20,7 +20,7 @@ export default class ProductList extends React.Component {
   render() {
     let items = this.props.products.map((item, index) => {
       return (
-        <ProductListItem key={index} item={item}/>
+        <ProductListItem key={index} item={item} onClick={this._handleSelect}/>
       );
     })
 
