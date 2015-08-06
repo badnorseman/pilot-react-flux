@@ -29,20 +29,16 @@ export default class TransactionList extends React.Component {
     TransactionStore.removeChangeListener(this._onChange)
   }
 
-  _getTransactionListItems(item) {
-    return (
-      <TransactionListItem
-        key={item.id}
-        item={item}/>
-    )
-  }
-
   _onChange() {
     this.setState(_getStateFromStores())
   }
 
   render() {
-    let items = this.state.transactions.map(this._getTransactionListItems);
+    let items = this.state.transactions.map((item, index) => {
+      return (
+        <TransactionListItem key={index} item={item}/>
+      );
+    })
 
     return (
       <div className="mdl-grid">
