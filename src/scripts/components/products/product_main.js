@@ -10,7 +10,7 @@ import NewProduct from "./new_product";
 export default class ProductMain extends React.Component {
   constructor() {
     super()
-    this.state = { content: {} }
+    this.state = { content: "" }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
     this._handleClose = this._handleClose.bind(this)
