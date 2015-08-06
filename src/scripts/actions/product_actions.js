@@ -1,6 +1,6 @@
 import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
-import ProductUtils from "../utils/product_utils";
+import * as ProductUtils from "../utils/product_utils";
 
 export function add(data) {
   Dispatcher.dispatch({
@@ -44,5 +44,5 @@ export function remove(id) {
     actionType: ActionTypes.REMOVE_PRODUCT,
     id: id
   });
-  ProductUtils.delete(id);
+  ProductUtils.destroy(id);
 }

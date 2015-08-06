@@ -1,5 +1,5 @@
 import ActionTypes from "../constants/action_types";
-import AuthUtils from "../utils/auth_utils";
+import * as AuthUtils from "../utils/auth_utils";
 import Dispatcher from "../dispatcher/dispatcher";
 
 export function login(data) {

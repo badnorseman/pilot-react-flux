@@ -1,6 +1,6 @@
 import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
-import TransactionUtils from "../utils/transaction_utils";
+import * as TransactionUtils from "../utils/transaction_utils";
 
 export function add(data) {
   Dispatcher.dispatch({
