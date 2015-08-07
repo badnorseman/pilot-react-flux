@@ -49,12 +49,12 @@ TransactionStore.dispatchToken = Dispatcher.register((action) => {
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_DATA_TRANSACTION:
+    case ActionTypes.RECEIVE_TRANSACTION_DATA:
       transactions = action.data;
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERRORS_TRANSACTION:
+    case ActionTypes.RECEIVE_TRANSACTION_ERRORS:
       errors = action.errors;
       TransactionStore.emitChange()
       break

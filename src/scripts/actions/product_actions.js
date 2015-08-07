@@ -27,14 +27,14 @@ export function list() {
 
 export function receiveProductDataFromServer(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_DATA_PRODUCT,
+    actionType: ActionTypes.RECEIVE_PRODUCT_DATA,
     data: data
   })
 }
 
 export function receiveProductErrorsFromServer(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_ERRORS_PRODUCT,
+    actionType: ActionTypes.RECEIVE_PRODUCT_ERRORS,
     errors: errors
   })
 }

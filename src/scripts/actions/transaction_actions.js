@@ -33,14 +33,14 @@ export function receiveClientTokenFromServer(clientToken) {
 
 export function receiveTransactionDataFromServer(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_DATA_TRANSACTION,
+    actionType: ActionTypes.RECEIVE_TRANSACTION_DATA,
     data: data
   })
 }
 
 export function receiveTransactionErrorsFromServer(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_ERRORS_TRANSACTION,
+    actionType: ActionTypes.RECEIVE_TRANSACTION_ERRORS,
     errors: errors
   })
 }
