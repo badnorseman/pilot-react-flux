@@ -1,12 +1,12 @@
 "use strict";
 import $ from "jquery";
-import ApiRoutes from "../constants/api_routes";
+import { LOGIN, LOGOUT, OAUTH, SIGNUP } from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
 import * as AuthActions from "../actions/auth_actions";
 
 export function login(data) {
   $.ajax({
-    url: ApiRoutes.LOGIN,
+    url: LOGIN,
     dataType: "json",
     type: "GET",
     data: data,
@@ -22,7 +22,7 @@ export function login(data) {
 
 export function logout() {
   $.ajax({
-    url: ApiRoutes.LOGOUT,
+    url: LOGOUT,
     dataType: "json",
     type: "GET",
     success: function(data) {
@@ -37,7 +37,7 @@ export function logout() {
 
 export function oauth(provider) {
   $.ajax({
-    url: ApiRoutes.OAUTH + provider,
+    url: `${OAUTH}/${provider}`,
     dataType: "json",
     type: "GET",
     success: function(data) {
@@ -52,7 +52,7 @@ export function oauth(provider) {
 
 export function signup(data) {
   $.ajax({
-    url: ApiRoutes.SIGNUP,
+    url: SIGNUP,
     dataType: "json",
     type: "POST",
     data: data,

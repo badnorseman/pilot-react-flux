@@ -1,7 +1,7 @@
 "use strict";
 import $ from "jquery";
 import { Promise } from "es6-promise";
-import ApiRoutes from "../constants/api_routes";
+import { PRODUCTS } from "../constants/api_routes";
 import * as ProductActions from "../actions/product_actions";
 
 function buildFormData(data) {
@@ -16,7 +16,7 @@ function buildFormData(data) {
 export function create(data) {
   Promise.resolve(
     $.ajax({
-      url: ApiRoutes.PRODUCTS,
+      url: PRODUCTS,
       dataType: "json",
       type: "POST",
       headers: {
@@ -37,7 +37,7 @@ export function create(data) {
 export function destroy(id) {
   Promise.resolve(
     $.ajax({
-      url: ApiRoutes.PRODUCTS + "/" + id,
+      url: `${PRODUCTS}/${id}`,
       dataType: "json",
       type: "DELETE",
       headers: {
@@ -55,7 +55,7 @@ export function destroy(id) {
 export function load() {
   Promise.resolve(
     $.ajax({
-      url: ApiRoutes.PRODUCTS,
+      url: PRODUCTS,
       dataType: "json",
       type: "GET"
     })
@@ -70,7 +70,7 @@ export function load() {
 export function update(data) {
   Promise.resolve(
     $.ajax({
-      url: ApiRoutes.PRODUCTS + "/" + data.id,
+      url: `${PRODUCTS}/${data.id}`,
       dataType: "json",
       type: "PATCH",
       headers: {

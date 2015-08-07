@@ -1,11 +1,11 @@
 "use strict";
 import $ from "jquery";
-import ApiRoutes from "../constants/api_routes";
+import { TRANSACTIONS } from "../constants/api_routes";
 import * as TransactionActions from "../actions/transaction_actions";
 
 export function create(data) {
   $.ajax({
-    url: ApiRoutes.TRANSACTIONS,
+    url: TRANSACTIONS,
     dataType: "json",
     type: "POST",
     headers: {
@@ -24,7 +24,7 @@ export function create(data) {
 
 export function load() {
   $.ajax({
-    url: ApiRoutes.TRANSACTIONS,
+    url: TRANSACTIONS,
     dataType: "json",
     type: "GET",
     headers: {
@@ -42,7 +42,7 @@ export function load() {
 
 export function requestClientToken() {
   $.ajax({
-    url: ApiRoutes.TRANSACTIONS + "/new",
+    url: `${TRANSACTIONS}/new`,
     dataType: "json",
     type: "GET",
     headers: {
