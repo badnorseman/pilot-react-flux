@@ -4,7 +4,7 @@ import Dispatcher from "../dispatcher/dispatcher";
 
 export function login(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.LOGIN,
+    type: ActionTypes.LOGIN,
     data: data
   });
   AuthUtils.login(data);
@@ -12,14 +12,14 @@ export function login(data) {
 
 export function logout() {
   Dispatcher.dispatch({
-    actionType: ActionTypes.LOGOUT,
+    type: ActionTypes.LOGOUT,
   });
   AuthUtils.logout();
 }
 
 export function oauth(provider) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.OAUTH,
+    type: ActionTypes.OAUTH,
     provider: provider
   });
   AuthUtils.oauth(provider);
@@ -27,21 +27,21 @@ export function oauth(provider) {
 
 export function receiveAuthData(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.AUTH_REQUEST_SUCCESS,
+    type: ActionTypes.AUTH_REQUEST_SUCCESS,
     data: data
   })
 }
 
 export function receiveAuthErrors(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.AUTH_REQUEST_ERROR,
+    type: ActionTypes.AUTH_REQUEST_ERROR,
     errors: errors
   })
 }
 
 export function signup(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.SIGNUP,
+    type: ActionTypes.SIGNUP,
     data: data
   });
   AuthUtils.signup(data);

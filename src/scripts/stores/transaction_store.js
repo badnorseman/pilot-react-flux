@@ -42,7 +42,7 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 })
 
 TransactionStore.dispatchToken = Dispatcher.register((action) => {
-  switch(action.actionType) {
+  switch(action.type) {
 
     case ActionTypes.CLIENT_TOKEN_REQUEST_ERROR:
       clientToken = "";

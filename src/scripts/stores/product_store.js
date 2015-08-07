@@ -37,7 +37,7 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 })
 
 ProductStore.dispatchToken = Dispatcher.register(action => {
-  switch(action.actionType) {
+  switch(action.type) {
 
     case ActionTypes.PRODUCT_REQUEST_ERROR:
       errors = action.errors;

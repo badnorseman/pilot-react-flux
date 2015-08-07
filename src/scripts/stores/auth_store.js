@@ -48,7 +48,7 @@ let AuthStore = assign({}, EventEmitter.prototype, {
 })
 
 AuthStore.dispatchToken = Dispatcher.register((action) => {
-  switch(action.actionType) {
+  switch(action.type) {
 
     case ActionTypes.AUTH_REQUEST_ERROR:
       errors = action.errors;

@@ -8,12 +8,12 @@ export default flux
 //   return flux.register(callback);
 // }
 
-// export function dispatch(actionType, action = {}) {
-//   flux.dispatch({ actionType, ...action });
+// export function dispatch(type, action = {}) {
+//   flux.dispatch({ type, ...action });
 // }
 
-// export function dispatchAsync(promise, actionTypes, action = {}) {
-//   const { request, success, failure } = actionTypes;
+// export function dispatchAsync(promise, types, action = {}) {
+//   const { request, success, failure } = types;
 //
 //   dispatch(request, action);
 //   promise.then(
