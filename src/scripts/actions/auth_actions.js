@@ -25,16 +25,16 @@ export function oauth(provider) {
   AuthUtils.oauth(provider);
 }
 
-export function receiveAuthDataFromServer(data) {
+export function receiveAuthData(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_AUTH_DATA,
+    actionType: ActionTypes.AUTH_SUCCEED,
     data: data
   })
 }
 
-export function receiveAuthErrorsFromServer(errors) {
+export function receiveAuthErrors(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_AUTH_ERRORS,
+    actionType: ActionTypes.AUTH_FAILED,
     errors: errors
   })
 }

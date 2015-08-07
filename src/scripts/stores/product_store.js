@@ -39,13 +39,13 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 ProductStore.dispatchToken = Dispatcher.register(action => {
   switch(action.actionType) {
 
-    case ActionTypes.RECEIVE_PRODUCT_DATA:
-      products = action.data;
+    case ActionTypes.PRODUCT_LOAD_FAILED:
+      errors = action.errors;
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_PRODUCT_ERRORS:
-      errors = action.errors;
+    case ActionTypes.PRODUCT_LOAD_SUCCEED:
+      products = action.data;
       ProductStore.emitChange()
       break
   }

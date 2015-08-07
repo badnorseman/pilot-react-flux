@@ -17,7 +17,7 @@ export function create(data) {
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrorsFromServer(errors);
+      TransactionActions.receiveTransactionErrors(errors);
     }.bind(this)
   })
 }
@@ -31,11 +31,11 @@ export function load() {
       "Authorization": `Token token=${localStorage.token}`
     },
     success: function(data) {
-      TransactionActions.receiveTransactionDataFromServer(data);
+      TransactionActions.receiveTransactionData(data);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrorsFromServer(errors);
+      TransactionActions.receiveTransactionErrors(errors);
     }.bind(this)
   })
 }
@@ -49,11 +49,11 @@ export function requestClientToken() {
       "Authorization": `Token token=${localStorage.token}`
     },
     success: function(data) {
-      TransactionActions.receiveClientTokenFromServer(data.client_token);
+      TransactionActions.receiveClientToken(data.client_token);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrorsFromServer(errors);
+      TransactionActions.receiveClientTokenErrors(errors);
     }.bind(this)
   })
 }

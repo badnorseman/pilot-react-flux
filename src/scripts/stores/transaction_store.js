@@ -44,18 +44,24 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 TransactionStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.actionType) {
 
-    case ActionTypes.RECEIVE_CLIENT_TOKEN:
+    case ActionTypes.CLIENT_TOKEN_FAILED:
+      clientToken = "";
+      errors = action.errors;
+      TransactionStore.emitChange()
+      break
+
+    case ActionTypes.CLIENT_TOKEN_SUCCEED:
       clientToken = action.clientToken;
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_TRANSACTION_DATA:
-      transactions = action.data;
+    case ActionTypes.TRANSACTION_LOAD_FAILED:
+      errors = action.errors;
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_TRANSACTION_ERRORS:
-      errors = action.errors;
+    case ActionTypes.TRANSACTION_LOAD_SUCCEED:
+      transactions = action.data;
       TransactionStore.emitChange()
       break
   }

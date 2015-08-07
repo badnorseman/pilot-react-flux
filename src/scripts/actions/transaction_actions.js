@@ -4,7 +4,7 @@ import * as TransactionUtils from "../utils/transaction_utils";
 
 export function add(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.ADD_TRANSACTION,
+    actionType: ActionTypes.TRANSACTION_CREATE,
     data: data
   });
   TransactionUtils.create(data);
@@ -12,35 +12,42 @@ export function add(data) {
 
 export function list() {
   Dispatcher.dispatch({
-    actionType: ActionTypes.LIST_TRANSACTION
+    actionType: ActionTypes.TRANSACTION_LOAD
   });
   TransactionUtils.load();
 }
 
 export function requestClientToken() {
   Dispatcher.dispatch({
-    actionType: ActionTypes.REQUEST_CLIENT_TOKEN,
+    actionType: ActionTypes.CLIENT_TOKEN,
   });
   TransactionUtils.requestClientToken();
 }
 
-export function receiveClientTokenFromServer(clientToken) {
+export function receiveClientToken(clientToken) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_CLIENT_TOKEN,
+    actionType: ActionTypes.CLIENT_TOKEN_SUCCEED,
     clientToken: clientToken
   })
 }
 
-export function receiveTransactionDataFromServer(data) {
+export function receiveClientTokenErrors(clientToken) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_TRANSACTION_DATA,
+    actionType: ActionTypes.CLIENT_TOKEN_FAILED,
+    errors: errors
+  })
+}
+
+export function receiveTransactionData(data) {
+  Dispatcher.dispatch({
+    actionType: ActionTypes.TRANSACTION_LOAD_SUCCEED,
     data: data
   })
 }
 
-export function receiveTransactionErrorsFromServer(errors) {
+export function receiveTransactionErrors(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.RECEIVE_TRANSACTION_ERRORS,
+    actionType: ActionTypes.TRANSACTION_LOAD_FAILED,
     errors: errors
   })
 }

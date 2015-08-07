@@ -11,11 +11,11 @@ export function login(data) {
     type: "GET",
     data: data,
     success: function(data) {
-      AuthActions.receiveAuthDataFromServer(data);
+      AuthActions.receiveAuthData(data);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      AuthActions.receiveAuthErrorsFromServer(errors);
+      AuthActions.receiveAuthErrors(errors);
     }.bind(this)
   })
 }
@@ -26,11 +26,11 @@ export function logout() {
     dataType: "json",
     type: "GET",
     success: function(data) {
-      AuthActions.receiveAuthDataFromServer(data);
+      AuthActions.receiveAuthData(data);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      AuthActions.receiveAuthErrorsFromServer(errors);
+      AuthActions.receiveAuthErrors(errors);
     }.bind(this)
   })
 }
@@ -41,11 +41,11 @@ export function oauth(provider) {
     dataType: "json",
     type: "GET",
     success: function(data) {
-      AuthActions.receiveAuthDataFromServer(data);
+      AuthActions.receiveAuthData(data);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      AuthActions.receiveAuthErrorsFromServer(errors);
+      AuthActions.receiveAuthErrors(errors);
     }.bind(this)
   })
 }
@@ -57,11 +57,11 @@ export function signup(data) {
     type: "POST",
     data: data,
     success: function(data) {
-      AuthActions.receiveAuthDataFromServer(data);
+      AuthActions.receiveAuthData(data);
     }.bind(this),
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
-      AuthActions.receiveAuthErrorsFromServer(errors);
+      AuthActions.receiveAuthErrors(errors);
     }.bind(this)
   })
 }

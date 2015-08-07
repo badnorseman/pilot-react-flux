@@ -30,7 +30,7 @@ export function create(data) {
       ProductActions.list();
     }).catch(failure => {
       let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrorsFromServer(errors);
+      ProductActions.receiveProductErrors(errors);
     })
 }
 
@@ -48,7 +48,7 @@ export function destroy(id) {
       ProductActions.list();
     }).catch(failure => {
       let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrorsFromServer(errors);
+      ProductActions.receiveProductErrors(errors);
     })
 }
 
@@ -60,10 +60,10 @@ export function load() {
       type: "GET"
     })
   ).then(success => {
-      ProductActions.receiveProductDataFromServer(success);
+      ProductActions.receiveProductData(success);
     }).catch(failure => {
       let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrorsFromServer(errors);
+      ProductActions.receiveProductErrors(errors);
     })
 }
 
@@ -84,6 +84,6 @@ export function update(data) {
       ProductActions.list();
     }).catch(failure => {
       let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrorsFromServer(errors);
+      ProductActions.receiveProductErrors(errors);
     })
 }
