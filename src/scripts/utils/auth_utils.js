@@ -1,8 +1,8 @@
 "use strict";
 import $ from "jquery";
-import { LOGIN, LOGOUT, OAUTH, SIGNUP } from "../constants/api_routes";
 import AuthStore from "../stores/auth_store";
 import * as AuthActions from "../actions/auth_actions";
+import { LOGIN, LOGOUT, OAUTH, SIGNUP } from "../constants/api_routes";
 
 export function login(data) {
   $.ajax({

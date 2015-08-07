@@ -9,7 +9,7 @@ export function create(data) {
     dataType: "json",
     type: "POST",
     headers: {
-      "Authorization": "Token token=" + localStorage.token
+      "Authorization": `Token token=${localStorage.token}`
     },
     data: data,
     success: function(data) {
@@ -28,7 +28,7 @@ export function load() {
     dataType: "json",
     type: "GET",
     headers: {
-      "Authorization": "Token token=" + localStorage.token
+      "Authorization": `Token token=${localStorage.token}`
     },
     success: function(data) {
       TransactionActions.receiveTransactionDataFromServer(data);
@@ -46,7 +46,7 @@ export function requestClientToken() {
     dataType: "json",
     type: "GET",
     headers: {
-      "Authorization": "Token token=" + localStorage.token
+      "Authorization": `Token token=${localStorage.token}`
     },
     success: function(data) {
       TransactionActions.receiveClientTokenFromServer(data.client_token);
