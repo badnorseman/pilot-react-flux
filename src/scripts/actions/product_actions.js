@@ -4,7 +4,7 @@ import * as ProductUtils from "../utils/product_utils";
 
 export function add(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_CREATE,
+    actionType: ActionTypes.PRODUCT_ADD,
     data: data
   });
   ProductUtils.create(data);
@@ -12,7 +12,7 @@ export function add(data) {
 
 export function edit(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_UPDATE,
+    actionType: ActionTypes.PRODUCT_EDIT,
     data: data
   });
   ProductUtils.update(data);
@@ -20,28 +20,28 @@ export function edit(data) {
 
 export function list() {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_LOAD
+    actionType: ActionTypes.PRODUCT_REQUEST
   });
-  ProductUtils.load();
+  ProductUtils.list();
 }
 
 export function receiveProductData(data) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_LOAD_SUCCEED,
+    actionType: ActionTypes.PRODUCT_REQUEST_SUCCESS,
     data: data
   })
 }
 
 export function receiveProductErrors(errors) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_LOAD_FAILED,
+    actionType: ActionTypes.PRODUCT_REQUEST_ERROR,
     errors: errors
   })
 }
 
 export function remove(id) {
   Dispatcher.dispatch({
-    actionType: ActionTypes.PRODUCT_DESTROY,
+    actionType: ActionTypes.PRODUCT_REMOVE,
     id: id
   });
   ProductUtils.destroy(id);

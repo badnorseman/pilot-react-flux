@@ -22,7 +22,7 @@ export function create(data) {
   })
 }
 
-export function load() {
+export function list() {
   $.ajax({
     url: TRANSACTIONS,
     dataType: "json",
