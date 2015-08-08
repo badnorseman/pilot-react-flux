@@ -5,7 +5,9 @@ import { Promise } from "es6-promise";
 
 function buildFormData(obj, data) {
   return function(data, formData = new FormData()) {
+    console.log(obj, data);
     Object.keys(data).forEach(key => {
+      console.log(obj, `${obj.toLowerCase()}[${key}]`, data[key]);
       formData.append(`${obj.toLowerCase()}[${key}]`, data[key]);
     })
     return formData;
@@ -60,7 +62,8 @@ export function load(obj) {
       $.ajax({
       url: buildUrl(obj),
       dataType: "json",
-      type: "GET"
+      type: "GET",
+      headers: buildHeaders()
     })
   )
 }

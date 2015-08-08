@@ -3,25 +3,6 @@ import $ from "jquery";
 import { TRANSACTIONS } from "../constants/api_routes";
 import * as TransactionActions from "../actions/transaction_actions";
 
-export function create(data) {
-  $.ajax({
-    url: TRANSACTIONS,
-    dataType: "json",
-    type: "POST",
-    headers: {
-      "Authorization": `Token token=${localStorage.token}`
-    },
-    data: data,
-    success: function(data) {
-      TransactionActions.list();
-    }.bind(this),
-    error: function(xhr) {
-      let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrors(errors);
-    }.bind(this)
-  })
-}
-
 export function fetchClientToken() {
   $.ajax({
     url: `${TRANSACTIONS}/new`,
@@ -36,24 +17,6 @@ export function fetchClientToken() {
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
       TransactionActions.receiveClientTokenErrors(errors);
-    }.bind(this)
-  })
-}
-
-export function load() {
-  $.ajax({
-    url: TRANSACTIONS,
-    dataType: "json",
-    type: "GET",
-    headers: {
-      "Authorization": `Token token=${localStorage.token}`
-    },
-    success: function(data) {
-      TransactionActions.receiveTransactionData(data);
-    }.bind(this),
-    error: function(xhr) {
-      let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrors(errors);
     }.bind(this)
   })
 }

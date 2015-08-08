@@ -63,16 +63,12 @@ export default class NewTransaction extends React.Component {
 
     if (amount && currency && id && paymentMethodNonce) {
       TransactionActions.add({
-        transaction: {
-          amount: amount,
-          currency: currency,
-          product_id: id,
-          payment_method_nonce: paymentMethodNonce
-        }
+        amount: amount,
+        currency: currency,
+        product_id: id,
+        payment_method_nonce: paymentMethodNonce
       })
     }
-    // There must better way. How to handle errors?
-    // this.props.onClose()
   }
 
   render() {
