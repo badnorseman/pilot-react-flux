@@ -1,45 +1,48 @@
-import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
+import Dispatcher from "../dispatcher/dispatcher";
+import * as ProductUtils from "../utils/product_utils";
 
-export default {
-  add(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.ADD_PRODUCT,
-      data: data
-    })
-  },
+export function add(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_ADD,
+    data: data
+  });
+  ProductUtils.create(data);
+}
 
-  edit(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.EDIT_PRODUCT,
-      data: data
-    })
-  },
+export function edit(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_EDIT,
+    data: data
+  });
+  ProductUtils.update(data);
+}
 
-  list() {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LIST_PRODUCT
-    })
-  },
+export function list() {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_REQUEST
+  });
+  ProductUtils.load();
+}
 
-  receiveProductDataFromServer(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_DATA_PRODUCT,
-      data: data
-    })
-  },
+export function receiveProductData(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_REQUEST_SUCCESS,
+    data: data
+  })
+}
 
-  receiveProductErrorsFromServer(errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_ERRORS_PRODUCT,
-      errors: errors
-    })
-  },
+export function receiveProductErrors(errors) {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_REQUEST_ERROR,
+    errors: errors
+  })
+}
 
-  remove(id) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.REMOVE_PRODUCT,
-      id: id
-    })
-  }
+export function remove(id) {
+  Dispatcher.dispatch({
+    type: ActionTypes.PRODUCT_REMOVE,
+    id: id
+  });
+  ProductUtils.destroy(id);
 }

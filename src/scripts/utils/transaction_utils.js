@@ -1,70 +1,59 @@
-import ApiRoutes from "../constants/api_routes";
-import TransactionActions from "../actions/transaction_actions";
+"use strict";
 import $ from "jquery";
+import { TRANSACTIONS } from "../constants/api_routes";
+import * as TransactionActions from "../actions/transaction_actions";
 
-function getErrorsFromXhr(xhr) {
-  let parsedErrors = JSON.parse(xhr.responseText)
-  let errors = []
-
-  for (let k in parsedErrors)
-    errors.push(parsedErrors[k])
-
-  return errors
+export function create(data) {
+  $.ajax({
+    url: TRANSACTIONS,
+    dataType: "json",
+    type: "POST",
+    headers: {
+      "Authorization": `Token token=${localStorage.token}`
+    },
+    data: data,
+    success: function(data) {
+      TransactionActions.list();
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      TransactionActions.receiveTransactionErrors(errors);
+    }.bind(this)
+  })
 }
 
-export default {
-  requestClientToken() {
-    $.ajax({
-      url: ApiRoutes.TRANSACTIONS + "/new",
-      dataType: "json",
-      type: "GET",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      success: function(data) {
-        TransactionActions.receiveClientTokenFromServer(data.client_token)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        TransactionActions.receiveTransactionErrorsFromServer(errors)
-      }.bind(this)
-    })
-  },
+export function fetchClientToken() {
+  $.ajax({
+    url: `${TRANSACTIONS}/new`,
+    dataType: "json",
+    type: "GET",
+    headers: {
+      "Authorization": `Token token=${localStorage.token}`
+    },
+    success: function(data) {
+      TransactionActions.receiveClientToken(data.client_token);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      TransactionActions.receiveClientTokenErrors(errors);
+    }.bind(this)
+  })
+}
 
-  create(data) {
-    $.ajax({
-      url: ApiRoutes.TRANSACTIONS,
-      dataType: "json",
-      type: "POST",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      data: data,
-      success: function(data) {
-        TransactionActions.list()
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        TransactionActions.receiveTransactionErrorsFromServer(errors)
-      }.bind(this)
-    })
-  },
-
-  load() {
-    $.ajax({
-      url: ApiRoutes.TRANSACTIONS,
-      dataType: "json",
-      type: "GET",
-      headers: {
-        "Authorization": "Token token=" + localStorage.token
-      },
-      success: function(data) {
-        TransactionActions.receiveTransactionDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        TransactionActions.receiveTransactionErrorsFromServer(errors)
-      }.bind(this)
-    })
-  }
+export function load() {
+  $.ajax({
+    url: TRANSACTIONS,
+    dataType: "json",
+    type: "GET",
+    headers: {
+      "Authorization": `Token token=${localStorage.token}`
+    },
+    success: function(data) {
+      TransactionActions.receiveTransactionData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      TransactionActions.receiveTransactionErrors(errors);
+    }.bind(this)
+  })
 }

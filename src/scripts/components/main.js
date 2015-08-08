@@ -1,25 +1,23 @@
+"use strict";
 import React from "react";
 import { Link, RouteHandler } from "react-router";
-import AuthActions from "../../actions/auth_actions";
-import AuthStore from "../../stores/auth_store";
+import * as AuthActions from "../actions/auth_actions";
+import AuthStore from "../stores/auth_store";
 import Footer from "./footer";
 
-export default class Navbar extends React.Component {
+function _getStateFromStores() {
+  return {
+    isLoggedIn: AuthStore.isLoggedIn(),
+    user: AuthStore.getUser()
+  }
+}
+
+export default class Main extends React.Component {
   constructor() {
     super()
-    this.state = {
-      isLoggedIn: false,
-      user: {}
-    }
+    this.state = _getStateFromStores()
     this._handleLogout = this._handleLogout.bind(this)
     this._onChange = this._onChange.bind(this)
-  }
-
-  componentWillMount() {
-    this.setState({
-      isLoggedIn: AuthStore.isLoggedIn(),
-      user: AuthStore.getUser()
-    })
   }
 
   componentDidMount() {
@@ -35,10 +33,7 @@ export default class Navbar extends React.Component {
   }
 
   _onChange() {
-    this.setState({
-      isLoggedIn: AuthStore.isLoggedIn(),
-      user: AuthStore.getUser()
-    })
+    this.setState(_getStateFromStores())
   }
 
   _handleLogout() {

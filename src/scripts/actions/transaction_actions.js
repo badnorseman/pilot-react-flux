@@ -1,44 +1,53 @@
-import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
+import Dispatcher from "../dispatcher/dispatcher";
+import * as TransactionUtils from "../utils/transaction_utils";
 
-export default {
-  add(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.ADD_TRANSACTION,
-      data: data
-    })
-  },
+export function add(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.TRANSACTION_ADD,
+    data: data
+  });
+  TransactionUtils.create(data);
+}
 
-  list() {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LIST_TRANSACTION
-    })
-  },
+export function list() {
+  Dispatcher.dispatch({
+    type: ActionTypes.TRANSACTION_REQUEST
+  });
+  TransactionUtils.load();
+}
 
-  requestClientToken() {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.REQUEST_CLIENT_TOKEN,
-    })
-  },
+export function requestClientToken() {
+  Dispatcher.dispatch({
+    type: ActionTypes.CLIENT_TOKEN_REQUEST,
+  });
+  TransactionUtils.fetchClientToken();
+}
 
-  receiveClientTokenFromServer(clientToken) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_CLIENT_TOKEN,
-      clientToken: clientToken
-    })
-  },
+export function receiveClientToken(clientToken) {
+  Dispatcher.dispatch({
+    type: ActionTypes.CLIENT_TOKEN_REQUEST_SUCCESS,
+    clientToken: clientToken
+  })
+}
 
-  receiveTransactionDataFromServer(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_DATA_TRANSACTION,
-      data: data
-    })
-  },
+export function receiveClientTokenErrors(clientToken) {
+  Dispatcher.dispatch({
+    type: ActionTypes.CLIENT_TOKEN_REQUEST_ERROR,
+    errors: errors
+  })
+}
 
-  receiveTransactionErrorsFromServer(errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_ERRORS_TRANSACTION,
-      errors: errors
-    })
-  }
+export function receiveTransactionData(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.TRANSACTION_REQUEST_SUCCESS,
+    data: data
+  })
+}
+
+export function receiveTransactionErrors(errors) {
+  Dispatcher.dispatch({
+    type: ActionTypes.TRANSACTION_REQUEST_ERROR,
+    errors: errors
+  })
 }

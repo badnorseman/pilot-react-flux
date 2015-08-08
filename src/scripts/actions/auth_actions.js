@@ -1,45 +1,48 @@
-import Dispatcher from "../dispatcher/dispatcher";
 import ActionTypes from "../constants/action_types";
+import * as AuthUtils from "../utils/auth_utils";
+import Dispatcher from "../dispatcher/dispatcher";
 
-export default {
-  login(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LOGIN,
-      data: data
-    })
-  },
+export function login(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.LOGIN,
+    data: data
+  });
+  AuthUtils.login(data);
+}
 
-  logout() {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.LOGOUT,
-    })
-  },
+export function logout() {
+  Dispatcher.dispatch({
+    type: ActionTypes.LOGOUT,
+  });
+  AuthUtils.logout();
+}
 
-  oauth(provider) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.OAUTH,
-      provider: provider
-    })
-  },
+export function oauth(provider) {
+  Dispatcher.dispatch({
+    type: ActionTypes.OAUTH,
+    provider: provider
+  });
+  AuthUtils.oauth(provider);
+}
 
-  receiveAuthDataFromServer(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_DATA_AUTH,
-      data: data
-    })
-  },
+export function receiveAuthData(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.AUTH_REQUEST_SUCCESS,
+    data: data
+  })
+}
 
-  receiveAuthErrorsFromServer(errors) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.RECEIVE_ERRORS_AUTH,
-      errors: errors
-    })
-  },
+export function receiveAuthErrors(errors) {
+  Dispatcher.dispatch({
+    type: ActionTypes.AUTH_REQUEST_ERROR,
+    errors: errors
+  })
+}
 
-  signup(data) {
-    Dispatcher.dispatch({
-      actionType: ActionTypes.SIGNUP,
-      data: data
-    })
-  }
+export function signup(data) {
+  Dispatcher.dispatch({
+    type: ActionTypes.SIGNUP,
+    data: data
+  });
+  AuthUtils.signup(data);
 }

@@ -1,8 +1,8 @@
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
+"use strict";
 import ActionTypes from "../constants/action_types";
+import assign from "react/lib/Object.assign";
 import Dispatcher from "../dispatcher/dispatcher";
-import ProductUtils from "../utils/product_utils";
+import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
 let products = [];
@@ -26,8 +26,9 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   },
 
   getById(id) {
-    for (let k in products)
+    for (let k in products) {
       if (products[k].id == id) return products[k]
+    }
   },
 
   getErrors() {
@@ -36,31 +37,15 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 })
 
 ProductStore.dispatchToken = Dispatcher.register(action => {
-  switch(action.actionType) {
+  switch(action.type) {
 
-    case ActionTypes.ADD_PRODUCT:
-      ProductUtils.create(action.data)
-      break
-
-    case ActionTypes.EDIT_PRODUCT:
-      ProductUtils.update(action.data)
-      break
-
-    case ActionTypes.LIST_PRODUCT:
-      ProductUtils.load()
-      break
-
-    case ActionTypes.REMOVE_PRODUCT:
-      ProductUtils.delete(action.id)
-      break
-
-    case ActionTypes.RECEIVE_DATA_PRODUCT:
-      products = action.data
+    case ActionTypes.PRODUCT_REQUEST_ERROR:
+      errors = action.errors;
       ProductStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERRORS_PRODUCT:
-      errors = action.errors
+    case ActionTypes.PRODUCT_REQUEST_SUCCESS:
+      products = action.data;
       ProductStore.emitChange()
       break
   }

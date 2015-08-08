@@ -1,12 +1,9 @@
-// let host = "https://matrix-api.herokuapp.com";
-let host = "http://localhost:3000";
-let root = "/api";
+// const host = "https://matrix-api.herokuapp.com";
+const host = "http://localhost:3000";
 
-export default {
-  LOGIN: host + root + "/auth/identity/callback",
-  LOGOUT: host + root + "/logout",
-  OAUTH: host + root + "/auth/",
-  PRODUCTS: host + root + "/products",
-  SIGNUP: host + root + "/auth/identity/register",
-  TRANSACTIONS: host + root + "/transactions"
-}
+export const LOGIN = `${host}/api/auth/identity/callback`;
+export const LOGOUT = `${host}/api/logout`;
+export const OAUTH = `${host}/api/auth`;
+export const PRODUCTS = `${host}/api/products`;
+export const SIGNUP = `${host}/api/auth/identity/register`;
+export const TRANSACTIONS = `${host}/api/transactions`;

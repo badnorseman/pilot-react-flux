@@ -1,79 +1,67 @@
-// getErrorsFromXhr is also in product_utils. It needs to be a separate script
-import ApiRoutes from "../constants/api_routes";
-import AuthStore from "../stores/auth_store";
-import AuthActions from "../actions/auth_actions";
+"use strict";
 import $ from "jquery";
+import AuthStore from "../stores/auth_store";
+import * as AuthActions from "../actions/auth_actions";
+import { LOGIN, LOGOUT, OAUTH, SIGNUP } from "../constants/api_routes";
 
-function getErrorsFromXhr(xhr) {
-  let parsedErrors = JSON.parse(xhr.responseText)
-  let errors = []
-
-  for (let k in parsedErrors)
-    errors.push(parsedErrors[k])
-
-  return errors
+export function login(data) {
+  $.ajax({
+    url: LOGIN,
+    dataType: "json",
+    type: "GET",
+    data: data,
+    success: function(data) {
+      AuthActions.receiveAuthData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      AuthActions.receiveAuthErrors(errors);
+    }.bind(this)
+  })
 }
 
-export default {
-  login(data) {
-    $.ajax({
-      url: ApiRoutes.LOGIN,
-      dataType: "json",
-      type: "GET",
-      data: data,
-      success: function(data) {
-        AuthActions.receiveAuthDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        AuthActions.receiveAuthErrorsFromServer(errors)
-      }.bind(this)
-    })
-  },
+export function logout() {
+  $.ajax({
+    url: LOGOUT,
+    dataType: "json",
+    type: "GET",
+    success: function(data) {
+      AuthActions.receiveAuthData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      AuthActions.receiveAuthErrors(errors);
+    }.bind(this)
+  })
+}
 
-  logout() {
-    $.ajax({
-      url: ApiRoutes.LOGOUT,
-      dataType: "json",
-      type: "GET",
-      success: function(data) {
-        AuthActions.receiveAuthDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        AuthActions.receiveAuthErrorsFromServer(errors)
-      }.bind(this)
-    })
-  },
+export function oauth(provider) {
+  $.ajax({
+    url: `${OAUTH}/${provider}`,
+    dataType: "json",
+    type: "GET",
+    success: function(data) {
+      AuthActions.receiveAuthData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      AuthActions.receiveAuthErrors(errors);
+    }.bind(this)
+  })
+}
 
-  oauth(provider) {
-    $.ajax({
-      url: ApiRoutes.OAUTH + provider,
-      dataType: "json",
-      type: "GET",
-      success: function(data) {
-        AuthActions.receiveAuthDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        AuthActions.receiveAuthErrorsFromServer(errors)
-      }.bind(this)
-    })
-  },
-
-  signup(data) {
-    $.ajax({
-      url: ApiRoutes.SIGNUP,
-      dataType: "json",
-      type: "POST",
-      data: data,
-      success: function(data) {
-        AuthActions.receiveAuthDataFromServer(data)
-      }.bind(this),
-      error: function(xhr, status, error) {
-        let errors = getErrorsFromXhr(xhr)
-        AuthActions.receiveAuthErrorsFromServer(errors)
-      }.bind(this)
-    })
-  }
+export function signup(data) {
+  $.ajax({
+    url: SIGNUP,
+    dataType: "json",
+    type: "POST",
+    data: data,
+    success: function(data) {
+      AuthActions.receiveAuthData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      AuthActions.receiveAuthErrors(errors);
+    }.bind(this)
+  })
 }

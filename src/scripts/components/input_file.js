@@ -1,22 +1,19 @@
+"use strict";
 import React from "react";
 
 export default class extends React.Component {
   constructor() {
     super()
-    this.state = {
-      file: ""
-    }
+    this.state = { file: "" }
     this._handleChange = this._handleChange.bind(this)
   }
 
   _handleChange(e) {
     e.preventDefault()
 
-    let file = document.getElementById("file--selected").files[0]
+    let file = document.getElementById("file--selected").files[0];
 
-    this.setState({
-      file: file
-    })
+    this.setState({ file: file })
   }
 
   render() {

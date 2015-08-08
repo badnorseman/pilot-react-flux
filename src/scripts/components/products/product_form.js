@@ -1,4 +1,4 @@
-// Add callback from server to return when no errors
+"use strict";
 import React from "react";
 import Button from "../button";
 import InputField from "../input_field";
@@ -14,9 +14,10 @@ export default class ProductForm extends React.Component {
   }
 
   _getCurrency() {
-    let currencies = document.getElementsByName("currency")
-    for (let k in currencies)
-      if (currencies[k].checked === true) return currencies[k].value
+    let currencies = document.getElementsByName("currency");
+    for (let k in currencies) {
+      if (currencies[k].checked === true) return currencies[k].value;
+    }
   }
 
   _handleClose() {
@@ -24,12 +25,12 @@ export default class ProductForm extends React.Component {
   }
 
   _handleSubmit() {
-    let currency = this._getCurrency()
-    let description = this.refs.description.state.fieldValue
-    let id = this.props.id
-    let image = this.refs.image.state.file
-    let name = this.refs.name.state.fieldValue
-    let price = this.refs.price.state.fieldValue
+    let currency = this._getCurrency();
+    let description = this.refs.description.state.fieldValue;
+    let id = this.props.id;
+    let image = this.refs.image.state.file;
+    let name = this.refs.name.state.fieldValue;
+    let price = this.refs.price.state.fieldValue;
 
     if (currency && description && name && price) {
       this.props.onSubmit({
@@ -44,7 +45,7 @@ export default class ProductForm extends React.Component {
   }
 
   _isCurrency(value) {
-    return value === this.props.currency
+    return value === this.props.currency;
   }
 
   render() {

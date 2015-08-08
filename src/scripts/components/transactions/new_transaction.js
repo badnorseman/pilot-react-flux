@@ -1,12 +1,14 @@
+"use strict";
 import React from "react";
 import Braintree from "braintree-web";
-import TransactionActions from "../../actions/transaction_actions";
+import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
 function _getStateFromStores() {
   return {
-    clientToken: TransactionStore.getClientToken()
+    clientToken: TransactionStore.getClientToken(),
+    errors: TransactionStore.getErrors()
   }
 }
 
@@ -54,10 +56,10 @@ export default class NewTransaction extends React.Component {
   }
 
   _onPaymentMethodReceived(paymentMethod) {
-    let amount = this.props.product.price
-    let currency = this.props.product.currency
-    let id = this.props.product.id
-    let paymentMethodNonce = paymentMethod.nonce
+    let amount = this.props.product.price;
+    let currency = this.props.product.currency;
+    let id = this.props.product.id;
+    let paymentMethodNonce = paymentMethod.nonce;
 
     if (amount && currency && id && paymentMethodNonce) {
       TransactionActions.add({
@@ -70,13 +72,14 @@ export default class NewTransaction extends React.Component {
       })
     }
     // There must better way. How to handle errors?
-    this.props.onClose()
+    // this.props.onClose()
   }
 
   render() {
     return (
       <div className="mdl-grid text-center">
         <div className="mdl-cell mdl-cell--12-col">
+          <div>{this.state.errors}</div>
           <div>
             {this.props.product.name}
             <div className="divider"></div>

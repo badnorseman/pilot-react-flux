@@ -1,5 +1,6 @@
+"use strict";
 import React from "react";
-import ProductActions from "../../actions/product_actions";
+import * as ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
 import BuyProduct from "../transactions/new_transaction";
@@ -9,7 +10,7 @@ import NewProduct from "./new_product";
 export default class ProductMain extends React.Component {
   constructor() {
     super()
-    this.state = { content: {} }
+    this.state = { content: "" }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
     this._handleClose = this._handleClose.bind(this)
@@ -72,7 +73,7 @@ export default class ProductMain extends React.Component {
   }
 
   _getProductList() {
-    let products = ProductStore.getAll()
+    let products = ProductStore.getAll();
     return (
       <ProductList
         products={products}

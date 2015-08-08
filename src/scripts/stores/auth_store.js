@@ -1,8 +1,8 @@
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
+"use strict";
 import ActionTypes from "../constants/action_types";
+import assign from "react/lib/Object.assign";
 import Dispatcher from "../dispatcher/dispatcher";
-import AuthUtils from "../utils/auth_utils";
+import EventEmitter from "events";
 
 const AUTH_TOKEN = "token";
 const CHANGE_EVENT = "change";
@@ -43,43 +43,27 @@ let AuthStore = assign({}, EventEmitter.prototype, {
   },
 
   setToken(token) {
-    localStorage.token = token
+    localStorage.token = token;
   }
 })
 
 AuthStore.dispatchToken = Dispatcher.register((action) => {
-  switch(action.actionType) {
+  switch(action.type) {
 
-    case ActionTypes.LOGIN:
-      AuthUtils.login(action.data)
+    case ActionTypes.AUTH_REQUEST_ERROR:
+      errors = action.errors;
+      AuthStore.emitChange()
       break
 
-    case ActionTypes.LOGOUT:
-      AuthUtils.logout()
-      break
-
-    case ActionTypes.OAUTH:
-      AuthUtils.oauth(action.provider)
-      break
-
-    case ActionTypes.RECEIVE_DATA_AUTH:
+    case ActionTypes.AUTH_REQUEST_SUCCESS:
       if (action.data.token) {
         AuthStore.setToken(action.data.token)
-        user = action.data
+        user = action.data;
       } else {
         AuthStore.deleteToken()
-        user = {}
+        user = {};
       }
       AuthStore.emitChange()
-      break
-
-    case ActionTypes.RECEIVE_ERRORS_AUTH:
-      errors = action.errors
-      AuthStore.emitChange()
-      break
-
-    case ActionTypes.SIGNUP:
-      AuthUtils.signup(action.data)
       break
   }
 })

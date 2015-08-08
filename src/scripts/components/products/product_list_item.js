@@ -1,3 +1,4 @@
+"use strict";
 import React from "react";
 
 export default class ProductListItem extends React.Component {
@@ -41,4 +42,5 @@ export default class ProductListItem extends React.Component {
 
 ProductListItem.propTypes = {
   item: React.PropTypes.object.isRequired,
+  onClick: React.PropTypes.func.isRequired
 }

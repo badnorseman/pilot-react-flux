@@ -1,3 +1,4 @@
+"use strict";
 import React, { PropTypes } from "react";
 import ProductForm from "./product_form";
 import Button from "../button";

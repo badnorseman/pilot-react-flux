@@ -1,8 +1,8 @@
-import assign from "react/lib/Object.assign";
-import EventEmitter from "events";
+"use strict";
 import ActionTypes from "../constants/action_types";
+import assign from "react/lib/Object.assign";
 import Dispatcher from "../dispatcher/dispatcher";
-import TransactionUtils from "../utils/transaction_utils";
+import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
 let clientToken = "";
@@ -27,8 +27,9 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
   },
 
   getById(id) {
-    for (let k in transactions)
+    for (let k in transactions) {
       if (transactions[k].id == id) return transactions[k]
+    }
   },
 
   getClientToken() {
@@ -41,32 +42,26 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 })
 
 TransactionStore.dispatchToken = Dispatcher.register((action) => {
-  switch(action.actionType) {
+  switch(action.type) {
 
-    case ActionTypes.ADD_TRANSACTION:
-      TransactionUtils.create(action.data)
-      break
-
-    case ActionTypes.LIST_TRANSACTION:
-      TransactionUtils.load()
-      break
-
-    case ActionTypes.REQUEST_CLIENT_TOKEN:
-      TransactionUtils.requestClientToken()
-      break
-
-    case ActionTypes.RECEIVE_CLIENT_TOKEN:
-      clientToken = action.clientToken
+    case ActionTypes.CLIENT_TOKEN_REQUEST_ERROR:
+      clientToken = "";
+      errors = action.errors;
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_DATA_TRANSACTION:
-      transactions = action.data
+    case ActionTypes.CLIENT_TOKEN_REQUEST_SUCCESS:
+      clientToken = action.clientToken;
       TransactionStore.emitChange()
       break
 
-    case ActionTypes.RECEIVE_ERRORS_TRANSACTION:
-      errors = action.errors
+    case ActionTypes.TRANSACTION_REQUEST_ERROR:
+      errors = action.errors;
+      TransactionStore.emitChange()
+      break
+
+    case ActionTypes.TRANSACTION_REQUEST_SUCCESS:
+      transactions = action.data;
       TransactionStore.emitChange()
       break
   }
