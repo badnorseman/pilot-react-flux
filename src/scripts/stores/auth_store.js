@@ -51,6 +51,9 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.type) {
 
     case ActionTypes.LOGIN_ERROR:
+    case ActionTypes.LOGOUT_ERROR:
+    case ActionTypes.OAUTH_ERROR:
+    case ActionTypes.SIGNUP_ERROR:
       errors = action.errors;
       AuthStore.emitChange()
       break
@@ -72,16 +75,6 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.emitChange()
       break
 
-    case ActionTypes.LOGOUT_ERROR:
-      errors = action.errors;
-      AuthStore.emitChange()
-      break
-
-    case ActionTypes.OAUTH_ERROR:
-      errors = action.errors;
-      AuthStore.emitChange()
-      break
-
     case ActionTypes.OAUTH_RESPONSE:
       // what does we actually receive?
       if (action.data.token) {
@@ -91,11 +84,6 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
         AuthStore.deleteToken()
         user = {};
       }
-      AuthStore.emitChange()
-      break
-
-    case ActionTypes.SIGNUP_ERROR:
-      errors = action.errors;
       AuthStore.emitChange()
       break
 

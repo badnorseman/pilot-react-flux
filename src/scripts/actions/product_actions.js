@@ -3,7 +3,7 @@ import Dispatcher from "../dispatcher/dispatcher";
 import * as ApiUtils from "../utils/api_utils";
 import { Promise } from "es6-promise";
 
-const PRODUCT = "PRODUCT";
+const PRODUCT = "product";
 
 export function add(data) {
   Dispatcher.dispatch({

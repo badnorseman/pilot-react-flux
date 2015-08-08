@@ -56,20 +56,12 @@ TransactionStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.TRANSACTION_CREATE_ERROR:
-      errors = action.errors;
-      TransactionStore.emitChange()
-      break
-
-    case ActionTypes.TRANSACTION_CREATE_RESPONSE:
-      transactions = action.data;
-      TransactionStore.emitChange()
-      break
-
     case ActionTypes.TRANSACTION_LOAD_ERROR:
       errors = action.errors;
       TransactionStore.emitChange()
       break
 
+    case ActionTypes.TRANSACTION_CREATE_RESPONSE:
     case ActionTypes.TRANSACTION_LOAD_RESPONSE:
       transactions = action.data;
       TransactionStore.emitChange()

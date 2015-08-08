@@ -2,7 +2,7 @@ import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import * as ApiUtils from "../utils/api_utils";
 
-const TRANSACTION = "TRANSACTION";
+const TRANSACTION = "transaction";
 
 export function add(data) {
   Dispatcher.dispatch({
