@@ -25,10 +25,22 @@ export function add(data) {
 
 export function edit(data) {
   Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_EDIT,
+    type: ActionTypes.PRODUCT_UPDATE_REQUEST,
     data: data
   });
-  ProductUtils.update(data);
+  Promise.resolve(ProductUtils.update(data)).then(() => {
+    return Promise.resolve(ProductUtils.load());
+  }).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_UPDATE_ERROR,
+      error: JSON.parse(error.responseText).errors
+    });
+  });
 }
 
 export function list() {
@@ -48,24 +60,22 @@ export function list() {
   });
 }
 
-export function receiveProductData(data) {
-  Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_REQUEST_SUCCESS,
-    data: data
-  })
-}
-
-export function receiveProductErrors(errors) {
-  Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_REQUEST_ERROR,
-    errors: errors
-  })
-}
-
 export function remove(id) {
   Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_REMOVE,
+    type: ActionTypes.PRODUCT_DESTROY_REQUEST,
     id: id
   });
-  ProductUtils.destroy(id);
+  Promise.resolve(ProductUtils.destroy(id)).then(() => {
+    return Promise.resolve(ProductUtils.load());
+  }).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_DESTROY_ERROR,
+      error: JSON.parse(error.responseText).errors
+    });
+  });
 }

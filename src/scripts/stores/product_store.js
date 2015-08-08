@@ -49,6 +49,16 @@ ProductStore.dispatchToken = Dispatcher.register(action => {
       ProductStore.emitChange()
       break
 
+    case ActionTypes.PRODUCT_DESTROY_ERROR:
+      errors = action.errors;
+      ProductStore.emitChange()
+      break
+
+    case ActionTypes.PRODUCT_DESTROY_RESPONSE:
+      products = action.data;
+      ProductStore.emitChange()
+      break
+
     case ActionTypes.PRODUCT_LOAD_ERROR:
       errors = action.errors;
       ProductStore.emitChange()
@@ -59,12 +69,12 @@ ProductStore.dispatchToken = Dispatcher.register(action => {
       ProductStore.emitChange()
       break
 
-    case ActionTypes.PRODUCT_REQUEST_ERROR:
+    case ActionTypes.PRODUCT_UPDATE_ERROR:
       errors = action.errors;
       ProductStore.emitChange()
       break
 
-    case ActionTypes.PRODUCT_REQUEST_SUCCESS:
+    case ActionTypes.PRODUCT_UPDATE_RESPONSE:
       products = action.data;
       ProductStore.emitChange()
       break

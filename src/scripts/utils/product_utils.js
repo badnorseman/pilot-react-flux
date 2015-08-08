@@ -13,6 +13,16 @@ function buildFormData(data) {
   }(data)
 }
 
+// function buildHeaders() {
+//   return (
+//   )
+// }
+
+// function buildUrl(obj) {
+//   return (
+//   )
+// }
+
 export function create(data) {
   return (
     $.ajax({
@@ -30,7 +40,7 @@ export function create(data) {
 }
 
 export function destroy(id) {
-  Promise.resolve(
+  return (
     $.ajax({
       url: `${PRODUCTS}/${id}`,
       dataType: "json",
@@ -39,12 +49,7 @@ export function destroy(id) {
         "Authorization": `Token token=${localStorage.token}`
       }
     })
-  ).then(success => {
-      ProductActions.list();
-    }).catch(failure => {
-      let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrors(errors);
-    })
+  )
 }
 
 export function load() {
@@ -58,7 +63,7 @@ export function load() {
 }
 
 export function update(data) {
-  Promise.resolve(
+  return (
     $.ajax({
       url: `${PRODUCTS}/${data.id}`,
       dataType: "json",
@@ -70,10 +75,5 @@ export function update(data) {
       contentType: false,
       data: buildFormData(data)
     })
-  ).then(success => {
-      ProductActions.list();
-    }).catch(failure => {
-      let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrors(errors);
-    })
+  )
 }
