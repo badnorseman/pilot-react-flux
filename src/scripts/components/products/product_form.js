@@ -7,10 +7,8 @@ import InputFile from "../input_file";
 export default class ProductForm extends Component {
   constructor(props) {
     super(props)
-    // this._getCurrency = this._getCurrency.bind(this)
     this._handleClose = this._handleClose.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
-    // this._isCurrency = this._isCurrency.bind(this)
   }
 
   _getCurrency() {

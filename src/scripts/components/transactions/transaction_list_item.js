@@ -1,7 +1,7 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
-export default class TransactionListItem extends React.Component {
+export default class TransactionListItem extends Component {
   constructor(props) {
     super(props)
   }
@@ -24,5 +24,5 @@ export default class TransactionListItem extends React.Component {
 }
 
 TransactionListItem.propTypes = {
-  item: React.PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
 }

@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 import * as AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
@@ -13,7 +13,7 @@ function _getStateFromStores() {
   }
 }
 
-export default class Login extends React.Component {
+export default class Login extends Component {
   constructor(context) {
     super(context)
     this.state = _getStateFromStores()
@@ -33,7 +33,7 @@ export default class Login extends React.Component {
   _onChange() {
     this.setState(_getStateFromStores())
     if (AuthStore.isLoggedIn()) {
-      this.setState({errors: []})
+      this.setState({ errors: [] })
       this.context.router.transitionTo("/products")
     }
   }
@@ -100,5 +100,5 @@ export default class Login extends React.Component {
 }
 
 Login.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: PropTypes.func.isRequired
 }

@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import Braintree from "braintree-web";
 import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
@@ -12,11 +12,12 @@ function _getStateFromStores() {
   }
 }
 
-export default class NewTransaction extends React.Component {
+export default class NewTransaction extends Component {
   constructor(props) {
     super(props)
     this.state = _getStateFromStores()
     this._handleClose = this._handleClose.bind(this)
+    this._handleSubmit = this._handleSubmit.bind(this)
     this._onChange = this._onChange.bind(this)
     this._onPaymentMethodReceived = this._onPaymentMethodReceived.bind(this)
   }
@@ -85,7 +86,7 @@ export default class NewTransaction extends React.Component {
           </div>
           <div className="divider"></div>
           <div>
-            <form onSubmit={this._handleSubmit.bind(this)}>
+            <form onSubmit={this._handleSubmit}>
               <div id="dropin-container"></div>
               <Button name="Close" onClick={this._handleClose}/>
               <div className="divider"></div>
@@ -103,6 +104,6 @@ export default class NewTransaction extends React.Component {
 }
 
 NewTransaction.propTypes = {
-  product: React.PropTypes.object.isRequired,
-  onClose: React.PropTypes.func.isRequired
+  product: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired
 }
