@@ -22,7 +22,7 @@ export function list() {
   Dispatcher.dispatch({
     type: ActionTypes.PRODUCT_REQUEST
   });
-  ProductUtils.list();
+  ProductUtils.load();
 }
 
 export function receiveProductData(data) {

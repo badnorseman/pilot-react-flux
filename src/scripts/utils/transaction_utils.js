@@ -22,25 +22,7 @@ export function create(data) {
   })
 }
 
-export function list() {
-  $.ajax({
-    url: TRANSACTIONS,
-    dataType: "json",
-    type: "GET",
-    headers: {
-      "Authorization": `Token token=${localStorage.token}`
-    },
-    success: function(data) {
-      TransactionActions.receiveTransactionData(data);
-    }.bind(this),
-    error: function(xhr) {
-      let errors = JSON.parse(xhr.responseText).errors;
-      TransactionActions.receiveTransactionErrors(errors);
-    }.bind(this)
-  })
-}
-
-export function requestClientToken() {
+export function fetchClientToken() {
   $.ajax({
     url: `${TRANSACTIONS}/new`,
     dataType: "json",
@@ -54,6 +36,24 @@ export function requestClientToken() {
     error: function(xhr) {
       let errors = JSON.parse(xhr.responseText).errors;
       TransactionActions.receiveClientTokenErrors(errors);
+    }.bind(this)
+  })
+}
+
+export function load() {
+  $.ajax({
+    url: TRANSACTIONS,
+    dataType: "json",
+    type: "GET",
+    headers: {
+      "Authorization": `Token token=${localStorage.token}`
+    },
+    success: function(data) {
+      TransactionActions.receiveTransactionData(data);
+    }.bind(this),
+    error: function(xhr) {
+      let errors = JSON.parse(xhr.responseText).errors;
+      TransactionActions.receiveTransactionErrors(errors);
     }.bind(this)
   })
 }

@@ -52,7 +52,7 @@ export function destroy(id) {
     })
 }
 
-export function list() {
+export function load() {
   Promise.resolve(
     $.ajax({
       url: PRODUCTS,

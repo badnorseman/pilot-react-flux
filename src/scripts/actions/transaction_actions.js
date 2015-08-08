@@ -14,14 +14,14 @@ export function list() {
   Dispatcher.dispatch({
     type: ActionTypes.TRANSACTION_REQUEST
   });
-  TransactionUtils.list();
+  TransactionUtils.load();
 }
 
 export function requestClientToken() {
   Dispatcher.dispatch({
     type: ActionTypes.CLIENT_TOKEN_REQUEST,
   });
-  TransactionUtils.requestClientToken();
+  TransactionUtils.fetchClientToken();
 }
 
 export function receiveClientToken(clientToken) {
