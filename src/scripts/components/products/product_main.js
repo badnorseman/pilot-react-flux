@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import React, { Component } from "react";
 import * as ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
@@ -7,7 +7,7 @@ import BuyProduct from "../transactions/new_transaction";
 import EditProduct from "./edit_product";
 import NewProduct from "./new_product";
 
-export default class ProductMain extends React.Component {
+export default class ProductMain extends Component {
   constructor() {
     super()
     this.state = { content: "" }

@@ -1,9 +1,9 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import ProductForm from "./product_form";
 import Button from "../button";
 
-export default class EditProduct extends React.Component {
+export default class EditProduct extends Component {
   constructor(props) {
     super(props)
     this._handleBuy = this._handleBuy.bind(this)
@@ -52,7 +52,9 @@ export default class EditProduct extends React.Component {
 }
 
 EditProduct.propTypes = {
-  product: React.PropTypes.object.isRequired,
-  onClose: React.PropTypes.func.isRequired,
-  onEdit: React.PropTypes.func.isRequired
+  product: PropTypes.object.isRequired,
+  onBuy: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
 }

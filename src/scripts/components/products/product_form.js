@@ -1,16 +1,16 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import Button from "../button";
 import InputField from "../input_field";
 import InputFile from "../input_file";
 
-export default class ProductForm extends React.Component {
+export default class ProductForm extends Component {
   constructor(props) {
     super(props)
-    this._getCurrency = this._getCurrency.bind(this)
+    // this._getCurrency = this._getCurrency.bind(this)
     this._handleClose = this._handleClose.bind(this)
     this._handleSubmit = this._handleSubmit.bind(this)
-    this._isCurrency = this._isCurrency.bind(this)
+    // this._isCurrency = this._isCurrency.bind(this)
   }
 
   _getCurrency() {
@@ -115,14 +115,14 @@ export default class ProductForm extends React.Component {
 }
 
 ProductForm.propTypes = {
-  currency: React.PropTypes.string,
-  description: React.PropTypes.string,
-  id: React.PropTypes.number,
-  image: React.PropTypes.string,
-  name: React.PropTypes.string,
-  price: React.PropTypes.number,
-  onClose: React.PropTypes.func.isRequired,
-  onSubmit: React.PropTypes.func.isRequired
+  currency: PropTypes.string,
+  description: PropTypes.string,
+  id: PropTypes.number,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 ProductForm.defaultProps = {
