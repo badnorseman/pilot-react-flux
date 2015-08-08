@@ -1,7 +1,6 @@
 "use strict";
 import $ from "jquery";
 import { API } from "../constants/api_routes";
-import { Promise } from "es6-promise";
 
 function buildFormData(obj, data) {
   return function(data, formData = new FormData()) {
