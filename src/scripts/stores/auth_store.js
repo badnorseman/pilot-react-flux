@@ -49,7 +49,6 @@ let AuthStore = assign({}, EventEmitter.prototype, {
 
 AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.type) {
-
     case ActionTypes.LOGIN_ERROR:
     case ActionTypes.LOGOUT_ERROR:
     case ActionTypes.OAUTH_ERROR:
@@ -59,6 +58,7 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       break
 
     case ActionTypes.LOGIN_RESPONSE:
+    case ActionTypes.OAUTH_RESPONSE:
       if (action.data.token) {
         AuthStore.setToken(action.data.token)
         user = action.data;
@@ -69,26 +69,12 @@ AuthStore.dispatchToken = Dispatcher.register((action) => {
       AuthStore.emitChange()
       break
 
+    // User needs to login after signup.
     case ActionTypes.LOGOUT_RESPONSE:
+    case ActionTypes.SIGNUP_RESPONSE:
       AuthStore.deleteToken()
       user = {};
       AuthStore.emitChange()
-      break
-
-    case ActionTypes.OAUTH_RESPONSE:
-      // what does we actually receive?
-      if (action.data.token) {
-        AuthStore.setToken(action.data.token)
-        user = action.data;
-      } else {
-        AuthStore.deleteToken()
-        user = {};
-      }
-      AuthStore.emitChange()
-      break
-
-    case ActionTypes.SIGNUP_RESPONSE:
-      // user needs to login.
       break
   }
 })

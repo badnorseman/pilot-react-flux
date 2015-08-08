@@ -5,8 +5,8 @@ import Dispatcher from "../dispatcher/dispatcher";
 import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
-let products = [];
 let errors = [];
+let products = [];
 
 let ProductStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
@@ -38,7 +38,6 @@ let ProductStore = assign({}, EventEmitter.prototype, {
 
 ProductStore.dispatchToken = Dispatcher.register(action => {
   switch(action.type) {
-
     case ActionTypes.PRODUCT_CREATE_ERROR:
     case ActionTypes.PRODUCT_DESTROY_ERROR:
     case ActionTypes.PRODUCT_LOAD_ERROR:

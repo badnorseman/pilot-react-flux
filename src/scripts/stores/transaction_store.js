@@ -6,8 +6,8 @@ import EventEmitter from "events";
 
 const CHANGE_EVENT = "change";
 let clientToken = "";
-let transactions = [];
 let errors = [];
+let transactions = [];
 
 let TransactionStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
@@ -43,8 +43,9 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 
 TransactionStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.type) {
-
     case ActionTypes.CLIENT_TOKEN_ERROR:
+    case ActionTypes.TRANSACTION_CREATE_ERROR:
+    case ActionTypes.TRANSACTION_LOAD_ERROR:
       clientToken = "";
       errors = action.error;
       TransactionStore.emitChange()
@@ -52,12 +53,6 @@ TransactionStore.dispatchToken = Dispatcher.register((action) => {
 
     case ActionTypes.CLIENT_TOKEN_RESPONSE:
       clientToken = action.clientToken;
-      TransactionStore.emitChange()
-      break
-
-    case ActionTypes.TRANSACTION_CREATE_ERROR:
-    case ActionTypes.TRANSACTION_LOAD_ERROR:
-      errors = action.error;
       TransactionStore.emitChange()
       break
 
