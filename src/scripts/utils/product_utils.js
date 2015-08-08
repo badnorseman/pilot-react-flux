@@ -4,37 +4,36 @@ import { PRODUCTS } from "../constants/api_routes";
 import * as ProductActions from "../actions/product_actions";
 import { Promise } from "es6-promise";
 
-function buildFormData(data) {
+function buildFormData(obj, data) {
   return function(data, formData = new FormData()) {
     Object.keys(data).forEach(key => {
-      formData.append(`product[${key}]`, data[key]);
+      formData.append(`${obj.toLowerCase()}[${key}]`, data[key]);
     })
     return formData;
   }(data)
 }
 
-// function buildHeaders() {
+function buildHeaders() {
+  return ({
+    "Authorization": `Token token=${localStorage.token}`
+  })
+}
+
+// function buildUrl(obj, id = 0) {
 //   return (
 //   )
 // }
 
-// function buildUrl(obj) {
-//   return (
-//   )
-// }
-
-export function create(data) {
+export function create(obj, data) {
   return (
     $.ajax({
       url: PRODUCTS,
       dataType: "json",
       type: "POST",
-      headers: {
-        "Authorization": `Token token=${localStorage.token}`
-      },
+      headers: buildHeaders(),
       processData: false,
       contentType: false,
-      data: buildFormData(data)
+      data: buildFormData(obj, data)
     })
   )
 }
@@ -45,9 +44,7 @@ export function destroy(id) {
       url: `${PRODUCTS}/${id}`,
       dataType: "json",
       type: "DELETE",
-      headers: {
-        "Authorization": `Token token=${localStorage.token}`
-      }
+      headers: buildHeaders()
     })
   )
 }
@@ -62,18 +59,16 @@ export function load() {
   )
 }
 
-export function update(data) {
+export function update(obj, data) {
   return (
     $.ajax({
       url: `${PRODUCTS}/${data.id}`,
       dataType: "json",
       type: "PATCH",
-      headers: {
-        "Authorization": `Token token=${localStorage.token}`
-      },
+      headers: buildHeaders(),
       processData: false,
       contentType: false,
-      data: buildFormData(data)
+      data: buildFormData(obj, data)
     })
   )
 }

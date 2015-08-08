@@ -3,12 +3,14 @@ import Dispatcher from "../dispatcher/dispatcher";
 import * as ProductUtils from "../utils/product_utils";
 import { Promise } from "es6-promise";
 
+const PRODUCT = "PRODUCT";
+
 export function add(data) {
   Dispatcher.dispatch({
     type: ActionTypes.PRODUCT_CREATE_REQUEST,
     data: data
   });
-  Promise.resolve(ProductUtils.create(data)).then(() => {
+  Promise.resolve(ProductUtils.create(PRODUCT, data)).then(() => {
     return Promise.resolve(ProductUtils.load());
   }).then(response => {
     Dispatcher.dispatch({
@@ -28,7 +30,7 @@ export function edit(data) {
     type: ActionTypes.PRODUCT_UPDATE_REQUEST,
     data: data
   });
-  Promise.resolve(ProductUtils.update(data)).then(() => {
+  Promise.resolve(ProductUtils.update(PRODUCT, data)).then(() => {
     return Promise.resolve(ProductUtils.load());
   }).then(response => {
     Dispatcher.dispatch({
