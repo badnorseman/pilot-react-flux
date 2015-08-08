@@ -1,6 +1,7 @@
 import ActionTypes from "../constants/action_types";
-import Dispatcher from "../dispatcher/dispatcher";
 import * as ApiUtils from "../utils/api_utils";
+import Dispatcher from "../dispatcher/dispatcher";
+import { Promise } from "es6-promise";
 
 const TRANSACTION = "transaction";
 

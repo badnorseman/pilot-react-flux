@@ -1,6 +1,7 @@
 import ActionTypes from "../constants/action_types";
 import * as AuthApiUtils from "../utils/auth_api_utils";
 import Dispatcher from "../dispatcher/dispatcher";
+import { Promise } from "es6-promise";
 
 export function login(data) {
   Dispatcher.dispatch({
