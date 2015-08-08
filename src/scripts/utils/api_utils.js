@@ -1,7 +1,6 @@
 "use strict";
 import $ from "jquery";
-import { API, PRODUCTS } from "../constants/api_routes";
-import * as ProductActions from "../actions/product_actions";
+import { API } from "../constants/api_routes";
 import { Promise } from "es6-promise";
 
 function buildFormData(obj, data) {
@@ -20,9 +19,15 @@ function buildHeaders() {
 }
 
 function buildUrl(obj, id = 0) {
-  return (
-    `${API}/${obj.toLowerCase()}s`
-  )
+  if (id === 0) {
+    return (
+      `${API}/${obj.toLowerCase()}s`
+    )
+  } else {
+    return (
+      `${API}/${obj.toLowerCase()}s/${id}`
+    )
+  }
 }
 
 export function create(obj, data) {
@@ -39,10 +44,10 @@ export function create(obj, data) {
   )
 }
 
-export function destroy(id) {
+export function destroy(obj, id) {
   return (
     $.ajax({
-      url: `${PRODUCTS}/${id}`,
+      url: buildUrl(obj, id),
       dataType: "json",
       type: "DELETE",
       headers: buildHeaders()
@@ -63,7 +68,7 @@ export function load(obj) {
 export function update(obj, data) {
   return (
     $.ajax({
-      url: `${PRODUCTS}/${data.id}`,
+      url: buildUrl(obj, data.id),
       dataType: "json",
       type: "PATCH",
       headers: buildHeaders(),
