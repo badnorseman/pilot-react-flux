@@ -14,7 +14,7 @@ function buildFormData(data) {
 }
 
 export function create(data) {
-  Promise.resolve(
+  return (
     $.ajax({
       url: PRODUCTS,
       dataType: "json",
@@ -26,12 +26,7 @@ export function create(data) {
       contentType: false,
       data: buildFormData(data)
     })
-  ).then(success => {
-      ProductActions.list();
-    }).catch(failure => {
-      let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrors(errors);
-    })
+  )
 }
 
 export function destroy(id) {
@@ -53,18 +48,13 @@ export function destroy(id) {
 }
 
 export function load() {
-  Promise.resolve(
-    $.ajax({
+  return (
+      $.ajax({
       url: PRODUCTS,
       dataType: "json",
       type: "GET"
     })
-  ).then(success => {
-      ProductActions.receiveProductData(success);
-    }).catch(failure => {
-      let errors = JSON.parse(failure.responseText).errors;
-      ProductActions.receiveProductErrors(errors);
-    })
+  )
 }
 
 export function update(data) {

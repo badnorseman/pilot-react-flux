@@ -1,13 +1,26 @@
 import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
 import * as ProductUtils from "../utils/product_utils";
+import { Promise } from "es6-promise";
 
 export function add(data) {
   Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_ADD,
+    type: ActionTypes.PRODUCT_CREATE_REQUEST,
     data: data
   });
-  ProductUtils.create(data);
+  Promise.resolve(ProductUtils.create(data)).then(() => {
+    return Promise.resolve(ProductUtils.load());
+  }).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_CREATE_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_CREATE_ERROR,
+      error: JSON.parse(error.responseText).errors
+    });
+  });
 }
 
 export function edit(data) {
@@ -20,9 +33,19 @@ export function edit(data) {
 
 export function list() {
   Dispatcher.dispatch({
-    type: ActionTypes.PRODUCT_REQUEST
+    type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
-  ProductUtils.load();
+  Promise.resolve(ProductUtils.load()).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_LOAD_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.PRODUCT_LOAD_ERROR,
+      error: JSON.parse(error.responseText).errors
+    });
+  });
 }
 
 export function receiveProductData(data) {
