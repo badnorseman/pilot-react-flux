@@ -5,9 +5,7 @@ import { Promise } from "es6-promise";
 
 function buildFormData(obj, data) {
   return function(data, formData = new FormData()) {
-    console.log(obj, data);
     Object.keys(data).forEach(key => {
-      console.log(obj, `${obj.toLowerCase()}[${key}]`, data[key]);
       formData.append(`${obj.toLowerCase()}[${key}]`, data[key]);
     })
     return formData;
@@ -78,6 +76,18 @@ export function update(obj, data) {
       processData: false,
       contentType: false,
       data: buildFormData(obj, data)
+    })
+  )
+}
+
+// Update buildUrl() to include 'new'
+export function fetchClientToken(obj) {
+  return (
+    $.ajax({
+      url: `${API}/${obj.toLowerCase()}s/new`,
+      dataType: "json",
+      type: "GET",
+      headers: buildHeaders()
     })
   )
 }

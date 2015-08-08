@@ -27,14 +27,14 @@ export function oauth(provider) {
 
 export function receiveAuthData(data) {
   Dispatcher.dispatch({
-    type: ActionTypes.AUTH_REQUEST_SUCCESS,
+    type: ActionTypes.AUTH_RESPONSE,
     data: data
   })
 }
 
 export function receiveAuthErrors(errors) {
   Dispatcher.dispatch({
-    type: ActionTypes.AUTH_REQUEST_ERROR,
+    type: ActionTypes.AUTH_ERROR,
     errors: errors
   })
 }

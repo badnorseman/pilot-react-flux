@@ -1,8 +1,8 @@
 import keyMirror from "react/lib/keyMirror";
 
 export default keyMirror({
-  AUTH_REQUEST_ERROR: null,
-  AUTH_REQUEST_SUCCESS: null,
+  AUTH_ERROR: null,
+  AUTH_RESPONSE: null,
 
   CLIENT_TOKEN_ERROR: null,
   CLIENT_TOKEN_RESPONSE: null,

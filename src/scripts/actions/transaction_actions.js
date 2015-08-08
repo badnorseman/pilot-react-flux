@@ -1,6 +1,5 @@
 import ActionTypes from "../constants/action_types";
 import Dispatcher from "../dispatcher/dispatcher";
-import * as TransactionUtils from "../utils/transaction_utils";
 import * as ApiUtils from "../utils/api_utils";
 
 const TRANSACTION = "TRANSACTION";
@@ -25,6 +24,23 @@ export function add(data) {
   });
 }
 
+export function getClientToken() {
+  Dispatcher.dispatch({
+    type: ActionTypes.CLIENT_TOKEN_REQUEST,
+  });
+  Promise.resolve(ApiUtils.fetchClientToken(TRANSACTION)).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.CLIENT_TOKEN_RESPONSE,
+      clientToken: response.client_token
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.CLIENT_TOKEN_ERROR,
+      error: JSON.parse(error.responseText).errors
+    });
+  });
+}
+
 export function list() {
   Dispatcher.dispatch({
     type: ActionTypes.TRANSACTION_LOAD_REQUEST
@@ -40,25 +56,4 @@ export function list() {
       error: JSON.parse(error.responseText).errors
     });
   });
-}
-
-export function requestClientToken() {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_REQUEST,
-  });
-  TransactionUtils.fetchClientToken();
-}
-
-export function receiveClientToken(clientToken) {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_RESPONSE,
-    clientToken: clientToken
-  })
-}
-
-export function receiveClientTokenErrors(clientToken) {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_ERROR,
-    errors: errors
-  })
 }

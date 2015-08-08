@@ -22,7 +22,7 @@ export default class NewTransaction extends React.Component {
   }
 
   componentWillMount() {
-    TransactionActions.requestClientToken()
+    TransactionActions.getClientToken()
   }
 
   componentDidMount() {

@@ -50,12 +50,12 @@ let AuthStore = assign({}, EventEmitter.prototype, {
 AuthStore.dispatchToken = Dispatcher.register((action) => {
   switch(action.type) {
 
-    case ActionTypes.AUTH_REQUEST_ERROR:
+    case ActionTypes.AUTH_ERROR:
       errors = action.errors;
       AuthStore.emitChange()
       break
 
-    case ActionTypes.AUTH_REQUEST_SUCCESS:
+    case ActionTypes.AUTH_RESPONSE:
       if (action.data.token) {
         AuthStore.setToken(action.data.token)
         user = action.data;
