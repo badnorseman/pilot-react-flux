@@ -11,7 +11,7 @@ export function add(data) {
     data: data
   });
   Promise.resolve(ProductUtils.create(PRODUCT, data)).then(() => {
-    return Promise.resolve(ProductUtils.load());
+    return Promise.resolve(ProductUtils.load(PRODUCT));
   }).then(response => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_CREATE_RESPONSE,
@@ -31,7 +31,7 @@ export function edit(data) {
     data: data
   });
   Promise.resolve(ProductUtils.update(PRODUCT, data)).then(() => {
-    return Promise.resolve(ProductUtils.load());
+    return Promise.resolve(ProductUtils.load(PRODUCT));
   }).then(response => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
@@ -49,7 +49,7 @@ export function list() {
   Dispatcher.dispatch({
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
-  Promise.resolve(ProductUtils.load()).then(response => {
+  Promise.resolve(ProductUtils.load(PRODUCT)).then(response => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_LOAD_RESPONSE,
       data: response
@@ -68,7 +68,7 @@ export function remove(id) {
     id: id
   });
   Promise.resolve(ProductUtils.destroy(id)).then(() => {
-    return Promise.resolve(ProductUtils.load());
+    return Promise.resolve(ProductUtils.load(PRODUCT));
   }).then(response => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_DESTROY_RESPONSE,

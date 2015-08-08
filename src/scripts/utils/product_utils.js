@@ -1,6 +1,6 @@
 "use strict";
 import $ from "jquery";
-import { PRODUCTS } from "../constants/api_routes";
+import { API, PRODUCTS } from "../constants/api_routes";
 import * as ProductActions from "../actions/product_actions";
 import { Promise } from "es6-promise";
 
@@ -19,15 +19,16 @@ function buildHeaders() {
   })
 }
 
-// function buildUrl(obj, id = 0) {
-//   return (
-//   )
-// }
+function buildUrl(obj, id = 0) {
+  return (
+    `${API}/${obj.toLowerCase()}s`
+  )
+}
 
 export function create(obj, data) {
   return (
     $.ajax({
-      url: PRODUCTS,
+      url: buildUrl(obj),
       dataType: "json",
       type: "POST",
       headers: buildHeaders(),
@@ -49,10 +50,10 @@ export function destroy(id) {
   )
 }
 
-export function load() {
+export function load(obj) {
   return (
       $.ajax({
-      url: PRODUCTS,
+      url: buildUrl(obj),
       dataType: "json",
       type: "GET"
     })
