@@ -30,14 +30,6 @@ export default class Login extends Component {
     AuthStore.removeChangeListener(this._onChange)
   }
 
-  _onChange() {
-    this.setState(_getStateFromStores())
-    if (AuthStore.isLoggedIn()) {
-      this.setState({ errors: [] })
-      this.context.router.transitionTo("/products")
-    }
-  }
-
   _handleCancel() {
     this.context.router.transitionTo("/products")
   }
@@ -53,6 +45,14 @@ export default class Login extends Component {
         auth_key: email,
         password: password
       })
+    }
+  }
+
+  _onChange() {
+    this.setState(_getStateFromStores())
+    if (AuthStore.isLoggedIn()) {
+      this.setState({ errors: [] })
+      this.context.router.transitionTo("/products")
     }
   }
 

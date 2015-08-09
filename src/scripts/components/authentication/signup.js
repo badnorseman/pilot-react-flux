@@ -33,10 +33,6 @@ export default class Signup extends Component {
     AuthStore.removeChangeListener(this._onChange)
   }
 
-  _onChange() {
-    this.setState(_getStateFromStores())
-  }
-
   _handleCancel() {
     this.context.router.transitionTo("/products")
   }
@@ -56,6 +52,10 @@ export default class Signup extends Component {
       })
       this.context.router.transitionTo("/login")
     }
+  }
+
+  _onChange() {
+    this.setState(_getStateFromStores())
   }
 
   render() {
