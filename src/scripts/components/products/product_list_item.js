@@ -3,8 +3,8 @@ import React, { Component, PropTypes } from "react";
 
 export default class ProductListItem extends Component {
   constructor(props) {
-    super(props)
-    this._handleSelect = this._handleSelect.bind(this)
+    super(props);
+    this._handleSelect = this._handleSelect.bind(this);
   }
 
   _handleSelect() {

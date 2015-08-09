@@ -1,7 +1,7 @@
 "use strict";
 import React, { Component, PropTypes } from "react";
 import Braintree from "braintree-web";
-import * as TransactionActions from "../../actions/transaction_actions";
+import { add, getClientToken } from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
@@ -19,7 +19,7 @@ export default class NewTransaction extends Component {
   }
 
   componentWillMount() {
-    TransactionActions.getClientToken()
+    getClientToken()
   }
 
   componentDidMount() {
@@ -66,7 +66,7 @@ export default class NewTransaction extends Component {
     let paymentMethodNonce = paymentMethod.nonce;
 
     if (amount && currency && id && paymentMethodNonce) {
-      TransactionActions.add({
+      add({
         amount: amount,
         currency: currency,
         product_id: id,

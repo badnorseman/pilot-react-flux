@@ -14,10 +14,10 @@ function _getStateFromStores() {
 
 export default class Main extends React.Component {
   constructor() {
-    super()
-    this.state = _getStateFromStores()
-    this._handleLogout = this._handleLogout.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super();
+    this.state = _getStateFromStores();
+    this._handleLogout = this._handleLogout.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {

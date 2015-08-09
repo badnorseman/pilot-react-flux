@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from "react";
 
 export default class TransactionListItem extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {

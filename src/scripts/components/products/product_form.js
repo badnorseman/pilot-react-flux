@@ -6,9 +6,9 @@ import InputFile from "../input_file";
 
 export default class ProductForm extends Component {
   constructor(props) {
-    super(props)
-    this._handleClose = this._handleClose.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
+    super(props);
+    this._handleClose = this._handleClose.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _getCurrency() {

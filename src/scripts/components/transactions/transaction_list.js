@@ -1,6 +1,6 @@
 "use strict";
 import React, { Component, PropTypes } from "react";
-import * as TransactionActions from "../../actions/transaction_actions";
+import { list } from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 
@@ -14,7 +14,7 @@ export default class TransactionList extends Component {
   }
 
   componentWillMount() {
-    TransactionActions.list()
+    list()
   }
 
   componentDidMount() {
