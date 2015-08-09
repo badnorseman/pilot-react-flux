@@ -1,7 +1,7 @@
 "use strict";
-import React from "react";
+import React, { Component } from "react";
 
-export default class extends React.Component {
+export default class extends Component {
   constructor() {
     super();
     this.state = { file: "" };
