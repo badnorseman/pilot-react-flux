@@ -1,5 +1,5 @@
 import ActionTypes from "../constants/action_types";
-import * as ApiUtils from "../utils/api_utils";
+import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
 import { Promise } from "es6-promise";
 
@@ -10,8 +10,8 @@ export function add(data) {
     type: ActionTypes.TRANSACTION_CREATE_REQUEST,
     data: data
   });
-  Promise.resolve(ApiUtils.create(TRANSACTION, data)).then(() => {
-    return Promise.resolve(ApiUtils.load(TRANSACTION));
+  Promise.resolve(Api.create(TRANSACTION, data)).then(() => {
+    return Promise.resolve(Api.load(TRANSACTION));
   }).then(response => {
     dispatch({
       type: ActionTypes.TRANSACTION_CREATE_RESPONSE,
@@ -29,7 +29,7 @@ export function getClientToken() {
   dispatch({
     type: ActionTypes.CLIENT_TOKEN_REQUEST,
   });
-  Promise.resolve(ApiUtils.fetchClientToken(TRANSACTION)).then(response => {
+  Promise.resolve(Api.fetchClientToken(TRANSACTION)).then(response => {
     dispatch({
       type: ActionTypes.CLIENT_TOKEN_RESPONSE,
       clientToken: response.client_token
@@ -46,7 +46,7 @@ export function list() {
   dispatch({
     type: ActionTypes.TRANSACTION_LOAD_REQUEST
   });
-  Promise.resolve(ApiUtils.load(TRANSACTION)).then(response => {
+  Promise.resolve(Api.load(TRANSACTION)).then(response => {
     dispatch({
       type: ActionTypes.TRANSACTION_LOAD_RESPONSE,
       data: response

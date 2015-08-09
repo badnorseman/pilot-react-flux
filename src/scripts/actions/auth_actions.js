@@ -1,5 +1,5 @@
 import ActionTypes from "../constants/action_types";
-import * as AuthApiUtils from "../utils/auth_api_utils";
+import * as AuthApi from "../api/auth_api";
 import { dispatch } from "../dispatcher/dispatcher";
 import { Promise } from "es6-promise";
 
@@ -8,7 +8,7 @@ export function login(data) {
     type: ActionTypes.LOGIN_REQUEST,
     data: data
   });
-  Promise.resolve(AuthApiUtils.login(data)).then(response => {
+  Promise.resolve(AuthApi.login(data)).then(response => {
     dispatch({
       type: ActionTypes.LOGIN_RESPONSE,
       data: response
@@ -25,7 +25,7 @@ export function logout() {
   dispatch({
     type: ActionTypes.LOGOUT_REQUEST,
   });
-  Promise.resolve(AuthApiUtils.logout()).then(response => {
+  Promise.resolve(AuthApi.logout()).then(response => {
     dispatch({
       type: ActionTypes.LOGOUT_RESPONSE,
       data: response
@@ -43,7 +43,7 @@ export function oauth(provider) {
     type: ActionTypes.OAUTH_REQUEST,
     provider: provider
   });
-  Promise.resolve(AuthApiUtils.oauth(provider)).then(response => {
+  Promise.resolve(AuthApi.oauth(provider)).then(response => {
     dispatch({
       type: ActionTypes.OAUTH_RESPONSE,
       data: response
@@ -61,7 +61,7 @@ export function signup(data) {
     type: ActionTypes.SIGNUP_REQUEST,
     data: data
   });
-  Promise.resolve(AuthApiUtils.signup(data)).then(response => {
+  Promise.resolve(AuthApi.signup(data)).then(response => {
     dispatch({
       type: ActionTypes.SIGNUP_RESPONSE,
       data: response
