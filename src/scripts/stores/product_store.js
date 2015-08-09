@@ -1,8 +1,8 @@
 "use strict";
 import ActionTypes from "../constants/action_types";
 import assign from "react/lib/Object.assign";
-import Dispatcher from "../dispatcher/dispatcher";
 import EventEmitter from "events";
+import { register } from "../dispatcher/dispatcher";
 
 const CHANGE_EVENT = "change";
 let errors = [];
@@ -36,7 +36,7 @@ let ProductStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-ProductStore.dispatchToken = Dispatcher.register(action => {
+ProductStore.dispatchToken = register(action => {
   switch(action.type) {
     case ActionTypes.PRODUCT_CREATE_ERROR:
     case ActionTypes.PRODUCT_DESTROY_ERROR:
