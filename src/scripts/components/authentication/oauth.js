@@ -5,8 +5,8 @@ import Button from "../button";
 
 export default class Oauth extends Component {
   constructor(props) {
-    super(props)
-    this._handleClick = this._handleClick.bind(this)
+    super(props);
+    this._handleClick = this._handleClick.bind(this);
   }
 
   _handleClick() {

@@ -7,19 +7,13 @@ import Button from "../button";
 import InputField from "../input_field";
 import Oauth from "./oauth";
 
-function _getStateFromStores() {
-  return {
-    errors: AuthStore.getErrors()
-  }
-}
-
 export default class Login extends Component {
   constructor(context) {
-    super(context)
-    this.state = _getStateFromStores()
-    this._handleCancel = this._handleCancel.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super(context);
+    this.state = { errors: [] };
+    this._handleCancel = this._handleCancel.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,12 +24,18 @@ export default class Login extends Component {
     AuthStore.removeChangeListener(this._onChange)
   }
 
+  _getStateFromStores() {
+    return {
+      errors: AuthStore.getErrors()
+    }
+  }
+
   _handleCancel() {
     this.context.router.transitionTo("/products")
   }
 
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let email = this.refs.email.state.fieldValue;
     let password = this.refs.password.state.fieldValue;
@@ -49,9 +49,8 @@ export default class Login extends Component {
   }
 
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getStateFromStores())
     if (AuthStore.isLoggedIn()) {
-      this.setState({ errors: [] })
       this.context.router.transitionTo("/products")
     }
   }
