@@ -8,17 +8,13 @@ import Footer from "./footer";
 export default class Main extends Component {
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false,
-      user: {}
-    };
+    this.state = this._getStateFromStores();
     this._handleLogout = this._handleLogout.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
     AuthStore.addChangeListener(this._onChange)
-    this.setState(this._getStateFromStores())
   }
 
   componentWillUnmount() {
