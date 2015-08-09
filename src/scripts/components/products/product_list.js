@@ -4,9 +4,9 @@ import ProductListItem from "./product_list_item";
 
 export default class ProductList extends Component {
   constructor(props) {
-    super(props)
-    this._handleNew = this._handleNew.bind(this)
-    this._handleSelect = this._handleSelect.bind(this)
+    super(props);
+    this._handleNew = this._handleNew.bind(this);
+    this._handleSelect = this._handleSelect.bind(this);
   }
 
   _handleNew() {

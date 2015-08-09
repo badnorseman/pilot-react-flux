@@ -1,15 +1,15 @@
 "use strict";
-import React from "react";
+import React, { Component } from "react";
 
-export default class extends React.Component {
+export default class extends Component {
   constructor() {
-    super()
-    this.state = { file: "" }
-    this._handleChange = this._handleChange.bind(this)
+    super();
+    this.state = { file: "" };
+    this._handleChange = this._handleChange.bind(this);
   }
 
   _handleChange(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let file = document.getElementById("file--selected").files[0];
 

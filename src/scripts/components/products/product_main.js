@@ -9,16 +9,16 @@ import NewProduct from "./new_product";
 
 export default class ProductMain extends Component {
   constructor(context) {
-    super(context)
-    this.state = { content: "" }
-    this._handleAdd = this._handleAdd.bind(this)
-    this._handleBuy = this._handleBuy.bind(this)
-    this._handleClose = this._handleClose.bind(this)
-    this._handleEdit = this._handleEdit.bind(this)
-    this._handleNew = this._handleNew.bind(this)
-    this._handleRemove = this._handleRemove.bind(this)
-    this._handleSelect = this._handleSelect.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super(context);
+    this.state = { content: "" };
+    this._handleAdd = this._handleAdd.bind(this);
+    this._handleBuy = this._handleBuy.bind(this);
+    this._handleClose = this._handleClose.bind(this);
+    this._handleEdit = this._handleEdit.bind(this);
+    this._handleNew = this._handleNew.bind(this);
+    this._handleRemove = this._handleRemove.bind(this);
+    this._handleSelect = this._handleSelect.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentWillMount() {

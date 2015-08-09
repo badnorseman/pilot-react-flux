@@ -5,9 +5,9 @@ import Button from "../button";
 
 export default class NewProduct extends Component {
   constructor(props) {
-    super(props)
-    this._handleAdd = this._handleAdd.bind(this)
-    this._handleClose = this._handleClose.bind(this)
+    super(props);
+    this._handleAdd = this._handleAdd.bind(this);
+    this._handleClose = this._handleClose.bind(this);
   }
 
   _handleAdd(product) {

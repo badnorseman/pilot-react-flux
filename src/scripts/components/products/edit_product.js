@@ -5,11 +5,11 @@ import Button from "../button";
 
 export default class EditProduct extends Component {
   constructor(props) {
-    super(props)
-    this._handleBuy = this._handleBuy.bind(this)
-    this._handleClose = this._handleClose.bind(this)
-    this._handleEdit = this._handleEdit.bind(this)
-    this._handleRemove = this._handleRemove.bind(this)
+    super(props);
+    this._handleBuy = this._handleBuy.bind(this);
+    this._handleClose = this._handleClose.bind(this);
+    this._handleEdit = this._handleEdit.bind(this);
+    this._handleRemove = this._handleRemove.bind(this);
   }
 
   _handleBuy() {

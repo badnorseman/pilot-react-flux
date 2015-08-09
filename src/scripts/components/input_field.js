@@ -1,17 +1,17 @@
 // Enable to pass in validators e.g. required, number, amount etc.
 // Each validators would have own pattern and each pattern world have an error message.
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
-export default class InputFile extends React.Component {
+export default class InputFile extends Component {
   constructor(props) {
-    super(props)
-    this.state = { fieldValue: this.props.fieldValue }
-    this._handleChange = this._handleChange.bind(this)
+    super(props);
+    this.state = { fieldValue: this.props.fieldValue };
+    this._handleChange = this._handleChange.bind(this);
   }
 
   _handleChange(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let fieldValue = React.findDOMNode(this.refs[this.props.fieldName]).value;
 
@@ -44,6 +44,6 @@ export default class InputFile extends React.Component {
 }
 
 InputFile.propTypes = {
-  fieldName: React.PropTypes.string.isRequired,
-  fieldType: React.PropTypes.string.isRequired
+  fieldName: PropTypes.string.isRequired,
+  fieldType: PropTypes.string.isRequired
 }

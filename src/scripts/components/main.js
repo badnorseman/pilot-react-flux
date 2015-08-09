@@ -1,23 +1,16 @@
 "use strict";
-import React from "react";
+import React, { Component } from "react";
 import { Link, RouteHandler } from "react-router";
 import * as AuthActions from "../actions/auth_actions";
 import AuthStore from "../stores/auth_store";
 import Footer from "./footer";
 
-function _getStateFromStores() {
-  return {
-    isLoggedIn: AuthStore.isLoggedIn(),
-    user: AuthStore.getUser()
-  }
-}
-
-export default class Main extends React.Component {
+export default class Main extends Component {
   constructor() {
-    super()
-    this.state = _getStateFromStores()
-    this._handleLogout = this._handleLogout.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super();
+    this.state = this._getStateFromStores();
+    this._handleLogout = this._handleLogout.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +25,15 @@ export default class Main extends React.Component {
     componentHandler.upgradeDom()
   }
 
+  _getStateFromStores() {
+    return {
+      isLoggedIn: AuthStore.isLoggedIn(),
+      user: AuthStore.getUser()
+    }
+  }
+
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getStateFromStores())
   }
 
   _handleLogout() {

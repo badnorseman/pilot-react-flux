@@ -1,10 +1,10 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
-export default class Button extends React.Component {
+export default class Button extends Component {
   constructor(props) {
-    super(props)
-    this._handleClick = this._handleClick.bind(this)
+    super(props);
+    this._handleClick = this._handleClick.bind(this);
   }
 
   _handleClick() {
@@ -23,6 +23,6 @@ export default class Button extends React.Component {
 }
 
 Button.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 }
