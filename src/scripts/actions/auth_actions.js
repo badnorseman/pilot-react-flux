@@ -16,7 +16,7 @@ export function login(data) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.LOGIN_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -33,7 +33,7 @@ export function logout() {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.LOGOUT_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -51,7 +51,7 @@ export function oauth(provider) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.OAUTH_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -69,7 +69,7 @@ export function signup(data) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.SIGNUP_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }

@@ -20,7 +20,7 @@ export function add(data) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_CREATE_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -40,7 +40,7 @@ export function edit(data) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_UPDATE_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -57,7 +57,7 @@ export function list() {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_LOAD_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -77,7 +77,7 @@ export function remove(id) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.PRODUCT_DESTROY_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }

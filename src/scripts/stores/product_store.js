@@ -42,7 +42,7 @@ ProductStore.dispatchToken = Dispatcher.register(action => {
     case ActionTypes.PRODUCT_DESTROY_ERROR:
     case ActionTypes.PRODUCT_LOAD_ERROR:
     case ActionTypes.PRODUCT_UPDATE_ERROR:
-      errors = action.error;
+      errors = action.errors;
       ProductStore.emitChange()
       break
 

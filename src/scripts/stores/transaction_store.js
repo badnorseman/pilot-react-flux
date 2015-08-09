@@ -47,7 +47,7 @@ TransactionStore.dispatchToken = Dispatcher.register((action) => {
     case ActionTypes.TRANSACTION_CREATE_ERROR:
     case ActionTypes.TRANSACTION_LOAD_ERROR:
       clientToken = "";
-      errors = action.error;
+      errors = action.errors;
       TransactionStore.emitChange()
       break
 

@@ -20,7 +20,7 @@ export function add(data) {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.TRANSACTION_CREATE_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -37,7 +37,7 @@ export function getClientToken() {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.CLIENT_TOKEN_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -54,7 +54,7 @@ export function list() {
   }).catch(error => {
     Dispatcher.dispatch({
       type: ActionTypes.TRANSACTION_LOAD_ERROR,
-      error: JSON.parse(error.responseText).errors
+      errors: JSON.parse(error.responseText).errors
     });
   });
 }
