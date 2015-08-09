@@ -5,21 +5,17 @@ import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
-function _getStateFromStores() {
-  return {
-    clientToken: TransactionStore.getClientToken(),
-    errors: TransactionStore.getErrors()
-  }
-}
-
 export default class NewTransaction extends Component {
   constructor(props) {
-    super(props)
-    this.state = _getStateFromStores()
-    this._handleClose = this._handleClose.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
-    this._onChange = this._onChange.bind(this)
-    this._onPaymentMethodReceived = this._onPaymentMethodReceived.bind(this)
+    super(props);
+    this.state = {
+      clientToken: "",
+      errors: []
+    };
+    this._handleClose = this._handleClose.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._onPaymentMethodReceived = this._onPaymentMethodReceived.bind(this);
   }
 
   componentWillMount() {
@@ -44,6 +40,13 @@ export default class NewTransaction extends Component {
     )
   }
 
+  _getStateFromStores() {
+    return {
+      clientToken: TransactionStore.getClientToken(),
+      errors: TransactionStore.getErrors()
+    }
+  }
+
   _handleClose() {
     this.props.onClose()
   }
@@ -53,7 +56,7 @@ export default class NewTransaction extends Component {
   }
 
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getStateFromStores())
   }
 
   _onPaymentMethodReceived(paymentMethod) {

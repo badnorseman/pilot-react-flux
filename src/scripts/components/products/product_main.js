@@ -1,5 +1,5 @@
 "use strict";
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import * as ProductActions from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
@@ -8,8 +8,8 @@ import EditProduct from "./edit_product";
 import NewProduct from "./new_product";
 
 export default class ProductMain extends Component {
-  constructor() {
-    super()
+  constructor(context) {
+    super(context)
     this.state = { content: "" }
     this._handleAdd = this._handleAdd.bind(this)
     this._handleBuy = this._handleBuy.bind(this)
@@ -124,4 +124,8 @@ export default class ProductMain extends Component {
       </div>
     )
   }
+}
+
+ProductMain.contextTypes = {
+  router: PropTypes.func.isRequired
 }
