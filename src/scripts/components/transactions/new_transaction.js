@@ -1,28 +1,25 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import Braintree from "braintree-web";
 import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
-function _getStateFromStores() {
-  return {
-    clientToken: TransactionStore.getClientToken(),
-    errors: TransactionStore.getErrors()
-  }
-}
-
-export default class NewTransaction extends React.Component {
+export default class NewTransaction extends Component {
   constructor(props) {
-    super(props)
-    this.state = _getStateFromStores()
-    this._handleClose = this._handleClose.bind(this)
-    this._onChange = this._onChange.bind(this)
-    this._onPaymentMethodReceived = this._onPaymentMethodReceived.bind(this)
+    super(props);
+    this.state = {
+      clientToken: "",
+      errors: []
+    };
+    this._handleClose = this._handleClose.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._onPaymentMethodReceived = this._onPaymentMethodReceived.bind(this);
   }
 
   componentWillMount() {
-    TransactionActions.requestClientToken()
+    TransactionActions.getClientToken()
   }
 
   componentDidMount() {
@@ -43,6 +40,13 @@ export default class NewTransaction extends React.Component {
     )
   }
 
+  _getStateFromStores() {
+    return {
+      clientToken: TransactionStore.getClientToken(),
+      errors: TransactionStore.getErrors()
+    }
+  }
+
   _handleClose() {
     this.props.onClose()
   }
@@ -52,7 +56,7 @@ export default class NewTransaction extends React.Component {
   }
 
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getStateFromStores())
   }
 
   _onPaymentMethodReceived(paymentMethod) {
@@ -63,16 +67,12 @@ export default class NewTransaction extends React.Component {
 
     if (amount && currency && id && paymentMethodNonce) {
       TransactionActions.add({
-        transaction: {
-          amount: amount,
-          currency: currency,
-          product_id: id,
-          payment_method_nonce: paymentMethodNonce
-        }
+        amount: amount,
+        currency: currency,
+        product_id: id,
+        payment_method_nonce: paymentMethodNonce
       })
     }
-    // There must better way. How to handle errors?
-    // this.props.onClose()
   }
 
   render() {
@@ -89,7 +89,7 @@ export default class NewTransaction extends React.Component {
           </div>
           <div className="divider"></div>
           <div>
-            <form onSubmit={this._handleSubmit.bind(this)}>
+            <form onSubmit={this._handleSubmit}>
               <div id="dropin-container"></div>
               <Button name="Close" onClick={this._handleClose}/>
               <div className="divider"></div>
@@ -107,6 +107,6 @@ export default class NewTransaction extends React.Component {
 }
 
 NewTransaction.propTypes = {
-  product: React.PropTypes.object.isRequired,
-  onClose: React.PropTypes.func.isRequired
+  product: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired
 }

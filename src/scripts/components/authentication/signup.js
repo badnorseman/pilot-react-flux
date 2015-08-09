@@ -2,7 +2,7 @@
 // Can Login and Signup forms be one?
 // Add avatar, paperclip functionality
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 import * as AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
@@ -10,19 +10,13 @@ import Button from "../button";
 import InputField from "../input_field";
 import Oauth from "./oauth";
 
-function _getStateFromStores() {
-  return {
-    errors: AuthStore.getErrors()
-  }
-}
-
-export default class Signup extends React.Component {
+export default class Signup extends Component {
   constructor(context) {
-    super(context)
-    this.state = _getStateFromStores()
-    this._handleCancel = this._handleCancel.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super(context);
+    this.state = { errors: [] };
+    this._handleCancel = this._handleCancel.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
@@ -33,8 +27,10 @@ export default class Signup extends React.Component {
     AuthStore.removeChangeListener(this._onChange)
   }
 
-  _onChange() {
-    this.setState(_getStateFromStores())
+  _getStateFromStores() {
+    return {
+      errors: AuthStore.getErrors()
+    }
   }
 
   _handleCancel() {
@@ -42,7 +38,7 @@ export default class Signup extends React.Component {
   }
 
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let email = this.refs.email.state.fieldValue;
     let password = this.refs.password.state.fieldValue;
@@ -56,6 +52,10 @@ export default class Signup extends React.Component {
       })
       this.context.router.transitionTo("/login")
     }
+  }
+
+  _onChange() {
+    this.setState(this._getStateFromStores())
   }
 
   render() {
@@ -110,5 +110,5 @@ export default class Signup extends React.Component {
 }
 
 Signup.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: PropTypes.func.isRequired
 }

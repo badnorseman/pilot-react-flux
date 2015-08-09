@@ -1,53 +1,60 @@
 import ActionTypes from "../constants/action_types";
+import * as ApiUtils from "../utils/api_utils";
 import Dispatcher from "../dispatcher/dispatcher";
-import * as TransactionUtils from "../utils/transaction_utils";
+import { Promise } from "es6-promise";
+
+const TRANSACTION = "transaction";
 
 export function add(data) {
   Dispatcher.dispatch({
-    type: ActionTypes.TRANSACTION_ADD,
+    type: ActionTypes.TRANSACTION_CREATE_REQUEST,
     data: data
   });
-  TransactionUtils.create(data);
+  Promise.resolve(ApiUtils.create(TRANSACTION, data)).then(() => {
+    return Promise.resolve(ApiUtils.load(TRANSACTION));
+  }).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.TRANSACTION_CREATE_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.TRANSACTION_CREATE_ERROR,
+      errors: JSON.parse(error.responseText).errors
+    });
+  });
+}
+
+export function getClientToken() {
+  Dispatcher.dispatch({
+    type: ActionTypes.CLIENT_TOKEN_REQUEST,
+  });
+  Promise.resolve(ApiUtils.fetchClientToken(TRANSACTION)).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.CLIENT_TOKEN_RESPONSE,
+      clientToken: response.client_token
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.CLIENT_TOKEN_ERROR,
+      errors: JSON.parse(error.responseText).errors
+    });
+  });
 }
 
 export function list() {
   Dispatcher.dispatch({
-    type: ActionTypes.TRANSACTION_REQUEST
+    type: ActionTypes.TRANSACTION_LOAD_REQUEST
   });
-  TransactionUtils.load();
-}
-
-export function requestClientToken() {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_REQUEST,
+  Promise.resolve(ApiUtils.load(TRANSACTION)).then(response => {
+    Dispatcher.dispatch({
+      type: ActionTypes.TRANSACTION_LOAD_RESPONSE,
+      data: response
+    });
+  }).catch(error => {
+    Dispatcher.dispatch({
+      type: ActionTypes.TRANSACTION_LOAD_ERROR,
+      errors: JSON.parse(error.responseText).errors
+    });
   });
-  TransactionUtils.fetchClientToken();
-}
-
-export function receiveClientToken(clientToken) {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_REQUEST_SUCCESS,
-    clientToken: clientToken
-  })
-}
-
-export function receiveClientTokenErrors(clientToken) {
-  Dispatcher.dispatch({
-    type: ActionTypes.CLIENT_TOKEN_REQUEST_ERROR,
-    errors: errors
-  })
-}
-
-export function receiveTransactionData(data) {
-  Dispatcher.dispatch({
-    type: ActionTypes.TRANSACTION_REQUEST_SUCCESS,
-    data: data
-  })
-}
-
-export function receiveTransactionErrors(errors) {
-  Dispatcher.dispatch({
-    type: ActionTypes.TRANSACTION_REQUEST_ERROR,
-    errors: errors
-  })
 }

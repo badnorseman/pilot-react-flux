@@ -1,7 +1,7 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
-export default class ProductListItem extends React.Component {
+export default class ProductListItem extends Component {
   constructor(props) {
     super(props)
     this._handleSelect = this._handleSelect.bind(this)
@@ -41,6 +41,6 @@ export default class ProductListItem extends React.Component {
 }
 
 ProductListItem.propTypes = {
-  item: React.PropTypes.object.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  item: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
 }

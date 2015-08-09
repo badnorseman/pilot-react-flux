@@ -1,5 +1,5 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 import * as AuthActions from "../../actions/auth_actions";
 import AuthStore from "../../stores/auth_store";
@@ -7,19 +7,13 @@ import Button from "../button";
 import InputField from "../input_field";
 import Oauth from "./oauth";
 
-function _getStateFromStores() {
-  return {
-    errors: AuthStore.getErrors()
-  }
-}
-
-export default class Login extends React.Component {
+export default class Login extends Component {
   constructor(context) {
-    super(context)
-    this.state = _getStateFromStores()
-    this._handleCancel = this._handleCancel.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
-    this._onChange = this._onChange.bind(this)
+    super(context);
+    this.state = { errors: [] };
+    this._handleCancel = this._handleCancel.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,11 +24,9 @@ export default class Login extends React.Component {
     AuthStore.removeChangeListener(this._onChange)
   }
 
-  _onChange() {
-    this.setState(_getStateFromStores())
-    if (AuthStore.isLoggedIn()) {
-      this.setState({errors: []})
-      this.context.router.transitionTo("/products")
+  _getStateFromStores() {
+    return {
+      errors: AuthStore.getErrors()
     }
   }
 
@@ -43,7 +35,7 @@ export default class Login extends React.Component {
   }
 
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     let email = this.refs.email.state.fieldValue;
     let password = this.refs.password.state.fieldValue;
@@ -53,6 +45,13 @@ export default class Login extends React.Component {
         auth_key: email,
         password: password
       })
+    }
+  }
+
+  _onChange() {
+    this.setState(this._getStateFromStores())
+    if (AuthStore.isLoggedIn()) {
+      this.context.router.transitionTo("/products")
     }
   }
 
@@ -100,5 +99,5 @@ export default class Login extends React.Component {
 }
 
 Login.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: PropTypes.func.isRequired
 }

@@ -1,20 +1,16 @@
 "use strict";
-import React from "react";
+import React, { Component, PropTypes } from "react";
 import * as TransactionActions from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 
-function _getStateFromStores() {
-  return {
-    transactions: TransactionStore.getAll()
-  }
-}
-
-export default class TransactionList extends React.Component {
-  constructor() {
-    super()
-    this.state = _getStateFromStores()
-    this._onChange = this._onChange.bind(this)
+export default class TransactionList extends Component {
+  constructor(context) {
+    super(context);
+    this.state = {
+      transactions: []
+    };
+    this._onChange = this._onChange.bind(this);
   }
 
   componentWillMount() {
@@ -29,8 +25,14 @@ export default class TransactionList extends React.Component {
     TransactionStore.removeChangeListener(this._onChange)
   }
 
+  _getStateFromStores() {
+    return {
+      transactions: TransactionStore.getAll()
+    }
+  }
+
   _onChange() {
-    this.setState(_getStateFromStores())
+    this.setState(this._getStateFromStores())
   }
 
   render() {
@@ -55,4 +57,8 @@ export default class TransactionList extends React.Component {
       </div>
     )
   }
+}
+
+TransactionList.contextTypes = {
+  router: PropTypes.func.isRequired
 }

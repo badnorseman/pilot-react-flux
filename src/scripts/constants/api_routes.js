@@ -1,9 +1,8 @@
-// const host = "https://matrix-api.herokuapp.com";
-const host = "http://localhost:3000";
+// const HOST = "https://matrix-api.herokuapp.com";
+const HOST = "http://localhost:3000";
 
-export const LOGIN = `${host}/api/auth/identity/callback`;
-export const LOGOUT = `${host}/api/logout`;
-export const OAUTH = `${host}/api/auth`;
-export const PRODUCTS = `${host}/api/products`;
-export const SIGNUP = `${host}/api/auth/identity/register`;
-export const TRANSACTIONS = `${host}/api/transactions`;
+export const API = `${HOST}/api`
+export const LOGIN = `${HOST}/api/auth/identity/callback`;
+export const LOGOUT = `${HOST}/api/logout`;
+export const OAUTH = `${HOST}/api/auth`;
+export const SIGNUP = `${HOST}/api/auth/identity/register`;
