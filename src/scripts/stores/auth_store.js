@@ -53,7 +53,7 @@ AuthStore.dispatchToken = register((action) => {
     case ActionTypes.LOGOUT_ERROR:
     case ActionTypes.OAUTH_ERROR:
     case ActionTypes.SIGNUP_ERROR:
-      errors = action.errors;
+      errors = action.error;
       AuthStore.emitChange()
       break
 

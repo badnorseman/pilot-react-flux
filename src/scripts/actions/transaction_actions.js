@@ -20,7 +20,7 @@ export function add(data) {
   }).catch(error => {
     dispatch({
       type: ActionTypes.TRANSACTION_CREATE_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -37,7 +37,7 @@ export function getClientToken() {
   }).catch(error => {
     dispatch({
       type: ActionTypes.CLIENT_TOKEN_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
@@ -54,7 +54,7 @@ export function list() {
   }).catch(error => {
     dispatch({
       type: ActionTypes.TRANSACTION_LOAD_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
