@@ -10,7 +10,11 @@ import NewProduct from "./new_product";
 export default class ProductMain extends Component {
   constructor(context) {
     super(context);
-    this.state = { content: "", errors: [] };
+    this.state = {
+      content: "",
+      errors: [],
+      products: []
+    };
     this._handleAdd = this._handleAdd.bind(this);
     this._handleBuy = this._handleBuy.bind(this);
     this._handleClose = this._handleClose.bind(this);
@@ -79,16 +83,17 @@ export default class ProductMain extends Component {
     )
   }
 
-  _getState() {
+  _getStateFromStores() {
     return {
       content: this._getProductList(),
-      errors: ProductStore.getErrors()
+      errors: ProductStore.getErrors(),
+      products: ProductStore.getAll()
     }
   }
 
   _handleAdd(product) {
     ProductActions.create(product)
-    this.setState(this._getState())
+    this.setState(this._getStateFromStores())
   }
 
   _handleBuy(id) {
@@ -96,12 +101,12 @@ export default class ProductMain extends Component {
   }
 
   _handleClose() {
-    this.setState(this._getState())
+    this.setState(this._getStateFromStores())
   }
 
   _handleEdit(product) {
     ProductActions.update(product)
-    this.setState(this._getState())
+    this.setState(this._getStateFromStores())
   }
 
   _handleNew() {
@@ -110,7 +115,7 @@ export default class ProductMain extends Component {
 
   _handleRemove(id) {
     ProductActions.destroy(id)
-    this.setState(this._getState())
+    this.setState(this._getStateFromStores())
   }
 
   _handleSelect(id) {
@@ -118,7 +123,7 @@ export default class ProductMain extends Component {
   }
 
   _onChange() {
-    this.setState(this._getState())
+    this.setState(this._getStateFromStores())
   }
 
   render() {
