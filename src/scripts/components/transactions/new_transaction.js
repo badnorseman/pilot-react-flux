@@ -52,7 +52,7 @@ export default class NewTransaction extends Component {
   }
 
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
   _onChange() {

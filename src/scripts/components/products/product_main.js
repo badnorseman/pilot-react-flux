@@ -39,6 +39,7 @@ export default class ProductMain extends Component {
 
   _getBuyProduct(id) {
     let product = ProductStore.getById(id);
+
     return (
       <BuyProduct
         product={product}
@@ -54,6 +55,7 @@ export default class ProductMain extends Component {
 
   _getEditProduct(id) {
     let product = ProductStore.getById(id);
+
     return (
       <EditProduct
         product={product}
@@ -74,6 +76,7 @@ export default class ProductMain extends Component {
 
   _getProductList() {
     let products = ProductStore.getAll();
+
     return (
       <ProductList
         products={products}
