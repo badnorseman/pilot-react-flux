@@ -2,15 +2,15 @@ import ActionTypes from "../constants/action_types";
 import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
 
-const TRANSACTION = "transaction";
+const ENTITY_NAME = "transaction";
 
 export function create(data) {
   dispatch({
     type: ActionTypes.TRANSACTION_CREATE_REQUEST,
     data: data
   });
-  Api.create(TRANSACTION, data).then(() => {
-    return Api.load(TRANSACTION);
+  Api.create(ENTITY_NAME, data).then(() => {
+    return Api.load(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.TRANSACTION_CREATE_RESPONSE,
@@ -28,7 +28,7 @@ export function getClientToken() {
   dispatch({
     type: ActionTypes.CLIENT_TOKEN_REQUEST,
   });
-  Api.fetchClientToken(TRANSACTION).then(response => {
+  Api.fetchClientToken(ENTITY_NAME).then(response => {
     dispatch({
       type: ActionTypes.CLIENT_TOKEN_RESPONSE,
       clientToken: response.client_token
@@ -45,7 +45,7 @@ export function load() {
   dispatch({
     type: ActionTypes.TRANSACTION_LOAD_REQUEST
   });
-  Api.load(TRANSACTION).then(response => {
+  Api.load(ENTITY_NAME).then(response => {
     dispatch({
       type: ActionTypes.TRANSACTION_LOAD_RESPONSE,
       data: response

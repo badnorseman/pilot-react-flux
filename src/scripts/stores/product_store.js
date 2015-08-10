@@ -43,7 +43,7 @@ ProductStore.dispatchToken = register(action => {
     case ActionTypes.PRODUCT_LOAD_ERROR:
     case ActionTypes.PRODUCT_UPDATE_ERROR:
       errors = action.error;
-      ProductStore.emitChange()
+      ProductStore.emitChange();
       break
 
     case ActionTypes.PRODUCT_CREATE_RESPONSE:
@@ -51,7 +51,8 @@ ProductStore.dispatchToken = register(action => {
     case ActionTypes.PRODUCT_LOAD_RESPONSE:
     case ActionTypes.PRODUCT_UPDATE_RESPONSE:
       products = action.data;
-      ProductStore.emitChange()
+      console.log("ProductStore", products)
+      ProductStore.emitChange();
       break
   }
 })

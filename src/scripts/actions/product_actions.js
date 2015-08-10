@@ -2,14 +2,14 @@ import ActionTypes from "../constants/action_types";
 import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
 
-const PRODUCT = "product";
+const ENTITY_NAME = "product";
 
 export function create(data) {
   dispatch({
     type: ActionTypes.PRODUCT_CREATE_REQUEST
   });
-  Api.create(PRODUCT, data).then(() => {
-    return Api.load(PRODUCT);
+  Api.create(ENTITY_NAME, data).then(() => {
+    return Api.load(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_CREATE_RESPONSE,
@@ -28,8 +28,8 @@ export function destroy(id) {
     type: ActionTypes.PRODUCT_DESTROY_REQUEST,
     id: id
   });
-  Api.destroy(PRODUCT, id).then(() => {
-    return Api.load(PRODUCT);
+  Api.destroy(ENTITY_NAME, id).then(() => {
+    return Api.load(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
@@ -47,7 +47,7 @@ export function load() {
   dispatch({
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
-  Api.load(PRODUCT).then(response => {
+  Api.load(ENTITY_NAME).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_LOAD_RESPONSE,
       data: response
@@ -64,8 +64,8 @@ export function update(data) {
   dispatch({
     type: ActionTypes.PRODUCT_UPDATE_REQUEST
   });
-  Api.update(PRODUCT, data).then(() => {
-    return Api.load(PRODUCT);
+  Api.update(ENTITY_NAME, data).then(() => {
+    return Api.load(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
