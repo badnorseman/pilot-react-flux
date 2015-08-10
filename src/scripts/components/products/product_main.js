@@ -22,7 +22,7 @@ export default class ProductMain extends Component {
   }
 
   componentWillMount() {
-    ProductActions.list()
+    ProductActions.load()
   }
 
   componentDidMount() {
@@ -86,7 +86,7 @@ export default class ProductMain extends Component {
   }
 
   _handleAdd(product) {
-    ProductActions.add(product)
+    ProductActions.create(product)
     this.setState(this._getContent())
   }
 
@@ -99,7 +99,7 @@ export default class ProductMain extends Component {
   }
 
   _handleEdit(product) {
-    ProductActions.edit(product)
+    ProductActions.update(product)
     this.setState(this._getContent())
   }
 
@@ -108,7 +108,7 @@ export default class ProductMain extends Component {
   }
 
   _handleRemove(id) {
-    ProductActions.remove(id)
+    ProductActions.destroy(id)
     this.setState(this._getContent())
   }
 

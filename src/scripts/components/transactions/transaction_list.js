@@ -1,20 +1,18 @@
 "use strict";
 import React, { Component, PropTypes } from "react";
-import { list } from "../../actions/transaction_actions";
+import { load } from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 
 export default class TransactionList extends Component {
   constructor(context) {
     super(context);
-    this.state = {
-      transactions: []
-    };
+    this.state = { transactions: [] };
     this._onChange = this._onChange.bind(this);
   }
 
   componentWillMount() {
-    list()
+    load()
   }
 
   componentDidMount() {
@@ -26,9 +24,7 @@ export default class TransactionList extends Component {
   }
 
   _getStateFromStores() {
-    return {
-      transactions: TransactionStore.getAll()
-    }
+    return { transactions: TransactionStore.getAll() }
   }
 
   _onChange() {

@@ -32,6 +32,19 @@ export function destroy(objName, id) {
   )
 }
 
+export function fetchClientToken(objName) {
+  return (
+    Promise.resolve(
+      $.ajax({
+        url: getUrl(objName, "new"),
+        dataType: "json",
+        type: "GET",
+        headers: getHeaders()
+      })
+    )
+  )
+}
+
 export function load(objName) {
   return (
     Promise.resolve(
@@ -56,19 +69,6 @@ export function update(objName, data) {
         processData: false,
         contentType: false,
         data: getFormData(objName, data)
-      })
-    )
-  )
-}
-
-export function fetchClientToken(objName) {
-  return (
-    Promise.resolve(
-      $.ajax({
-        url: getUrl(objName, "new"),
-        dataType: "json",
-        type: "GET",
-        headers: getHeaders()
       })
     )
   )

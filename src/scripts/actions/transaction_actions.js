@@ -4,7 +4,7 @@ import { dispatch } from "../dispatcher/dispatcher";
 
 const TRANSACTION = "transaction";
 
-export function add(data) {
+export function create(data) {
   dispatch({
     type: ActionTypes.TRANSACTION_CREATE_REQUEST,
     data: data
@@ -41,7 +41,7 @@ export function getClientToken() {
   });
 }
 
-export function list() {
+export function load() {
   dispatch({
     type: ActionTypes.TRANSACTION_LOAD_REQUEST
   });

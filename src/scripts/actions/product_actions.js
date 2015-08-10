@@ -4,7 +4,7 @@ import { dispatch } from "../dispatcher/dispatcher";
 
 const PRODUCT = "product";
 
-export function add(data) {
+export function create(data) {
   dispatch({
     type: ActionTypes.PRODUCT_CREATE_REQUEST
   });
@@ -23,26 +23,27 @@ export function add(data) {
   });
 }
 
-export function edit(data) {
+export function destroy(id) {
   dispatch({
-    type: ActionTypes.PRODUCT_UPDATE_REQUEST
+    type: ActionTypes.PRODUCT_DESTROY_REQUEST,
+    id: id
   });
-  Api.update(PRODUCT, data).then(() => {
+  Api.destroy(PRODUCT, id).then(() => {
     return Api.load(PRODUCT);
   }).then(response => {
     dispatch({
-      type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
+      type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
       data: response
     });
   }).catch(error => {
     dispatch({
-      type: ActionTypes.PRODUCT_UPDATE_ERROR,
+      type: ActionTypes.PRODUCT_DESTROY_ERROR,
       error: JSON.parse(error.responseText).errors
     });
   });
 }
 
-export function list() {
+export function load() {
   dispatch({
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
@@ -59,21 +60,20 @@ export function list() {
   });
 }
 
-export function remove(id) {
+export function update(data) {
   dispatch({
-    type: ActionTypes.PRODUCT_DESTROY_REQUEST,
-    id: id
+    type: ActionTypes.PRODUCT_UPDATE_REQUEST
   });
-  Api.destroy(PRODUCT, id).then(() => {
+  Api.update(PRODUCT, data).then(() => {
     return Api.load(PRODUCT);
   }).then(response => {
     dispatch({
-      type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
+      type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
       data: response
     });
   }).catch(error => {
     dispatch({
-      type: ActionTypes.PRODUCT_DESTROY_ERROR,
+      type: ActionTypes.PRODUCT_UPDATE_ERROR,
       error: JSON.parse(error.responseText).errors
     });
   });
