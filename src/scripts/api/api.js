@@ -1,64 +1,75 @@
 "use strict";
 import $ from "jquery";
 import { getFormData, getHeaders, getUrl } from "../utils/api_utils";
+import { Promise } from "es6-promise";
 
-export function create(obj, data) {
+export function create(objName, data) {
   return (
-    $.ajax({
-      url: getUrl(obj),
-      dataType: "json",
-      type: "POST",
-      headers: getHeaders(),
-      processData: false,
-      contentType: false,
-      data: getFormData(obj, data)
-    })
-  )
-}
-
-export function destroy(obj, id) {
-  return (
-    $.ajax({
-      url: getUrl(obj, id),
-      dataType: "json",
-      type: "DELETE",
-      headers: getHeaders()
-    })
-  )
-}
-
-export function load(obj) {
-  return (
+    Promise.resolve(
       $.ajax({
-      url: getUrl(obj),
-      dataType: "json",
-      type: "GET",
-      headers: getHeaders()
-    })
+        url: getUrl(objName),
+        dataType: "json",
+        type: "POST",
+        headers: getHeaders(),
+        processData: false,
+        contentType: false,
+        data: getFormData(objName, data)
+      })
+    )
   )
 }
 
-export function update(obj, data) {
+export function destroy(objName, id) {
   return (
-    $.ajax({
-      url: getUrl(obj, data.id),
-      dataType: "json",
-      type: "PATCH",
-      headers: getHeaders(),
-      processData: false,
-      contentType: false,
-      data: getFormData(obj, data)
-    })
+    Promise.resolve(
+      $.ajax({
+        url: getUrl(objName, id),
+        dataType: "json",
+        type: "DELETE",
+        headers: getHeaders()
+      })
+    )
   )
 }
 
-export function fetchClientToken(obj) {
+export function load(objName) {
   return (
-    $.ajax({
-      url: getUrl(obj, "new"),
-      dataType: "json",
-      type: "GET",
-      headers: getHeaders()
-    })
+    Promise.resolve(
+      $.ajax({
+        url: getUrl(objName),
+        dataType: "json",
+        type: "GET",
+        headers: getHeaders()
+      })
+    )
+  )
+}
+
+export function update(objName, data) {
+  return (
+    Promise.resolve(
+      $.ajax({
+        url: getUrl(objName, data.id),
+        dataType: "json",
+        type: "PATCH",
+        headers: getHeaders(),
+        processData: false,
+        contentType: false,
+        data: getFormData(objName, data)
+      })
+    )
+  )
+}
+
+export function fetchClientToken(objName) {
+  return (
+    Promise.resolve(
+      $.ajax({
+        url: getUrl(objName, "new"),
+        dataType: "json",
+        type: "GET",
+        headers: getHeaders()
+      })
+    )
   )
 }

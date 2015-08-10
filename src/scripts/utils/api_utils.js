@@ -1,10 +1,10 @@
 "use strict";
 import { API } from "../constants/api_routes";
 
-export function getFormData(obj, data) {
+export function getFormData(objName, data) {
   return function(data, formData = new FormData()) {
     Object.keys(data).forEach(key => {
-      formData.append(`${obj.toLowerCase()}[${key}]`, data[key]);
+      formData.append(`${objName.toLowerCase()}[${key}]`, data[key]);
     })
     return formData;
   }(data)
@@ -16,8 +16,8 @@ export function getHeaders() {
   })
 }
 
-export function getUrl(obj, params) {
-  return `${API}/${obj.toLowerCase()}s${getParams(params)}`;
+export function getUrl(objName, params) {
+  return `${API}/${objName.toLowerCase()}s${getParams(params)}`;
 }
 
 function getParams(params = "") {

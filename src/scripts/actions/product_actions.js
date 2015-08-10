@@ -1,17 +1,15 @@
 import ActionTypes from "../constants/action_types";
 import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
-import { Promise } from "es6-promise";
 
 const PRODUCT = "product";
 
 export function add(data) {
   dispatch({
-    type: ActionTypes.PRODUCT_CREATE_REQUEST,
-    data: data
+    type: ActionTypes.PRODUCT_CREATE_REQUEST
   });
-  Promise.resolve(Api.create(PRODUCT, data)).then(() => {
-    return Promise.resolve(Api.load(PRODUCT));
+  Api.create(PRODUCT, data).then(() => {
+    return Api.load(PRODUCT);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_CREATE_RESPONSE,
@@ -27,11 +25,10 @@ export function add(data) {
 
 export function edit(data) {
   dispatch({
-    type: ActionTypes.PRODUCT_UPDATE_REQUEST,
-    data: data
+    type: ActionTypes.PRODUCT_UPDATE_REQUEST
   });
-  Promise.resolve(Api.update(PRODUCT, data)).then(() => {
-    return Promise.resolve(Api.load(PRODUCT));
+  Api.update(PRODUCT, data).then(() => {
+    return Api.load(PRODUCT);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_UPDATE_RESPONSE,
@@ -49,7 +46,7 @@ export function list() {
   dispatch({
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
-  Promise.resolve(Api.load(PRODUCT)).then(response => {
+  Api.load(PRODUCT).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_LOAD_RESPONSE,
       data: response
@@ -67,8 +64,8 @@ export function remove(id) {
     type: ActionTypes.PRODUCT_DESTROY_REQUEST,
     id: id
   });
-  Promise.resolve(Api.destroy(PRODUCT, id)).then(() => {
-    return Promise.resolve(Api.load(PRODUCT));
+  Api.destroy(PRODUCT, id).then(() => {
+    return Api.load(PRODUCT);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
