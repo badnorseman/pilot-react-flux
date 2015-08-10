@@ -33,12 +33,16 @@ export default class ProductMain extends Component {
     ProductStore.addChangeListener(this._onChange)
   }
 
+  componentDidUpdate() {
+    componentHandler.upgradeDom()
+  }
+
   componentWillUnmount() {
     ProductStore.removeChangeListener(this._onChange)
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom()
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.errors.length === 0
   }
 
   _getBuyProduct(id) {
