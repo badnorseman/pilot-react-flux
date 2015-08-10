@@ -25,9 +25,7 @@ export default class Login extends Component {
   }
 
   _getStateFromStores() {
-    return {
-      errors: AuthStore.getErrors()
-    }
+    return { errors: AuthStore.getErrors() }
   }
 
   _handleCancel() {
@@ -50,9 +48,7 @@ export default class Login extends Component {
 
   _onChange() {
     this.setState(this._getStateFromStores())
-    if (AuthStore.isLoggedIn()) {
-      this.context.router.transitionTo("/products")
-    }
+    if (this.state.errors.length === 0) { this.context.router.transitionTo("/products") }
   }
 
   render() {

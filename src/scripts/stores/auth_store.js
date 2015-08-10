@@ -69,7 +69,7 @@ AuthStore.dispatchToken = register((action) => {
       AuthStore.emitChange()
       break
 
-    // User needs to login after signup.
+    // User must login after signup.
     case ActionTypes.LOGOUT_RESPONSE:
     case ActionTypes.SIGNUP_RESPONSE:
       AuthStore.deleteToken()

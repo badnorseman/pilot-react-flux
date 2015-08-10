@@ -28,9 +28,7 @@ export default class Signup extends Component {
   }
 
   _getStateFromStores() {
-    return {
-      errors: AuthStore.getErrors()
-    }
+    return { errors: AuthStore.getErrors() }
   }
 
   _handleCancel() {
@@ -50,12 +48,12 @@ export default class Signup extends Component {
         password: password,
         password_confirmation: passwordConfirmation
       })
-      this.context.router.transitionTo("/login")
     }
   }
 
   _onChange() {
     this.setState(this._getStateFromStores())
+    if (this.state.errors.length === 0) { this.context.router.transitionTo("/login") }
   }
 
   render() {
