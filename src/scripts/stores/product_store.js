@@ -4,6 +4,7 @@ import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import { register } from "../dispatcher/dispatcher";
 import { Schema, arrayOf, normalize } from "normalizr";
+import { toArray } from "../utils/store_utils";
 
 const CHANGE_EVENT = "change";
 const product = new Schema("products", { idAttribute: "id" });
@@ -53,8 +54,7 @@ ProductStore.dispatchToken = register(action => {
     case ActionTypes.PRODUCT_LOAD_RESPONSE:
     case ActionTypes.PRODUCT_UPDATE_RESPONSE:
       let normalized = normalize(action.data, arrayOf(product));
-      console.log(normalized);
-      products = action.data;
+      products = toArray(normalized.entities.products);
       ProductStore.emitChange();
       break
   }
