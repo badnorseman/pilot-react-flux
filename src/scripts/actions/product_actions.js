@@ -1,10 +1,8 @@
 import ActionTypes from "../constants/action_types";
 import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
-import { Schema, arrayOf, normalize } from "normalizr";
 
 const ENTITY_NAME = "product";
-const product = new Schema("products", { idAttribute: "id" });
 
 export function create(data) {
   dispatch({
@@ -50,11 +48,6 @@ export function load() {
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
   Api.load(ENTITY_NAME).then(response => {
-    console.log(response);
-    let normalized = normalize(response, {
-      products: arrayOf(product)
-    });
-    console.log(normalized);
     dispatch({
       type: ActionTypes.PRODUCT_LOAD_RESPONSE,
       data: response
