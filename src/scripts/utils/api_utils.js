@@ -3,9 +3,11 @@ import { API } from "../constants/api_routes";
 
 export function getFormData(entityName, data) {
   let formData = new FormData();
-  Object.keys(data).forEach(key => {
-    formData.append(`${entityName.toLowerCase()}[${key}]`, data[key]);
-  })
+  for (let key in data) {
+    if (data.hasOwnProperty(key)) {
+      formData.append(`${entityName.toLowerCase()}[${key}]`, data[key]);
+    }
+  }
   return formData;
 }
 
