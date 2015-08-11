@@ -54,27 +54,27 @@ AuthStore.dispatchToken = register((action) => {
     case ActionTypes.OAUTH_ERROR:
     case ActionTypes.SIGNUP_ERROR:
       errors = action.error;
-      AuthStore.emitChange()
+      AuthStore.emitChange();
       break
 
     case ActionTypes.LOGIN_RESPONSE:
     case ActionTypes.OAUTH_RESPONSE:
       if (action.data.token) {
-        AuthStore.setToken(action.data.token)
+        AuthStore.setToken(action.data.token);
         user = action.data;
       } else {
-        AuthStore.deleteToken()
+        AuthStore.deleteToken();
         user = {};
       }
-      AuthStore.emitChange()
+      AuthStore.emitChange();
       break
 
     // User must login after signup.
     case ActionTypes.LOGOUT_RESPONSE:
     case ActionTypes.SIGNUP_RESPONSE:
-      AuthStore.deleteToken()
+      AuthStore.deleteToken();
       user = {};
-      AuthStore.emitChange()
+      AuthStore.emitChange();
       break
   }
 })

@@ -48,18 +48,18 @@ TransactionStore.dispatchToken = register((action) => {
     case ActionTypes.TRANSACTION_LOAD_ERROR:
       clientToken = "";
       errors = action.error;
-      TransactionStore.emitChange()
+      TransactionStore.emitChange();
       break
 
     case ActionTypes.CLIENT_TOKEN_RESPONSE:
       clientToken = action.clientToken;
-      TransactionStore.emitChange()
+      TransactionStore.emitChange();
       break
 
     case ActionTypes.TRANSACTION_CREATE_RESPONSE:
     case ActionTypes.TRANSACTION_LOAD_RESPONSE:
       transactions = action.data;
-      TransactionStore.emitChange()
+      TransactionStore.emitChange();
       break
   }
 })
