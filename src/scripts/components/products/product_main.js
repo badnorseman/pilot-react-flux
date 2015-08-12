@@ -11,7 +11,8 @@ export default class ProductMain extends Component {
   constructor(context) {
     super(context);
     this.state = {
-      content: "",
+      contentSelector: "",
+      id: 0,
       errors: [],
       products: []
     };
@@ -41,10 +42,6 @@ export default class ProductMain extends Component {
     ProductStore.removeChangeListener(this._onChange)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.errors.length === 0
-  }
-
   _getBuyProduct(id) {
     let product = ProductStore.getById(id);
 
@@ -53,6 +50,22 @@ export default class ProductMain extends Component {
         product={product}
         onClose={this._handleClose}/>
     )
+  }
+
+  _getContent() {
+    switch (this.state.contentSelector) {
+      case "BUY":
+        return this._getBuyProduct(this.state.id)
+        break;
+      case "EDIT":
+        return this._getEditProduct(this.state.id)
+        break;
+      case "NEW":
+        return this._getNewProduct()
+        break;
+      default:
+        return this._getProductList()
+    }
   }
 
   _getEditProduct(id) {
@@ -77,11 +90,9 @@ export default class ProductMain extends Component {
   }
 
   _getProductList() {
-    let products = ProductStore.getAll();
-
     return (
       <ProductList
-        products={products}
+        products={this.state.products}
         onNew={this._handleNew}
         onSelect={this._handleSelect}/>
     )
@@ -89,8 +100,9 @@ export default class ProductMain extends Component {
 
   _getStateFromStores() {
     return {
-      content: this._getProductList(),
+      contentSelector: "",
       errors: ProductStore.getErrors(),
+      id: 0,
       products: ProductStore.getAll()
     }
   }
@@ -101,7 +113,10 @@ export default class ProductMain extends Component {
   }
 
   _handleBuy(id) {
-    this.setState({ content: this._getBuyProduct(id) })
+    this.setState({
+      contentSelector: "BUY",
+      id: id
+    })
   }
 
   _handleClose() {
@@ -114,7 +129,9 @@ export default class ProductMain extends Component {
   }
 
   _handleNew() {
-    this.setState({ content: this._getNewProduct() })
+    this.setState({
+      contentSelector: "NEW"
+    })
   }
 
   _handleRemove(id) {
@@ -123,7 +140,10 @@ export default class ProductMain extends Component {
   }
 
   _handleSelect(id) {
-    this.setState({ content: this._getEditProduct(id) })
+    this.setState({
+      contentSelector: "EDIT",
+      id: id
+    })
   }
 
   _onChange() {
@@ -131,9 +151,10 @@ export default class ProductMain extends Component {
   }
 
   render() {
+    let content = this._getContent();
     return (
       <div>
-        {this.state.content}
+        {content}
       </div>
     )
   }
