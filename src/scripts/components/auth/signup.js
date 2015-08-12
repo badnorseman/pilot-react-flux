@@ -11,6 +11,10 @@ import InputField from "../input_field";
 import Oauth from "./oauth";
 
 export default class Signup extends Component {
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(context) {
     super(context);
     this.state = { errors: [] };
@@ -105,8 +109,4 @@ export default class Signup extends Component {
       </div>
     )
   }
-}
-
-Signup.contextTypes = {
-  router: PropTypes.func.isRequired
 }

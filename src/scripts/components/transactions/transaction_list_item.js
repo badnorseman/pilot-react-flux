@@ -2,6 +2,10 @@
 import React, { Component, PropTypes } from "react";
 
 export default class TransactionListItem extends Component {
+  static propTypes = {
+    item: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
   }
@@ -21,8 +25,4 @@ export default class TransactionListItem extends Component {
       </div>
     )
   }
-}
-
-TransactionListItem.propTypes = {
-  item: PropTypes.object.isRequired,
 }

@@ -5,6 +5,10 @@ import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 
 export default class TransactionList extends Component {
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(context) {
     super(context);
     this.state = { transactions: {} };
@@ -25,11 +29,13 @@ export default class TransactionList extends Component {
 
   _getItems() {
     let items = [];
-    Object.keys(this.state.transactions).forEach(key => {
-      items.push(
-        <TransactionListItem key={key} item={this.state.transactions[key]}/>
-      );
-    })
+    for (let key in this.state.transactions) {
+      if (this.state.transactions.hasOwnProperty(key)) {
+        items.push(
+          <TransactionListItem key={key} item={this.state.transactions[key]}/>
+        );
+      }
+    }
     return items;
   }
 
@@ -59,8 +65,4 @@ export default class TransactionList extends Component {
       </div>
     )
   }
-}
-
-TransactionList.contextTypes = {
-  router: PropTypes.func.isRequired
 }

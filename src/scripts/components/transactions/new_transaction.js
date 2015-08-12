@@ -6,6 +6,11 @@ import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
 export default class NewTransaction extends Component {
+  static propTypes = {
+    product: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -104,9 +109,4 @@ export default class NewTransaction extends Component {
       </div>
     )
   }
-}
-
-NewTransaction.propTypes = {
-  product: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired
 }

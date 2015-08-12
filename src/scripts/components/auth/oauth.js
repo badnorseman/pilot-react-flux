@@ -4,6 +4,10 @@ import * as AuthActions from "../../actions/auth_actions";
 import Button from "../button";
 
 export default class Oauth extends Component {
+  static propTypes = {
+    provider: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleClick = this._handleClick.bind(this);
@@ -18,8 +22,4 @@ export default class Oauth extends Component {
       <Button name={this.props.provider} onClick={this._handleClick}/>
     )
   }
-}
-
-Oauth.propTypes = {
-  provider: PropTypes.string.isRequired
 }
