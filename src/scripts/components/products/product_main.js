@@ -14,7 +14,7 @@ export default class ProductMain extends Component {
       contentSelector: "",
       id: 0,
       errors: [],
-      products: []
+      products: {}
     };
     this._handleAdd = this._handleAdd.bind(this);
     this._handleBuy = this._handleBuy.bind(this);
@@ -42,9 +42,8 @@ export default class ProductMain extends Component {
     ProductStore.removeChangeListener(this._onChange)
   }
 
-  _getBuyProduct(id) {
-    let product = ProductStore.getById(id);
-
+  _getBuyProduct() {
+    let product = this.state.products[this.state.id];
     return (
       <BuyProduct
         product={product}
@@ -55,10 +54,10 @@ export default class ProductMain extends Component {
   _getContent() {
     switch (this.state.contentSelector) {
       case "BUY":
-        return this._getBuyProduct(this.state.id)
+        return this._getBuyProduct()
         break;
       case "EDIT":
-        return this._getEditProduct(this.state.id)
+        return this._getEditProduct()
         break;
       case "NEW":
         return this._getNewProduct()
@@ -68,9 +67,8 @@ export default class ProductMain extends Component {
     }
   }
 
-  _getEditProduct(id) {
-    let product = ProductStore.getById(id);
-
+  _getEditProduct() {
+    let product = this.state.products[this.state.id];
     return (
       <EditProduct
         product={product}
@@ -90,9 +88,10 @@ export default class ProductMain extends Component {
   }
 
   _getProductList() {
+    let products = this.state.products;
     return (
       <ProductList
-        products={this.state.products}
+        products={products}
         onNew={this._handleNew}
         onSelect={this._handleSelect}/>
     )
@@ -103,7 +102,7 @@ export default class ProductMain extends Component {
       contentSelector: "",
       errors: ProductStore.getErrors(),
       id: 0,
-      products: ProductStore.getAll()
+      products: ProductStore.getProducts()
     }
   }
 

@@ -1,6 +1,6 @@
 "use strict";
 
-export function toArray(obj) {
+export function convertObjtoArray(obj) {
   let array = [];
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {

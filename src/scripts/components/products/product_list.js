@@ -9,6 +9,16 @@ export default class ProductList extends Component {
     this._handleSelect = this._handleSelect.bind(this);
   }
 
+  _getItems() {
+    let items = [];
+    Object.keys(this.props.products).forEach(key => {
+      items.push(
+        <ProductListItem key={key} item={this.props.products[key]} onClick={this._handleSelect}/>
+      );
+    })
+    return items;
+  }
+
   _handleNew() {
     this.props.onNew()
   }
@@ -18,11 +28,7 @@ export default class ProductList extends Component {
   }
 
   render() {
-    let items = this.props.products.map((item, index) => {
-      return (
-        <ProductListItem key={index} item={item} onClick={this._handleSelect}/>
-      );
-    })
+    let items = this._getItems();
 
     return (
       <div>
@@ -40,7 +46,7 @@ export default class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  products: PropTypes.array.isRequired,
+  products: PropTypes.object.isRequired,
   onNew: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired
 }
