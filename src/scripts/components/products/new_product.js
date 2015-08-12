@@ -4,6 +4,17 @@ import ProductForm from "./product_form";
 import Button from "../button";
 
 export default class NewProduct extends Component {
+  static propTypes = {
+    currency: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    onAdd: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleAdd = this._handleAdd.bind(this);
@@ -34,15 +45,4 @@ export default class NewProduct extends Component {
       </div>
     )
   }
-}
-
-NewProduct.propTypes = {
-  currency: PropTypes.string,
-  description: PropTypes.string,
-  id: PropTypes.number,
-  image: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  onAdd: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
 }

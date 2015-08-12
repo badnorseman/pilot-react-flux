@@ -3,6 +3,12 @@ import React, { Component, PropTypes } from "react";
 import ProductListItem from "./product_list_item";
 
 export default class ProductList extends Component {
+  static propTypes = {
+    products: PropTypes.object.isRequired,
+    onNew: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleNew = this._handleNew.bind(this);
@@ -43,10 +49,4 @@ export default class ProductList extends Component {
       </div>
     )
   }
-}
-
-ProductList.propTypes = {
-  products: PropTypes.object.isRequired,
-  onNew: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired
 }
