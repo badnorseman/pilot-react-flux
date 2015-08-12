@@ -41,6 +41,14 @@ export default class Main extends Component {
    }
 
   render() {
+    const login = (
+      <Link className="mdl-navigation__link" to="/login">Log In</Link>
+    );
+    const logout = (
+      <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
+    );
+    const signup = <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>;
+
     return (
       <div>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--overlay-drawer-button">
@@ -51,12 +59,8 @@ export default class Main extends Component {
               </span>
               <div className="mdl-layout-spacer"></div>
               <nav className="mdl-navigation">
-                {this.state.isLoggedIn ? (
-                  <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
-                ) : (
-                  <Link className="mdl-navigation__link" to="/login">Log In</Link>
-                )}
-                {!this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>}
+                {this.state.isLoggedIn ? logout : login}
+                {!this.state.isLoggedIn && signup}
               </nav>
             </div>
           </header>
@@ -65,12 +69,8 @@ export default class Main extends Component {
             <nav className="mdl-navigation">
               <Link className="mdl-navigation__link" to="/products">Discover</Link>
               {this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/transactions">My Account</Link>}
-              {this.state.isLoggedIn ? (
-                <a className="mdl-navigation__link" onClick={this._handleLogout} href="#">Log Out</a>
-              ) : (
-                <Link className="mdl-navigation__link" to="/login">Log In</Link>
-              )}
-              {!this.state.isLoggedIn && <Link className="mdl-navigation__link" to="/signup">Sign Up</Link>}
+              {this.state.isLoggedIn ? logout : login}
+              {!this.state.isLoggedIn && signup}
             </nav>
           </div>
           <main className="mdl-layout__content">
