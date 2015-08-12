@@ -6,7 +6,7 @@ import { register } from "../dispatcher/dispatcher";
 import { Schema, arrayOf, normalize } from "normalizr";
 
 const CHANGE_EVENT = "change";
-const product = new Schema("products", { idAttribute: "id" });
+const productSchema = new Schema("products", { idAttribute: "id" });
 let errors = [];
 let products = {};
 
@@ -23,12 +23,12 @@ let ProductStore = assign({}, EventEmitter.prototype, {
     this.removeListener("CHANGE_EVENT", callback)
   },
 
-  getErrors() {
-    return errors
+  getAll() {
+    return products
   },
 
-  getProducts() {
-    return products
+  getErrors() {
+    return errors
   }
 })
 
@@ -46,7 +46,7 @@ ProductStore.dispatchToken = register(action => {
     case ActionTypes.PRODUCT_DESTROY_RESPONSE:
     case ActionTypes.PRODUCT_LOAD_RESPONSE:
     case ActionTypes.PRODUCT_UPDATE_RESPONSE:
-      let normalized = normalize(action.data, arrayOf(product));
+      let normalized = normalize(action.data, arrayOf(productSchema));
       products = normalized.entities.products
       ProductStore.emitChange();
       break

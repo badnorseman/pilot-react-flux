@@ -102,7 +102,7 @@ export default class ProductMain extends Component {
       contentSelector: "",
       errors: ProductStore.getErrors(),
       id: 0,
-      products: ProductStore.getProducts()
+      products: ProductStore.getAll()
     }
   }
 

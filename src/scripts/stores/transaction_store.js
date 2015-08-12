@@ -3,11 +3,13 @@ import ActionTypes from "../constants/action_types";
 import assign from "react/lib/Object.assign";
 import EventEmitter from "events";
 import { register } from "../dispatcher/dispatcher";
+import { Schema, arrayOf, normalize } from "normalizr";
 
 const CHANGE_EVENT = "change";
+const transactionSchema = new Schema("transactions", { idAttribute: "id" });
 let clientToken = "";
 let errors = [];
-let transactions = [];
+let transactions = {};
 
 let TransactionStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
@@ -24,12 +26,6 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
 
   getAll() {
     return transactions
-  },
-
-  getById(id) {
-    for (let k in transactions) {
-      if (transactions[k].id == id) return transactions[k]
-    }
   },
 
   getClientToken() {
@@ -58,7 +54,8 @@ TransactionStore.dispatchToken = register((action) => {
 
     case ActionTypes.TRANSACTION_CREATE_RESPONSE:
     case ActionTypes.TRANSACTION_LOAD_RESPONSE:
-      transactions = action.data;
+      let normalized = normalize(action.data, arrayOf(transactionSchema));
+      transactions = normalized.entities.transactions
       TransactionStore.emitChange();
       break
   }

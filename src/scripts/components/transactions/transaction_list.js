@@ -7,7 +7,7 @@ import TransactionListItem from "./transaction_list_item";
 export default class TransactionList extends Component {
   constructor(context) {
     super(context);
-    this.state = { transactions: [] };
+    this.state = { transactions: {} };
     this._onChange = this._onChange.bind(this);
   }
 
@@ -23,6 +23,16 @@ export default class TransactionList extends Component {
     TransactionStore.removeChangeListener(this._onChange)
   }
 
+  _getItems() {
+    let items = [];
+    Object.keys(this.state.transactions).forEach(key => {
+      items.push(
+        <TransactionListItem key={key} item={this.state.transactions[key]}/>
+      );
+    })
+    return items;
+  }
+
   _getStateFromStores() {
     return { transactions: TransactionStore.getAll() }
   }
@@ -32,11 +42,7 @@ export default class TransactionList extends Component {
   }
 
   render() {
-    let items = this.state.transactions.map((item, index) => {
-      return (
-        <TransactionListItem key={index} item={item}/>
-      );
-    })
+    let items = this._getItems();
 
     return (
       <div className="mdl-grid">
