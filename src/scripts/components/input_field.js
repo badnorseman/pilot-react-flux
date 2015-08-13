@@ -4,6 +4,11 @@
 import React, { Component, PropTypes } from "react";
 
 export default class InputFile extends Component {
+  static propTypes = {
+    fieldName: PropTypes.string.isRequired,
+    fieldType: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = { fieldValue: this.props.fieldValue };
@@ -41,9 +46,4 @@ export default class InputFile extends Component {
       </div>
     )
   }
-}
-
-InputFile.propTypes = {
-  fieldName: PropTypes.string.isRequired,
-  fieldType: PropTypes.string.isRequired
 }

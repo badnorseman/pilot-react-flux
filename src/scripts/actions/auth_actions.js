@@ -1,75 +1,71 @@
 import ActionTypes from "../constants/action_types";
-import * as AuthApiUtils from "../utils/auth_api_utils";
-import Dispatcher from "../dispatcher/dispatcher";
-import { Promise } from "es6-promise";
+import * as AuthApi from "../api/auth_api";
+import { dispatch } from "../dispatcher/dispatcher";
 
 export function login(data) {
-  Dispatcher.dispatch({
-    type: ActionTypes.LOGIN_REQUEST,
-    data: data
+  dispatch({
+    type: ActionTypes.LOGIN_REQUEST
   });
-  Promise.resolve(AuthApiUtils.login(data)).then(response => {
-    Dispatcher.dispatch({
+  AuthApi.login(data).then(response => {
+    dispatch({
       type: ActionTypes.LOGIN_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.LOGIN_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
 
 export function logout() {
-  Dispatcher.dispatch({
+  dispatch({
     type: ActionTypes.LOGOUT_REQUEST,
   });
-  Promise.resolve(AuthApiUtils.logout()).then(response => {
-    Dispatcher.dispatch({
+  AuthApi.logout().then(response => {
+    dispatch({
       type: ActionTypes.LOGOUT_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.LOGOUT_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
 
 export function oauth(provider) {
-  Dispatcher.dispatch({
-    type: ActionTypes.OAUTH_REQUEST,
-    provider: provider
+  dispatch({
+    type: ActionTypes.OAUTH_REQUEST
   });
-  Promise.resolve(AuthApiUtils.oauth(provider)).then(response => {
-    Dispatcher.dispatch({
+  AuthApi.oauth(provider).then(response => {
+    dispatch({
       type: ActionTypes.OAUTH_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.OAUTH_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
 
 export function signup(data) {
-  Dispatcher.dispatch({
-    type: ActionTypes.SIGNUP_REQUEST,
-    data: data
+  dispatch({
+    type: ActionTypes.SIGNUP_REQUEST
   });
-  Promise.resolve(AuthApiUtils.signup(data)).then(response => {
-    Dispatcher.dispatch({
+  AuthApi.signup(data).then(response => {
+    dispatch({
       type: ActionTypes.SIGNUP_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.SIGNUP_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }

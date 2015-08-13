@@ -1,13 +1,15 @@
 "use strict";
 import ActionTypes from "../constants/action_types";
 import assign from "react/lib/Object.assign";
-import Dispatcher from "../dispatcher/dispatcher";
 import EventEmitter from "events";
+import { register } from "../dispatcher/dispatcher";
+import { Schema, arrayOf, normalize } from "normalizr";
 
 const CHANGE_EVENT = "change";
+const transactionSchema = new Schema("transactions", { idAttribute: "id" });
 let clientToken = "";
 let errors = [];
-let transactions = [];
+let transactions = {};
 
 let TransactionStore = assign({}, EventEmitter.prototype, {
   addChangeListener(callback) {
@@ -26,12 +28,6 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
     return transactions
   },
 
-  getById(id) {
-    for (let k in transactions) {
-      if (transactions[k].id == id) return transactions[k]
-    }
-  },
-
   getClientToken() {
     return clientToken
   },
@@ -41,25 +37,26 @@ let TransactionStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-TransactionStore.dispatchToken = Dispatcher.register((action) => {
+TransactionStore.dispatchToken = register((action) => {
   switch(action.type) {
     case ActionTypes.CLIENT_TOKEN_ERROR:
     case ActionTypes.TRANSACTION_CREATE_ERROR:
     case ActionTypes.TRANSACTION_LOAD_ERROR:
       clientToken = "";
-      errors = action.errors;
-      TransactionStore.emitChange()
+      errors = action.error;
+      TransactionStore.emitChange();
       break
 
     case ActionTypes.CLIENT_TOKEN_RESPONSE:
       clientToken = action.clientToken;
-      TransactionStore.emitChange()
+      TransactionStore.emitChange();
       break
 
     case ActionTypes.TRANSACTION_CREATE_RESPONSE:
     case ActionTypes.TRANSACTION_LOAD_RESPONSE:
-      transactions = action.data;
-      TransactionStore.emitChange()
+      let normalized = normalize(action.data, arrayOf(transactionSchema));
+      transactions = normalized.entities.transactions
+      TransactionStore.emitChange();
       break
   }
 })

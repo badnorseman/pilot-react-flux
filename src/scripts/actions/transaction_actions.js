@@ -1,60 +1,59 @@
 import ActionTypes from "../constants/action_types";
-import * as ApiUtils from "../utils/api_utils";
-import Dispatcher from "../dispatcher/dispatcher";
-import { Promise } from "es6-promise";
+import * as Api from "../api/api";
+import { dispatch } from "../dispatcher/dispatcher";
 
-const TRANSACTION = "transaction";
+const ENTITY_NAME = "transaction";
 
-export function add(data) {
-  Dispatcher.dispatch({
+export function create(data) {
+  dispatch({
     type: ActionTypes.TRANSACTION_CREATE_REQUEST,
     data: data
   });
-  Promise.resolve(ApiUtils.create(TRANSACTION, data)).then(() => {
-    return Promise.resolve(ApiUtils.load(TRANSACTION));
+  Api.create(ENTITY_NAME, data).then(() => {
+    return Api.load(ENTITY_NAME);
   }).then(response => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.TRANSACTION_CREATE_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.TRANSACTION_CREATE_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
 
 export function getClientToken() {
-  Dispatcher.dispatch({
+  dispatch({
     type: ActionTypes.CLIENT_TOKEN_REQUEST,
   });
-  Promise.resolve(ApiUtils.fetchClientToken(TRANSACTION)).then(response => {
-    Dispatcher.dispatch({
+  Api.fetchClientToken(ENTITY_NAME).then(response => {
+    dispatch({
       type: ActionTypes.CLIENT_TOKEN_RESPONSE,
       clientToken: response.client_token
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.CLIENT_TOKEN_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }
 
-export function list() {
-  Dispatcher.dispatch({
+export function load() {
+  dispatch({
     type: ActionTypes.TRANSACTION_LOAD_REQUEST
   });
-  Promise.resolve(ApiUtils.load(TRANSACTION)).then(response => {
-    Dispatcher.dispatch({
+  Api.load(ENTITY_NAME).then(response => {
+    dispatch({
       type: ActionTypes.TRANSACTION_LOAD_RESPONSE,
       data: response
     });
   }).catch(error => {
-    Dispatcher.dispatch({
+    dispatch({
       type: ActionTypes.TRANSACTION_LOAD_ERROR,
-      errors: JSON.parse(error.responseText).errors
+      error: JSON.parse(error.responseText).errors
     });
   });
 }

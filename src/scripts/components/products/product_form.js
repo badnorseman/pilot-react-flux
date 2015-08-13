@@ -5,6 +5,21 @@ import InputField from "../input_field";
 import InputFile from "../input_file";
 
 export default class ProductForm extends Component {
+  static propTypes = {
+    currency: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    currency: "DKK"
+  }
+
   constructor(props) {
     super(props);
     this._handleClose = this._handleClose.bind(this);
@@ -110,19 +125,4 @@ export default class ProductForm extends Component {
       </div>
     )
   }
-}
-
-ProductForm.propTypes = {
-  currency: PropTypes.string,
-  description: PropTypes.string,
-  id: PropTypes.number,
-  image: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  onClose: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
-}
-
-ProductForm.defaultProps = {
-  currency: "DKK"
 }

@@ -2,6 +2,11 @@
 import React, { Component, PropTypes } from "react";
 
 export default class Button extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleClick = this._handleClick.bind(this);
@@ -20,9 +25,4 @@ export default class Button extends Component {
       </button>
     )
   }
-}
-
-Button.propTypes = {
-  name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
 }

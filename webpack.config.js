@@ -21,9 +21,9 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: path.join(__dirname, "/src/scripts"),
-      loader: "babel"
+      loader: "babel?stage=0"
     }, {
       test: /\.css$/,
       loader: "style-loader!css-loader"

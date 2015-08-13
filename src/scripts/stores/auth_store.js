@@ -1,8 +1,8 @@
 "use strict";
 import ActionTypes from "../constants/action_types";
 import assign from "react/lib/Object.assign";
-import Dispatcher from "../dispatcher/dispatcher";
 import EventEmitter from "events";
+import { register } from "../dispatcher/dispatcher";
 
 const AUTH_TOKEN = "token";
 const CHANGE_EVENT = "change";
@@ -47,34 +47,34 @@ let AuthStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-AuthStore.dispatchToken = Dispatcher.register((action) => {
+AuthStore.dispatchToken = register((action) => {
   switch(action.type) {
     case ActionTypes.LOGIN_ERROR:
     case ActionTypes.LOGOUT_ERROR:
     case ActionTypes.OAUTH_ERROR:
     case ActionTypes.SIGNUP_ERROR:
-      errors = action.errors;
-      AuthStore.emitChange()
+      errors = action.error;
+      AuthStore.emitChange();
       break
 
     case ActionTypes.LOGIN_RESPONSE:
     case ActionTypes.OAUTH_RESPONSE:
       if (action.data.token) {
-        AuthStore.setToken(action.data.token)
+        AuthStore.setToken(action.data.token);
         user = action.data;
       } else {
-        AuthStore.deleteToken()
+        AuthStore.deleteToken();
         user = {};
       }
-      AuthStore.emitChange()
+      AuthStore.emitChange();
       break
 
-    // User needs to login after signup.
+    // User must login after signup.
     case ActionTypes.LOGOUT_RESPONSE:
     case ActionTypes.SIGNUP_RESPONSE:
-      AuthStore.deleteToken()
+      AuthStore.deleteToken();
       user = {};
-      AuthStore.emitChange()
+      AuthStore.emitChange();
       break
   }
 })

@@ -1,11 +1,16 @@
 "use strict";
 import React, { Component, PropTypes } from "react";
 import Braintree from "braintree-web";
-import { add, getClientToken } from "../../actions/transaction_actions";
+import { create, getClientToken } from "../../actions/transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import Button from "../button";
 
 export default class NewTransaction extends Component {
+  static propTypes = {
+    product: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +57,7 @@ export default class NewTransaction extends Component {
   }
 
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
   }
 
   _onChange() {
@@ -66,7 +71,7 @@ export default class NewTransaction extends Component {
     let paymentMethodNonce = paymentMethod.nonce;
 
     if (amount && currency && id && paymentMethodNonce) {
-      add({
+      create({
         amount: amount,
         currency: currency,
         product_id: id,
@@ -104,9 +109,4 @@ export default class NewTransaction extends Component {
       </div>
     )
   }
-}
-
-NewTransaction.propTypes = {
-  product: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired
 }

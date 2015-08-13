@@ -11,6 +11,10 @@ import InputField from "../input_field";
 import Oauth from "./oauth";
 
 export default class Signup extends Component {
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(context) {
     super(context);
     this.state = { errors: [] };
@@ -28,9 +32,7 @@ export default class Signup extends Component {
   }
 
   _getStateFromStores() {
-    return {
-      errors: AuthStore.getErrors()
-    }
+    return { errors: AuthStore.getErrors() }
   }
 
   _handleCancel() {
@@ -50,12 +52,12 @@ export default class Signup extends Component {
         password: password,
         password_confirmation: passwordConfirmation
       })
-      this.context.router.transitionTo("/login")
     }
   }
 
   _onChange() {
     this.setState(this._getStateFromStores())
+    if (this.state.errors.length === 0) { this.context.router.transitionTo("/login") }
   }
 
   render() {
@@ -107,8 +109,4 @@ export default class Signup extends Component {
       </div>
     )
   }
-}
-
-Signup.contextTypes = {
-  router: PropTypes.func.isRequired
 }

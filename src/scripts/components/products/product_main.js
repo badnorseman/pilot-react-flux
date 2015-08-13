@@ -10,7 +10,12 @@ import NewProduct from "./new_product";
 export default class ProductMain extends Component {
   constructor(context) {
     super(context);
-    this.state = { content: "" };
+    this.state = {
+      contentSelector: "",
+      id: 0,
+      errors: [],
+      products: {}
+    };
     this._handleAdd = this._handleAdd.bind(this);
     this._handleBuy = this._handleBuy.bind(this);
     this._handleClose = this._handleClose.bind(this);
@@ -22,23 +27,23 @@ export default class ProductMain extends Component {
   }
 
   componentWillMount() {
-    ProductActions.list()
+    ProductActions.load()
   }
 
   componentDidMount() {
     ProductStore.addChangeListener(this._onChange)
   }
 
-  componentWillUnmount() {
-    ProductStore.removeChangeListener(this._onChange)
-  }
-
   componentDidUpdate() {
     componentHandler.upgradeDom()
   }
 
-  _getBuyProduct(id) {
-    let product = ProductStore.getById(id);
+  componentWillUnmount() {
+    ProductStore.removeChangeListener(this._onChange)
+  }
+
+  _getBuyProduct() {
+    let product = this.state.products[this.state.id];
     return (
       <BuyProduct
         product={product}
@@ -47,13 +52,23 @@ export default class ProductMain extends Component {
   }
 
   _getContent() {
-    return {
-      content: this._getProductList()
+    switch (this.state.contentSelector) {
+      case "BUY":
+        return this._getBuyProduct()
+        break;
+      case "EDIT":
+        return this._getEditProduct()
+        break;
+      case "NEW":
+        return this._getNewProduct()
+        break;
+      default:
+        return this._getProductList()
     }
   }
 
-  _getEditProduct(id) {
-    let product = ProductStore.getById(id);
+  _getEditProduct() {
+    let product = this.state.products[this.state.id];
     return (
       <EditProduct
         product={product}
@@ -73,7 +88,7 @@ export default class ProductMain extends Component {
   }
 
   _getProductList() {
-    let products = ProductStore.getAll();
+    let products = this.state.products;
     return (
       <ProductList
         products={products}
@@ -82,45 +97,63 @@ export default class ProductMain extends Component {
     )
   }
 
+  _getStateFromStores() {
+    return {
+      contentSelector: "",
+      errors: ProductStore.getErrors(),
+      id: 0,
+      products: ProductStore.getAll()
+    }
+  }
+
   _handleAdd(product) {
-    ProductActions.add(product)
-    this.setState(this._getContent())
+    ProductActions.create(product)
+    this.setState(this._getStateFromStores())
   }
 
   _handleBuy(id) {
-    this.setState({ content: this._getBuyProduct(id) })
+    this.setState({
+      contentSelector: "BUY",
+      id: id
+    })
   }
 
   _handleClose() {
-    this.setState(this._getContent())
+    this.setState(this._getStateFromStores())
   }
 
   _handleEdit(product) {
-    ProductActions.edit(product)
-    this.setState(this._getContent())
+    ProductActions.update(product)
+    this.setState(this._getStateFromStores())
   }
 
   _handleNew() {
-    this.setState({ content: this._getNewProduct() })
+    this.setState({
+      contentSelector: "NEW"
+    })
   }
 
   _handleRemove(id) {
-    ProductActions.remove(id)
-    this.setState(this._getContent())
+    ProductActions.destroy(id)
+    this.setState(this._getStateFromStores())
   }
 
   _handleSelect(id) {
-    this.setState({ content: this._getEditProduct(id) })
+    this.setState({
+      contentSelector: "EDIT",
+      id: id
+    })
   }
 
   _onChange() {
-    this.setState(this._getContent())
+    this.setState(this._getStateFromStores())
   }
 
   render() {
+    let content = this._getContent();
     return (
       <div>
-        {this.state.content}
+        {content}
       </div>
     )
   }

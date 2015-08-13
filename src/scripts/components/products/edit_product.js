@@ -4,6 +4,14 @@ import ProductForm from "./product_form";
 import Button from "../button";
 
 export default class EditProduct extends Component {
+  static propTypes = {
+    product: PropTypes.object.isRequired,
+    onBuy: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this._handleBuy = this._handleBuy.bind(this);
@@ -49,12 +57,4 @@ export default class EditProduct extends Component {
       </div>
     )
   }
-}
-
-EditProduct.propTypes = {
-  product: PropTypes.object.isRequired,
-  onBuy: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
 }
