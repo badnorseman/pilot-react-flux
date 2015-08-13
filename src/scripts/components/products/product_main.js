@@ -123,18 +123,24 @@ export default class ProductMain extends Component {
     )
   }
 
-  _getStateFromStores() {
+  _initializeViewState() {
     return {
       contentSelector: "",
+      id: 0
+    }
+  }
+
+  _getStateFromStores() {
+    return {
       errors: ProductStore.getErrors(),
-      id: 0,
       products: ProductStore.getAll()
     }
   }
 
   _handleAdd(product) {
     ProductActions.create(product)
-    this.setState(this._getStateFromStores())
+    // this.setState(this._getStateFromStores())
+    this.setState(this._initializeViewState())
   }
 
   _handleBuy(id) {
@@ -145,13 +151,14 @@ export default class ProductMain extends Component {
   }
 
   _handleClose() {
-    this.setState(this._getStateFromStores())
+    // this.setState(this._getStateFromStores())
+    this.setState(this._initializeViewState())
   }
 
   _handleEdit(product) {
     ProductActions.update(product)
-    this.setState(this._getStateFromStores())
-    console.log("_handleEdit", product, this.state)
+    // this.setState(this._getStateFromStores())
+    this.setState(this._initializeViewState())
   }
 
   _handleNew() {
@@ -162,7 +169,8 @@ export default class ProductMain extends Component {
 
   _handleRemove(id) {
     ProductActions.destroy(id)
-    this.setState(this._getStateFromStores())
+    // this.setState(this._getStateFromStores())
+    this.setState(this._initializeViewState())
   }
 
   _handleSelect(id) {
@@ -170,12 +178,10 @@ export default class ProductMain extends Component {
       contentSelector: "EDIT",
       id: id
     })
-    console.log("_handleSelect", this.state)
   }
 
   _onChange() {
     this.setState(this._getStateFromStores())
-    console.log("_onChange", this.state)
   }
 
   render() {
