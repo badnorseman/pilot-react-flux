@@ -2,9 +2,6 @@
 // Change is to find best solution to control change of content
 // when component updates successfully or with errors.
 // Perehaps a boolean is required on Store e.g. isRequestSuccessfull.
-// I would like to differetiate between viewState and storeState.
-// viewState is contentSelector and id (for seleted item).
-// storeState is errors array and items array e.g. products.
 // ToDo:
 // I need to pass errors to children in order to display the errors as props.
 
@@ -123,13 +120,6 @@ export default class ProductMain extends Component {
     )
   }
 
-  _initializeViewState() {
-    return {
-      contentSelector: "",
-      id: 0
-    }
-  }
-
   _getStateFromStores() {
     return {
       errors: ProductStore.getErrors(),
@@ -139,8 +129,7 @@ export default class ProductMain extends Component {
 
   _handleAdd(product) {
     ProductActions.create(product)
-    // this.setState(this._getStateFromStores())
-    this.setState(this._initializeViewState())
+    this.setState(this._initializeView())
   }
 
   _handleBuy(id) {
@@ -151,14 +140,12 @@ export default class ProductMain extends Component {
   }
 
   _handleClose() {
-    // this.setState(this._getStateFromStores())
-    this.setState(this._initializeViewState())
+    this.setState(this._initializeView())
   }
 
   _handleEdit(product) {
     ProductActions.update(product)
-    // this.setState(this._getStateFromStores())
-    this.setState(this._initializeViewState())
+    this.setState(this._initializeView())
   }
 
   _handleNew() {
@@ -169,8 +156,7 @@ export default class ProductMain extends Component {
 
   _handleRemove(id) {
     ProductActions.destroy(id)
-    // this.setState(this._getStateFromStores())
-    this.setState(this._initializeViewState())
+    this.setState(this._initializeView())
   }
 
   _handleSelect(id) {
@@ -178,6 +164,13 @@ export default class ProductMain extends Component {
       contentSelector: "EDIT",
       id: id
     })
+  }
+
+  _initializeView() {
+    return {
+      contentSelector: "",
+      id: 0
+    }
   }
 
   _onChange() {
