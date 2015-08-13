@@ -1,3 +1,13 @@
+// Added component life-cycle event to better understand dataflow.
+// Change is to find best solution to control change of content
+// when component updates successfully or with errors.
+// Perehaps a boolean is required on Store e.g. isRequestSuccessfull.
+// I would like to differetiate between viewState and storeState.
+// viewState is contentSelector and id (for seleted item).
+// storeState is errors array and items array e.g. products.
+// ToDo:
+// I need to pass errors to children in order to display the errors as props.
+
 "use strict";
 import React, { Component, PropTypes } from "react";
 import * as ProductActions from "../../actions/product_actions";
@@ -6,6 +16,8 @@ import ProductList from "./product_list";
 import BuyProduct from "../transactions/new_transaction";
 import EditProduct from "./edit_product";
 import NewProduct from "./new_product";
+
+let prevContent;
 
 export default class ProductMain extends Component {
   constructor(context) {
@@ -34,12 +46,26 @@ export default class ProductMain extends Component {
     ProductStore.addChangeListener(this._onChange)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, nextProps) {
+    console.log("componentDidUpdate", this.state, nextProps)
     componentHandler.upgradeDom()
   }
 
   componentWillUnmount() {
     ProductStore.removeChangeListener(this._onChange)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps", this.state, nextProps)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("shouldComponentUpdate", this.state, nextState)
+    return nextState.errors.length === 0;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("componentWillUpdate", this.state, nextState)
   }
 
   _getBuyProduct() {
@@ -125,6 +151,7 @@ export default class ProductMain extends Component {
   _handleEdit(product) {
     ProductActions.update(product)
     this.setState(this._getStateFromStores())
+    console.log("_handleEdit", product, this.state)
   }
 
   _handleNew() {
@@ -143,14 +170,17 @@ export default class ProductMain extends Component {
       contentSelector: "EDIT",
       id: id
     })
+    console.log("_handleSelect", this.state)
   }
 
   _onChange() {
     this.setState(this._getStateFromStores())
+    console.log("_onChange", this.state)
   }
 
   render() {
     let content = this._getContent();
+    console.log("render", content, this.state)
     return (
       <div>
         {content}
