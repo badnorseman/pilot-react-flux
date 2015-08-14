@@ -1,9 +1,6 @@
-// Added component life-cycle event to better understand dataflow.
-// Change is to find best solution to control change of content
-// when component updates successfully or with errors.
-// Perehaps a boolean is required on Store e.g. isRequestSuccessfull.
 // ToDo:
 // I need to pass errors to children in order to display the errors as props.
+// Develop element to display errors.
 
 "use strict";
 import React, { Component, PropTypes } from "react";
@@ -45,26 +42,12 @@ export default class ProductMain extends Component {
     ProductStore.addChangeListener(this._onChange)
   }
 
-  componentDidUpdate(prevProps, nextProps) {
-    console.log("componentDidUpdate", this.state, nextProps)
+  componentDidUpdate() {
     componentHandler.upgradeDom()
   }
 
   componentWillUnmount() {
     ProductStore.removeChangeListener(this._onChange)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps", this.state, nextProps)
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("shouldComponentUpdate", this.state, nextState)
-    return nextState.errors.length === 0;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log("componentWillUpdate", this.state, nextState)
   }
 
   _getBuyProduct() {
@@ -74,22 +57,6 @@ export default class ProductMain extends Component {
         product={product}
         onClose={this._handleClose}/>
     );
-  }
-
-  _getContent() {
-    switch (this.state.contentSelector) {
-      case "BUY":
-        return this._getBuyProduct();
-        break;
-      case "EDIT":
-        return this._getEditProduct();
-        break;
-      case "NEW":
-        return this._getNewProduct();
-        break;
-      default:
-        return this._getProductList();
-    }
   }
 
   _getEditProduct() {
@@ -107,8 +74,10 @@ export default class ProductMain extends Component {
   }
 
   _getNewProduct() {
+    let errors = this.state.errors;
     return (
       <NewProduct
+        errors={errors}
         onAdd={this._handleAdd}
         onClose={this._handleClose}/>
     );
@@ -178,14 +147,17 @@ export default class ProductMain extends Component {
   }
 
   _onChange() {
-    console.log("_onChange 1", this.state)
     this.setState(this._getStateFromStores())
-    console.log("_onChange 2", this.state)
   }
 
   render() {
-    let content = this._getContent();
-    console.log("render", content, this.state)
+    let content;
+    switch (this.state.contentSelector) {
+      case "BUY": content = this._getBuyProduct(); break;
+      case "EDIT": content = this._getEditProduct(); break;
+      case "NEW": content = this._getNewProduct(); break;
+      default: content = this._getProductList();
+    }
     return (
       <div>
         {content}
