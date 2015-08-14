@@ -40,6 +40,7 @@ export default class EditProduct extends Component {
     return (
       <div className="mdl-grid text-center">
         <div className="mdl-cell mdl-cell--12-col">
+          <div>{this.props.errors}</div>
           <ProductForm
             currency={this.props.product.currency}
             description={this.props.product.description}

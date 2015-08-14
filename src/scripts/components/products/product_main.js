@@ -14,9 +14,11 @@ import BuyProduct from "../transactions/new_transaction";
 import EditProduct from "./edit_product";
 import NewProduct from "./new_product";
 
-let prevContent;
-
 export default class ProductMain extends Component {
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(context) {
     super(context);
     this.state = {
@@ -71,35 +73,37 @@ export default class ProductMain extends Component {
       <BuyProduct
         product={product}
         onClose={this._handleClose}/>
-    )
+    );
   }
 
   _getContent() {
     switch (this.state.contentSelector) {
       case "BUY":
-        return this._getBuyProduct()
+        return this._getBuyProduct();
         break;
       case "EDIT":
-        return this._getEditProduct()
+        return this._getEditProduct();
         break;
       case "NEW":
-        return this._getNewProduct()
+        return this._getNewProduct();
         break;
       default:
-        return this._getProductList()
+        return this._getProductList();
     }
   }
 
   _getEditProduct() {
+    let errors = this.state.errors;
     let product = this.state.products[this.state.id];
     return (
       <EditProduct
+        errors={errors}
         product={product}
         onBuy={this._handleBuy}
         onClose={this._handleClose}
         onEdit={this._handleEdit}
         onRemove={this._handleRemove}/>
-    )
+    );
   }
 
   _getNewProduct() {
@@ -107,7 +111,7 @@ export default class ProductMain extends Component {
       <NewProduct
         onAdd={this._handleAdd}
         onClose={this._handleClose}/>
-    )
+    );
   }
 
   _getProductList() {
@@ -117,7 +121,7 @@ export default class ProductMain extends Component {
         products={products}
         onNew={this._handleNew}
         onSelect={this._handleSelect}/>
-    )
+    );
   }
 
   _getStateFromStores() {
@@ -174,7 +178,9 @@ export default class ProductMain extends Component {
   }
 
   _onChange() {
+    console.log("_onChange 1", this.state)
     this.setState(this._getStateFromStores())
+    console.log("_onChange 2", this.state)
   }
 
   render() {
@@ -184,10 +190,6 @@ export default class ProductMain extends Component {
       <div>
         {content}
       </div>
-    )
+    );
   }
-}
-
-ProductMain.contextTypes = {
-  router: PropTypes.func.isRequired
 }
