@@ -2,19 +2,17 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
-  devtool: "eval-source-map",
+  devtool: "source-map",
   entry: [
-    "webpack/hot/dev-server",
     "./src/scripts/app.js"
   ],
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "/dist"),
     publicPath: "/",
     filename: "bundle.js"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.optimize.OccurenceOrderPlugin()
   ],
   resolve: {
     extensions: ["", ".js"]

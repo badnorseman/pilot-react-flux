@@ -1,3 +1,7 @@
+// ToDo:
+// I need to pass errors to children in order to display the errors as props.
+// Develop element to display errors.
+
 "use strict";
 import React, { Component, PropTypes } from "react";
 import * as ProductActions from "../../actions/product_actions";
@@ -8,6 +12,10 @@ import EditProduct from "./edit_product";
 import NewProduct from "./new_product";
 
 export default class ProductMain extends Component {
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(context) {
     super(context);
     this.state = {
@@ -48,43 +56,31 @@ export default class ProductMain extends Component {
       <BuyProduct
         product={product}
         onClose={this._handleClose}/>
-    )
-  }
-
-  _getContent() {
-    switch (this.state.contentSelector) {
-      case "BUY":
-        return this._getBuyProduct()
-        break;
-      case "EDIT":
-        return this._getEditProduct()
-        break;
-      case "NEW":
-        return this._getNewProduct()
-        break;
-      default:
-        return this._getProductList()
-    }
+    );
   }
 
   _getEditProduct() {
+    let errors = this.state.errors;
     let product = this.state.products[this.state.id];
     return (
       <EditProduct
+        errors={errors}
         product={product}
         onBuy={this._handleBuy}
         onClose={this._handleClose}
         onEdit={this._handleEdit}
         onRemove={this._handleRemove}/>
-    )
+    );
   }
 
   _getNewProduct() {
+    let errors = this.state.errors;
     return (
       <NewProduct
+        errors={errors}
         onAdd={this._handleAdd}
         onClose={this._handleClose}/>
-    )
+    );
   }
 
   _getProductList() {
@@ -94,21 +90,19 @@ export default class ProductMain extends Component {
         products={products}
         onNew={this._handleNew}
         onSelect={this._handleSelect}/>
-    )
+    );
   }
 
   _getStateFromStores() {
     return {
-      contentSelector: "",
       errors: ProductStore.getErrors(),
-      id: 0,
       products: ProductStore.getAll()
     }
   }
 
   _handleAdd(product) {
     ProductActions.create(product)
-    this.setState(this._getStateFromStores())
+    this.setState(this._initializeView())
   }
 
   _handleBuy(id) {
@@ -119,12 +113,12 @@ export default class ProductMain extends Component {
   }
 
   _handleClose() {
-    this.setState(this._getStateFromStores())
+    this.setState(this._initializeView())
   }
 
   _handleEdit(product) {
     ProductActions.update(product)
-    this.setState(this._getStateFromStores())
+    this.setState(this._initializeView())
   }
 
   _handleNew() {
@@ -135,7 +129,7 @@ export default class ProductMain extends Component {
 
   _handleRemove(id) {
     ProductActions.destroy(id)
-    this.setState(this._getStateFromStores())
+    this.setState(this._initializeView())
   }
 
   _handleSelect(id) {
@@ -145,20 +139,29 @@ export default class ProductMain extends Component {
     })
   }
 
+  _initializeView() {
+    return {
+      contentSelector: "",
+      id: 0
+    }
+  }
+
   _onChange() {
     this.setState(this._getStateFromStores())
   }
 
   render() {
-    let content = this._getContent();
+    let content;
+    switch (this.state.contentSelector) {
+      case "BUY": content = this._getBuyProduct(); break;
+      case "EDIT": content = this._getEditProduct(); break;
+      case "NEW": content = this._getNewProduct(); break;
+      default: content = this._getProductList();
+    }
     return (
       <div>
         {content}
       </div>
-    )
+    );
   }
-}
-
-ProductMain.contextTypes = {
-  router: PropTypes.func.isRequired
 }

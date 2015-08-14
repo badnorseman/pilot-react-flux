@@ -1,3 +1,11 @@
+// Todo:
+// Now then both product_actions and transaction_actions are generic,
+// we should have utils for action (dispatch) calls.
+// Input:
+// action e.g. create, load, update etc.
+// path or entityName e.g. /products or product (perhaps modelName is better)
+// Then we can rename Api to ApiCall for clarity.
+
 import ActionTypes from "../constants/action_types";
 import * as Api from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
