@@ -1,6 +1,8 @@
 // See http://webpack.github.io/docs/configuration.html for webpack configuration options.
 var path = require("path");
 var webpack = require("webpack");
+var hotPlugin = new webpack.HotModuleReplacementPlugin();
+var noErrorsPlugin = new webpack.NoErrorsPlugin();
 
 module.exports = {
   devtool: "eval-source-map",
@@ -12,10 +14,7 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: "bundle.js"
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
+  plugins: [hotPlugin, noErrorsPlugin],
   resolve: {
     extensions: ["", ".js"]
   },
