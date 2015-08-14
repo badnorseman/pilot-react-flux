@@ -28,7 +28,7 @@
     "node": ">= 0.10"
   },
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --content-base dist/",
-    "distribute": "./node_modules/.bin/webpack --config webpack.config.production.js"
+    "start": "webpack-dev-server --content-base dist/",
+    "distribute": "webpack --config webpack.config.production.js"
   }
 }
