@@ -55,7 +55,7 @@ TransactionStore.dispatchToken = register((action) => {
     case ActionTypes.TRANSACTION_CREATE_RESPONSE:
     case ActionTypes.TRANSACTION_LOAD_RESPONSE:
       let normalized = normalize(action.data, arrayOf(transactionSchema));
-      transactions = normalized.entities.transactions
+      transactions = normalized.entities.transactions;
       TransactionStore.emitChange();
       break
   }
