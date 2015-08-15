@@ -73,6 +73,27 @@ export const TRANSACTION_LOAD_ERROR = "TRANSACTION_LOAD_ERROR";
 export const TRANSACTION_LOAD_RESPONSE = "TRANSACTION_LOAD_RESPONSE";
 export const TRANSACTION_LOAD_REQUEST = "TRANSACTION_LOAD_REQUEST";
 
+// Temporary exported to enable tests.
+export function loadTransactionRequest() {
+  return {
+    type: TRANSACTION_LOAD_REQUEST
+  }
+}
+
+function loadTransactionResponse(response) {
+  return {
+    type: TRANSACTION_LOAD_RESPONSE,
+    data: response
+  }
+}
+
+function loadTransactionError(error) {
+  return {
+    type: TRANSACTION_LOAD_ERROR,
+    error: JSON.parse(error.responseText).errors
+  }
+}
+
 export function load() {
   return dispatch => {
     dispatch({
