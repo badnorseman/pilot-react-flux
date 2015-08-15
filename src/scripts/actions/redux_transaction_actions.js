@@ -2,8 +2,7 @@
 // If so, shall it be generic with same type or shall type be a param?
 // Remove dispatch, it will be injected by Redux
 
-import * as Api from "../api/api";
-import { dispatch } from "../dispatcher/dispatcher";
+import * as Api from "../api/redux_api";
 
 const ENTITY_NAME = "transaction";
 
@@ -69,39 +68,39 @@ export function getClientToken() {
   }
 }
 
-export const TRANSACTION_LOAD_ERROR = "TRANSACTION_LOAD_ERROR";
-export const TRANSACTION_LOAD_RESPONSE = "TRANSACTION_LOAD_RESPONSE";
-export const TRANSACTION_LOAD_REQUEST = "TRANSACTION_LOAD_REQUEST";
+export const TRANSACTION_FETCH_ALL_ERROR = "TRANSACTION_FETCH_ALL_ERROR";
+export const TRANSACTION_FETCH_ALL_RESPONSE = "TRANSACTION_FETCH_ALL_RESPONSE";
+export const TRANSACTION_FETCH_ALL_REQUEST = "TRANSACTION_FETCH_ALL_REQUEST";
 
 // Temporary exported to enable tests.
-export function transactionLoadRequest() {
+export function transactionFetchAllRequest() {
   return {
-    type: TRANSACTION_LOAD_REQUEST
+    type: TRANSACTION_FETCH_ALL_REQUEST
   }
 }
 
-function transactionLoadResponse(response) {
+function transactionFetchAllResponse(response) {
   return {
-    type: TRANSACTION_LOAD_RESPONSE,
+    type: TRANSACTION_FETCH_ALL_RESPONSE,
     data: response
   }
 }
 
-function transactionLoadError(error) {
+function transactionFetchAllError(error) {
   return {
-    type: TRANSACTION_LOAD_ERROR,
+    type: TRANSACTION_FETCH_ALL_ERROR,
     error: error.responseText
   }
 }
 
-export function load() {
+export function fetchAll() {
   return dispatch => {
-    dispatch(transactionLoadRequest);
-    return Api.load(ENTITY_NAME)
+    dispatch(transactionFetchAllRequest);
+    return Api.fetchAll(ENTITY_NAME)
       .then(response => {
-        dispatch(transactionLoadResponse);
+        dispatch(transactionFetchAllResponse);
       }).catch(error => {
-        dispatch(transactionLoadError);
+        dispatch(transactionFetchAllError);
       });
   }
 }

@@ -1,16 +1,26 @@
 import expect from "expect";
 import {
-  TRANSACTION_LOAD_ERROR,
-  TRANSACTION_LOAD_RESPONSE,
-  TRANSACTION_LOAD_REQUEST,
-  transactionLoadRequest
+  TRANSACTION_FETCH_ALL_ERROR,
+  TRANSACTION_FETCH_ALL_RESPONSE,
+  TRANSACTION_FETCH_ALL_REQUEST,
+  transactionFetchAllRequest,
+  fetchAll
 } from "../../src/scripts/actions/redux_transaction_actions";
 
 describe("transaction actions", () => {
-  it("should request transactions to be loaded", () => {
+  it("should request all transactions to be fetched", () => {
     const expected = {
-      type: TRANSACTION_LOAD_REQUEST
+      type: TRANSACTION_FETCH_ALL_REQUEST
     };
-    expect(transactionLoadRequest()).toEqual(expected);
+    expect(transactionFetchAllRequest()).toEqual(expected);
+  });
+  it("should fetch all transactions", () => {
+    const expected = {
+      type: TRANSACTION_FETCH_ALL_RESPONSE,
+      data: {}
+    };
+    const response = fetchAll();
+    console.log(response);
+    // expect(fetchAll()).toEqual(expected);
   });
 })
