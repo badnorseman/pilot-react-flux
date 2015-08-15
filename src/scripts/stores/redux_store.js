@@ -1,5 +1,12 @@
 "use strict";
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { appReducer } from "../reducers/app_reducer";
+import thunkMiddleware from "redux-thunk";
 
-let store = createStore(appReducer);
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware
+)(createStore);
+
+export default function configureStore(initialState) {
+  return createStoreWithMiddleware(appReducer, initialState);
+}
