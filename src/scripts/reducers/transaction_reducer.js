@@ -14,7 +14,7 @@ const initialState = {
   transactions: {}
 }
 
-export default function reduceTransactions(state = initialState, action) {
+export default function transactionReducer(state = initialState, action) {
   switch (action.type) {
     case TRANSACTION_LOAD_ERROR:
       return Object.assign({}, state, {

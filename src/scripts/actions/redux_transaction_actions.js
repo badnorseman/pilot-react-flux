@@ -74,42 +74,34 @@ export const TRANSACTION_LOAD_RESPONSE = "TRANSACTION_LOAD_RESPONSE";
 export const TRANSACTION_LOAD_REQUEST = "TRANSACTION_LOAD_REQUEST";
 
 // Temporary exported to enable tests.
-export function loadTransactionRequest() {
+export function transactionLoadRequest() {
   return {
     type: TRANSACTION_LOAD_REQUEST
   }
 }
 
-function loadTransactionResponse(response) {
+function transactionLoadResponse(response) {
   return {
     type: TRANSACTION_LOAD_RESPONSE,
     data: response
   }
 }
 
-function loadTransactionError(error) {
+function transactionLoadError(error) {
   return {
     type: TRANSACTION_LOAD_ERROR,
-    error: JSON.parse(error.responseText).errors
+    error: error.responseText
   }
 }
 
 export function load() {
   return dispatch => {
-    dispatch({
-      type: TRANSACTION_LOAD_REQUEST
-    });
+    dispatch(transactionLoadRequest);
     return Api.load(ENTITY_NAME)
       .then(response => {
-        dispatch({
-          type: TRANSACTION_LOAD_RESPONSE,
-          data: response
-        });
+        dispatch(transactionLoadResponse);
       }).catch(error => {
-        dispatch({
-          type: TRANSACTION_LOAD_ERROR,
-          error: error.responseText
-        });
+        dispatch(transactionLoadError);
       });
   }
 }

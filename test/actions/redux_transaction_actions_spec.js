@@ -3,7 +3,7 @@ import {
   TRANSACTION_LOAD_ERROR,
   TRANSACTION_LOAD_RESPONSE,
   TRANSACTION_LOAD_REQUEST,
-  loadTransactionRequest
+  transactionLoadRequest
 } from "../../src/scripts/actions/redux_transaction_actions";
 
 describe("transaction actions", () => {
@@ -11,6 +11,6 @@ describe("transaction actions", () => {
     const expected = {
       type: TRANSACTION_LOAD_REQUEST
     };
-    expect(loadTransactionRequest()).toEqual(expected);
+    expect(transactionLoadRequest()).toEqual(expected);
   });
 })
