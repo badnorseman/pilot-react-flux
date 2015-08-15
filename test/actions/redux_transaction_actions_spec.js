@@ -14,13 +14,11 @@ describe("transaction actions", () => {
     };
     expect(transactionFetchAllRequest()).toEqual(expected);
   });
-  it("should fetch all transactions", () => {
-    const expected = {
-      type: TRANSACTION_FETCH_ALL_RESPONSE,
-      data: {}
-    };
-    const response = fetchAll();
-    console.log(response);
-    // expect(fetchAll()).toEqual(expected);
-  });
+  // it("should fetch all transactions", () => {
+  //   const expected = {
+  //     type: TRANSACTION_FETCH_ALL_RESPONSE,
+  //     data: {}
+  //   };
+  //   expect(fetchAll()).toEqual(expected);
+  // });
 })
