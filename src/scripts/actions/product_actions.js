@@ -7,17 +7,17 @@
 // Then we can rename Api to ApiCall for clarity.
 
 import ActionTypes from "../constants/action_types";
-import * as Api from "../api/api";
+import { create, destroy, fetchAll, update } from "../api/api";
 import { dispatch } from "../dispatcher/dispatcher";
 
 const ENTITY_NAME = "product";
 
-export function create(data) {
+export function createProduct(data) {
   dispatch({
     type: ActionTypes.PRODUCT_CREATE_REQUEST
   });
-  Api.create(ENTITY_NAME, data).then(() => {
-    return Api.load(ENTITY_NAME);
+  create(ENTITY_NAME, data).then(() => {
+    return fetchAll(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_CREATE_RESPONSE,
@@ -31,13 +31,13 @@ export function create(data) {
   });
 }
 
-export function destroy(id) {
+export function destroyProduct(id) {
   dispatch({
     type: ActionTypes.PRODUCT_DESTROY_REQUEST,
     id: id
   });
-  Api.destroy(ENTITY_NAME, id).then(() => {
-    return Api.load(ENTITY_NAME);
+  destroy(ENTITY_NAME, id).then(() => {
+    return fetchAll(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_DESTROY_RESPONSE,
@@ -51,11 +51,11 @@ export function destroy(id) {
   });
 }
 
-export function load() {
+export function getProducts() {
   dispatch({
     type: ActionTypes.PRODUCT_LOAD_REQUEST
   });
-  Api.load(ENTITY_NAME).then(response => {
+  fetchAll(ENTITY_NAME).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_LOAD_RESPONSE,
       data: response
@@ -68,12 +68,12 @@ export function load() {
   });
 }
 
-export function update(data) {
+export function updateProduct(data) {
   dispatch({
     type: ActionTypes.PRODUCT_UPDATE_REQUEST
   });
-  Api.update(ENTITY_NAME, data).then(() => {
-    return Api.load(ENTITY_NAME);
+  update(ENTITY_NAME, data).then(() => {
+    return fetchAll(ENTITY_NAME);
   }).then(response => {
     dispatch({
       type: ActionTypes.PRODUCT_UPDATE_RESPONSE,

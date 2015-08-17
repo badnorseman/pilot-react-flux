@@ -12,9 +12,9 @@ export function getFormData(entityName, data) {
 }
 
 export function getHeaders() {
-  return ({
+  return {
     "Authorization": `Token token=${localStorage.token}`
-  })
+  }
 }
 
 export function getUrl(entityName, params) {

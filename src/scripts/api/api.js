@@ -45,7 +45,7 @@ export function fetchClientToken(objName) {
   )
 }
 
-export function load(objName) {
+export function fetchAll(objName) {
   return (
     Promise.resolve(
       $.ajax({

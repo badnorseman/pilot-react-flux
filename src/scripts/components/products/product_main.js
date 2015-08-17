@@ -4,7 +4,7 @@
 
 "use strict";
 import React, { Component, PropTypes } from "react";
-import * as ProductActions from "../../actions/product_actions";
+import { createProduct, destroyProduct, getProducts, updateProduct } from "../../actions/product_actions";
 import ProductStore from "../../stores/product_store";
 import ProductList from "./product_list";
 import BuyProduct from "../transactions/new_transaction";
@@ -35,7 +35,7 @@ export default class ProductMain extends Component {
   }
 
   componentWillMount() {
-    ProductActions.load()
+    getProducts()
   }
 
   componentDidMount() {
@@ -101,7 +101,7 @@ export default class ProductMain extends Component {
   }
 
   _handleAdd(product) {
-    ProductActions.create(product)
+    createProduct(product)
     this.setState(this._initializeView())
   }
 
@@ -117,7 +117,7 @@ export default class ProductMain extends Component {
   }
 
   _handleEdit(product) {
-    ProductActions.update(product)
+    updateProduct(product)
     this.setState(this._initializeView())
   }
 
@@ -128,7 +128,7 @@ export default class ProductMain extends Component {
   }
 
   _handleRemove(id) {
-    ProductActions.destroy(id)
+    destroyProduct(id)
     this.setState(this._initializeView())
   }
 
