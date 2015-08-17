@@ -1,10 +1,15 @@
 // Do we want single receiveTransactionResponse?
 // If so, shall it be generic with same type or shall type be a param?
 // Remove dispatch, it will be injected by Redux
-import * as Api from "../api/redux_api";
+import { create, fetchClientToken, fetchAll } from "../api/redux_api";
 // Move this to Api.
-import { Schema, arrayOf, normalize } from "normalizr";
-const transactionSchema = new Schema("transactions", { idAttribute: "id" });
+// import { Schema, arrayOf, normalize } from "normalizr";
+// const transactionSchema = new Schema("transactions", { idAttribute: "id" });
+
+// Temporary setup to test action with reducer:
+import { createStore } from "redux";
+import appReducer from "../reducers/app_reducer";
+const store = createStore(appReducer);
 
 const ENTITY_NAME = "transaction";
 
@@ -34,11 +39,11 @@ function createTransactionError(error) {
   }
 }
 
-export function create(data) {
+export function createTransaction(data) {
   return dispatch => {
     dispatch(createTransactionRequest(data));
-    return Api.create(ENTITY_NAME, data)
-      .then(() => Api.load(ENTITY_NAME))
+    return create(ENTITY_NAME, data)
+      .then(() => fetchAll(ENTITY_NAME))
       .then(response => {
         dispatch(createTransactionResponse(response));
       }).catch(error => {
@@ -75,7 +80,7 @@ function getClientTokenError(error) {
 export function getClientToken() {
   return dispatch => {
     dispatch(getClientTokenRequest());
-    return Api.fetchClientToken(ENTITY_NAME)
+    return fetchClientToken(ENTITY_NAME)
       .then(response => {
         dispatch(getClientTokenResponse(response));
       }).catch(error => {
@@ -111,14 +116,26 @@ function transactionFetchAllError(error) {
   }
 }
 
-export function fetchAll() {
+export function getAllTransactions() {
   return dispatch => {
     dispatch(transactionFetchAllRequest);
-    return Api.fetchAll(ENTITY_NAME)
+    return fetchAll(ENTITY_NAME)
       .then(response => {
-        dispatch(transactionFetchAllResponse);
+        dispatch(transactionFetchAllResponse(response));
       }).catch(error => {
-        dispatch(transactionFetchAllError);
+        dispatch(transactionFetchAllError(error));
       });
   }
+}
+
+export function testAllTransactions() {
+  store.dispatch(transactionFetchAllRequest);
+  fetchAll(ENTITY_NAME)
+  .then(response =>{
+    store.dispatch(transactionFetchAllResponse(response))
+  }).then(() => {
+    console.log(store.getState());
+  }).catch(error => {
+    store.dispatch(transactionFetchAllError(error))
+  });
 }

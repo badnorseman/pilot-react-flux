@@ -1,6 +1,7 @@
 "use strict";
 import React, { Component, PropTypes } from "react";
 import { getTransactions } from "../../actions/transaction_actions";
+import { testAllTransactions } from "../../actions/redux_transaction_actions";
 import TransactionStore from "../../stores/transaction_store";
 import TransactionListItem from "./transaction_list_item";
 
@@ -16,7 +17,8 @@ export default class TransactionList extends Component {
   }
 
   componentWillMount() {
-    getTransactions()
+    testAllTransactions()
+    // getTransactions()
   }
 
   componentDidMount() {

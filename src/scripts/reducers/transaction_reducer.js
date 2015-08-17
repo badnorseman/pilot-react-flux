@@ -27,7 +27,7 @@ import {
   TRANSACTION_FETCH_ERROR,
   TRANSACTION_FETCH_RESPONSE,
   TRANSACTION_FETCH_REQUEST
-} from "../actions/redux_transactions_actions";
+} from "../actions/redux_transaction_actions";
 
 const initialState = {
   isFetching: false,
@@ -39,7 +39,7 @@ export default function transactionReducer(state = initialState, action) {
   switch (action.type) {
     case TRANSACTION_FETCH_ERROR:
       return Object.assign({}, state, {
-        errors = action.errors,
+        errors: action.errors,
         isFetching: false
       });
 
@@ -47,7 +47,7 @@ export default function transactionReducer(state = initialState, action) {
       return Object.assign({}, state, {
         errors: [],
         isFetching: false,
-        items = action.transactions
+        items: action.transactions
       });
 
     case TRANSACTION_FETCH_REQUEST:
