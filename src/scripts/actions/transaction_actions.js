@@ -43,16 +43,16 @@ export function getClientToken() {
 
 export function getTransactions() {
   dispatch({
-    type: ActionTypes.TRANSACTION_LOAD_REQUEST
+    type: ActionTypes.TRANSACTION_FETCH_REQUEST
   });
   fetchAll(ENTITY_NAME).then(response => {
     dispatch({
-      type: ActionTypes.TRANSACTION_LOAD_RESPONSE,
+      type: ActionTypes.TRANSACTION_FETCH_RESPONSE,
       data: response
     });
   }).catch(error => {
     dispatch({
-      type: ActionTypes.TRANSACTION_LOAD_ERROR,
+      type: ActionTypes.TRANSACTION_FETCH_ERROR,
       error: JSON.parse(error.responseText).errors
     });
   });

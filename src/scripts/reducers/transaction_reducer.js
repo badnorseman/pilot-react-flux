@@ -1,9 +1,9 @@
 // We will reduce switch statement later.
 
 import {
-  TRANSACTION_LOAD_ERROR,
-  TRANSACTION_LOAD_RESPONSE,
-  TRANSACTION_LOAD_REQUEST
+  TRANSACTION_FETCH_ERROR,
+  TRANSACTION_FETCH_RESPONSE,
+  TRANSACTION_FETCH_REQUEST
 } from "../actions/redux_transactions_actions";
 import { Schema, arrayOf, normalize } from "normalizr";
 
@@ -16,20 +16,20 @@ const initialState = {
 
 export default function transactionReducer(state = initialState, action) {
   switch (action.type) {
-    case TRANSACTION_LOAD_ERROR:
+    case TRANSACTION_FETCH_ERROR:
       return Object.assign({}, state, {
         errors = JSON.parse(action.error).errors,
         isRequsting: false
       });
 
-    case TRANSACTION_LOAD_RESPONSE:
+    case TRANSACTION_FETCH_RESPONSE:
       let normalized = normalize(action.data, arrayOf(transactionSchema));
       return Object.assign({}, state, {
         isRequsting: false,
         transactions = normalized.entities.transactions
       });
 
-    case TRANSACTION_LOAD_REQUEST:
+    case TRANSACTION_FETCH_REQUEST:
       return Object.assign({}, state, {
         isRequsting: true
       });

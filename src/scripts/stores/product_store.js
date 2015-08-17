@@ -36,7 +36,7 @@ ProductStore.dispatchToken = register(action => {
   switch(action.type) {
     case ActionTypes.PRODUCT_CREATE_ERROR:
     case ActionTypes.PRODUCT_DESTROY_ERROR:
-    case ActionTypes.PRODUCT_LOAD_ERROR:
+    case ActionTypes.PRODUCT_FETCH_ERROR:
     case ActionTypes.PRODUCT_UPDATE_ERROR:
       errors = action.error;
       ProductStore.emitChange();
@@ -44,7 +44,7 @@ ProductStore.dispatchToken = register(action => {
 
     case ActionTypes.PRODUCT_CREATE_RESPONSE:
     case ActionTypes.PRODUCT_DESTROY_RESPONSE:
-    case ActionTypes.PRODUCT_LOAD_RESPONSE:
+    case ActionTypes.PRODUCT_FETCH_RESPONSE:
     case ActionTypes.PRODUCT_UPDATE_RESPONSE:
       let normalized = normalize(action.data, arrayOf(productSchema));
       products = normalized.entities.products

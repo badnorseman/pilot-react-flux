@@ -53,16 +53,16 @@ export function destroyProduct(id) {
 
 export function getProducts() {
   dispatch({
-    type: ActionTypes.PRODUCT_LOAD_REQUEST
+    type: ActionTypes.PRODUCT_FETCH_REQUEST
   });
   fetchAll(ENTITY_NAME).then(response => {
     dispatch({
-      type: ActionTypes.PRODUCT_LOAD_RESPONSE,
+      type: ActionTypes.PRODUCT_FETCH_RESPONSE,
       data: response
     });
   }).catch(error => {
     dispatch({
-      type: ActionTypes.PRODUCT_LOAD_ERROR,
+      type: ActionTypes.PRODUCT_FETCH_ERROR,
       error: JSON.parse(error.responseText).errors
     });
   });

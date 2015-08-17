@@ -41,7 +41,7 @@ TransactionStore.dispatchToken = register((action) => {
   switch(action.type) {
     case ActionTypes.CLIENT_TOKEN_ERROR:
     case ActionTypes.TRANSACTION_CREATE_ERROR:
-    case ActionTypes.TRANSACTION_LOAD_ERROR:
+    case ActionTypes.TRANSACTION_FETCH_ERROR:
       clientToken = "";
       errors = action.error;
       TransactionStore.emitChange();
@@ -53,7 +53,7 @@ TransactionStore.dispatchToken = register((action) => {
       break
 
     case ActionTypes.TRANSACTION_CREATE_RESPONSE:
-    case ActionTypes.TRANSACTION_LOAD_RESPONSE:
+    case ActionTypes.TRANSACTION_FETCH_RESPONSE:
       let normalized = normalize(action.data, arrayOf(transactionSchema));
       transactions = normalized.entities.transactions;
       TransactionStore.emitChange();
