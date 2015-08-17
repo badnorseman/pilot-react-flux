@@ -1,8 +1,10 @@
 // Do we want single receiveTransactionResponse?
 // If so, shall it be generic with same type or shall type be a param?
 // Remove dispatch, it will be injected by Redux
-
 import * as Api from "../api/redux_api";
+// Move this to Api.
+import { Schema, arrayOf, normalize } from "normalizr";
+const transactionSchema = new Schema("transactions", { idAttribute: "id" });
 
 const ENTITY_NAME = "transaction";
 
@@ -25,9 +27,10 @@ function createTransactionResponse(response) {
 }
 
 function createTransactionError(error) {
+  let errors = JSON.parse(error.responseText).errors;
   return {
     type: TRANSACTION_CREATE_ERROR,
-    error: JSON.parse(error.responseText).errors
+    errors: errors
   }
 }
 
@@ -62,9 +65,10 @@ function getClientTokenResponse(response) {
 }
 
 function getClientTokenError(error) {
+  let errors = JSON.parse(error.responseText).errors;
   return {
     type: CLIENT_TOKEN_ERROR,
-    error: JSON.parse(error.responseText).errors
+    errors: errors
   }
 }
 
@@ -91,16 +95,19 @@ export function transactionFetchAllRequest() {
 }
 
 function transactionFetchAllResponse(response) {
+  // let normalized = normalize(response, arrayOf(transactionSchema));
   return {
     type: TRANSACTION_FETCH_ALL_RESPONSE,
     data: response
+    // data: normalized.entities.transactions
   }
 }
 
 function transactionFetchAllError(error) {
+  let errors = JSON.parse(error.responseText).errors;
   return {
     type: TRANSACTION_FETCH_ALL_ERROR,
-    error: error.responseText
+    error: errors
   }
 }
 
