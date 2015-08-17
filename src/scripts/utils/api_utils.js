@@ -18,9 +18,9 @@ export function getHeaders() {
 }
 
 export function getUrl(entityName, params) {
-  return `${API}/${entityName.toLowerCase()}s${getParams(params)}`;
+  return `${API}/${entityName.toLowerCase()}s${getUrlParams(params)}`;
 }
 
-function getParams(params = "") {
+function getUrlParams(params = "") {
   return (params === "") ? "" : `/${params}`;
 }
