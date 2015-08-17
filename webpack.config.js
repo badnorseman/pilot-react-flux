@@ -4,13 +4,14 @@ var webpack = require("webpack");
 module.exports = {
   devtool: "eval-source-map",
   entry: [
+    "webpack-dev-server/client?http://localhost:8080/",
     "webpack/hot/dev-server",
     "./src/scripts/app.js"
   ],
   output: {
     path: path.join(__dirname, "dist"),
-    publicPath: "/",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/"
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
