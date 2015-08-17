@@ -10,7 +10,7 @@ export const TRANSACTION_CREATE_ERROR = "TRANSACTION_CREATE_ERROR";
 export const TRANSACTION_CREATE_RESPONSE = "TRANSACTION_CREATE_RESPONSE";
 export const TRANSACTION_CREATE_REQUEST = "TRANSACTION_CREATE_REQUEST";
 
-function createTransactionRequest(data) {
+export function createTransactionRequest(data) {
   return {
     type: TRANSACTION_CREATE_REQUEST,
     data: data
@@ -48,22 +48,34 @@ export const CLIENT_TOKEN_ERROR = "CLIENT_TOKEN_ERROR";
 export const CLIENT_TOKEN_RESPONSE = "CLIENT_TOKEN_RESPONSE";
 export const CLIENT_TOKEN_REQUEST = "CLIENT_TOKEN_REQUEST";
 
+export function getClientTokenRequest() {
+  return {
+    type: CLIENT_TOKEN_REQUEST
+  }
+}
+
+function getClientTokenResponse(response) {
+  return {
+    type: CLIENT_TOKEN_RESPONSE,
+    clientToken: response.client_token
+  }
+}
+
+function getClientTokenError(error) {
+  return {
+    type: CLIENT_TOKEN_ERROR,
+    error: JSON.parse(error.responseText).errors
+  }
+}
+
 export function getClientToken() {
   return dispatch => {
-    dispatch({
-      type: CLIENT_TOKEN_REQUEST,
-    });
+    dispatch(getClientTokenRequest());
     return Api.fetchClientToken(ENTITY_NAME)
       .then(response => {
-        dispatch({
-          type: CLIENT_TOKEN_RESPONSE,
-          clientToken: response.client_token
-        });
+        dispatch(getClientTokenResponse(response));
       }).catch(error => {
-        dispatch({
-          type: CLIENT_TOKEN_ERROR,
-          error: JSON.parse(error.responseText).errors
-        });
+        dispatch(getClientTokenError(error));
       });
   }
 }
@@ -72,7 +84,6 @@ export const TRANSACTION_FETCH_ALL_ERROR = "TRANSACTION_FETCH_ALL_ERROR";
 export const TRANSACTION_FETCH_ALL_RESPONSE = "TRANSACTION_FETCH_ALL_RESPONSE";
 export const TRANSACTION_FETCH_ALL_REQUEST = "TRANSACTION_FETCH_ALL_REQUEST";
 
-// Temporary exported to enable tests.
 export function transactionFetchAllRequest() {
   return {
     type: TRANSACTION_FETCH_ALL_REQUEST
